@@ -8,24 +8,34 @@
 
   // Fetch products data given id
   export let data;
+  let list_ids: string[] = [];
+  let unique_ids: string[] = [];
+  let products = productsStore.dic;
+
+  list_ids = Object.keys($products);
+  unique_ids = list_ids.filter(
+    (id, index) => list_ids.indexOf(id) === index
+  );
+
   let company_id = data.company_id;
 
   // User can filter products using query value
   let query = "";
 
   // Group products by tags
-  $: grouped = productsStore.ids.reduce((result, product_id) => {
+  $: grouped = list_ids.reduce((result, product_id) => {
     let key =
-      $productsStore.dic[product_id].tags.length > 0
+      $products[product_id].tags.length > 0
         ? $products[product_id].tags[0].name.toLowerCase().trim()
         : "No tag";
-    r[key] = [...(r[key] || []), product_id].sort((a, b) =>
+
+    result[key] = [...(result[key] || []), product_id].sort((a, b) =>
       $products[a].name.localeCompare($products[b].name)
     );
-    return r;
+    return result;
   }, {});
 
-  $: filtered = unique_products.filter((id) => {
+  $: filtered = unique_ids.filter((id) => {
     let term = query.toLowerCase();
     return (
       $products[id].name.toLowerCase().includes(term) ||
@@ -66,7 +76,7 @@
     <Logo />
     <div class="row">
       <h1>{$company.name}</h1>
-      <a href={`/shop/${company_id}`}><h5>{$_("images")}</h5></a>
+      <a href={`/shop/${company_id}/images`}><h5>{$_("images")}</h5></a>
     </div>
   </div>
 
@@ -106,11 +116,12 @@
     {#if query.length > 1}
       {#each Object.values(filtered) as product_id}
         <Card
-          product_id={$products[product_id].id}
-          name={$products[product_id].name}
-          price={$products[product_id].price}
-          description={$products[product_id].description}
-          likes_count={$products[product_id].likes_count}
+        product_id={$products[product_id].id}
+        name={$products[product_id].name}
+        price={$products[product_id].price}
+        description={$products[product_id].description}
+        likes_count={$products[product_id].likes_count}
+        image_public_id={$products[product_id].images[0].public_id}
         />
       {/each}
     {:else}
@@ -124,6 +135,7 @@
               price={$products[product_id].price}
               description={$products[product_id].description}
               likes_count={$products[product_id].likes_count}
+              image_public_id={$products[product_id].images[0].public_id}
             />
           {/each}
         {/if}
@@ -131,7 +143,7 @@
     {/if}
   </Masonry>
 
-  {#if loading}
+  {#if Object.keys($products).length === 0}
     <div class="pagination">Loading...</div>
   {/if}
 </main>

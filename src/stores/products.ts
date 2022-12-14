@@ -1,7 +1,9 @@
-import { derived, writable, Writable } from "svelte/store";
+import { derived, writable } from "svelte/store";
+import type { Writable } from "svelte/store";
+import type { IProduct } from "src/api/products";
 
 interface IProductDictionary {
-  [key: string]: any;
+  [key: string]: IProduct;
 }
 
 interface IGroupedProducts {

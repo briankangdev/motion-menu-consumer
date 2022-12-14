@@ -1,71 +1,32 @@
-<script>
+<script lang="ts">
   import { env } from "$env/dynamic/public";
 
   import { _ } from "svelte-i18n";
   import Logo from "../../../../components/Logo.svelte";
-  import { products } from "../../../../stores/products.js";
+  import { productsStore } from "../../../../stores/products.js";
   import { company } from "../../../../stores/company.js";
-  import { onMount } from "svelte";
   import Masonry from "../../../../components/Masonry.svelte";
   import Card from "../../../../components/Card.svelte";
   import Video from "../../../../components/Video.svelte";
 
   // Fetch products data given shop company_id
-  export let company_id;
+  export let data;
+  let company_id = data.company_id;
 
-  let list = [];
-  let unique = [];
+  let list_ids: string[] = [];
+  let unique_ids: string[] = [];
   let loading = false;
+  let products = productsStore.dic;
+  
+  list_ids = Object.keys($products); 
+  // list_ids = productsStore.ids;
 
-  async function fetchProfile() {
-    loading = true;
+  unique_ids = list_ids.filter(
+    (id, index) => list_ids.indexOf(id) === index
+  );
 
-    const response = await fetch(
-      `${env.PUBLIC_MOTION_MENU_API_ENDPOINT}/api/v1/companies/${company_id}`
-    );
-
-    const json = await response.json();
-
-    company.update((prev) => ({ ...prev, ...json.data }));
-
-    loading = false;
-  }
-
-  async function fetchProducts() {
-    loading = true;
-
-    const response = await fetch(
-      `${env.PUBLIC_MOTION_MENU_API_ENDPOINT}/api/v1/${company_id}/products?page=1&per_page=15`
-    );
-
-    const { meta } = await response.json();
-
-    for (let page = 1; page <= meta.pages; page++) {
-      async function request() {
-        const response = await fetch(
-          `${env.PUBLIC_MOTION_MENU_API_ENDPOINT}/api/v1/${company_id}/products?page=${page}&per_page=15`
-        );
-
-        const json = await response.json();
-
-        products.update((prev) => ({ ...prev, ...json.data }));
-        list = [...list, ...Object.keys(json.data)];
-        unique = list.filter((v, i) => list.indexOf(v) === i);
-      }
-
-      request();
-    }
-
-    loading = false;
-  }
-
-  onMount(() => {
-    fetchProfile();
-    fetchProducts();
-  });
-
-  $: with_videos = unique.filter((id) => $products[id].videos_count > 0);
-  $: with_images = unique.filter(
+  $: with_videos = unique_ids.filter((id) => $products[id].videos_count > 0);
+  $: with_images = unique_ids.filter(
     (id) => $products[id].images_count > 0 && $products[id].videos_count < 1
   );
 </script>
@@ -100,14 +61,14 @@
 
     <div class="row">
       <h5>{$_("featured_products")}</h5>
-      <a href={`/shop/${company_id}/menu`}><h5>{$_("menu")}</h5></a>
+      <a href={`/shop/${company_id}`}><h5>{$_("menu")}</h5></a>
     </div>
   </div>
 
   {#if with_images.length + with_videos.length < 1}
     <div class="row no-image">
       <p>{$_("no_images")}</p>
-      <a href={`/shop/${company_id}/menu`}><h5>{$_("check_menu")}</h5></a>
+      <a href={`/shop/${company_id}`}><h5>{$_("check_menu")}</h5></a>
     </div>
   {/if}
 
@@ -134,6 +95,7 @@
           description={$products[product_id].description}
           price={$products[product_id].price}
           image_public_id={image.public_id}
+          likes_count={$products[product_id].likes_count}
         />
       {/each}
     {/each}
