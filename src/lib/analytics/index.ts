@@ -20,7 +20,7 @@ interface IAnalytics {
 
 const analytics: IAnalytics = {
   init: (config) => {
-    mixpanel.init(env.PUBLIC_PROJECT_TOKEN!, config);
+    mixpanel.init(env.PUBLIC_PROJECT_TOKEN, config);
   },
   getUserId: () => {
     return mixpanel.get_distinct_id();
