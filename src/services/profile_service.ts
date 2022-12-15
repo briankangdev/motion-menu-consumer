@@ -1,4 +1,4 @@
-import { get_profile } from "../api/profile";
+import { get_profile } from "../api/company";
 import { company } from "../stores/company";
 
 export async function getProfile(company_id: string) {

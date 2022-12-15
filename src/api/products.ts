@@ -20,7 +20,7 @@ export interface IProduct {
 }
 
 interface IResponse {
-  data: IProduct[];
+  data: { [key: string]: IProduct };
   meta: { [key: string]: any };
 }
 

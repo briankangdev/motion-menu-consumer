@@ -1,6 +1,6 @@
 import client from "./client";
 
-export interface IProfile {
+export interface ICompany {
   id: number;
   email: string;
   name: string;
@@ -12,7 +12,7 @@ export interface IProfile {
 }
 
 interface IResponse {
-  data: IProfile;
+  data: ICompany;
 }
 
 export const get_profile = async (company_id: string): Promise<IResponse> => {

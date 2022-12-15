@@ -1,4 +1,4 @@
 import { writable } from "svelte/store";
-import type { IProfile } from "src/api/profile";
+import type { ICompany } from "src/api/company";
 
-export const company = writable<IProfile>(null);
+export const company = writable<ICompany>(null);

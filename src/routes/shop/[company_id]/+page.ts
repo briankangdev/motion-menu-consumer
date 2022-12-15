@@ -11,8 +11,8 @@ interface IRouteParams {
 export async function load({ params }: IRouteParams) {
   let company_id = params.company_id;
   await getProfile(company_id);
-  // await getProductLikes(company_id); problems with Mixpanel
   await getProducts(company_id);
+  // await getProductLikes(company_id); problems with Mixpanel
 
   return {
     company_id: params.company_id,
