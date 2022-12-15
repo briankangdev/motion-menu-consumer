@@ -15,7 +15,7 @@ interface IResponse {
   data: ICompany;
 }
 
-export const get_profile = async (company_id: string): Promise<IResponse> => {
+export const get_company = async (company_id: string): Promise<IResponse> => {
   const response = await client.get(`/api/v1/companies/${company_id}`);
   return response.data;
 };
