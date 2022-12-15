@@ -43,6 +43,20 @@ class ProductsStore {
     });
   }
 
+  get ids_with_videos() {
+    return derived([this.dic, this.ids], ([$dic, $ids]) => {
+      return $ids.filter((id) => $dic[id].videos_count > 0);
+    });
+  }
+
+  get ids_with_images() {
+    return derived([this.dic, this.ids], ([$dic, $ids]) => {
+      return $ids.filter(
+        (id) => $dic[id].images_count > 0 && $dic[id].videos_count < 1
+      );
+    });
+  }
+
   get filtered_ids() {
     return derived([this.ids, this.dic, this.query], ([$ids, $dic, $query]) => {
       let term = $query.toLowerCase();

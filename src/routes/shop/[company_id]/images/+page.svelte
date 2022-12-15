@@ -14,21 +14,23 @@
   let company_id = data.company_id;
 
   let list_ids: string[] = [];
-  let unique_ids: string[] = [];
+  let ids_with_images: string[] = [];
+  let ids_with_videos: string[] = [];
   let loading = false;
   let products = productsStore.dic;
-  
-  list_ids = Object.keys($products); 
-  // list_ids = productsStore.ids;
 
-  unique_ids = list_ids.filter(
-    (id, index) => list_ids.indexOf(id) === index
-  );
+  productsStore.ids.subscribe((value) => {
+    list_ids = value;
+  });
 
-  $: with_videos = unique_ids.filter((id) => $products[id].videos_count > 0);
-  $: with_images = unique_ids.filter(
-    (id) => $products[id].images_count > 0 && $products[id].videos_count < 1
-  );
+  productsStore.ids_with_images.subscribe((value) => {
+    ids_with_images = value;
+  });
+
+  productsStore.ids_with_videos.subscribe((value) => {
+    ids_with_videos = value;
+  });
+
 </script>
 
 <svelte:head>
@@ -65,7 +67,7 @@
     </div>
   </div>
 
-  {#if with_images.length + with_videos.length < 1}
+  {#if ids_with_images.length + ids_with_videos.length < 1}
     <div class="row no-image">
       <p>{$_("no_images")}</p>
       <a href={`/shop/${company_id}`}><h5>{$_("check_menu")}</h5></a>
@@ -76,9 +78,9 @@
     stretchFirst={false}
     gridGap={"10"}
     colWidth={"minmax(Min(50%, 225px), 1fr)"}
-    items={[...with_videos, ...with_images]}
+    items={[...ids_with_videos, ...ids_with_images]}
   >
-    {#each with_videos as product_id}
+    {#each ids_with_videos as product_id}
       <Video
         id={$products[product_id].id}
         name={$products[product_id].name}
@@ -87,12 +89,10 @@
       />
     {/each}
 
-    {#each with_images as product_id}
-      {#each $products[product_id].images as image}
+    {#each ids_with_images as product_id}
         <Card
           product={$products[product_id]}
         />
-      {/each}
     {/each}
   </Masonry>
 

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
   import { Motion } from "svelte-motion";
@@ -43,19 +43,19 @@
 
   const flag = "landing_page_copy";
   let video_public_id = "tgeweblar8soskbe6gzy";
-  let titleValue;
-  let onMountTime;
+  let titleValue: string;
+  let onMountTime: Date;
 
   onMount(async () => {
-    let user_id = analytics.getUserId();
+    let user_id: string = analytics.getUserId(); // get the user id from mixpanel
     await FeatureFlag.initSession(user_id); // the client needs to be initialized before we can use its methods
-    titleValue = await FeatureFlag.getValue(flag); // get the value of the feature flag we are using for AB testing
+    titleValue = await FeatureFlag.getValue(flag) as string; // get the value of the feature flag we are using for AB testing
 
     // TRACK how long user stays in the page
     onMountTime = new Date(); // get the time when the page was loaded
     window.onbeforeunload = function () {
       let exitTime = new Date(); // get the time when the page was closed
-      let timeOnPage = (exitTime - onMountTime) / 1000; // calculate the time the user was on the page
+      let timeOnPage = exitTime.getTime() - onMountTime.getTime() / 1000; // calculate the time the user was on the page
       analytics.track.timeOnPage({
         page: HOME_PAGE,
         titleValue,
