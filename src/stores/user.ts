@@ -1,3 +1,7 @@
 import { writable } from "svelte/store";
 
-export const user = writable({});
+interface IUser {
+  likes: string[];
+}
+
+export const user = writable<IUser>(null);

@@ -1,21 +1,22 @@
-<script>
+<script lang="ts">
   import Like from "./like/Like.svelte";
   import {
     createProductLike,
     removeProductLike,
   } from "../services/like_service";
-  import { user } from "../stores/user";
+  import type { IProduct } from "src/api/products";
+  import { user } from "../stores/user"
 
-  export let product_id;
-  export let name;
-  export let description;
-  export let price;
-  export let likes_count;
-
-  export let image_public_id;
-
+  export let product: IProduct;
+  
+  let { id, name, description, price, images} = product;
+  let product_id: string = id.toString();
+  let image_public_id: string = images[0]?.public_id;
+  let isLiked:boolean = $user.likes.includes(product_id);
   let captionVisible = false;
-
+    
+  $: likes_count = product.likes_count; // to re-render when likes_count changes
+  
   function onTouchStart() {
     captionVisible = true;
   }
@@ -60,7 +61,7 @@
           removeLikeCallback={() => {
             removeProductLike(product_id);
           }}
-          isLiked={$user.likes_ids_list.includes(product_id)}
+          isLiked={isLiked}
           {likes_count}
         />
         <p class="price">$ {price}</p>

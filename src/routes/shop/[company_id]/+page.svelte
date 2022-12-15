@@ -13,6 +13,7 @@
   let products = productsStore.dic;
 
   list_ids = Object.keys($products);
+  
   unique_ids = list_ids.filter(
     (id, index) => list_ids.indexOf(id) === index
   );
@@ -116,12 +117,7 @@
     {#if query.length > 1}
       {#each Object.values(filtered) as product_id}
         <Card
-        product_id={$products[product_id].id}
-        name={$products[product_id].name}
-        price={$products[product_id].price}
-        description={$products[product_id].description}
-        likes_count={$products[product_id].likes_count}
-        image_public_id={$products[product_id].images[0].public_id}
+        product={$products[product_id]}	
         />
       {/each}
     {:else}
@@ -130,12 +126,7 @@
           <h1 class="tag">{tag_name}</h1>
           {#each grouped[tag_name] as product_id}
             <Card
-              product_id={$products[product_id].id}
-              name={$products[product_id].name}
-              price={$products[product_id].price}
-              description={$products[product_id].description}
-              likes_count={$products[product_id].likes_count}
-              image_public_id={$products[product_id].images[0].public_id}
+            product={$products[product_id]}	
             />
           {/each}
         {/if}

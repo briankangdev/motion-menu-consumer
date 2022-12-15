@@ -90,12 +90,7 @@
     {#each with_images as product_id}
       {#each $products[product_id].images as image}
         <Card
-          product_id={$products[product_id].id}
-          name={$products[product_id].name}
-          description={$products[product_id].description}
-          price={$products[product_id].price}
-          image_public_id={image.public_id}
-          likes_count={$products[product_id].likes_count}
+          product={$products[product_id]}
         />
       {/each}
     {/each}
