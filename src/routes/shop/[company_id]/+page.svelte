@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Logo from "../../../components/Logo.svelte";
-  import { productsStore } from "../../../stores/products.js";
+  import { productsStore, type IGroupedProducts } from "../../../stores/products.js";
   import { company } from "../../../stores/company.js";
   import Masonry from "../../../components/Masonry.svelte";
   import Card from "../../../components/Card.svelte";
@@ -9,41 +9,23 @@
   // Fetch products data given id
   export let data;
   let list_ids: string[] = [];
-  let unique_ids: string[] = [];
+  let grouped: IGroupedProducts = {};
+  let filtered_ids: string[] = []
   let products = productsStore.dic;
-
-  list_ids = Object.keys($products);
-  
-  unique_ids = list_ids.filter(
-    (id, index) => list_ids.indexOf(id) === index
-  );
-
+  let query = productsStore.query;
   let company_id = data.company_id;
 
+  productsStore.ids.subscribe((value) => {
+    list_ids = value;
+  });
+
+  productsStore.grouped_by_tags.subscribe((value) => {
+    grouped = value;
+  });
+
   // User can filter products using query value
-  let query = "";
-
-  // Group products by tags
-  $: grouped = list_ids.reduce((result, product_id) => {
-    let key =
-      $products[product_id].tags.length > 0
-        ? $products[product_id].tags[0].name.toLowerCase().trim()
-        : "No tag";
-
-    result[key] = [...(result[key] || []), product_id].sort((a, b) =>
-      $products[a].name.localeCompare($products[b].name)
-    );
-    return result;
-  }, {});
-
-  $: filtered = unique_ids.filter((id) => {
-    let term = query.toLowerCase();
-    return (
-      $products[id].name.toLowerCase().includes(term) ||
-      $products[id].tags.some((tag) => {
-        return tag.name.toLowerCase().includes(term);
-      })
-    );
+  productsStore.filtered_ids.subscribe((value) => {
+    filtered_ids = value;
   });
 
   $: ordered_tags = $company.tag_priority
@@ -86,7 +68,7 @@
       class="input-transparent"
       type="text"
       placeholder={$_("menu_search_placeholder")}
-      bind:value={query}
+      bind:value={$query}
     />
   </div>
 
@@ -94,12 +76,12 @@
     {#each all_tags as tag}
       <button
         type="button"
-        class={`tag-button ${tag === query && "active"}`}
+        class={`tag-button ${tag === $query && "active"}`}
         on:click={() => {
-          if (query === tag) {
-            query = "";
+          if ($query === tag) {
+            $query = "";
           } else {
-            query = tag;
+            $query = tag;
           }
         }}>{tag}</button
       >
@@ -110,12 +92,12 @@
     stretchFirst={false}
     gridGap={"10"}
     colWidth={"minmax(Min(50%, 225px), 1fr)"}
-    items={query.length > 1
-      ? Object.values(filtered)
+    items={$query.length > 1
+      ? Object.values(filtered_ids)
       : Object.values(grouped).flatMap((x) => x)}
   >
-    {#if query.length > 1}
-      {#each Object.values(filtered) as product_id}
+    {#if $query.length > 1}
+      {#each Object.values(filtered_ids) as product_id}
         <Card
         product={$products[product_id]}	
         />

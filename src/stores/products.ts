@@ -6,14 +6,15 @@ interface IProductDictionary {
   [key: string]: IProduct;
 }
 
-interface IGroupedProducts {
+export interface IGroupedProducts {
   [key: string]: Array<string>;
 }
 
 class ProductsStore {
   constructor(
     // public ids: Writable<Array<string>> = writable([]),
-    public dic: Writable<IProductDictionary> = writable({})
+    public dic: Writable<IProductDictionary> = writable({}),
+    public query: Writable<string> = writable("")
   ) {}
 
   get ids() {
@@ -25,7 +26,7 @@ class ProductsStore {
 
   get grouped_by_tags() {
     return derived([this.dic, this.ids], ([$dic, $ids]) => {
-      $ids.reduce((result: IGroupedProducts, product_id: string) => {
+      return $ids.reduce((result: IGroupedProducts, product_id: string) => {
         // Identify which tag the product belongs to
         let tag: string =
           $dic[product_id].tags.length > 0
@@ -39,6 +40,20 @@ class ProductsStore {
 
         return result;
       }, {});
+    });
+  }
+
+  get filtered_ids() {
+    return derived([this.ids, this.dic, this.query], ([$ids, $dic, $query]) => {
+      let term = $query.toLowerCase();
+      return $ids.filter((id) => {
+        return (
+          $dic[id].name.toLowerCase().includes(term) ||
+          $dic[id].tags.some((tag) => {
+            return tag.name.toLowerCase().includes(term);
+          })
+        );
+      });
     });
   }
 }

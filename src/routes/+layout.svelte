@@ -1,5 +1,4 @@
 <script>
-  import analytics from "../lib/analytics";
   import "./global.css";
 </script>
 
