@@ -101,7 +101,7 @@
   {/if}
 
   <div class="row center">
-    <a href={`/shop/${company_id}/menu`} class="button">{$_("more_products")}</a
+    <a href={`/shop/${company_id}`} class="button">{$_("more_products")}</a
     >
   </div>
 </main>
