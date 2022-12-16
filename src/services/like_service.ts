@@ -20,7 +20,7 @@ import { user } from "../stores/user";
 let user_distinct_id: IUser["distinct_id"];
 
 user.subscribe((user) => {
-  user_distinct_id = user.distinct_id;
+  user_distinct_id = user?.distinct_id;
 });
 
 export const getProductLikes = async (company_id: ICompany["name"]) => {

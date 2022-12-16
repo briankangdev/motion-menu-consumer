@@ -19,6 +19,7 @@
     PointElement,
     CategoryScale,
   } from "chart.js";
+  import { user, type IUser } from "../stores/user";
 
   ChartJS.register(
     Title,
@@ -45,9 +46,9 @@
   let video_public_id = "tgeweblar8soskbe6gzy";
   let titleValue: string;
   let onMountTime: Date;
+  let user_id: IUser["distinct_id"] = $user.distinct_id;
 
   onMount(async () => {
-    let user_id: string = analytics.getUserId(); // get the user id from mixpanel
     await FeatureFlag.initSession(user_id); // the client needs to be initialized before we can use its methods
     titleValue = await FeatureFlag.getValue(flag) as string; // get the value of the feature flag we are using for AB testing
 
