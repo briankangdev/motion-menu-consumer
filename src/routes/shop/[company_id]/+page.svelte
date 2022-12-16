@@ -5,19 +5,15 @@
   import { company } from "../../../stores/company.js";
   import Masonry from "../../../components/Masonry.svelte";
   import Card from "../../../components/Card.svelte";
+  import type { IProduct } from "src/api/products";
 
   // Fetch products data given id
   export let data;
-  let list_ids: string[] = [];
   let grouped: IGroupedProducts = {};
-  let filtered_ids: string[] = []
+  let filtered_ids: IProduct["id"][] = [];
   let products = productsStore.dic;
   let query = productsStore.query;
   let company_id = data.company_id;
-
-  productsStore.ids.subscribe((value) => {
-    list_ids = value;
-  });
 
   productsStore.grouped_by_tags.subscribe((value) => {
     grouped = value;

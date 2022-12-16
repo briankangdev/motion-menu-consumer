@@ -1,8 +1,9 @@
 import { browser } from "$app/environment";
+import type { ICompany } from "src/api/company";
 import { get_products, get_products_by_page } from "../api/products";
 import { productsStore } from "../stores/products";
 
-export async function getProducts(company_id: string) {
+export async function getProducts(company_id: ICompany["name"]) {
   const response = await get_products(company_id);
 
   productsStore.dic.update((prev) => ({
@@ -14,6 +15,6 @@ export async function getProducts(company_id: string) {
   // for (let page = 1; page <= (browser ? response.meta.pages : 2); page++) {
   //   const response = await get_products_by_page(company_id, page);
 
-  //   productsStore.dic.update((prev: any) => ({ ...prev, ...response.data }));
+  //   productsStore.dic.update((prev) => ({ ...prev, ...response.data }));
   // }
 }

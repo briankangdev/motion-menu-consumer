@@ -1,10 +1,11 @@
 import { getCompany } from "../../../services/profile_service";
 import { getProducts } from "../../../services/products_service";
 import { getProductLikes } from "../../../services/like_service";
+import type { ICompany } from "src/api/company";
 
 interface IRouteParams {
   params: {
-    company_id: string;
+    company_id: ICompany["name"];
   };
 }
 
