@@ -1,5 +1,6 @@
 import mixpanel from "mixpanel-browser";
 import { env } from "$env/dynamic/public";
+import { user } from "../../stores/user";
 
 interface IConfig {
   [key: string]: any;
@@ -11,7 +12,7 @@ interface IProps {
 
 interface IAnalytics {
   init: (config: IConfig) => void;
-  getUserId: () => string;
+  setUserId: () => void;
   track: {
     button: (props: IProps) => void;
     timeOnPage: (props: IProps) => void;
@@ -22,8 +23,11 @@ const analytics: IAnalytics = {
   init: (config) => {
     mixpanel.init(env.PUBLIC_PROJECT_TOKEN, config);
   },
-  getUserId: () => {
-    return mixpanel.get_distinct_id();
+  setUserId: () => {
+    user.update((prev) => ({
+      ...prev,
+      distinct_id: mixpanel.get_distinct_id(),
+    }));
   },
   track: {
     button: (props) => mixpanel.track("button_click", props),

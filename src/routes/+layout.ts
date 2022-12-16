@@ -9,5 +9,6 @@ export const load = async () => {
   }
 
   await analytics.init({ cross_subdomain_cookie: false });
+  await analytics.setUserId();
   await waitLocale();
 };
