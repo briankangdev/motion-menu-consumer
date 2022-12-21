@@ -1,73 +1,36 @@
-<script>
+<script lang="ts">
   import { env } from "$env/dynamic/public";
 
   import { _ } from "svelte-i18n";
   import Logo from "../../../../components/Logo.svelte";
-  import { products } from "../../../../stores/products.js";
+  import { productsStore } from "../../../../stores/products.js";
   import { company } from "../../../../stores/company.js";
-  import { onMount } from "svelte";
   import Masonry from "../../../../components/Masonry.svelte";
   import Card from "../../../../components/Card.svelte";
   import Video from "../../../../components/Video.svelte";
 
   // Fetch products data given shop company_id
-  export let company_id;
+  export let data;
+  let company_id = data.company_id;
 
-  let list = [];
-  let unique = [];
+  let list_ids: string[] = [];
+  let ids_with_images: string[] = [];
+  let ids_with_videos: string[] = [];
   let loading = false;
+  let products = productsStore.dic;
 
-  async function fetchProfile() {
-    loading = true;
-
-    const response = await fetch(
-      `${env.PUBLIC_MOTION_MENU_API_ENDPOINT}/api/v1/companies/${company_id}`
-    );
-
-    const json = await response.json();
-
-    company.update((prev) => ({ ...prev, ...json.data }));
-
-    loading = false;
-  }
-
-  async function fetchProducts() {
-    loading = true;
-
-    const response = await fetch(
-      `${env.PUBLIC_MOTION_MENU_API_ENDPOINT}/api/v1/${company_id}/products?page=1&per_page=15`
-    );
-
-    const { meta } = await response.json();
-
-    for (let page = 1; page <= meta.pages; page++) {
-      async function request() {
-        const response = await fetch(
-          `${env.PUBLIC_MOTION_MENU_API_ENDPOINT}/api/v1/${company_id}/products?page=${page}&per_page=15`
-        );
-
-        const json = await response.json();
-
-        products.update((prev) => ({ ...prev, ...json.data }));
-        list = [...list, ...Object.keys(json.data)];
-        unique = list.filter((v, i) => list.indexOf(v) === i);
-      }
-
-      request();
-    }
-
-    loading = false;
-  }
-
-  onMount(() => {
-    fetchProfile();
-    fetchProducts();
+  productsStore.ids.subscribe((value) => {
+    list_ids = value;
   });
 
-  $: with_videos = unique.filter((id) => $products[id].videos_count > 0);
-  $: with_images = unique.filter(
-    (id) => $products[id].images_count > 0 && $products[id].videos_count < 1
-  );
+  productsStore.ids_with_images.subscribe((value) => {
+    ids_with_images = value;
+  });
+
+  productsStore.ids_with_videos.subscribe((value) => {
+    ids_with_videos = value;
+  });
+
 </script>
 
 <svelte:head>
@@ -100,14 +63,14 @@
 
     <div class="row">
       <h5>{$_("featured_products")}</h5>
-      <a href={`/shop/${company_id}/menu`}><h5>{$_("menu")}</h5></a>
+      <a href={`/shop/${company_id}`}><h5>{$_("menu")}</h5></a>
     </div>
   </div>
 
-  {#if with_images.length + with_videos.length < 1}
+  {#if ids_with_images.length + ids_with_videos.length < 1}
     <div class="row no-image">
       <p>{$_("no_images")}</p>
-      <a href={`/shop/${company_id}/menu`}><h5>{$_("check_menu")}</h5></a>
+      <a href={`/shop/${company_id}`}><h5>{$_("check_menu")}</h5></a>
     </div>
   {/if}
 
@@ -115,9 +78,9 @@
     stretchFirst={false}
     gridGap={"10"}
     colWidth={"minmax(Min(50%, 225px), 1fr)"}
-    items={[...with_videos, ...with_images]}
+    items={[...ids_with_videos, ...ids_with_images]}
   >
-    {#each with_videos as product_id}
+    {#each ids_with_videos as product_id}
       <Video
         id={$products[product_id].id}
         name={$products[product_id].name}
@@ -126,16 +89,10 @@
       />
     {/each}
 
-    {#each with_images as product_id}
-      {#each $products[product_id].images as image}
+    {#each ids_with_images as product_id}
         <Card
-          product_id={$products[product_id].id}
-          name={$products[product_id].name}
-          description={$products[product_id].description}
-          price={$products[product_id].price}
-          image_public_id={image.public_id}
+          product={$products[product_id]}
         />
-      {/each}
     {/each}
   </Masonry>
 
@@ -144,7 +101,7 @@
   {/if}
 
   <div class="row center">
-    <a href={`/shop/${company_id}/menu`} class="button">{$_("more_products")}</a
+    <a href={`/shop/${company_id}`} class="button">{$_("more_products")}</a
     >
   </div>
 </main>

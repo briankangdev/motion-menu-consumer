@@ -1,38 +1,27 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Logo from "../../../components/Logo.svelte";
-  import { productsStore } from "../../../stores/products.js";
+  import { productsStore, type IGroupedProducts } from "../../../stores/products.js";
   import { company } from "../../../stores/company.js";
   import Masonry from "../../../components/Masonry.svelte";
   import Card from "../../../components/Card.svelte";
+  import type { IProduct } from "src/api/products";
 
   // Fetch products data given id
   export let data;
+  let grouped: IGroupedProducts = {};
+  let filtered_ids: IProduct["id"][] = [];
+  let products = productsStore.dic;
+  let query = productsStore.query;
   let company_id = data.company_id;
 
+  productsStore.grouped_by_tags.subscribe((value) => {
+    grouped = value;
+  });
+
   // User can filter products using query value
-  let query = "";
-
-  // Group products by tags
-  $: grouped = productsStore.ids.reduce((result, product_id) => {
-    let key =
-      $productsStore.dic[product_id].tags.length > 0
-        ? $products[product_id].tags[0].name.toLowerCase().trim()
-        : "No tag";
-    r[key] = [...(r[key] || []), product_id].sort((a, b) =>
-      $products[a].name.localeCompare($products[b].name)
-    );
-    return r;
-  }, {});
-
-  $: filtered = unique_products.filter((id) => {
-    let term = query.toLowerCase();
-    return (
-      $products[id].name.toLowerCase().includes(term) ||
-      $products[id].tags.some((tag) => {
-        return tag.name.toLowerCase().includes(term);
-      })
-    );
+  productsStore.filtered_ids.subscribe((value) => {
+    filtered_ids = value;
   });
 
   $: ordered_tags = $company.tag_priority
@@ -66,7 +55,7 @@
     <Logo />
     <div class="row">
       <h1>{$company.name}</h1>
-      <a href={`/shop/${company_id}`}><h5>{$_("images")}</h5></a>
+      <a href={`/shop/${company_id}/images`}><h5>{$_("images")}</h5></a>
     </div>
   </div>
 
@@ -75,7 +64,7 @@
       class="input-transparent"
       type="text"
       placeholder={$_("menu_search_placeholder")}
-      bind:value={query}
+      bind:value={$query}
     />
   </div>
 
@@ -83,12 +72,12 @@
     {#each all_tags as tag}
       <button
         type="button"
-        class={`tag-button ${tag === query && "active"}`}
+        class={`tag-button ${tag === $query && "active"}`}
         on:click={() => {
-          if (query === tag) {
-            query = "";
+          if ($query === tag) {
+            $query = "";
           } else {
-            query = tag;
+            $query = tag;
           }
         }}>{tag}</button
       >
@@ -99,18 +88,14 @@
     stretchFirst={false}
     gridGap={"10"}
     colWidth={"minmax(Min(50%, 225px), 1fr)"}
-    items={query.length > 1
-      ? Object.values(filtered)
+    items={$query.length > 1
+      ? Object.values(filtered_ids)
       : Object.values(grouped).flatMap((x) => x)}
   >
-    {#if query.length > 1}
-      {#each Object.values(filtered) as product_id}
+    {#if $query.length > 1}
+      {#each Object.values(filtered_ids) as product_id}
         <Card
-          product_id={$products[product_id].id}
-          name={$products[product_id].name}
-          price={$products[product_id].price}
-          description={$products[product_id].description}
-          likes_count={$products[product_id].likes_count}
+        product={$products[product_id]}	
         />
       {/each}
     {:else}
@@ -119,11 +104,7 @@
           <h1 class="tag">{tag_name}</h1>
           {#each grouped[tag_name] as product_id}
             <Card
-              product_id={$products[product_id].id}
-              name={$products[product_id].name}
-              price={$products[product_id].price}
-              description={$products[product_id].description}
-              likes_count={$products[product_id].likes_count}
+            product={$products[product_id]}	
             />
           {/each}
         {/if}
@@ -131,7 +112,7 @@
     {/if}
   </Masonry>
 
-  {#if loading}
+  {#if Object.keys($products).length === 0}
     <div class="pagination">Loading...</div>
   {/if}
 </main>

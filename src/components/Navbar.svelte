@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
     import Logo from './Logo.svelte';
     import { _ } from 'svelte-i18n';
 
-    export let handleButtonTrack;
+    export let handleButtonTrack: (button: string) => void = () => {}; // optional function
+
 </script>
 
 <header>

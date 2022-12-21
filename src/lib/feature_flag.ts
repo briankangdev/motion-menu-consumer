@@ -1,5 +1,6 @@
 import flagsmith from "flagsmith";
 import { env } from "$env/dynamic/public";
+import type { IFlagsmith } from "flagsmith/types";
 
 /**
  * Flagsmith client must be initialized before it can be used.
@@ -8,18 +9,20 @@ import { env } from "$env/dynamic/public";
  */
 
 class FeatureFlag {
+  client: IFlagsmith<string, string>;
+
   constructor() {
     this.client = flagsmith;
   }
 
-  async initSession(user) {
+  async initSession(user: string) {
     if (!user) {
       console.warn(
         "Flagsmith: User is not provided. Flagsmith will not be able to track user specific flags."
       );
     }
     await this.client.init({
-      environmentID: env.PUBLIC_FLAGSMITH_ENVIRONMENT_ID,
+      environmentID: env.PUBLIC_FLAGSMITH_ENVIRONMENT_ID!,
       identity: user,
     });
   }
@@ -42,7 +45,7 @@ class FeatureFlag {
     return await this.client.getAllFlags();
   }
 
-  async getValue(key) {
+  async getValue(key: string) {
     await this.checkSession();
     return await this.client.getValue(key);
   }

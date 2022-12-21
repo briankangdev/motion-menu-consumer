@@ -1,7 +1,4 @@
 import { writable } from "svelte/store";
+import type { ICompany } from "src/api/company";
 
-interface ICompany {
-  name?: string;
-}
-
-export const company = writable<ICompany>({});
+export const company = writable<ICompany>(null);

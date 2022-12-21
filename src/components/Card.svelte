@@ -1,20 +1,29 @@
-<script>
+<script lang="ts">
   import Like from "./like/Like.svelte";
   import {
     createProductLike,
     removeProductLike,
   } from "../services/like_service";
-  import { user } from "../stores/user";
+  import type { IProduct } from "src/api/products";
+  import { user } from "../stores/user"
 
-  export let product_id;
-  export let name;
-  export let description;
-  export let price;
-  export let likes_count;
-
-  export let image_public_id;
-
+  export let product: IProduct;
+  
+  let { id, name, description, price, images, likes_count } = product;
+  let image_public_id: IProduct["images"][0]["public_id"] = images[0]?.public_id;
+  let isLiked:boolean = $user.likes.includes(id);
   let captionVisible = false;
+
+  $: {
+    // Reassign variables when product changes
+    ({ id, name, description, price, images, likes_count } = product);
+    image_public_id = images[0]?.public_id;
+  }
+  
+  $: {
+    // Reassign variables when $user changes or id changes
+    isLiked = $user.likes.includes(id); 
+  }
 
   function onTouchStart() {
     captionVisible = true;
@@ -27,7 +36,7 @@
 
 {#if image_public_id}
   <div class="card">
-    <a href={`/product/${product_id}`}>
+    <a href={`/product/${id}`}>
       <img
         on:touchstart={onTouchStart}
         on:touchend={onTouchEnd}
@@ -55,12 +64,12 @@
       <div class="card-footer">
         <Like
           createLikeCallback={() => {
-            createProductLike(product_id);
+            createProductLike(id);
           }}
           removeLikeCallback={() => {
-            removeProductLike(product_id);
+            removeProductLike(id);
           }}
-          isLiked={$user.likes_ids_list.includes(product_id)}
+          {isLiked}
           {likes_count}
         />
         <p class="price">$ {price}</p>

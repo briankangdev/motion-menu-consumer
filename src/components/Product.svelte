@@ -1,12 +1,14 @@
-<script>
+<script lang="ts">
   import { env } from "$env/dynamic/public";
   import Logo from "./Logo.svelte";
-  import { products } from "../stores/products";
+  import { productsStore } from "../stores/products";
   import { onMount } from "svelte";
+  import type { IProduct } from "src/api/products";
 
-  export let id;
+  export let id: IProduct["id"];
 
   let loading = false;
+  let products = productsStore.dic
   let product = $products[id];
 
   async function fetchProduct() {
@@ -62,7 +64,7 @@
         <img
           class="img"
           src={`https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_auto,w_250,h_250,dpr_2.0,c_fill,g_auto/${image.public_id}.jpg`}
-          alt={product.caption}
+          alt={product.name}
         />
       {/each}
     </div>
