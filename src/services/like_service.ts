@@ -12,7 +12,7 @@ import {
   type ILike,
 } from "../api/likes";
 import mixpanel from "mixpanel-browser";
-import type { ICompany } from "src/api/company";
+import type { CompanySlug } from "src/api/company";
 import type { IUser } from "src/stores/user";
 import type { IProduct } from "src/api/products";
 import { user } from "../stores/user";
@@ -23,7 +23,7 @@ user.subscribe((user) => {
   user_distinct_id = user?.distinct_id;
 });
 
-export const getProductLikes = async (company_id: ICompany["name"]) => {
+export const getProductLikes = async (company_id: CompanySlug) => {
   try {
     const response = await get_product_likes(company_id, user_distinct_id);
     let user_likes: IUser["likes"] = Object.values(response.data).map(

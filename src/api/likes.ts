@@ -1,6 +1,6 @@
 import client from "./client";
 import type { IUser } from "src/stores/user";
-import type { ICompany } from "./company";
+import type { CompanySlug } from "./company";
 import type { IProduct } from "./products";
 
 export interface ILike {
@@ -16,7 +16,7 @@ interface IResponse {
 }
 
 export const get_product_likes = async (
-  company_id: ICompany["name"],
+  company_id: CompanySlug,
   user_distinct_id: IUser["distinct_id"]
 ): Promise<IResponse> => {
   const response = await client.get(`/api/v1/${company_id}/products/likes`, {

@@ -1,5 +1,5 @@
 import client from "./client";
-import type { ICompany } from "./company";
+import type { CompanySlug } from "./company";
 
 export interface IProduct {
   id: number;
@@ -29,7 +29,7 @@ interface IResponse {
 }
 
 export const get_products = async (
-  company_id: ICompany["name"]
+  company_id: CompanySlug
 ): Promise<IResponse> => {
   const response = await client.get(
     `/api/v1/${company_id}/products?page=1&per_page=15`
@@ -39,7 +39,7 @@ export const get_products = async (
 };
 
 export const get_products_by_page = async (
-  company_id: ICompany["name"],
+  company_id: CompanySlug,
   page: number
 ): Promise<IResponse> => {
   const response = await client.get(

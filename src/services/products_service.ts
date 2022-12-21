@@ -1,9 +1,9 @@
 import { browser } from "$app/environment";
-import type { ICompany } from "src/api/company";
+import type { CompanySlug } from "src/api/company";
 import { get_products, get_products_by_page } from "../api/products";
 import { productsStore } from "../stores/products";
 
-export async function getProducts(company_id: ICompany["name"]) {
+export async function getProducts(company_id: CompanySlug) {
   const response = await get_products(company_id);
 
   productsStore.dic.update((prev) => ({
