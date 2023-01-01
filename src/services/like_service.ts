@@ -4,7 +4,7 @@
 // API communication
 // Tracking logic
 
-import { productsStore } from "../stores/products";
+import productsStore from "../stores/products";
 import {
   get_product_likes,
   create_product_like,

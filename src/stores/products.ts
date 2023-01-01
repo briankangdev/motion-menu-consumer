@@ -75,4 +75,4 @@ class ProductsStore {
   }
 }
 
-export const productsStore = new ProductsStore();
+export default new ProductsStore();

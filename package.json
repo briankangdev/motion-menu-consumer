@@ -25,6 +25,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@auth0/auth0-spa-js": "^2.0.1",
     "axios": "^1.2.0",
     "flagsmith": "^3.14.1",
     "mixpanel-browser": "^2.45.0",
