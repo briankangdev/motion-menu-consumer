@@ -3,7 +3,7 @@
 
   import { _ } from "svelte-i18n";
   import Logo from "../../../../components/Logo.svelte";
-  import { productsStore } from "../../../../stores/products.js";
+  import productsStore from "../../../../stores/products.js";
   import { company } from "../../../../stores/company.js";
   import Masonry from "../../../../components/Masonry.svelte";
   import Card from "../../../../components/Card.svelte";

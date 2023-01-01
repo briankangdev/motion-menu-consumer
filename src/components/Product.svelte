@@ -1,7 +1,7 @@
 <script lang="ts">
   import { env } from "$env/dynamic/public";
   import Logo from "./Logo.svelte";
-  import { productsStore } from "../stores/products";
+  import productsStore from "../stores/products";
   import { onMount } from "svelte";
   import type { IProduct } from "src/api/products";
 

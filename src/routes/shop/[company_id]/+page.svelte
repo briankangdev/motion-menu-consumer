@@ -1,7 +1,9 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Logo from "../../../components/Logo.svelte";
-  import { productsStore, type IGroupedProducts } from "../../../stores/products.js";
+  import productsStore, {
+    type IGroupedProducts,
+  } from "../../../stores/products.js";
   import { company } from "../../../stores/company.js";
   import Masonry from "../../../components/Masonry.svelte";
   import Card from "../../../components/Card.svelte";
@@ -94,18 +96,14 @@
   >
     {#if $query.length > 1}
       {#each Object.values(filtered_ids) as product_id}
-        <Card
-        product={$products[product_id]}	
-        />
+        <Card product={$products[product_id]} />
       {/each}
     {:else}
       {#each all_tags as tag_name}
         {#if grouped[tag_name]}
           <h1 class="tag">{tag_name}</h1>
           {#each grouped[tag_name] as product_id}
-            <Card
-            product={$products[product_id]}	
-            />
+            <Card product={$products[product_id]} />
           {/each}
         {/if}
       {/each}
