@@ -28,23 +28,20 @@ interface IResponse {
   meta: { [key: string]: any };
 }
 
-export const get_products = async (
-  company_id: CompanySlug
+export const getProducts = async (
+  company_id: CompanySlug,
+  page: number,
+  per_page: number = 15
 ): Promise<IResponse> => {
   const response = await client.get(
-    `/api/v1/${company_id}/products?page=1&per_page=15`
+    `/api/v1/${company_id}/products?page=${page}&per_page=${per_page}`
   );
 
   return response.data;
 };
 
-export const get_products_by_page = async (
-  company_id: CompanySlug,
-  page: number
-): Promise<IResponse> => {
-  const response = await client.get(
-    `/api/v1/${company_id}/products?page=${page}&per_page=15`
-  );
+export const getProduct = async (product_id: string): Promise<IResponse> => {
+  const response = await client.get(`/api/v1/product/${product_id}`);
 
   return response.data;
 };
