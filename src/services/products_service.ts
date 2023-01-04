@@ -32,8 +32,6 @@ export async function loadProduct(product_id: string) {
 
   dic.update((prev) => ({
     ...prev,
-    ...response.data,
+    [response.data.id]: response.data,
   }));
-
-  console.log(dic);
 }

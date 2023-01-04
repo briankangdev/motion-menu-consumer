@@ -3,7 +3,7 @@
   import { dic } from "../../../../../stores/products";
 
   export let data;
-  let product = $dic[data.id];
+  let product = $dic[data.product_id];
 
   function goBack() {
     window.history.back();
