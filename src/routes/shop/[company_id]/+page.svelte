@@ -86,14 +86,14 @@
   >
     {#if $query.length > 1}
       {#each Object.values($filtered_ids) as product_id}
-        <Card {company_id} product={$products_dic[product_id]} />
+        <Card {company_id} product={$products_dic[product_id]} show_media={false} />
       {/each}
     {:else}
       {#each all_tags as tag_name}
         {#if $grouped_by_tags[tag_name]}
           <h1 class="tag">{tag_name}</h1>
           {#each $grouped_by_tags[tag_name] as product_id}
-            <Card {company_id} product={$products_dic[product_id]} />
+            <Card {company_id} product={$products_dic[product_id]} show_media={false} />
           {/each}
         {/if}
       {/each}

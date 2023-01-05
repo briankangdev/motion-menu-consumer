@@ -73,7 +73,7 @@
     {/each}
 
     {#each $ids_with_images as product_id}
-      <Card {company_id} product={$products_dic[product_id]} />
+      <Card {company_id} product={$products_dic[product_id]} show_media={true} />
     {/each}
   </Masonry>
 

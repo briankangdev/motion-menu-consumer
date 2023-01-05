@@ -10,6 +10,7 @@
 
   export let company_id: CompanySlug;
   export let product: IProduct;
+  export let show_media: boolean;
 
   let { id, name, description, price, images, likes_count } = product;
   let image_public_id: IProduct["images"][0]["public_id"] =
@@ -37,7 +38,7 @@
   }
 </script>
 
-{#if image_public_id}
+{#if image_public_id && show_media}
   <div class="card">
     <a href={`/shop/${company_id}/product/${id}`}>
       <img
