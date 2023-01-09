@@ -8,7 +8,9 @@
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "test:unit": "vitest"
+    "test:unit": "vitest",
+    "test:e2e": "cypress open",
+    "test:e2e:run": "cypress run"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
