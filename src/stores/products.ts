@@ -1,6 +1,27 @@
 import { derived, writable } from "svelte/store";
 import type { Writable } from "svelte/store";
-import type { IProduct } from "src/api/products";
+
+export interface IProduct {
+  id: number;
+  name: string;
+  description: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string;
+  images: Array<{
+    id: number;
+    public_id: string;
+  }>;
+  videos: any[];
+  images_count: number;
+  videos_count: number;
+  price: number;
+  tags: Array<{
+    id: number;
+    name: string;
+  }>;
+  likes_count: number;
+}
 
 interface IProductDictionary {
   [key: string]: IProduct;

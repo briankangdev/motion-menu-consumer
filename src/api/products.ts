@@ -1,27 +1,6 @@
 import client from "./client";
 import type { CompanySlug } from "./company";
-
-export interface IProduct {
-  id: number;
-  name: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-  deleted_at: string;
-  images: Array<{
-    id: number;
-    public_id: string;
-  }>;
-  videos: any[];
-  images_count: number;
-  videos_count: number;
-  price: number;
-  tags: Array<{
-    id: number;
-    name: string;
-  }>;
-  likes_count: number;
-}
+import type { IProduct } from "src/stores/products";
 
 interface IResponseProducts {
   data: { [key: string]: IProduct };

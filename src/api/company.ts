@@ -1,15 +1,5 @@
 import client from "./client";
-
-export interface ICompany {
-  id: number;
-  email: string;
-  name: string;
-  description: string;
-  instagram: string;
-  short_description: string;
-  slug: string;
-  tag_priority: string;
-}
+import type { ICompany } from "src/stores/company";
 
 interface IResponse {
   data: ICompany;
