@@ -13,9 +13,11 @@ export async function load({ params }: IRouteParams) {
   let company_id = params.company_id;
   let product_id = params.product_id;
 
-  await getCompany(company_id);
-  await loadProduct(product_id);
-  await getProductLikes(company_id);
+  await Promise.all([
+    getCompany(company_id),
+    loadProduct(product_id),
+    getProductLikes(company_id),
+  ]);
 
   return {
     company_id: params.company_id,
