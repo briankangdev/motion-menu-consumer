@@ -1,6 +1,6 @@
 import client from "./client";
-import type { CompanySlug } from "./company";
 import type { IProduct } from "src/stores/products";
+import type { CompanySlug } from "src/stores/company";
 
 interface IResponseProducts {
   data: { [key: string]: IProduct };
@@ -24,7 +24,7 @@ export const getProducts = async (
 };
 
 export const getProduct = async (
-  product_id: string
+  product_id: IProduct["id"]
 ): Promise<IResponseProduct> => {
   const response = await client.get(`/api/v1/product/${product_id}`);
 

@@ -4,9 +4,9 @@
     createProductLike,
     removeProductLike,
   } from "../services/like_service";
-  import type { IProduct } from "src/api/products";
+  import type { IProduct } from "src/stores/products";
   import { user } from "../stores/user";
-  import type { CompanySlug } from "src/api/company";
+  import type { CompanySlug } from "src/stores/company";
 
   export let company_id: CompanySlug;
   export let product: IProduct;

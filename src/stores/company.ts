@@ -11,4 +11,6 @@ export interface ICompany {
   tag_priority: string;
 }
 
+export type CompanySlug = ICompany["name"];
+
 export const company = writable<ICompany>(null);

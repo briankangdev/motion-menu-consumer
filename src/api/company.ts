@@ -1,12 +1,9 @@
 import client from "./client";
-import type { ICompany } from "src/stores/company";
+import type { CompanySlug, ICompany } from "src/stores/company";
 
 interface IResponse {
   data: ICompany;
 }
-
-export type CompanySlug = ICompany["name"];
-
 export const get_company = async (
   company_id: CompanySlug
 ): Promise<IResponse> => {

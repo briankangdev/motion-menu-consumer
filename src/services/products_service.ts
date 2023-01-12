@@ -1,7 +1,7 @@
 import { browser } from "$app/environment";
-import type { CompanySlug } from "src/api/company";
+import type { CompanySlug } from "src/stores/company";
 import { getProducts, getProduct } from "../api/products";
-import { dic } from "../stores/products";
+import { dic, type IProduct } from "../stores/products";
 
 export async function loadProductsByPage(
   company_id: CompanySlug,
@@ -30,7 +30,7 @@ export async function loadAllProducts(company_id: CompanySlug) {
   }
 }
 
-export async function loadProduct(product_id: string) {
+export async function loadProduct(product_id: IProduct["id"]) {
   const response = await getProduct(product_id);
 
   dic.update((prev) => ({

@@ -11,7 +11,7 @@ interface IRouteParams {
 
 export async function load({ params }: IRouteParams) {
   let company_id = params.company_id;
-  let product_id = params.product_id;
+  let product_id = +params.product_id;
 
   await Promise.all([
     getCompany(company_id),

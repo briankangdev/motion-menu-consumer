@@ -1,7 +1,7 @@
 import client from "./client";
 import type { IUser } from "src/stores/user";
-import type { CompanySlug } from "./company";
-import type { IProduct } from "./products";
+import type { IProduct } from "src/stores/products";
+import type { CompanySlug } from "src/stores/company";
 
 export interface ILike {
   created_at: string;
