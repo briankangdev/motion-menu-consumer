@@ -20,10 +20,13 @@ export async function loadProductsByPage(
 export async function loadAllProducts(company_id: CompanySlug) {
   // This is called for the initial server side page rendering and meta data.
   const response = await loadProductsByPage(company_id, 1);
-
   // It checks if it's client side and fetch all products to update products store.
-  for (let page = 1; page <= (browser ? response.meta.pages : 2); page++) {
-    await loadProductsByPage(company_id, page);
+  const pages = response.meta.pages;
+
+  if (browser && pages > 1) {
+    for (let i = 2; i <= pages; i++) {
+      await loadProductsByPage(company_id, i);
+    }
   }
 }
 
