@@ -1,4 +1,4 @@
-import type { IProduct } from "src/api/products";
+import type { IProduct } from "./products";
 import { writable } from "svelte/store";
 
 export interface IUser {
