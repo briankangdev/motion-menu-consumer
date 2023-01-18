@@ -12,7 +12,7 @@ const props = {
 describe("Like component", () => {
   afterEach(cleanup); // cleanup is required to remove the component from the DOM after each test
 
-  it("Component without likes", () => {
+  it("component without likes", () => {
     const likes_count = 0;
 
     render(Like, {
@@ -24,7 +24,7 @@ describe("Like component", () => {
     expect(likes).toBeNull();
   });
 
-  it("Component with likes", () => {
+  it("component with likes", () => {
     const likes_count = 10;
 
     render(Like, {
@@ -36,7 +36,7 @@ describe("Like component", () => {
     expect(likes.textContent).toBe(likes_count.toString());
   });
 
-  it("Component without user like", () => {
+  it("component without user like", () => {
     render(Like, {
       ...props,
       isLiked: false,
@@ -49,7 +49,7 @@ describe("Like component", () => {
     expect(likeIconLiked).toBeNull();
   });
 
-  it("Component with user like", () => {
+  it("component with user like", () => {
     render(Like, {
       ...props,
       isLiked: true,
@@ -62,7 +62,7 @@ describe("Like component", () => {
     expect(likeIconLiked).toBeTruthy();
   });
 
-  it("Calling like function", async () => {
+  it("it calls like function", async () => {
     render(Like, {
       ...props,
       isLiked: false,
@@ -74,7 +74,7 @@ describe("Like component", () => {
     expect(props.createLikeCallback).toBeCalled();
   });
 
-  it("Calling unlike function", async () => {
+  it("it calls unlike function", async () => {
     render(Like, {
       ...props,
       isLiked: true,
