@@ -15,8 +15,10 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
+    "@testing-library/svelte": "^3.2.2",
     "@types/mixpanel-browser": "^2.38.0",
     "cypress": "^11.2.0",
+    "jsdom": "^21.0.0",
     "svelte": "^3.53.1",
     "svelte-check": "^2.9.2",
     "svelte-preprocess": "^4.10.7",

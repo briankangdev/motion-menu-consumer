@@ -1,10 +1,10 @@
 describe("Images Page", () => {
   context("Products in images", () => {
     beforeEach(() => {
-      cy.intercept("GET", "/api/v1/37/products?page=1&per_page=15").as(
+      cy.intercept("GET", "/api/v1/shop/products?page=1&per_page=15").as(
         "get_products"
       );
-      cy.visit("/shop/37");
+      cy.visit("/shop/shop");
     });
 
     it("render products", () => {
