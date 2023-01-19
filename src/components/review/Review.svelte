@@ -5,6 +5,8 @@
     export let body: string;
     export let created_at: string;
     export let clickable: boolean = false;
+    export let short_body_char_limit: number = 150;
+    export let link: string = "/review";
 
     let time_ago = (created_at: string): string => {
         let date = new Date(created_at);
@@ -30,29 +32,27 @@
         }
     };
 
-    let charLimit: number = 150;
-    let shortBody: string = body.slice(0, charLimit) + "...";
-
+    let shortBody: string = body.slice(0, short_body_char_limit).trim();
   </script>
   
-  <section class="review-container">
+  <section class="review-container" data-testid="container">
     {#if clickable}
         <!-- svelte-ignore a11y-missing-content -->
-        <a class="review-link" href="/review"></a>
+        <a class="review-link" data-testid="link" href={link}></a>
     {/if}
     <div class="review-main">
-        <div class="review-name">{name}</div>
-        <div class="review-body">
+        <div class="review-name" data-testid="name">{name}</div>
+        <div class="review-body" data-testid="body">
             {#if shortBody.length < body.length}
-            {shortBody}
+            {shortBody}...
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <span class="review-more" on:click={() => shortBody = body}>{$_("more")}</span>
+                <span class="review-more" data-testid="more" on:click={() => shortBody = body}>{$_("more")}</span>
             {:else}
                 {body}
             {/if}
         </div>
     </div>
-    <div class="review-time">{time_ago(created_at)}</div>
+    <div class="review-date" data-testid="date">{time_ago(created_at)}</div>
   </section>
   
   <style>
@@ -65,7 +65,6 @@
       overflow: hidden;
       gap: 10px;
       background-color: #f3f3f4;
-      margin: 40px; 
       position: relative;
       z-index: 0;
     }
@@ -90,7 +89,7 @@
       font-weight: 600;
     }
   
-    .review-time {
+    .review-date {
       color: rgb(142, 142, 142);
       align-self: flex-end;
       font-size: 0.7rem;
@@ -101,6 +100,12 @@
       cursor: progress; 
       position: relative;
       z-index: 2;
+    }
+
+    @media (min-width: 768px) {
+      .review-container {
+        max-width: 30%
+      }
     }
   </style>
   
