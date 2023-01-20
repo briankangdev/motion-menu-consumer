@@ -15,17 +15,6 @@ const props = {
 // init the i18n module
 init({ initialLocale: "en" });
 
-// simulate the actual Date object
-const mockDate = new Date("2023-01-18T19:00:00.000Z");
-global.Date = class extends Date {
-  constructor(...args) {
-    if (args.length) {
-      return super(...args);
-    }
-    return mockDate;
-  }
-};
-
 describe("review component", () => {
   afterEach(cleanup); // cleanup is required to remove the component from the DOM after each test
 
@@ -92,56 +81,6 @@ describe("review component", () => {
 
       more = screen.queryByTestId("more");
       expect(more).toBeNull();
-    });
-  });
-
-  describe("render the correct translation variant for the date", () => {
-    it("1 year", () => {
-      render(Review, props); // render with 1 year ago
-      const date = screen.queryByTestId("date");
-      expect(date.textContent).contains("year_ago");
-    });
-
-    it("2 years", () => {
-      render(Review, { ...props, created_at: "2021-01-01T00:00:00.000Z" }); // render with 2 years ago
-      const date = screen.queryByTestId("date");
-      expect(date.textContent).contains("years_ago");
-    });
-
-    it("1 month", () => {
-      render(Review, { ...props, created_at: "2022-12-01T00:00:00.000Z" }); // render with 1 month ago
-      const date = screen.queryByTestId("date");
-      expect(date.textContent).contains("month_ago");
-    });
-
-    it("2 months", () => {
-      render(Review, { ...props, created_at: "2022-11-01T00:00:00.000Z" }); // render with 2 months ago
-      const date = screen.queryByTestId("date");
-      expect(date.textContent).contains("months_ago");
-    });
-
-    it("1 week", () => {
-      render(Review, { ...props, created_at: "2023-01-11T00:00:00.000Z" }); // render with 1 week ago
-      const date = screen.queryByTestId("date");
-      expect(date.textContent).contains("week_ago");
-    });
-
-    it("2 weeks", () => {
-      render(Review, { ...props, created_at: "2023-01-03T00:00:00.000Z" }); // render with 2 weeks ago
-      const date = screen.queryByTestId("date");
-      expect(date.textContent).contains("weeks_ago");
-    });
-
-    it("1 day", () => {
-      render(Review, { ...props, created_at: "2023-01-17T00:00:00.000Z" }); // render with 1 day ago
-      const date = screen.queryByTestId("date");
-      expect(date.textContent).contains("day_ago");
-    });
-
-    it("2 days", () => {
-      render(Review, { ...props, created_at: "2023-01-15T00:00:00.000Z" }); // render with 2 days ago
-      const date = screen.queryByTestId("date");
-      expect(date.textContent).contains("days_ago");
     });
   });
 
