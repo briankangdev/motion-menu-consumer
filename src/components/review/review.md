@@ -1,6 +1,6 @@
 # Review Component
 
-The Review component is a Svelte component that displays a review with a name, body, and date. The component allows to make the review clickable by providing a link and supports internationalization (i18n) using the svelte-i18n library.
+The Review component is a Svelte component that displays a review with a name, body, and date. The component supports internationalization (i18n) using the svelte-i18n library.
 
 ### Includes
 
@@ -8,7 +8,6 @@ The Review component is a Svelte component that displays a review with a name, b
 - Component test built on Testing Library + Vitest
 - Displaying a shortened version of the review body with a configurable character limit.
 - Displaying a user-readable date format (e.g. "today", "a week ago", etc.).
-- Optional link when clicking wherever on the component
 - Use of the svelte-i18n library for internationalization (i18n).
 
 ## Usage
@@ -17,14 +16,12 @@ The Review component is a Svelte component that displays a review with a name, b
 <script>
     import Review from './review/Review.svelte';
 </script>
-    <Review 
+<Review 
     name="Veronica"
     body="I love this app."
     created_at="2022-12-10T18:00:00.000Z"
     //short_body_char_limit: 150 --> optional
-    //link: "/review" --> optional
-    //clickable: true --> optional
-  />
+/>
 ```
 ## Props
 
@@ -34,11 +31,7 @@ The Review component is a Svelte component that displays a review with a name, b
 
 - **created_at**: The date when the review was created in string format.
 
-- **clickable**: A Boolean value that determines whether the review should be clickable or not. Default is false.
-
 - **short_body_char_limit**: A Number value that determines the maximum number of characters to show in the short version of the review. Default is 150.
-
-- **link**: A String value that represents the url to navigate when the review is clicked. Default is "/review".
 
 ## Preview
 

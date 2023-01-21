@@ -5,19 +5,13 @@
     export let name: string;
     export let body: string;
     export let created_at: string;
-    export let clickable: boolean = false;
     export let short_body_char_limit: number = 150;
-    export let link: string = "/review";
 
     let shortBody: string = body.slice(0, short_body_char_limit).trim();  
     let {message, values} = time_ago(created_at);
   </script>
   
   <section class="review-container" data-testid="container">
-    {#if clickable}
-        <!-- svelte-ignore a11y-missing-content -->
-        <a class="review-link" data-testid="link" href={link}></a>
-    {/if}
     <div class="review-main">
         <div class="review-name" data-testid="name">{name}</div>
         <div class="review-body" data-testid="body">
@@ -47,15 +41,6 @@
       z-index: 0;
     }
 
-    .review-link {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1;
-    }
-  
     .review-main {
       display: flex;
       flex-direction: column;
@@ -75,7 +60,7 @@
 
     .review-more {
       color: rgb(142, 142, 142);
-      cursor: progress; 
+      cursor: pointer; 
       position: relative;
       z-index: 2;
     }

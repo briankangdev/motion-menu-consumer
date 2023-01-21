@@ -83,39 +83,4 @@ describe("review component", () => {
       expect(more).toBeNull();
     });
   });
-
-  describe("link to the review page", () => {
-    it("not render the link if the 'clickable' prop is false", () => {
-      render(Review, {
-        ...props,
-        clickable: false,
-      });
-
-      const link = screen.queryByTestId("link");
-      expect(link).toBeNull();
-    });
-
-    it("render the link if the 'clickable' prop is true", () => {
-      render(Review, {
-        ...props,
-        clickable: true,
-      });
-
-      const link = screen.queryByTestId("link");
-      expect(link).toBeTruthy();
-    });
-
-    it("render the link with the correct href", () => {
-      const link_href = "/test";
-
-      render(Review, {
-        ...props,
-        clickable: true,
-        link: link_href,
-      });
-
-      const link = screen.queryByTestId("link");
-      expect(link.getAttribute("href")).toBe(link_href);
-    });
-  });
 });
