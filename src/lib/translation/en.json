@@ -1,4 +1,15 @@
 {
+  "today": "Today",
+  "day_ago": "{days} day ago",
+  "days_ago": "{days} days ago",
+  "week_ago": "{weeks} week ago",
+  "weeks_ago": "{weeks} weeks ago",
+  "month_ago": "{months} month ago",
+  "months_ago": "{months} months ago",
+  "year_ago": "{years} year ago",
+  "years_ago": "{years} years ago",
+  "more": "more",
+
   "home_title": "Get QR code for your business!",
   "home_title_A": "Get QR code for your business!",
   "home_title_B": "Customer is looking for an interactive menu!",

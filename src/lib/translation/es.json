@@ -1,4 +1,15 @@
 {
+  "today": "Hoy",
+  "day_ago": "Hace {days} día",
+  "days_ago": "Hace {days} días",
+  "week_ago": "Hace {weeks} semana",
+  "weeks_ago": "Hace {weeks} semanas",
+  "month_ago": "Hace {months} mes",
+  "months_ago": "Hace {months} meses",
+  "year_ago": "Hace {years} año",
+  "years_ago": "Hace {years} años",
+  "more": "más",
+
   "home_title": "La carta más atractiva para clientes!",
   "home_title_A": "Mejora tu restaurante y acercate a tus clientes",
   "home_title_B": "El menú interactivo que tu cliente necesita",
