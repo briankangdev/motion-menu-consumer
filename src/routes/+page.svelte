@@ -44,22 +44,22 @@
 
   const flag = "landing_page_copy";
   let video_public_id = "tgeweblar8soskbe6gzy";
-  let titleValue: string;
-  let onMountTime: Date;
+  let title_value: string;
+  let on_mount_time: Date;
   let user_id: IUser["distinct_id"] = $user.distinct_id;
 
   onMount(async () => {
     await FeatureFlag.initSession(user_id); // the client needs to be initialized before we can use its methods
-    titleValue = await FeatureFlag.getValue(flag) as string; // get the value of the feature flag we are using for AB testing
+    title_value = await FeatureFlag.getValue(flag) as string; // get the value of the feature flag we are using for AB testing
 
     // TRACK how long user stays in the page
-    onMountTime = new Date(); // get the time when the page was loaded
+    on_mount_time = new Date(); // get the time when the page was loaded
     window.onbeforeunload = function () {
       let exitTime = new Date(); // get the time when the page was closed
-      let timeOnPage = exitTime.getTime() - onMountTime.getTime() / 1000; // calculate the time the user was on the page
+      let timeOnPage = exitTime.getTime() - on_mount_time.getTime() / 1000; // calculate the time the user was on the page
       analytics.track.timeOnPage({
         page: HOME_PAGE,
-        titleValue,
+        title_value,
         timeOnPage,
       }); // send the time the user was on the page to mixpanel
     };
@@ -68,7 +68,7 @@
   const handleButtonTrack = (button) => {
     analytics.track.button({
       page: HOME_PAGE,
-      titleValue,
+      title_value,
       button,
     });
   };
@@ -84,8 +84,8 @@
 <main>
   <div class="row">
     <div>
-      {#if titleValue}
-        <h1>{$_(titleValue)}</h1>
+      {#if title_value}
+        <h1>{$_(title_value)}</h1>
       {/if}
       <p>
         {$_("home_description")}
