@@ -53,6 +53,11 @@ button {
   color: #333;
   background-color: #f4f4f4;
   outline: none;
+
+  --blue: #0050a0;
+  --blue_highlighted: #0076ed;
+  --black: #111111;
+  --white: #fff;
 }
 
 button:disabled {
