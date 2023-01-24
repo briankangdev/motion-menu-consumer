@@ -1,5 +1,4 @@
-import { render, fireEvent, screen, cleanup } from "@testing-library/svelte";
-import { describe, it, expect, afterEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { time_ago } from "../time_ago";
 
 // simulate the actual Date object
