@@ -7,10 +7,10 @@
     export let handleButtonTrack: (button: string) => void = () => {}; // optional function
     
     let variants: Variant[] = ["primary", "black", "borderless", "blue"];
-    let className: string = (variants.includes(variant)) ? `button ${variant}` : `button ${variants[0]}` //if variant is not valid, use the first one as default
+    let class_name: string = (variants.includes(variant)) ? `button ${variant}` : `button ${variants[0]}` //if variant is not valid, use the first one as default
 </script>
 
-<button class={className} data-testid="button" on:click={() => {
+<button class={class_name} data-testid="button" on:click={() => {
     // on click call the function passed as "tap" prop and
     // if button is trackable, call the tracking function
     tap(); 
