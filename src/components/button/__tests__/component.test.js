@@ -31,7 +31,7 @@ describe("Button component", () => {
       });
     });
 
-    it("when variant is not in the list, shouldn't render a default variant", () => {
+    it("when variant is not in the list, should render a default variant", () => {
       const wrongVariant = "test";
       const defaultVariant = variants[0];
       render(Button, { ...props, variant: wrongVariant });
