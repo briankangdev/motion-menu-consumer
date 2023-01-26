@@ -1,19 +1,20 @@
 <script lang="ts" >
     type Variant = "primary" | "black" | "borderless" | "blue";
   
-    export let tap: () => void;
+    export let onClick: () => void;
+    export let handleButtonTrack: (button: string) => void = () => {}; // optional function
     export let title: string;
     export let variant: Variant;
-    export let handleButtonTrack: (button: string) => void = () => {}; // optional function
+    export let test_id: string = "button";
     
     let variants: Variant[] = ["primary", "black", "borderless", "blue"];
     let class_name: string = (variants.includes(variant)) ? `button ${variant}` : `button ${variants[0]}` //if variant is not valid, use the first one as default
 </script>
 
-<button class={class_name} data-testid="button" on:click={() => {
-    // on click call the function passed as "tap" prop and
+<button class={class_name} data-testid={test_id} on:click={() => {
+    // on click call the function passed as "onClick" prop and
     // if button is trackable, call the tracking function
-    tap(); 
+    onClick(); 
     if (handleButtonTrack) {
         handleButtonTrack(title);
     }

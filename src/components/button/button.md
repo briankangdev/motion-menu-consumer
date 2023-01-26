@@ -8,6 +8,7 @@ The Button component is a Svelte component that displays a button with a customi
 - Component test built on Testing Library + Vitest
 - 4 different variants: "primary", "black", "borderless", "blue"
 - Option to track the button click by providing a function
+- Option to add a test id to the button
 
 ## Usage
 
@@ -18,8 +19,9 @@ The Button component is a Svelte component that displays a button with a customi
     <Button 
     title="Submit"
     variant="primary"
-    tap={exampleFunction}
+    onClick={exampleFunction}
     // handleButtonTrack={trackButton} -> optional
+    // test_id="submit-button" -> optional
     />
 
 ```
@@ -29,9 +31,11 @@ The Button component is a Svelte component that displays a button with a customi
 
 - **variant**: The variant style of the button. Can be "primary", "black", "borderless", or "blue". Default is "primary".
 
-- **tap**: A function to be called when the button is clicked.
+- **onClick**: A function to be called when the button is clicked.
 
 - **handleButtonTrack**: An optional function to track the button click. It should receive a string parameter which is the title of the button.
+
+- **test_id**: An optional string to add a test id to the button. By default, the test id is "button".
 
 ## Preview
 
