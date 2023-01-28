@@ -50,26 +50,24 @@
 
   onMount(async () => {
     await FeatureFlag.initSession(user_id); // the client needs to be initialized before we can use its methods
-    title_value = await FeatureFlag.getValue(flag) as string; // get the value of the feature flag we are using for AB testing
+    title_value = (await FeatureFlag.getValue(flag)) as string; // get the value of the feature flag we are using for AB testing
 
     // TRACK how long user stays in the page
     on_mount_time = new Date(); // get the time when the page was loaded
     window.onbeforeunload = function () {
-      let exitTime = new Date(); // get the time when the page was closed
-      let timeOnPage = exitTime.getTime() - on_mount_time.getTime() / 1000; // calculate the time the user was on the page
-      analytics.track.timeOnPage({
+      let exit_time = new Date(); // get the time when the page was closed
+      let user_stayed = exit_time.getTime() - on_mount_time.getTime() / 1000; // calculate the time the user was on the page in seconds
+      analytics.track.pageStay(HOME_PAGE, user_stayed, {
         page: HOME_PAGE,
         title_value,
-        timeOnPage,
       }); // send the time the user was on the page to mixpanel
     };
   });
 
-  const handleButtonTrack = (button) => {
-    analytics.track.button({
+  const handleButtonTrack = (button_name: string) => {
+    analytics.track.buttonClick(button_name, {
       page: HOME_PAGE,
       title_value,
-      button,
     });
   };
 </script>
@@ -95,7 +93,7 @@
         <a
           class="button"
           href="https://admin.motion.menu/sign_up"
-          on:click={() => handleButtonTrack("get_started")}
+          on:click={() => handleButtonTrack("get-started")}
         >
           {$_("get_started")}</a
         >
@@ -110,25 +108,10 @@
         let:motion
       />
 
-      <Motion
-        initial={{ opacity: 0 }}
-        animate={{ y: -30, opacity: 1 }}
-        transition={{ duration: 0.5, type: "spring", stiffness: 220, delay: 1 }}
-        let:motion
-      >
-        <img
-          use:motion
-          alt="Motion Menu component"
-          class="menu-component"
-          src="https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_auto,w_300/v1639330570/proveat/menu-component.png"
-        />
-      </Motion>
-
       <img
         alt="Motion QR menu preview"
         class="menu-preview"
-        style="max-width: 650px;"
-        src="https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_auto,w_1000/v1639330699/proveat/mockup-header-2"
+        src="https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_auto/v1674934439/motion%20menu/landing-menu-preview.png"
       />
     </div>
   </div>
@@ -194,22 +177,18 @@
 
   h1 {
     color: black;
-    font-weight: 400;
+    font-weight: 600;
     max-width: 9em;
     font-size: 3em;
   }
 
-  .caption {
-    color: #333333;
+  .menu-preview {
+    max-width: 600px;
+    margin-top: 30px;
   }
 
-  .menu-component {
-    width: 200px;
-    object-fit: contain;
-
-    position: absolute;
-    left: 41%;
-    top: 35%;
+  .caption {
+    color: #333333;
   }
 
   p {
@@ -252,14 +231,6 @@
 
     .header-right {
       margin-top: 10px;
-    }
-
-    .menu-component {
-      width: 100px;
-      top: initial;
-      right: initial;
-      left: 5%;
-      bottom: 34%;
     }
 
     .chart {

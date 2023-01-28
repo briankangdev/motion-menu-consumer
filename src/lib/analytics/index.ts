@@ -14,8 +14,8 @@ interface IAnalytics {
   init: (config: IConfig) => void;
   setUserId: () => void;
   track: {
-    button: (props: IProps) => void;
-    timeOnPage: (props: IProps) => void;
+    buttonClick: (button_name: string, props: IProps) => void;
+    pageStay: (ppage_name: string, seconds: number, rops: IProps) => void;
   };
 }
 
@@ -30,8 +30,10 @@ const analytics: IAnalytics = {
     }));
   },
   track: {
-    button: (props) => mixpanel.track("button_click", props),
-    timeOnPage: (props) => mixpanel.track("time_on_page", props),
+    buttonClick: (button_name, props = {}) =>
+      mixpanel.track(`${button_name}-button.click`, props),
+    pageStay: (page_name, seconds, props) =>
+      mixpanel.track(`${page_name}.stay`, { ...props, seconds }),
   },
 };
 
