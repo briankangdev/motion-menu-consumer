@@ -6,8 +6,6 @@
   export let company_id: CompanySlug;
   export let product: IProduct;
   export let variant: Variant;
-  export let isOnScreen: boolean = false;
-  export let element: HTMLElement;
   export let handleTrack: (
     name: IProduct["name"],
     id: IProduct["id"]
@@ -26,7 +24,6 @@
 
   // media
   let image_src: string = `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_auto,w_200,h_200,dpr_auto,c_fill/${images[0].public_id}`;
-  let is_image_loaded: boolean = false;
 
   let video: HTMLVideoElement | undefined; // video tag
   let video_sources: string[] | undefined = videos.map(
@@ -34,15 +31,6 @@
   );
   let video_index: number = 0; // index used to manage what video is playing
   let video_src: string | undefined = video_sources[video_index];
-
-  // if the element is on screen, load the image to avoid partial showing of this one
-  $: if (isOnScreen) {
-    const img = new Image();
-    img.src = image_src;
-    img.onload = () => {
-      is_image_loaded = true;
-    };
-  }
 
   function handleClick() {
     handleTrack(name, id);
@@ -76,22 +64,24 @@
   on:click={() => handleClick()}
   on:mouseover={() => handleHover(true)}
   on:mouseout={() => handleHover(false)}
-  bind:this={element}
 >
   <a data-testid="product-link" href={`/shop/${company_id}/product/${id}`}>
-    {#if isOnScreen}
-      {#if videos_count > 0}
-        <video
-          data-testid="product-video"
-          bind:this={video}
-          src={video_src}
-          autoplay
-          muted
-          on:ended={() => handleVideoEnded(video_index)}
-        />
-      {:else if images_count > 0 && is_image_loaded}
-        <img data-testid="product-image" src={image_src} alt={name} />
-      {/if}
+    {#if videos_count > 0}
+      <video
+        data-testid="product-video"
+        bind:this={video}
+        src={video_src}
+        autoplay
+        muted
+        on:ended={() => handleVideoEnded(video_index)}
+      />
+    {:else if images_count > 0}
+      <img
+        data-testid="product-image"
+        src={image_src}
+        alt={name}
+        loading="lazy"
+      />
     {/if}
     <div class={overlay_class_name} data-testid="product-overlay">
       <div class="product-info">
@@ -128,6 +118,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 1;
   }
 
   .product-overlay {
