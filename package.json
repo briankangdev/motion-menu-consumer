@@ -13,7 +13,7 @@
     "test:e2e:run": "cypress run"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/adapter-vercel": "next",
     "@sveltejs/kit": "next",
     "@testing-library/svelte": "^3.2.2",
     "@types/mixpanel-browser": "^2.38.0",
