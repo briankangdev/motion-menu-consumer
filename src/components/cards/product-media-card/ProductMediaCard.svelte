@@ -6,6 +6,7 @@
   export let company_id: CompanySlug;
   export let product: IProduct;
   export let variant: Variant;
+  export let card_size: number;
   export let handleTrack: (
     name: IProduct["name"],
     id: IProduct["id"]
@@ -64,6 +65,10 @@
   on:click={() => handleClick()}
   on:mouseover={() => handleHover(true)}
   on:mouseout={() => handleHover(false)}
+  style={`
+    width: ${card_size}px;
+    height: ${card_size}px;
+    `}
 >
   <a data-testid="product-link" href={`/shop/${company_id}/product/${id}`}>
     {#if videos_count > 0}
@@ -101,8 +106,6 @@
   }
 
   .product-media-card {
-    width: 150px;
-    height: 150px;
     background-color: rgb(190, 192, 194);
     position: relative;
     user-select: none;
