@@ -6,7 +6,7 @@
   export let company_id: CompanySlug;
   export let product: IProduct;
   export let variant: Variant;
-  export let card_size: number;
+  export let card_size: number = 150;
   export let handleTrack: (
     name: IProduct["name"],
     id: IProduct["id"]

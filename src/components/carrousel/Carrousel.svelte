@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import type { CompanySlug } from "../../stores/company";
   import type { IProduct } from "../../stores/products";
   import ProductMediaCard from "../cards/product-media-card/ProductMediaCard.svelte";
@@ -13,17 +12,18 @@
 
   //ref
   let carrousel_wrap: HTMLElement;
-  let carrousel_spacer: HTMLElement;
 
-  //desktop grid
-  let is_desktop: boolean = false;
+  //desktop
   let desktop_columns: number = 3;
-  let desktop_rows: number = 2;
+
+  //grid
+  let grid_rows: number = 2;
   let grid_gap: number = 10;
-  let desktop_grid: string = `
+  let spacer_style: string = `
+  display: grid;
   grid-template-columns:
-  repeat(${Math.ceil(products.length / desktop_rows)}, 1fr); 
-  grid-template-rows: repeat(${desktop_rows}, 1fr);
+  repeat(${Math.ceil(products.length / grid_rows)}, 1fr); 
+  grid-template-rows: repeat(${grid_rows}, 1fr);
   grid-gap: ${grid_gap}px;
   `;
 
@@ -31,28 +31,19 @@
   let card_size: number = 150;
   let wrapper_width: number = //wrapper width depends on the card size and the number of columns you want to show
     card_size * desktop_columns + grid_gap * (desktop_columns - 1);
+  let carrousel_vars: string = `--wrapper-width: ${wrapper_width}px;`; //wrapper width is set as a css variable to be used in the carrousel__wrapper class
 
   const moveCarrousel = (direction: number) => {
-    if (is_desktop) {
-      carrousel_wrap.scrollBy({
-        left: direction * wrapper_width,
-        behavior: "smooth",
-      });
-    }
+    carrousel_wrap.scrollBy({
+      left: direction * wrapper_width,
+      behavior: "smooth",
+    });
   };
-
-  onMount(() => {
-    is_desktop = window.innerWidth >= 768;
-  });
 </script>
 
-<div class="carrousel" style={is_desktop ? `width: ${wrapper_width}px` : ""}>
+<div class="carrousel" style={carrousel_vars}>
   <div class="carrousel__wrapper" bind:this={carrousel_wrap}>
-    <div
-      class="carrousel__spacer"
-      style={desktop_grid}
-      bind:this={carrousel_spacer}
-    >
+    <div class="carrousel__spacer" style={spacer_style}>
       {#each products as product}
         <ProductMediaCard {product} {company_id} {variant} {card_size} />
       {/each}
@@ -95,11 +86,6 @@
     display: none;
   }
 
-  .carrousel__spacer {
-    display: inline-flex;
-    gap: 10px;
-  }
-
   .carrousel__arrow {
     display: none;
   }
@@ -107,11 +93,7 @@
   @media (min-width: 768px) {
     .carrousel {
       position: relative;
-    }
-
-    .carrousel__spacer {
-      /* display grid makes the desktop grid work */
-      display: grid;
+      width: var(--wrapper-width);
     }
 
     .carrousel__arrow {
