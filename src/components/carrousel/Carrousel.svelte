@@ -34,16 +34,27 @@
   let carrousel_vars: string = `--wrapper-width: ${wrapper_width}px;`; //wrapper width is set as a css variable to be used in the carrousel__wrapper class
 
   const moveCarrousel = (direction: number) => {
-    carrousel_wrap.scrollBy({
-      left: direction * wrapper_width,
-      behavior: "smooth",
-    });
+    if (carrousel_wrap) {
+      carrousel_wrap.scrollTo({
+        left: direction * wrapper_width,
+        behavior: "smooth",
+      });
+      console.log(carrousel_wrap.scrollLeft);
+    }
   };
 </script>
 
-<div class="carrousel" style={carrousel_vars}>
-  <div class="carrousel__wrapper" bind:this={carrousel_wrap}>
-    <div class="carrousel__spacer" style={spacer_style}>
+<div class="carrousel" style={carrousel_vars} data-testid="carrousel">
+  <div
+    class="carrousel__wrapper"
+    bind:this={carrousel_wrap}
+    data-testid="carrousel-wrapper"
+  >
+    <div
+      class="carrousel__spacer"
+      style={spacer_style}
+      data-testid="carrousel-spacer"
+    >
       {#each products as product}
         <ProductMediaCard {product} {company_id} {variant} {card_size} />
       {/each}
@@ -54,6 +65,7 @@
       on:click={() => {
         moveCarrousel(-1);
       }}
+      data-testid="carrousel-arrow-left"
     >
       <span id="arrow">
         <MdKeyboardArrowLeft />
@@ -65,6 +77,7 @@
       on:click={() => {
         moveCarrousel(1);
       }}
+      data-testid="carrousel-arrow-right"
     >
       <span id="arrow">
         <MdKeyboardArrowRight />
