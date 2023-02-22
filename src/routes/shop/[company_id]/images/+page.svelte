@@ -5,19 +5,15 @@
     dic as products_dic,
     ids_with_images,
     ids_with_videos,
-    type IProduct,
   } from "../../../../stores/products.js";
   import { company } from "../../../../stores/company.js";
   import Masonry from "../../../../components/Masonry.svelte";
   import Card from "../../../../components/Card.svelte";
   import Video from "../../../../components/Video.svelte";
-  import Carrousel from "../../../../components/carrousel/Carrousel.svelte";
 
   // Fetch products data given shop company_id
   export let data;
   let company_id = data.company_id;
-
-  const products: IProduct[] = $ids_with_images.map((id) => $products_dic[id]);
 </script>
 
 <svelte:head>
@@ -87,10 +83,6 @@
 
   <div class="row center">
     <a href={`/shop/${company_id}`} class="button">{$_("more_products")}</a>
-  </div>
-
-  <div style={"padding: 40px 0; display: flex; justify-content: center;"}>
-    <Carrousel {products} {company_id} variant="shadow" />
   </div>
 </main>
 
