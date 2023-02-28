@@ -9,7 +9,8 @@ export default defineConfig({
     viewportHeight: 660,
     env: {
       PUBLIC_MOTION_MENU_API_ENDPOINT:
-        "https://proveat-api-staging.herokuapp.com",
+        "https://motion-menu-api-staging.herokuapp.com",
+      TEST_COMPANY_ID: "tremblay-halvorson-and-larkin",
     },
     supportFile: false,
   },
