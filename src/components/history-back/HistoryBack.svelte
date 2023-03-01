@@ -2,10 +2,10 @@
   import { goto } from "$app/navigation";
   import FaChevronLeft from "svelte-icons/fa/FaChevronLeft.svelte";
 
-  export let goTo: string = null; // if null, go back in history
+  export let previous_page: string = null; // if null, go back in history
 
   const onClick = () => {
-    goTo ? goto(goTo) : history.back();
+    previous_page ? goto(previous_page) : history.back();
   };
 </script>
 
