@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { _ } from "svelte-i18n";
   import type { CompanySlug } from "../../../../../stores/company";
   import Button from "../../../../../components/button/Button.svelte";
   import Logo from "../../../../../components/Logo.svelte";
@@ -22,18 +23,18 @@
 
   <section>
     <h1>
-      <span class="text-blue">Thank you!</span>
-      Shop owner would love to see your review.
+      <span class="text-blue">{$_("thank_you")}</span>
+      {$_("success_title")}
     </h1>
     <div class="congrats-emoji">🥳</div>
     <Button
       onClick={() => {
         goto(`/shop/${company_id}`);
       }}
-      title="Back to menu"
+      title={$_("back_to_menu")}
       variant="primary"
     />
-    <p>Your comment will be reviewed and published later.</p>
+    <p>{$_("success_message")}</p>
   </section>
   <HistoryBack goTo={`/shop/${company_id}/review`} />
 </main>

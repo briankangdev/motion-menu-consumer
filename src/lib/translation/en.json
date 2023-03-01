@@ -41,5 +41,10 @@
   "step_2_title": "Add products",
   "step_2_description": "Add dishes and upload images.",
   "step_3_title": "Print QR code",
-  "step_3_description": "Show it to the customers."
+  "step_3_description": "Show it to the customers.",
+
+  "thank_you": "Thank you!",
+  "success_title": "Shop owner would love to see your review.",
+  "back_to_menu": "Back to menu",
+  "success_message": "Your comment will be reviewed and published later."
 }
