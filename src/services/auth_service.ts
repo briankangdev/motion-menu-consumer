@@ -20,7 +20,7 @@ async function createClient() {
     clientId: PUBLIC_AUTH0_APP_CLIENT_ID,
     authorizationParams: {
       audience: "https://motion.menu",
-      scope: "read:reviews",
+      scope: "profile read:reviews",
     },
   });
 
