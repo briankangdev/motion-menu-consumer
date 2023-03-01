@@ -36,7 +36,7 @@
     />
     <p>{$_("success_message")}</p>
   </section>
-  <HistoryBack goTo={`/shop/${company_id}/review`} />
+  <HistoryBack previous_page={`/shop/${company_id}/review`} />
 </main>
 
 <style>
