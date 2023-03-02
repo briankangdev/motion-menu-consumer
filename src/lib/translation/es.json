@@ -42,5 +42,10 @@
   "step_2_title": "Agregar los productos",
   "step_2_description": "Agregar los platos y subir imagenes.",
   "step_3_title": "Imprimir el código QR",
-  "step_3_description": "Muestrá el código a los clientes."
+  "step_3_description": "Muestrá el código a los clientes.",
+
+  "thank_you": "Muchas gracias!",
+  "success_title": "A la tienda le encantará leer su opinión.",
+  "back_to_menu": "Volver a la carta",
+  "success_message": "Su comentario será revisado y publicado pronto."
 }
