@@ -47,5 +47,13 @@
   "thank_you": "Muchas gracias!",
   "success_title": "A la tienda le encantará leer su opinión.",
   "back_to_menu": "Volver a la carta",
-  "success_message": "Su comentario será revisado y publicado pronto."
+  "success_message": "Su comentario será revisado y publicado pronto.",
+
+  "support": "Apoyanos",
+  "with_your_comment": "con tu comentario",
+  "share_your_thought": "¡Comparte tu opinión!",
+  "type_something": "Escribe algo...",
+  "sign-up_to_share_review": "Parece que no tienes una cuenta. Por favor regístrate y tu comentario será publicado.",
+  "share": "Compartir",
+  "sign-up_to_share": "Regístrate y comparte"
 }

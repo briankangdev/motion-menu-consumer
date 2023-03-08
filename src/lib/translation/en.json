@@ -46,5 +46,13 @@
   "thank_you": "Thank you!",
   "success_title": "Shop owner would love to see your review.",
   "back_to_menu": "Back to menu",
-  "success_message": "Your comment will be reviewed and published later."
+  "success_message": "Your comment will be reviewed and published later.",
+
+  "support": "Support",
+  "with_your_comment": "with your comment",
+  "share_your_thought": "Share your thought!",
+  "type_something": "Type something...",
+  "sign-up_to_share_review": "It looks like, you don't have account. Please sign up to leave review.",
+  "share": "Share",
+  "sign-up_to_share": "Sign up and share"
 }
