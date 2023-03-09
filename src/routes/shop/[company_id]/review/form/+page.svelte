@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
-  import type { CompanySlug } from "../../../../../stores/company";
+  import { company, type ICompany } from "../../../../../stores/company";
   import Button from "../../../../../components/button/Button.svelte";
   import Logo from "../../../../../components/Logo.svelte";
   import auth from "../../../../../services/auth_service";
@@ -12,17 +12,20 @@
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
   import { createReview } from "../../../../../api/reviews";
+  import LoadingSpinner from "../../../../../components/LoadingSpinner.svelte";
 
-  export let data: { company_id: CompanySlug };
-
-  let company_id: CompanySlug = data.company_id;
   let comment: string = "";
+  let company_id: ICompany["id"] = $company.id;
+  let comment_min_length: number = 3;
+  let loading: boolean = true;
+  let error_occurred: boolean = false;
 
   onMount(async () => {
     let auth0Client: Auth0Client;
 
     auth0Client = await auth.createClient();
-    auth.getSession(auth0Client);
+    await auth.getSession(auth0Client);
+    loading = false;
   });
 
   const handleInput = () => (event: Event) => {
@@ -30,7 +33,21 @@
   };
 
   const handleSubmit = async () => {
-    await createReview(company_id, comment, $jwt_token);
+    if (comment.length > comment_min_length) {
+      if ($is_authenticated) {
+        const response = await createReview(comment, company_id, $jwt_token);
+
+        if (response.status === 201) {
+          goto(`/shop/${company_id}/review/success`);
+        }
+      } else {
+        goto("/user/sign-in", {
+          state: { comment, company_id },
+        });
+      }
+    } else {
+      error_occurred = true;
+    }
   };
 </script>
 
@@ -49,7 +66,7 @@
       <span class="text-blue">{$_("support")}</span>
       {$_("with_your_comment")}
     </h1>
-    <form>
+    <form on:submit|preventDefault={handleSubmit}>
       <label for="comment">{$_("share_your_thought")}</label>
       <textarea
         id="comment"
@@ -60,19 +77,26 @@
         on:input={handleInput()}
         value={comment}
       />
+      {#if error_occurred}
+        <p class="error_message">{$_("comment_error_message")}</p>
+      {/if}
       <div class="submit">
-        <p>
-          {#if !$is_authenticated}
-            {$_("sign-up_to_share_review")}
-          {/if}
-        </p>
-        <Button
-          onClick={() => {
-            $is_authenticated ? handleSubmit() : goto(`/user/sign-up`);
-          }}
-          title={$_($is_authenticated ? "share" : "sign-up_to_share")}
-          variant="blue"
-        />
+        {#if loading}
+          <div class="submit-loading">
+            <LoadingSpinner size={30} />
+          </div>
+        {:else}
+          <p>
+            {#if !$is_authenticated}
+              {$_("sign-up_to_share_review")}
+            {/if}
+          </p>
+          <Button
+            onClick={() => {}}
+            title={$_($is_authenticated ? "share" : "sign-up_to_share")}
+            variant="blue"
+          />
+        {/if}
       </div>
     </form>
     <p>{$_("success_message")}</p>
@@ -139,9 +163,23 @@
     align-items: center;
   }
 
+  .submit .submit-loading {
+    margin-left: auto;
+    width: 110px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   textarea:focus {
     outline: none;
     border: 1px solid var(--blue_highlighted);
+  }
+
+  .error_message {
+    color: var(--red);
+    font-weight: 600;
   }
 
   @media (min-width: 768px) {
