@@ -54,5 +54,6 @@
   "type_something": "Type something...",
   "sign-up_to_share_review": "It looks like, you don't have account. Please sign up to leave review.",
   "share": "Share",
-  "sign-up_to_share": "Sign up and share"
+  "sign-up_to_share": "Sign up and share",
+  "comment_error_message": "Your comment can't be less than 3 characters"
 }
