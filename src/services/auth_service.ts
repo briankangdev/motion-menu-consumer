@@ -29,12 +29,19 @@ async function createClient() {
   return auth0Client;
 }
 
-async function loginWithPopup(client: Auth0Client, options?: any) {
+async function loginWithPopup(
+  client: Auth0Client,
+  options?: any,
+  callback?: any
+) {
   popup_opened.set(true);
 
   try {
     await client.loginWithPopup(options);
     await updateStore(client);
+    if (callback) {
+      callback();
+    }
   } catch (e) {
     console.error(e);
   } finally {
@@ -42,8 +49,8 @@ async function loginWithPopup(client: Auth0Client, options?: any) {
   }
 }
 
-function logout(client: Auth0Client) {
-  return client.logout();
+function logout(client: Auth0Client, options?: any) {
+  return client.logout(options);
 }
 
 async function getSession(client: Auth0Client) {
