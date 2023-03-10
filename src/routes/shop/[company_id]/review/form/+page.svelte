@@ -4,7 +4,6 @@
   import Button from "../../../../../components/button/Button.svelte";
   import Logo from "../../../../../components/Logo.svelte";
   import auth from "../../../../../services/auth_service";
-  import type { Auth0Client } from "@auth0/auth0-spa-js";
   import {
     is_authenticated,
     jwt_token,
@@ -13,7 +12,10 @@
   import { onMount } from "svelte";
   import { createReview } from "../../../../../api/reviews";
   import LoadingSpinner from "../../../../../components/LoadingSpinner.svelte";
+  import { toast } from "svelte-french-toast";
+  import type { Auth0Client } from "@auth0/auth0-spa-js";
 
+  let auth0Client: Auth0Client;
   let comment: string = "";
   let company_id: ICompany["id"] = $company.id;
   let comment_min_length: number = 3;
@@ -21,12 +23,20 @@
   let error_occurred: boolean = false;
 
   onMount(async () => {
-    let auth0Client: Auth0Client;
-
     auth0Client = await auth.createClient();
     await auth.getSession(auth0Client);
     loading = false;
   });
+
+  const sendReview = async () => {
+    const response = await createReview(comment, company_id, $jwt_token);
+    if (response.status === 201) {
+      toast.success($_("review_post_success_message"));
+      goto(`/shop/${company_id}/review/success`);
+    } else {
+      toast.error($_("review_post_error_message"));
+    }
+  };
 
   const handleInput = () => (event: Event) => {
     comment = (event.target as HTMLInputElement).value;
@@ -35,25 +45,21 @@
   const handleSubmit = async () => {
     if (comment.length > comment_min_length) {
       if ($is_authenticated) {
-        const response = await createReview(comment, company_id, $jwt_token);
-
-        if (response.status === 201) {
-          goto(`/shop/${company_id}/review/success`);
-        }
+        sendReview();
       } else {
-        goto("/user/sign-in", {
-          state: { comment, company_id },
-        });
+        //if user is not authenticated, login and then send review
+        await auth.loginWithPopup(auth0Client);
+        sendReview();
       }
     } else {
-      error_occurred = true;
+      error_occurred = true; //if comment is too short show error message
     }
   };
 </script>
 
 <svelte:head>
-  <title>Review submitted</title>
-  <meta name="description" content="Thank you for your review" />
+  <title>{$_("review_form_title")}</title>
+  <meta name="description" content={$_("review_form_description")} />
 </svelte:head>
 
 <main>
