@@ -13,24 +13,8 @@
     auth.getSession(auth0Client);
   });
 
-  async function onLoginClicked() {
-    let { comment, company_id } = history.state;
-
-    if (comment && company_id) {
-      await auth.loginWithPopup(auth0Client);
-      if ($jwt_token) {
-        const response = await createReview(comment, company_id, $jwt_token);
-        if (response.status === 201) {
-          goto(`/shop/${company_id}/review/success`);
-        } else {
-          goto(`/shop/${company_id}/review/form`);
-        }
-      }
-    } else {
-      await auth.loginWithPopup(auth0Client, {}, () => {
-        goto("/");
-      });
-    }
+  function onLoginClicked() {
+    auth.loginWithPopup(auth0Client);
   }
 
   function onLogoutClicked() {
