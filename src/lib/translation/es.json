@@ -49,6 +49,8 @@
   "back_to_menu": "Volver a la carta",
   "success_message": "Su comentario será revisado y publicado pronto.",
 
+  "review_form_title": "Deja un comentario",
+  "review_form_description": "Deja un comentario y ayuda a otros clientes a elegir el mejor restaurante.",
   "support": "Apoyanos",
   "with_your_comment": "con tu comentario",
   "share_your_thought": "¡Comparte tu opinión!",
@@ -56,5 +58,7 @@
   "sign-up_to_share_review": "Parece que no tienes una cuenta. Por favor regístrate y tu comentario será publicado.",
   "share": "Compartir",
   "sign-up_to_share": "Regístrate y comparte",
-  "comment_error_message": "Tu comentario no puede tener menos de 3 caracteres"
+  "comment_error_message": "Tu comentario no puede tener menos de 3 caracteres",
+  "review_post_error_message": "Error al publicar tu comentario. Por favor, inténtalo de nuevo más tarde.",
+  "review_post_success_message": "Tu comentario ha sido enviado con éxito."
 }
