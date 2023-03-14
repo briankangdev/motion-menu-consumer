@@ -1,24 +1,13 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import auth from "../../../services/auth_service";
-  import type { Auth0Client } from "@auth0/auth0-spa-js";
-  import { is_authenticated, jwt_token } from "../../../stores/user_store";
-  import { createReview } from "../../../api/reviews";
-  import { goto } from "$app/navigation";
-
-  let auth0Client: Auth0Client;
-
-  onMount(async () => {
-    auth0Client = await auth.createClient();
-    auth.getSession(auth0Client);
-  });
+  import { is_authenticated } from "../../../stores/user_store";
+  import { user } from "../../../services/user_service";
 
   function onLoginClicked() {
-    auth.loginWithPopup(auth0Client);
+    user.loginWithPopup();
   }
 
   function onLogoutClicked() {
-    auth.logout(auth0Client);
+    user.logout();
   }
 </script>
 

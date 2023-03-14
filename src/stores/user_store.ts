@@ -2,7 +2,7 @@ import { derived, writable, type Writable } from "svelte/store";
 
 type Nullable<T> = T | undefined | null;
 
-export const is_authenticated: Writable<boolean> = writable(false);
+export const is_authenticated: Writable<Nullable<boolean>> = writable();
 export const jwt_token: Writable<Nullable<string>> = writable();
 export const sub: Writable<Nullable<string>> = writable();
 export const exp: Writable<Nullable<string>> = writable();

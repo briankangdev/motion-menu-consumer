@@ -3,33 +3,27 @@
   import { company, type ICompany } from "../../../../../stores/company";
   import Button from "../../../../../components/button/Button.svelte";
   import Logo from "../../../../../components/Logo.svelte";
-  import auth from "../../../../../services/auth_service";
-  import {
-    is_authenticated,
-    jwt_token,
-  } from "../../../../../stores/user_store";
+  import { user } from "../../../../../services/user_service";
   import { goto } from "$app/navigation";
-  import { onMount } from "svelte";
   import { createReview } from "../../../../../api/reviews";
   import LoadingSpinner from "../../../../../components/LoadingSpinner.svelte";
   import { toast } from "svelte-french-toast";
-  import type { Auth0Client } from "@auth0/auth0-spa-js";
+  import { is_authenticated } from "../../../../../stores/user_store";
 
-  let auth0Client: Auth0Client;
   let comment: string = "";
   let company_id: ICompany["id"] = $company.id;
   let comment_min_length: number = 3;
   let loading: boolean = true;
   let error_occurred: boolean = false;
 
-  onMount(async () => {
-    auth0Client = await auth.createClient();
-    await auth.getSession(auth0Client);
-    loading = false;
+  $: is_authenticated.subscribe((value) => {
+    if (value !== undefined) {
+      loading = false;
+    }
   });
 
   const sendReview = async () => {
-    const response = await createReview(comment, company_id, $jwt_token);
+    const response = await createReview(comment, company_id, user.jwtToken);
     if (response.status === 201) {
       toast.success($_("review_post_success_message"));
       goto(`/shop/${company_id}/review/success`);
@@ -44,11 +38,11 @@
 
   const handleSubmit = async () => {
     if (comment.length > comment_min_length) {
-      if ($is_authenticated) {
+      if (user.isAuthenticated) {
         sendReview();
       } else {
         //if user is not authenticated, login and then send review
-        await auth.loginWithPopup(auth0Client);
+        await user.loginWithPopup();
         sendReview();
       }
     } else {
@@ -93,13 +87,13 @@
           </div>
         {:else}
           <p>
-            {#if !$is_authenticated}
+            {#if !user.isAuthenticated}
               {$_("sign-up_to_share_review")}
             {/if}
           </p>
           <Button
             onClick={() => {}}
-            title={$_($is_authenticated ? "share" : "sign-up_to_share")}
+            title={$_(user.isAuthenticated ? "share" : "sign-up_to_share")}
             variant="blue"
           />
         {/if}
