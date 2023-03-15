@@ -181,4 +181,4 @@ class User {
   }
 }
 
-export const user = await User.getInstance();
+export const user = User.getInstance();

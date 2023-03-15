@@ -1,9 +1,16 @@
 <script lang="ts">
-  import { user } from "../../../services/user_service";
-  let is_authenticated;
+  import { onMount } from "svelte";
+  import { user as user_service } from "../../../services/user_service";
 
-  user.is_authenticated.subscribe((value) => {
-    is_authenticated = value;
+  let is_authenticated;
+  let user;
+
+  onMount(async () => {
+    user = await user_service;
+
+    user?.is_authenticated.subscribe((value) => {
+      is_authenticated = value;
+    });
   });
 
   function onLoginClicked() {
