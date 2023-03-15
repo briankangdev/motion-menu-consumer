@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { is_authenticated } from "../../../stores/user_store";
   import { user } from "../../../services/user_service";
+  let is_authenticated;
+
+  user.is_authenticated.subscribe((value) => {
+    is_authenticated = value;
+  });
 
   function onLoginClicked() {
     user.loginWithPopup();
@@ -12,7 +16,7 @@
 </script>
 
 <main>
-  {#if $is_authenticated}
+  {#if is_authenticated}
     <h1>Sign Out</h1>
     <button on:click={onLogoutClicked}>Log Out</button>
   {:else}

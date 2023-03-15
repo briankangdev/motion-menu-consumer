@@ -8,22 +8,31 @@
   import { createReview } from "../../../../../api/reviews";
   import LoadingSpinner from "../../../../../components/LoadingSpinner.svelte";
   import { toast } from "svelte-french-toast";
-  import { is_authenticated } from "../../../../../stores/user_store";
 
   let comment: string = "";
-  let company_id: ICompany["id"] = $company.id;
   let comment_min_length: number = 3;
+  let company_id: ICompany["id"] = $company.id;
   let loading: boolean = true;
   let error_occurred: boolean = false;
 
-  $: is_authenticated.subscribe((value) => {
+  //store
+  let is_authenticated;
+  let token;
+
+  //subscribe to store
+  user.jwt_token.subscribe((value) => {
+    token = value;
+  });
+
+  user.is_authenticated.subscribe((value) => {
     if (value !== undefined) {
       loading = false;
+      is_authenticated = value;
     }
   });
 
   const sendReview = async () => {
-    const response = await createReview(comment, company_id, user.jwtToken);
+    const response = await createReview(comment, company_id, token);
     if (response.status === 201) {
       toast.success($_("review_post_success_message"));
       goto(`/shop/${company_id}/review/success`);
@@ -38,7 +47,13 @@
 
   const handleSubmit = async () => {
     if (comment.length > comment_min_length) {
-      if (user.isAuthenticated) {
+      let is_authenticated: boolean;
+
+      user.is_authenticated.subscribe((value) => {
+        is_authenticated = value;
+      });
+
+      if (is_authenticated) {
         sendReview();
       } else {
         //if user is not authenticated, login and then send review
@@ -87,13 +102,13 @@
           </div>
         {:else}
           <p>
-            {#if !user.isAuthenticated}
+            {#if !is_authenticated}
               {$_("sign-up_to_share_review")}
             {/if}
           </p>
           <Button
             onClick={() => {}}
-            title={$_(user.isAuthenticated ? "share" : "sign-up_to_share")}
+            title={$_(is_authenticated ? "share" : "sign-up_to_share")}
             variant="blue"
           />
         {/if}

@@ -1,3 +1,4 @@
+import { browser } from "$app/environment";
 import {
   PUBLIC_AUTH0_DOMAIN,
   PUBLIC_AUTH0_APP_CLIENT_ID,
@@ -7,7 +8,9 @@ import {
   createAuth0Client,
   type PopupLoginOptions,
 } from "@auth0/auth0-spa-js";
-import { popup_opened } from "../stores/user_store";
+import { writable, type Writable } from "svelte/store";
+
+type Nullable<T> = T | undefined | null;
 
 class User {
   private static instance: User;
@@ -16,15 +19,19 @@ class User {
   private storage_token_name = "motionMenu_jwtToken";
   private storage_expiration_date_name = "motionMenu_expiration_date";
 
-  isAuthenticated: boolean = false;
-  jwtToken: string | undefined = undefined;
-  sub: string | undefined = undefined;
-  iss: string | undefined = undefined;
-  exp: number | undefined = undefined;
-  email: string | undefined = undefined;
-  name: string | undefined = undefined;
+  is_authenticated: Writable<Nullable<boolean>> = writable();
+  jwt_token: Writable<Nullable<string>> = writable();
+  sub: Writable<Nullable<string>> = writable();
+  exp: Writable<Nullable<number>> = writable();
+  iss: Writable<Nullable<string>> = writable();
+  email: Writable<Nullable<string>> = writable();
+  name: Writable<Nullable<string>> = writable();
 
-  private constructor() {}
+  private constructor() {
+    if (browser) {
+      this.init();
+    }
+  }
 
   public static async getInstance(): Promise<User> {
     if (!User.instance) {
@@ -46,18 +53,20 @@ class User {
       throw new Error("Auth0 values not loaded");
     }
 
-    this.client = await createAuth0Client({
-      domain,
-      clientId,
-      authorizationParams,
-    });
+    try {
+      this.client = await createAuth0Client({
+        domain,
+        clientId,
+        authorizationParams,
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   async init() {
     if (!this.client) {
       await this.createClient();
-    } else {
-      throw new Error("Auth0 client already innited");
     }
 
     const token = localStorage.getItem(this.storage_token_name);
@@ -66,22 +75,28 @@ class User {
     );
 
     if (token && expiration_date) {
+      // if token and expiration date are in local storage then check if token is valid
       const expirationDate = new Date(expiration_date);
       if (expirationDate > new Date()) {
-        this.jwtToken = token;
-        this.exp = (expirationDate.getTime() - new Date().getTime()) / 1000;
-        this.isAuthenticated = true;
+        // if token is valid then update store and storage
+        this.jwt_token.set(token);
+        this.exp.set((expirationDate.getTime() - new Date().getTime()) / 1000);
+        this.is_authenticated.set(true);
       } else {
+        // if token is not valid then clear store and storage
+        await this.clearStore();
         await this.clearStorage();
       }
+    } else {
+      // if token and expiration date are not in local storage then clear store and storage
+      await this.clearStore();
+      await this.clearStorage();
     }
   }
 
   async loginWithPopup(options?: PopupLoginOptions, callback?: () => void) {
     if (!this.client)
       throw new Error("Auth0 client must be innited before use that method");
-
-    popup_opened.set(true);
 
     try {
       await this.client.loginWithPopup(options);
@@ -92,8 +107,6 @@ class User {
       }
     } catch (e) {
       console.error(e);
-    } finally {
-      popup_opened.set(false);
     }
   }
 
@@ -121,46 +134,50 @@ class User {
       throw new Error("User, token or expiration date not found");
     }
 
-    this.isAuthenticated = true;
-    this.jwtToken = token;
-    this.sub = user?.sub;
-    this.iss = user?.iss;
-    this.exp = exp;
-    this.email = user?.email;
-    this.name = user?.name;
+    this.is_authenticated.set(true);
+    this.jwt_token.set(token);
+    this.sub.set(user?.sub);
+    this.iss.set(user?.iss);
+    this.exp.set(exp);
+    this.email.set(user?.email);
+    this.name.set(user?.name);
   }
 
   private async updateStorage() {
-    if (!this.exp) throw new Error("Expiration date not found");
-    if (!this.jwtToken) throw new Error("JWT token not found");
+    let exp: number;
+    let token: string;
 
-    localStorage.setItem(this.storage_token_name, this.jwtToken);
+    this.exp.subscribe((value) => {
+      exp = value;
+    });
+
+    this.jwt_token.subscribe((value) => {
+      token = value;
+    });
+
+    if (!exp) throw new Error("Expiration date not found");
+    if (!token) throw new Error("JWT token not found");
+
+    localStorage.setItem(this.storage_token_name, token);
     localStorage.setItem(
       this.storage_expiration_date_name,
-      new Date(this.exp * 1000).toISOString()
+      new Date(exp * 1000).toISOString()
     );
   }
 
   private async clearStore() {
-    this.isAuthenticated = false;
-    this.jwtToken = undefined;
-    this.sub = undefined;
-    this.iss = undefined;
-    this.exp = undefined;
-    this.email = undefined;
-    this.name = undefined;
+    this.is_authenticated.set(false);
+    this.jwt_token.set(undefined);
+    this.sub.set(undefined);
+    this.iss.set(undefined);
+    this.exp.set(undefined);
+    this.email.set(undefined);
+    this.name.set(undefined);
   }
 
   private async clearStorage() {
     localStorage.removeItem(this.storage_token_name);
     localStorage.removeItem(this.storage_expiration_date_name);
-  }
-
-  async getIsAuthenticated() {
-    if (!this.client)
-      throw new Error("Auth0 client must be innited before use that method");
-
-    return this.isAuthenticated;
   }
 }
 
