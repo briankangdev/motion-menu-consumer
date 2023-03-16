@@ -1,29 +1,17 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { user as user_service } from "../../../services/user_service";
-
-  let is_authenticated;
-  let user;
-
-  onMount(async () => {
-    user = await user_service;
-
-    user?.is_authenticated.subscribe((value) => {
-      is_authenticated = value;
-    });
-  });
+  import { is_authenticated, user } from "../../../stores/user_store";
 
   function onLoginClicked() {
-    user.loginWithPopup();
+    $user.loginWithPopup();
   }
 
   function onLogoutClicked() {
-    user.logout();
+    $user.logout();
   }
 </script>
 
 <main>
-  {#if is_authenticated}
+  {#if $is_authenticated}
     <h1>Sign Out</h1>
     <button on:click={onLogoutClicked}>Log Out</button>
   {:else}

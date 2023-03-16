@@ -3,12 +3,15 @@
   import { company, type ICompany } from "../../../../../stores/company";
   import Button from "../../../../../components/button/Button.svelte";
   import Logo from "../../../../../components/Logo.svelte";
-  import { user as user_service } from "../../../../../services/user_service";
   import { goto } from "$app/navigation";
   import { createReview } from "../../../../../api/reviews";
   import LoadingSpinner from "../../../../../components/LoadingSpinner.svelte";
   import { toast } from "svelte-french-toast";
-  import { onMount } from "svelte";
+  import {
+    is_authenticated,
+    jwt_token,
+    user,
+  } from "../../../../../stores/user_store";
 
   let comment: string = "";
   let comment_min_length: number = 3;
@@ -16,28 +19,12 @@
   let loading: boolean = true;
   let error_occurred: boolean = false;
 
-  let user;
-  let is_authenticated;
-  let token;
-
-  onMount(async () => {
-    // on mount get user instance and get user's jwt token and is_authenticated value
-    user = await user_service;
-
-    user?.jwt_token.subscribe((value) => {
-      token = value;
-    });
-
-    user?.is_authenticated.subscribe((value) => {
-      if (value !== undefined) {
-        loading = false;
-        is_authenticated = value;
-      }
-    });
-  });
+  $: if ($is_authenticated !== undefined) {
+    loading = false;
+  }
 
   const sendReview = async () => {
-    const response = await createReview(comment, company_id, token);
+    const response = await createReview(comment, company_id, $jwt_token);
     if (response.status === 201) {
       toast.success($_("review_post_success_message"));
       goto(`/shop/${company_id}/review/success`);
@@ -52,17 +39,10 @@
 
   const handleSubmit = async () => {
     if (comment.length > comment_min_length) {
-      let is_authenticated: boolean;
-
-      user.is_authenticated.subscribe((value) => {
-        is_authenticated = value;
-      });
-
-      if (is_authenticated) {
+      if ($is_authenticated) {
         sendReview();
       } else {
-        //if user is not authenticated, login and then send review
-        await user.loginWithPopup();
+        await $user.loginWithPopup();
         sendReview();
       }
     } else {
@@ -107,13 +87,13 @@
           </div>
         {:else}
           <p>
-            {#if !is_authenticated}
+            {#if !$is_authenticated}
               {$_("sign-up_to_share_review")}
             {/if}
           </p>
           <Button
             onClick={() => {}}
-            title={$_(is_authenticated ? "share" : "sign-up_to_share")}
+            title={$_($is_authenticated ? "share" : "sign-up_to_share")}
             variant="blue"
           />
         {/if}
