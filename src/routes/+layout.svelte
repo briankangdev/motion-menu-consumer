@@ -12,8 +12,6 @@
       user.set(user_instance); // set the user store to use user class in a easier way
     }
   });
-
-  $user;
 </script>
 
 <div class="app">
