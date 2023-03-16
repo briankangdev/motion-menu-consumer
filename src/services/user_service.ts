@@ -22,6 +22,8 @@ import {
 } from "../stores/user_store";
 import { get } from "svelte/store";
 
+export type UserType = User;
+
 class User {
   private static instance: User;
   private client: Auth0Client;
@@ -174,4 +176,4 @@ class User {
   }
 }
 
-export const user = User.getInstance();
+export const user = User;

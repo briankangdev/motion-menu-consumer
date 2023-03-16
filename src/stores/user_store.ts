@@ -1,9 +1,9 @@
 import { writable, type Writable } from "svelte/store";
-import type { user as user_service } from "../services/user_service";
+import type { UserType } from "../services/user_service";
 
 type Nullable<T> = T | undefined | null;
 
-export const user: Writable<Nullable<typeof user_service>> = writable(null);
+export const user: Writable<Nullable<UserType>> = writable(null);
 export const is_authenticated: Writable<Nullable<boolean>> = writable();
 export const jwt_token: Writable<Nullable<string>> = writable();
 export const sub: Writable<Nullable<string>> = writable();
