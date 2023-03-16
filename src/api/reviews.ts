@@ -7,20 +7,12 @@ export const createReview = async (
   token: string
 ) => {
   try {
-    const response = await client.post(
-      `/api/v1/users/reviews`,
-      {
-        review: {
-          body: comment,
-          company_id: company_id,
-        },
+    const response = await client.post(`/api/v1/users/reviews`, {
+      review: {
+        body: comment,
+        company_id: company_id,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    });
 
     return response;
   } catch (error) {
