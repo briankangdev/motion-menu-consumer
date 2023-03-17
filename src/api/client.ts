@@ -1,7 +1,8 @@
 import axios, { AxiosHeaders } from "axios";
 import type { AxiosInstance } from "axios";
 import { env } from "$env/dynamic/public";
-import { storage_token_name } from "../stores/user_store";
+import { jwt_token } from "../stores/user_store";
+import { get } from "svelte/store";
 
 interface ICustomHeaders extends AxiosHeaders {
   Authorization?: string;
@@ -15,10 +16,12 @@ client.interceptors.request.use((config) => {
   const custom_headers = config.headers as ICustomHeaders;
 
   if (typeof window === "undefined") return config; // if server side, don't add token
-  const token = localStorage.getItem(storage_token_name);
+
+  let token = get(jwt_token);
   if (token) {
     custom_headers.Authorization = `Bearer ${token}`;
   }
+
   return config;
 });
 
