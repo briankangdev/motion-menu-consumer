@@ -14,7 +14,7 @@
   } from "../../../../../stores/user_store";
 
   let comment: string = "";
-  let comment_min_length: number = 3;
+  let COMMENT_MIN_LENGTH: number = 3;
   let company_id: ICompany["id"] = $company.id;
   let loading: boolean = true;
   let error_occurred: boolean = false;
@@ -38,7 +38,7 @@
   };
 
   const handleSubmit = async () => {
-    if (comment.length > comment_min_length) {
+    if (comment.length > COMMENT_MIN_LENGTH) {
       if ($is_authenticated) {
         sendReview();
       } else {
@@ -95,6 +95,7 @@
             onClick={() => {}}
             title={$_($is_authenticated ? "share" : "sign-up_to_share")}
             variant="blue"
+            test_id="submit-button"
           />
         {/if}
       </div>
