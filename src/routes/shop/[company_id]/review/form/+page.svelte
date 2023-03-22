@@ -24,8 +24,8 @@
   }
 
   const sendReview = async () => {
-    const response = await createReview(comment, company_id, $jwt_token);
-    if (response.status === 201) {
+    const response = await createReview(comment, company_id);
+    if (response?.status === 201) {
       toast.success($_("review_post_success_message"));
       goto(`/shop/${company_id}/review/success`);
     } else {
@@ -78,7 +78,9 @@
         value={comment}
       />
       {#if error_occurred}
-        <p class="error_message">{$_("comment_error_message")}</p>
+        <p class="error_message" data-testid="error-message">
+          {$_("comment_error_message")}
+        </p>
       {/if}
       <div class="submit">
         {#if loading}
@@ -86,7 +88,7 @@
             <LoadingSpinner size={30} />
           </div>
         {:else}
-          <p>
+          <p data-testid="unauthenticated-message">
             {#if !$is_authenticated}
               {$_("sign-up_to_share_review")}
             {/if}
