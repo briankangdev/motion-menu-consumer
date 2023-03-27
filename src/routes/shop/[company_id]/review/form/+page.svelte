@@ -1,17 +1,16 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
+  import { goto } from "$app/navigation";
+  import { toast } from "svelte-french-toast";
+  import { REVIEW_FORM_PAGE } from "../../../../../lib/analytics/types";
+  import { createReview } from "../../../../../api/reviews";
+  import { is_authenticated, user } from "../../../../../stores/user_store";
   import { company, type ICompany } from "../../../../../stores/company";
   import Button from "../../../../../components/button/Button.svelte";
   import Logo from "../../../../../components/Logo.svelte";
-  import { goto } from "$app/navigation";
-  import { createReview } from "../../../../../api/reviews";
   import LoadingSpinner from "../../../../../components/LoadingSpinner.svelte";
-  import { toast } from "svelte-french-toast";
-  import {
-    is_authenticated,
-    jwt_token,
-    user,
-  } from "../../../../../stores/user_store";
+  import analytics from "../../../../../lib/analytics";
 
   let comment: string = "";
   let COMMENT_MIN_LENGTH: number = 3;
@@ -19,31 +18,49 @@
   let loading: boolean = true;
   let error_occurred: boolean = false;
 
+  onMount(() => {
+    analytics.track.visitPage(REVIEW_FORM_PAGE, {
+      company_id,
+    });
+  });
+
   $: if ($is_authenticated !== undefined) {
+    //$is_authenticated is undefined until client side is hydrated
     loading = false;
   }
-
-  const sendReview = async () => {
-    const response = await createReview(comment, company_id);
-    if (response?.status === 201) {
-      toast.success($_("review_post_success_message"));
-      goto(`/shop/${company_id}/review/success`);
-    } else {
-      toast.error($_("review_post_error_message"));
-    }
-  };
 
   const handleInput = () => (event: Event) => {
     comment = (event.target as HTMLInputElement).value;
   };
 
   const handleSubmit = async () => {
+    const sendReview = async () => {
+      const response = await createReview(comment, company_id);
+      if (response?.status === 201) {
+        toast.success($_("review_post_success_message"));
+        goto(`/shop/${company_id}/review/success`);
+      } else {
+        toast.error($_("review_post_error_message"));
+      }
+    };
+
+    const trackSubmitForm = (aditional_props: {
+      authenticated: boolean;
+    }): void => {
+      analytics.track.submitForm(REVIEW_FORM_PAGE, "review-form", {
+        company_id,
+        ...aditional_props,
+      });
+    };
+
     if (comment.length > COMMENT_MIN_LENGTH) {
       if ($is_authenticated) {
-        sendReview();
+        await sendReview();
+        trackSubmitForm({ authenticated: true });
       } else {
         await $user.loginWithPopup();
-        sendReview();
+        await sendReview();
+        trackSubmitForm({ authenticated: false });
       }
     } else {
       error_occurred = true; //if comment is too short show error message
