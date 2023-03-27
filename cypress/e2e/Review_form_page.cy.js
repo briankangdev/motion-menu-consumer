@@ -2,6 +2,7 @@ import {
   storage_token_name,
   storage_expiration_date_name,
 } from "../../src/stores/user_store";
+import "../support/commands";
 
 describe("Review form Page", () => {
   const comment = "This is a test comment";
@@ -12,35 +13,36 @@ describe("Review form Page", () => {
     },
   };
   const language = window.navigator.language.split(/[-_]/)[0]; // language without region code
+  const test_token = "test_token";
+  const test_expiration_date = "2050-01-01T00:00:00.000Z";
 
   beforeEach(() => {
     cy.visit(`/shop/${Cypress.env("TEST_COMPANY_ID")}/review/form`);
-    cy.intercept(
-      "GET",
-      `/api/v1/companies/${Cypress.env("TEST_COMPANY_ID")}`
-    ).as("get_company");
-
+    cy.waitForPageLoad();
     cy.on("uncaught:exception", () => false); // ignore auth0 errors
   });
 
   context("when user submits the form", () => {
     it("when review is less than 3 characters, it should show an error message", () => {
-      cy.wait("@get_company").then(() => {
-        cy.get("[data-testid=submit-button]").should("be.visible");
-        cy.get("textarea[name=comment]").should("be.visible").type("aa");
+      cy.get("[data-testid=submit-button]").should("be.visible");
+      cy.get("textarea[name=comment]").should("be.visible").type("aa");
 
-        cy.get("[data-testid=submit-button]").click();
+      cy.get("[data-testid=submit-button]").click();
 
-        cy.get("[data-testid=error-message]").should("be.visible");
-      });
+      cy.get("[data-testid=error-message]").should("be.visible");
     });
 
     context("as a logged user", () => {
       beforeEach(() => {
-        localStorage.setItem(storage_token_name, "test_token");
+        localStorage.setItem(storage_token_name, test_token);
         localStorage.setItem(
           storage_expiration_date_name,
-          "2050-01-01T00:00:00.000Z"
+          test_expiration_date
+        );
+
+        expect(localStorage.getItem(storage_token_name)).to.equal(test_token);
+        expect(localStorage.getItem(storage_expiration_date_name)).to.equal(
+          test_expiration_date
         );
       });
 
@@ -50,15 +52,13 @@ describe("Review form Page", () => {
           url: "/api/v1/users/reviews",
         }).as("post_review");
 
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
-          cy.get("textarea[name=comment]").should("be.visible").type(comment);
+        cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("textarea[name=comment]").should("be.visible").type(comment);
 
-          cy.get("[data-testid=submit-button]").click();
+        cy.get("[data-testid=submit-button]").click();
 
-          cy.wait("@post_review").then((interception) => {
-            expect(interception.request.body).to.deep.equal(request_body);
-          });
+        cy.wait("@post_review").then((interception) => {
+          expect(interception.request.body).to.deep.equal(request_body);
         });
       });
 
@@ -73,15 +73,13 @@ describe("Review form Page", () => {
           }
         ).as("post_review");
 
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
-          cy.get("textarea[name=comment]").should("be.visible").type(comment);
+        cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("textarea[name=comment]").should("be.visible").type(comment);
 
-          cy.get("[data-testid=submit-button]").click();
+        cy.get("[data-testid=submit-button]").click();
 
-          cy.wait("@post_review").then(() => {
-            cy.url().should("include", "review/success");
-          });
+        cy.wait("@post_review").then(() => {
+          cy.url().should("include", "review/success");
         });
       });
 
@@ -96,35 +94,31 @@ describe("Review form Page", () => {
           }
         ).as("post_review");
 
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
-          cy.get("textarea[name=comment]").should("be.visible").type(comment);
+        cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("textarea[name=comment]").should("be.visible").type(comment);
 
-          cy.get("[data-testid=submit-button]").click();
+        cy.get("[data-testid=submit-button]").click();
 
-          cy.wait("@post_review").then(() => {
-            cy.url().should("not.include", "review/success");
-          });
+        cy.wait("@post_review").then(() => {
+          cy.url().should("not.include", "review/success");
         });
       });
     });
 
     context("as an unauthenticated user", () => {
       it("auth0 popup should open", () => {
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
-          cy.get("textarea[name=comment]").should("be.visible").type(comment);
-          cy.window().then((win) => {
-            cy.stub(win, "open").returns({}).as("open"); // stub the popup
-          });
-          cy.get("[data-testid=submit-button]").click();
-          cy.get("@open").should(
-            // check if the popup was called correctly
-            "have.been.calledWith",
-            "",
-            "auth0:authorize:popup"
-          );
+        cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("textarea[name=comment]").should("be.visible").type(comment);
+        cy.window().then((win) => {
+          cy.stub(win, "open").returns({}).as("open"); // stub the popup
         });
+        cy.get("[data-testid=submit-button]").click();
+        cy.get("@open").should(
+          // check if the popup was called correctly
+          "have.been.calledWith",
+          "",
+          "auth0:authorize:popup"
+        );
       });
 
       it("(after open popup) if review is successfully created, it should redirect to the success page", () => {
@@ -138,21 +132,19 @@ describe("Review form Page", () => {
           }
         ).as("post_review");
 
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
-          cy.get("textarea[name=comment]").should("be.visible").type(comment);
+        cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("textarea[name=comment]").should("be.visible").type(comment);
 
-          cy.window().then((win) => {
-            cy.stub(win, "open").returns({}).as("open"); // stub the popup
-          });
+        cy.window().then((win) => {
+          cy.stub(win, "open").returns({}).as("open"); // stub the popup
+        });
 
-          cy.get("[data-testid=submit-button]").click();
+        cy.get("[data-testid=submit-button]").click();
 
-          cy.get("@open").should("have.been.called"); // check if the popup was called
+        cy.get("@open").should("have.been.called"); // check if the popup was called
 
-          cy.wait("@post_review").then(() => {
-            cy.url().should("include", "review/success");
-          });
+        cy.wait("@post_review").then(() => {
+          cy.url().should("include", "review/success");
         });
       });
 
@@ -167,21 +159,19 @@ describe("Review form Page", () => {
           }
         ).as("post_review");
 
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
-          cy.get("textarea[name=comment]").should("be.visible").type(comment);
+        cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("textarea[name=comment]").should("be.visible").type(comment);
 
-          cy.window().then((win) => {
-            cy.stub(win, "open").returns({}).as("open"); // stub the popup
-          });
+        cy.window().then((win) => {
+          cy.stub(win, "open").returns({}).as("open"); // stub the popup
+        });
 
-          cy.get("[data-testid=submit-button]").click();
+        cy.get("[data-testid=submit-button]").click();
 
-          cy.get("@open").should("have.been.called"); // check if the popup was called
+        cy.get("@open").should("have.been.called"); // check if the popup was called
 
-          cy.wait("@post_review").then(() => {
-            cy.url().should("not.include", "review/success");
-          });
+        cy.wait("@post_review").then(() => {
+          cy.url().should("not.include", "review/success");
         });
       });
     });
@@ -209,21 +199,19 @@ describe("Review form Page", () => {
           }
         ).as("post_review");
 
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
-          cy.get("textarea[name=comment]").should("be.visible").type(comment);
+        cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("textarea[name=comment]").should("be.visible").type(comment);
 
-          cy.get("[data-testid=submit-button]").click();
+        cy.get("[data-testid=submit-button]").click();
 
-          cy.wait("@post_review").then(() => {
-            cy.readFile(`src/lib/translation/${language}.json`).then(
-              (translation) => {
-                cy.get("div[class*=toaster]").contains(
-                  translation[success_message]
-                );
-              }
-            );
-          });
+        cy.wait("@post_review").then(() => {
+          cy.readFile(`src/lib/translation/${language}.json`).then(
+            (translation) => {
+              cy.get("div[class*=toaster]").contains(
+                translation[success_message]
+              );
+            }
+          );
         });
       });
 
@@ -238,21 +226,19 @@ describe("Review form Page", () => {
           }
         ).as("post_review");
 
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
-          cy.get("textarea[name=comment]").should("be.visible").type(comment);
+        cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("textarea[name=comment]").should("be.visible").type(comment);
 
-          cy.get("[data-testid=submit-button]").click();
+        cy.get("[data-testid=submit-button]").click();
 
-          cy.wait("@post_review").then(() => {
-            cy.readFile(`src/lib/translation/${language}.json`).then(
-              (translation) => {
-                cy.get("div[class*=toaster]").contains(
-                  translation[error_message]
-                );
-              }
-            );
-          });
+        cy.wait("@post_review").then(() => {
+          cy.readFile(`src/lib/translation/${language}.json`).then(
+            (translation) => {
+              cy.get("div[class*=toaster]").contains(
+                translation[error_message]
+              );
+            }
+          );
         });
       });
     });
@@ -273,55 +259,47 @@ describe("Review form Page", () => {
       });
 
       it("submit button should have the right text", () => {
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("[data-testid=submit-button]").should("be.visible");
 
-          cy.readFile(`src/lib/translation/${language}.json`).then(
-            (translations) => {
-              cy.get("[data-testid=submit-button]").contains(
-                translations[button_text_logged]
-              );
-            }
-          );
-        });
+        cy.readFile(`src/lib/translation/${language}.json`).then(
+          (translations) => {
+            cy.get("[data-testid=submit-button]").contains(
+              translations[button_text_logged]
+            );
+          }
+        );
       });
 
       it("unauthentication message should not be visible", () => {
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=unauthenticated-message]").should(
-            "not.be.visible"
-          );
-        });
+        cy.get("[data-testid=unauthenticated-message]").should(
+          "not.be.visible"
+        );
       });
     });
 
     context("as a unauthenticated user", () => {
       it("submit button should have the right text", () => {
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=submit-button]").should("be.visible");
+        cy.get("[data-testid=submit-button]").should("be.visible");
 
-          cy.readFile(`src/lib/translation/${language}.json`).then(
-            (translations) => {
-              cy.get("[data-testid=submit-button]").contains(
-                translations[button_text_unlogged]
-              );
-            }
-          );
-        });
+        cy.readFile(`src/lib/translation/${language}.json`).then(
+          (translations) => {
+            cy.get("[data-testid=submit-button]").contains(
+              translations[button_text_unlogged]
+            );
+          }
+        );
       });
 
       it("unauthentication message should have the right text", () => {
-        cy.wait("@get_company").then(() => {
-          cy.get("[data-testid=unauthenticated-message]").should("be.visible");
+        cy.get("[data-testid=unauthenticated-message]").should("be.visible");
 
-          cy.readFile(`src/lib/translation/${language}.json`).then(
-            (translations) => {
-              cy.get("[data-testid=unauthenticated-message]").contains(
-                translations[paragraph_text_unlogged]
-              );
-            }
-          );
-        });
+        cy.readFile(`src/lib/translation/${language}.json`).then(
+          (translations) => {
+            cy.get("[data-testid=unauthenticated-message]").contains(
+              translations[paragraph_text_unlogged]
+            );
+          }
+        );
       });
     });
   });
