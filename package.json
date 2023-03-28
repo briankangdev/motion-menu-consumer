@@ -35,6 +35,7 @@
     "flagsmith": "^3.14.1",
     "mixpanel-browser": "^2.45.0",
     "svelte-chartjs": "^3.1.0",
+    "svelte-french-toast": "^1.0.3",
     "svelte-i18n": "^3.6.0",
     "svelte-icons": "^2.1.0",
     "svelte-motion": "^0.11.4"
