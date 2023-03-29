@@ -10,8 +10,4 @@ export async function load({ params }: IRouteParams) {
   let company_id = params.company_id;
 
   await getCompany(company_id);
-
-  return {
-    company_id: params.company_id,
-  };
 }
