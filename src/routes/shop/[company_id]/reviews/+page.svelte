@@ -1,20 +1,20 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
-  import { REVIEW_INDEX_PAGE } from "../../../../lib/analytics/types";
+  import { goto } from "$app/navigation";
   import { is_authenticated } from "../../../../stores/user_store";
   import { company, type ICompany } from "../../../../stores/company";
-  import Logo from "../../../../components/Logo.svelte";
-  import analytics from "../../../../lib/analytics";
   import { reviews, reviews_meta } from "../../../../stores/reviews";
+  import { loadReviewsByPage } from "../../../../services/reviews_service";
+  import { getScrollPercent } from "../../../../utils/get_scroll_percent";
+  import { REVIEW_INDEX_PAGE } from "../../../../lib/analytics/types";
+  import analytics from "../../../../lib/analytics";
+  import Logo from "../../../../components/Logo.svelte";
   import ReviewForm from "../../../../components/review-form/ReviewForm.svelte";
   import Review from "../../../../components/review/Review.svelte";
   import HistoryBack from "../../../../components/history-back/HistoryBack.svelte";
-  import { loadReviewsByPage } from "../../../../services/reviews_service";
-  import { getScrollPercent } from "../../../../utils/get_scroll_percent";
   import LoadingSpinner from "../../../../components/LoadingSpinner.svelte";
   import Button from "../../../../components/button/Button.svelte";
-  import { goto } from "$app/navigation";
 
   let company_name: ICompany["name"] = $company.name //company name with every first letter in uppercase
     .split(" ")
