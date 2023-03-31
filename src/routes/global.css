@@ -16,6 +16,7 @@ body {
   --blue: #0050a0;
   --blue_highlighted: #0076ed;
   --black: #111111;
+  --gray: #666;
   --white: #fff;
   --red: #fd3a5c;
 }
@@ -70,4 +71,8 @@ button:not(:disabled):active {
 
 button:focus {
   border-color: #666;
+}
+
+h1{
+  color: var(--black);
 }
