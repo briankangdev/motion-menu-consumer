@@ -65,5 +65,6 @@
   "review-index_description": "You can support your favorite shop with well written comment.",
   "company_reviews": "{company_name} Reviews",
   "reviews": "Reviews",
-  "no_reviews": "Currently, there are no reviews.You can become the first reviewer!"
+  "no_reviews": "Currently, there are no reviews.You can become the first reviewer!",
+  "total_reviews": "Customers have written {total_reviews} reviews."
 }

@@ -24,6 +24,7 @@
   let loading_reviews: boolean;
   let actual_page: number;
   let total_pages: number = $reviews_meta.pages;
+  let total_reviews: number = $reviews_meta.count;
 
   $: actual_page = $reviews_meta.page;
 
@@ -114,6 +115,9 @@
       </div>
       {#if $reviews.length > 0}
         <div class="reviews">
+          <p class="total-reviews">
+            {$_("total_reviews", { values: { total_reviews } })}
+          </p>
           {#each $reviews as review}
             <Review
               name={review.user.name}
@@ -183,6 +187,11 @@
 
   .reviews-header {
     display: none;
+  }
+
+  p.total-reviews {
+    font-size: 14px;
+    color: var(--gray);
   }
 
   .reviews {
