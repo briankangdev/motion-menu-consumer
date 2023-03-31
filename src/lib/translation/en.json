@@ -63,5 +63,7 @@
 
   "review-index_title": "Reviews",
   "review-index_description": "You can support your favorite shop with well written comment.",
-  "reviews": "{company_name} Reviews"
+  "company_reviews": "{company_name} Reviews",
+  "reviews": "Reviews",
+  "no_reviews": "Currently, there are no reviews.You can become the first reviewer!"
 }

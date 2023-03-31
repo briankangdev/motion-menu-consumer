@@ -64,5 +64,7 @@
 
   "review-index_title": "Reseñas",
   "review-index_description": "Puedes apoyar a tu negocio favorito con una buena reseña.",
-  "reviews": "Reseñas sobre {company_name}"
+  "company_reviews": "Reseñas sobre {company_name}",
+  "reviews": "Reseñas",
+  "no_reviews": "Actualmente no hay reseñas. ¡Puedes ser el primero en escribir una!"
 }
