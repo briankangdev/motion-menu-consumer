@@ -47,7 +47,7 @@
       <span class="text-blue">{$_("support")}</span>
       {$_("with_your_comment")}
     </h1>
-    <ReviewForm {trackSubmitForm} {loading} />
+    <ReviewForm {trackSubmitForm} {loading} page="form" />
     <p>{$_("success_message")}</p>
   </section>
 </main>
@@ -63,7 +63,7 @@
   }
 
   section {
-    width: 80%;
+    padding: 0 30px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
