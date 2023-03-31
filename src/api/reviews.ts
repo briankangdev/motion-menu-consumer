@@ -10,14 +10,14 @@ export interface IResponseReviews {
 }
 
 export const getReviews = async (
-  company_id: ICompany["id"],
-  per_page: number = 10,
+  company_slug: ICompany["slug"],
   page: number = 1,
+  per_page: number = 5,
   featured: boolean = false
 ): Promise<IResponseReviews | undefined> => {
   try {
     const response: AxiosResponse<IResponseReviews> = await client.get(
-      `/api/v1/${company_id}/reviews`,
+      `/api/v1/${company_slug}/reviews`,
       {
         params: {
           per_page,

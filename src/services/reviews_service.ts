@@ -1,23 +1,20 @@
 import { getReviews, type IResponseReviews } from "../api/reviews";
 import type { ICompany } from "src/stores/company";
-import { dic, type IReview } from "../stores/reviews";
+import { reviews_data, reviews_meta } from "../stores/reviews";
 
 export async function loadReviewsByPage(
-  company_id: ICompany["id"],
-  per_page: number = 10,
-  page: number = 1,
-  featured: boolean = false
+  company_slug: ICompany["slug"],
+  page: number = 1
 ) {
-  const response: IResponseReviews = await getReviews(
-    company_id,
-    per_page,
-    page,
-    featured
-  );
+  const response: IResponseReviews = await getReviews(company_slug, page);
 
-  // dic.update((prev) => ({
-  //   ...prev,
-  // }));
+  reviews_data.update((prev) => ({
+    ...prev,
+    ...response.data,
+  }));
 
-  return response;
+  reviews_meta.update((prev) => ({
+    ...prev,
+    ...response.meta,
+  }));
 }
