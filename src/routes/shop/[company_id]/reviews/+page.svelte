@@ -15,6 +15,7 @@
   import HistoryBack from "../../../../components/history-back/HistoryBack.svelte";
   import LoadingSpinner from "../../../../components/LoadingSpinner.svelte";
   import Button from "../../../../components/button/Button.svelte";
+  import Skeleton from "../../../../components/skeleton/Skeleton.svelte";
 
   let company_name: ICompany["name"] = $company.name //company name with every first letter in uppercase
     .split(" ")
@@ -23,7 +24,6 @@
   let loading_client: boolean;
   let loading_reviews: boolean;
   let actual_page: number;
-  let total_pages: number = $reviews_meta.pages;
   let total_reviews: number = $reviews_meta.count;
 
   $: actual_page = $reviews_meta.page;
@@ -48,7 +48,7 @@
 
     if (
       scroll_percent >= SCROLL_PERCENT_TO_LOAD_MORE &&
-      actual_page < total_pages
+      $reviews.length < total_reviews
     ) {
       if (loading_reviews) return;
       loading_reviews = true;
@@ -80,9 +80,11 @@
   <section>
     <div class="form-section">
       <div>
-        <h1>
-          {$_("company_reviews", { values: { company_name } })}
-        </h1>
+        <Skeleton loading={loading_client}>
+          <h1>
+            {$_("company_reviews", { values: { company_name } })}
+          </h1>
+        </Skeleton>
         <p class="form-description mobile">{$_("review-index_description")}</p>
         <p class="form-description desktop">{$company.description}</p>
       </div>
@@ -115,9 +117,13 @@
       </div>
       {#if $reviews.length > 0}
         <div class="reviews">
-          <p class="total-reviews">
-            {$_("total_reviews", { values: { total_reviews } })}
-          </p>
+          <div>
+            <Skeleton loading={loading_client}>
+              <p class="total-reviews">
+                {$_("total_reviews", { values: { total_reviews } })}
+              </p>
+            </Skeleton>
+          </div>
           {#each $reviews as review}
             <Review
               name={review.user.name}
@@ -125,7 +131,7 @@
               created_at={review.created_at}
             />
           {/each}
-          {#if actual_page < total_pages}
+          {#if $reviews.length < total_reviews}
             <div class="reviews-loading">
               {#if loading_reviews}
                 <LoadingSpinner size={30} />
@@ -190,6 +196,7 @@
   }
 
   p.total-reviews {
+    margin-top: 0;
     font-size: 14px;
     color: var(--gray);
   }
