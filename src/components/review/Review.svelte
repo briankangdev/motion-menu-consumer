@@ -1,11 +1,13 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { time_ago } from "../../utils/time_ago";
+  import Skeleton from "../skeleton/Skeleton.svelte";
 
   export let name: string;
   export let body: string;
   export let created_at: string;
   export let short_body_char_limit: number = 150;
+  export let loading: boolean = false;
 
   let shortBody: string = body.slice(0, short_body_char_limit).trim();
   let { message, values } = time_ago(created_at);
@@ -28,7 +30,19 @@
       {/if}
     </div>
   </div>
-  <div class="review-date" data-testid="date">{$_(message, { values })}</div>
+  <div class="review-date-container">
+    <Skeleton
+      {loading}
+      rows={{ default: 1 }}
+      rows_width_percent={{ default: [100] }}
+      row_height={{ default: 12 }}
+      variant="dark"
+    >
+      <div class="review-date" data-testid="date">
+        {$_(message, { values })}
+      </div>
+    </Skeleton>
+  </div>
 </section>
 
 <style>
@@ -60,9 +74,15 @@
     word-wrap: break-word;
   }
 
+  .review-date-container {
+    min-width: 100px;
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .review-date {
     color: rgb(142, 142, 142);
-    align-self: flex-end;
     font-size: 0.7rem;
   }
 

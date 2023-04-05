@@ -80,7 +80,13 @@
   <section>
     <div class="form-section">
       <div>
-        <Skeleton loading={loading_client}>
+        <Skeleton
+          loading={loading_client}
+          rows={{ default: 3, desktop: 2 }}
+          rows_width_percent={{ default: [70, 90, 100], desktop: [80, 100] }}
+          row_height={{ default: 40, desktop: 50 }}
+          gap={10}
+        >
           <h1>
             {$_("company_reviews", { values: { company_name } })}
           </h1>
@@ -118,7 +124,15 @@
       {#if $reviews.length > 0}
         <div class="reviews">
           <div>
-            <Skeleton loading={loading_client}>
+            <Skeleton
+              loading={loading_client}
+              rows={{ default: 1 }}
+              rows_width_percent={{
+                default: [80],
+                desktop: [40],
+              }}
+              row_height={{ default: 14 }}
+            >
               <p class="total-reviews">
                 {$_("total_reviews", { values: { total_reviews } })}
               </p>
@@ -126,6 +140,7 @@
           </div>
           {#each $reviews as review}
             <Review
+              loading={loading_client}
               name={review.user.name}
               body={review.body}
               created_at={review.created_at}

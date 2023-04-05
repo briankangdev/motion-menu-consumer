@@ -1,57 +1,79 @@
 <script lang="ts">
-  import { getNumberOfLines } from "../../utils/skeleton/get_number_of_lines";
-  import { getContentWidthByLine } from "../../utils/skeleton/get_content_width_by_lines";
-  import { getFontHeight } from "../../utils/skeleton/get_font_height";
-  import { onMount } from "svelte";
+  type Variant = "light" | "dark";
 
+  // Props
   export let loading = false;
-  let number_of_rows;
-  let lines_width: number[] = [];
-  let line_height: number;
-  let skeleton: HTMLElement;
+  export let rows: { default: number; desktop?: number };
+  export let rows_width_percent: { default: number[]; desktop?: number[] } = {
+    default: [100], // default to 100% width for all rows
+  };
+  export let row_height: { default: number; desktop?: number };
+  export let gap: number = 0;
+  export let variant: Variant = "light";
 
-  onMount(() => {
-    number_of_rows = getNumberOfLines(skeleton.children[0] as HTMLElement) || 1;
-    lines_width = getContentWidthByLine(skeleton.children[0] as HTMLElement);
-    line_height = getFontHeight(skeleton.children[0] as HTMLElement);
-  });
+  // Calculate the maximum number of rows between default and desktop
+  let max_rows: number =
+    rows.desktop > rows.default ? rows.desktop : rows.default;
+
+  // Set default values for desktop properties if not provided
+  if (!rows.desktop) {
+    rows.desktop = rows.default;
+  }
+
+  if (!rows_width_percent.desktop) {
+    rows_width_percent.desktop = rows_width_percent.default;
+  }
+
+  if (!row_height.desktop) {
+    row_height.desktop = row_height.default;
+  }
 </script>
 
 {#if loading}
-  <span class="ref-skeleton" bind:this={skeleton}>
-    <slot />
-    <span class="skeleton">
-      {#each new Array(number_of_rows) as _, i}
-        <div
-          style="width: {lines_width[
-            i
-          ]}px; height: {line_height}px; margin-bottom: 10px"
-          class="skeleton-line"
-        />
-      {/each}
-    </span>
+  <span class="skeleton">
+    {#each new Array(max_rows) as _, i}
+      <!-- render the max number of rows -->
+      <div
+        style="--default-width: {rows_width_percent.default[i]}%; 
+          --desktop-width: {rows_width_percent.desktop[i]}%; 
+          --default-height: {row_height.default}px; 
+          --desktop-height: {row_height.desktop}px;
+          --default-display: {i < rows.default ? 'block' : 'none'};
+          --desktop-display: {i < rows.desktop ? 'block' : 'none'};
+          margin-bottom: {gap}px;
+          "
+        class="skeleton-line {variant}"
+      />
+    {/each}
   </span>
 {:else}
   <slot />
 {/if}
 
 <style>
-  .ref-skeleton {
+  .skeleton {
+    width: 100%;
     display: inline-block;
     position: relative;
     overflow: hidden;
   }
 
-  .skeleton {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
   .skeleton-line {
-    background-color: #f0f0f091;
     border-radius: 10px;
     visibility: visible !important;
+    width: var(--default-width);
+    height: var(--default-height);
+    display: var(--default-display);
+    overflow: hidden;
+  }
+
+  /* Light and dark variants for the skeleton lines */
+  .skeleton-line.light {
+    background-color: #f0f0f091;
+  }
+
+  .skeleton-line.dark {
+    background-color: #94949450;
   }
 
   .skeleton-line::before {
@@ -70,13 +92,17 @@
     animation: loading 1.5s infinite;
   }
 
-  .ref-skeleton :global(*) {
-    visibility: hidden;
-  }
-
   @keyframes loading {
     100% {
       left: 150%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .skeleton-line {
+      width: var(--desktop-width);
+      height: var(--desktop-height);
+      display: var(--desktop-display);
     }
   }
 </style>
