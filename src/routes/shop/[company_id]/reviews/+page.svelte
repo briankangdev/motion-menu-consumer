@@ -29,9 +29,9 @@
   $: actual_page = $reviews_meta.page;
 
   onMount(() => {
-    // analytics.track.visitPage(REVIEW_INDEX_PAGE, {
-    //   company_id,
-    // });
+    analytics.track.visitPage(REVIEW_INDEX_PAGE, {
+      company_id: $company.id,
+    });
     window.addEventListener("scroll", handleScroll);
   });
 
@@ -60,10 +60,16 @@
   const trackSubmitForm = (aditional_props: {
     authenticated: boolean;
   }): void => {
-    // analytics.track.submitForm(REVIEW_INDEX_PAGE, "review-form", {
-    //   company_id,
-    //   ...aditional_props,
-    // });
+    analytics.track.submitForm(REVIEW_INDEX_PAGE, "review-form", {
+      company_id: $company.id,
+      ...aditional_props,
+    });
+  };
+
+  const handleButtonTrack = (button_name: string) => {
+    analytics.track.buttonClick(REVIEW_INDEX_PAGE, button_name, {
+      company_id: $company.id,
+    });
   };
 </script>
 
@@ -111,6 +117,7 @@
           }}
           title={$_("back_to_menu")}
           variant="borderless"
+          handleButtonTrack={() => handleButtonTrack("menu-page")}
         />
       </div>
     </div>

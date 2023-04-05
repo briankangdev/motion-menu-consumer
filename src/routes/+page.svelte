@@ -65,8 +65,7 @@
   });
 
   const handleButtonTrack = (button_name: string) => {
-    analytics.track.buttonClick(button_name, {
-      page: HOME_PAGE,
+    analytics.track.buttonClick(HOME_PAGE, button_name, {
       title_value,
     });
   };
