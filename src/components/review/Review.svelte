@@ -13,7 +13,7 @@
   let { message, values } = time_ago(created_at);
 </script>
 
-<section class="review-container" data-testid="container">
+<section class="review-container" data-testid="review-container">
   <div class="review-main">
     <div class="review-name" data-testid="name">{name}</div>
     <div class="review-body" data-testid="body">

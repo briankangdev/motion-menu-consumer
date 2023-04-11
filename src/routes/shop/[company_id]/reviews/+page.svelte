@@ -91,9 +91,8 @@
           rows={{ default: 3, desktop: 2 }}
           rows_width_percent={{ default: [70, 90, 100], desktop: [80, 100] }}
           row_height={{ default: 40, desktop: 50 }}
-          gap={10}
         >
-          <h1>
+          <h1 data-testid="review-index-title">
             {$_("company_reviews", { values: { company_name } })}
           </h1>
         </Skeleton>
@@ -140,7 +139,7 @@
               }}
               row_height={{ default: 14 }}
             >
-              <p class="total-reviews">
+              <p class="total-reviews" data-testid="total-reviews">
                 {$_("total_reviews", { values: { total_reviews } })}
               </p>
             </Skeleton>
