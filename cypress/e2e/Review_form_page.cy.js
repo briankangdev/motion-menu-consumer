@@ -17,7 +17,7 @@ describe("Review form Page", () => {
   const test_expiration_date = "2050-01-01T00:00:00.000Z";
 
   beforeEach(() => {
-    cy.visit(`/shop/${Cypress.env("TEST_COMPANY_ID")}/review/form`);
+    cy.visit(`/shop/${Cypress.env("TEST_COMPANY_ID")}/reviews/form`);
     cy.waitForPageLoad();
     cy.on("uncaught:exception", () => false); // ignore auth0 errors
   });

@@ -10,7 +10,7 @@ export default defineConfig({
     env: {
       PUBLIC_MOTION_MENU_API_ENDPOINT:
         "https://motion-menu-api-staging.herokuapp.com",
-      TEST_COMPANY_ID: 3,
+      TEST_COMPANY_ID: 50,
     },
     supportFile: false,
   },
