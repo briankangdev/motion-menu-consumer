@@ -8,7 +8,9 @@
     default: [100], // default to 100% width for all rows
   };
   export let row_height: { default: number; desktop?: number };
-  export let gap: number = 0;
+  export let gap: { default: number; desktop?: number } = {
+    default: 10,
+  };
   export let variant: Variant = "light";
 
   // Calculate the maximum number of rows between default and desktop
@@ -40,7 +42,10 @@
           --desktop-height: {row_height.desktop}px;
           --default-display: {i < rows.default ? 'block' : 'none'};
           --desktop-display: {i < rows.desktop ? 'block' : 'none'};
-          margin-bottom: {gap}px;
+          --default-gap: {i < rows.default - 1 ? gap.default : 0}px;
+          --desktop-gap: {i < rows.desktop - 1
+          ? gap.desktop ?? gap.default
+          : 0}px;
           "
         class="skeleton-line {variant}"
       />
@@ -64,6 +69,7 @@
     width: var(--default-width);
     height: var(--default-height);
     display: var(--default-display);
+    margin-bottom: var(--default-gap);
     overflow: hidden;
   }
 
@@ -103,6 +109,7 @@
       width: var(--desktop-width);
       height: var(--desktop-height);
       display: var(--desktop-display);
+      margin-bottom: var(--desktop-gap);
     }
   }
 </style>
