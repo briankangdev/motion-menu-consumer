@@ -20,6 +20,7 @@
     CategoryScale,
   } from "chart.js";
   import { user, type IUser } from "../stores/user";
+  import Skeleton from "../components/skeleton/Skeleton.svelte";
 
   ChartJS.register(
     Title,
@@ -65,8 +66,7 @@
   });
 
   const handleButtonTrack = (button_name: string) => {
-    analytics.track.buttonClick(button_name, {
-      page: HOME_PAGE,
+    analytics.track.buttonClick(HOME_PAGE, button_name, {
       title_value,
     });
   };
@@ -82,9 +82,17 @@
 <main>
   <div class="row">
     <div>
-      {#if title_value}
-        <h1>{$_(title_value)}</h1>
-      {/if}
+      <div class="title">
+        <Skeleton
+          loading={!title_value}
+          rows={{ default: 3 }}
+          rows_width_percent={{ default: [40, 60, 80], desktop: [60, 80, 100] }}
+          row_height={{ default: 32, desktop: 42 }}
+          gap={{ default: 15, desktop: 26 }}
+        >
+          <h1>{$_(title_value)}</h1>
+        </Skeleton>
+      </div>
       <p>
         {$_("home_description")}
       </p>
@@ -173,6 +181,14 @@
 
   .divider {
     margin-top: 80px;
+  }
+
+  .title {
+    margin: 32px 0;
+  }
+
+  .title h1 {
+    margin: 0;
   }
 
   h1 {
