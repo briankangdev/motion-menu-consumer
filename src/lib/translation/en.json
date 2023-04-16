@@ -55,9 +55,16 @@
   "share_your_thought": "Share your thought!",
   "type_something": "Type something...",
   "sign-up_to_share_review": "It looks like, you don't have account. Please sign up to leave review.",
-  "share": "Share",
+  "add_review": "Add review",
   "sign-up_to_share": "Sign up and share",
   "comment_error_message": "Your comment can't be less than 3 characters",
   "review_post_error_message": "Error while posting your comment. Please try again later.",
-  "review_post_success_message": "Your comment has been posted successfully."
+  "review_post_success_message": "Your comment has been posted successfully.",
+
+  "review-index_title": "Reviews",
+  "review-index_description": "You can support your favorite shop with well written comment.",
+  "company_reviews": "{company_name} Reviews",
+  "reviews": "Reviews",
+  "no_reviews": "Currently, there are no reviews.You can become the first reviewer!",
+  "total_reviews": "Customers have written {total_reviews} reviews."
 }

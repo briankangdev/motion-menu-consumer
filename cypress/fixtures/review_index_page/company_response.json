@@ -1,0 +1,12 @@
+{
+  "data": {
+    "id": 1,
+    "email": "test@gmail.com",
+    "name": "Test Company",
+    "description": "Test Company Description",
+    "instagram": "test",
+    "short_description": "Test Company Short Description",
+    "slug": "test-company",
+    "tag_priority": "test"
+  }
+}

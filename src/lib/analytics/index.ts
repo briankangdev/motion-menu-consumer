@@ -14,8 +14,12 @@ interface IAnalytics {
   init: (config: IConfig) => void;
   setUserId: () => void;
   track: {
-    buttonClick: (button_name: string, props: IProps) => void;
-    pageStay: (page_name: string, seconds: number, rops: IProps) => void;
+    buttonClick: (
+      page_name: string,
+      button_name: string,
+      props: IProps
+    ) => void;
+    pageStay: (page_name: string, seconds: number, props: IProps) => void;
     submitForm: (page_name: string, form_name: string, props: IProps) => void;
     visitPage: (page_name: string, props: IProps) => void;
   };
@@ -32,8 +36,8 @@ const analytics: IAnalytics = {
     }));
   },
   track: {
-    buttonClick: (button_name, props = {}) =>
-      mixpanel.track(`${button_name}-button.click`, props),
+    buttonClick: (page_name, button_name, props = {}) =>
+      mixpanel.track(`${page_name}.${button_name}-button.click`, props),
     pageStay: (page_name, seconds, props) =>
       mixpanel.track(`${page_name}.stay`, { ...props, seconds }),
     submitForm: (page_name, form_name, props) =>

@@ -56,9 +56,16 @@
   "share_your_thought": "¡Comparte tu opinión!",
   "type_something": "Escribe algo...",
   "sign-up_to_share_review": "Parece que no tienes una cuenta. Por favor regístrate y tu comentario será publicado.",
-  "share": "Compartir",
+  "add_review": "Añadir comentario",
   "sign-up_to_share": "Regístrate y comparte",
   "comment_error_message": "Tu comentario no puede tener menos de 3 caracteres",
   "review_post_error_message": "Error al publicar tu comentario. Por favor, inténtalo de nuevo más tarde.",
-  "review_post_success_message": "Tu comentario ha sido enviado con éxito."
+  "review_post_success_message": "Tu comentario ha sido enviado con éxito.",
+
+  "review-index_title": "Reseñas",
+  "review-index_description": "Puedes apoyar a tu negocio favorito con una buena reseña.",
+  "company_reviews": "Reseñas sobre {company_name}",
+  "reviews": "Reseñas",
+  "no_reviews": "Actualmente no hay reseñas. ¡Puedes ser el primero en escribir una!",
+  "total_reviews": "Los clientes han escrito {total_reviews} reseñas."
 }
