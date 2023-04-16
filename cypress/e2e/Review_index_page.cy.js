@@ -10,9 +10,10 @@ import company_response from "../fixtures/review_index_page/company_response.jso
 
 describe("Review Index Page", () => {
   const language = window.navigator.language.split(/[-_]/)[0]; // language without region code
+  const TEST_COMPANY_ID = 50;
 
   beforeEach(() => {
-    cy.visit(`/shop/${Cypress.env("TEST_COMPANY_ID")}/reviews`);
+    cy.visit(`/shop/${TEST_COMPANY_ID}/reviews`);
     cy.on("uncaught:exception", () => false); // ignore auth0 errors
   });
 
@@ -34,7 +35,7 @@ describe("Review Index Page", () => {
     it("should display no reviews message text when there are no reviews", () => {
       cy.intercept(
         "GET",
-        `/api/v1/${Cypress.env("TEST_COMPANY_ID")}/reviews*`,
+        `/api/v1/${TEST_COMPANY_ID}/reviews*`,
         reviews_empty_response
       ).as("getReviews");
 
@@ -106,7 +107,7 @@ describe("Review Index Page", () => {
       const request_body = {
         review: {
           body: comment,
-          company_id: Cypress.env("TEST_COMPANY_ID"),
+          company_id: TEST_COMPANY_ID,
         },
       };
 
