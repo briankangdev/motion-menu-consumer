@@ -1,10 +1,11 @@
 <script lang="ts">
   type Variant = "primary" | "black" | "borderless" | "blue";
 
-  export let onClick: () => void;
+  export let onClick: () => void = () => {};
   export let handleButtonTrack: (button: string) => void = () => {}; // optional function
-  export let title: string;
+  export let content: string;
   export let variant: Variant;
+  export let path: string;
   export let test_id: string = "button";
 
   let variants: Variant[] = ["primary", "black", "borderless", "blue"];
@@ -13,20 +14,21 @@
     : `button ${variants[0]}`; //if variant is not valid, use the first one as default
 </script>
 
-<button
+<a
   class={class_name}
   data-testid={test_id}
+  href={path}
   on:click={() => {
     // on click call the function passed as "onClick" prop and
     // if button is trackable, call the tracking function
     if (handleButtonTrack) {
-      handleButtonTrack(title);
+      handleButtonTrack(content);
     }
     onClick();
   }}
 >
-  {title}
-</button>
+  {content}
+</a>
 
 <style>
   .button {

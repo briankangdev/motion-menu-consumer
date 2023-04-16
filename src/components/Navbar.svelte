@@ -1,6 +1,7 @@
 <script lang="ts">
   import Logo from "./Logo.svelte";
   import { _ } from "svelte-i18n";
+  import Link from "./link/Link.svelte";
 
   export let handleButtonTrack: (button: string) => void = () => {}; // optional function
 </script>
@@ -9,15 +10,12 @@
   <Logo />
 
   <div class="links">
-    <a href="https://guide.motion.menu">{$_("how_to_use")}</a>
-    <a
-      href="https://admin.motion.menu/sign_up"
-      on:click={() => handleButtonTrack("sign-up")}>{$_("sign_up")}</a
-    >
-    <a
-      href="https://admin.motion.menu/sign_in"
-      on:click={() => handleButtonTrack("sign-in")}>{$_("sign_in")}</a
-    >
+    <Link
+      path="https://admin.motion.menu/sign_in"
+      on:click={() => handleButtonTrack("sign-in")}
+      content={$_("sign_in")}
+      variant="primary"
+    />
   </div>
 </header>
 
