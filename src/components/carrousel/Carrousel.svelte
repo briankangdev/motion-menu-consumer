@@ -9,6 +9,7 @@
   export let products: IProduct[];
   export let company_id: CompanySlug;
   export let variant: Variant;
+  export let card_size: number = 150;
 
   //ref
   let carrousel_wrap: HTMLElement;
@@ -28,18 +29,19 @@
   `;
 
   //carrousel width
-  let card_size: number = 150;
   let wrapper_width: number = //wrapper width depends on the card size and the number of columns you want to show
     card_size * desktop_columns + grid_gap * (desktop_columns - 1);
   let carrousel_vars: string = `--wrapper-width: ${wrapper_width}px;`; //wrapper width is set as a css variable to be used in the carrousel__wrapper class
 
   const moveCarrousel = (direction: number) => {
     if (carrousel_wrap) {
+      const new_scroll_left =
+        carrousel_wrap.scrollLeft + direction * (wrapper_width + grid_gap);
+
       carrousel_wrap.scrollTo({
-        left: direction * wrapper_width,
+        left: new_scroll_left,
         behavior: "smooth",
       });
-      console.log(carrousel_wrap.scrollLeft);
     }
   };
 </script>
