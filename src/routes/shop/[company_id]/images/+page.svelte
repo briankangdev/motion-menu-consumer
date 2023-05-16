@@ -21,7 +21,7 @@
   let company_id = data.company_id;
 
   //reviews section
-  const REVIEWS_DISPLAYED_COUNT = 5;
+  const REVIEWS_DISPLAYED_COUNT = 3;
 
   let reviews_displayed = $reviews.slice(0, REVIEWS_DISPLAYED_COUNT);
 
@@ -57,6 +57,8 @@
       let reviews_height = reviews_ref.getBoundingClientRect().height;
 
       let max_height = header_height + reviews_height;
+
+      console.log({ max_height, products_height, menu_ref });
 
       menu_ref.style.height = `${max_height - products_height}px`;
     }
@@ -337,6 +339,7 @@
       display: flex;
       flex-direction: column;
       gap: 25px;
+      margin-left: 100px;
     }
 
     .header {
@@ -344,7 +347,7 @@
     }
 
     .reviews {
-      height: 100%;
+      height: auto;
       overflow-x: auto;
       flex-direction: column;
       gap: 10px;
@@ -352,10 +355,10 @@
 
     .menu {
       display: block;
-      margin-left: 100px;
-      max-height: 600px;
       overflow-y: auto;
       overflow-x: hidden;
+      /* to avoid scrollbar */
+      padding-right: 10px;
     }
 
     .desktop-products {

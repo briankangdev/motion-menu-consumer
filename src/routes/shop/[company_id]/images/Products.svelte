@@ -79,7 +79,6 @@
   @media (min-width: 768px) {
     .products {
       padding: 0;
-      margin-left: 100px;
     }
 
     .products .info p {
