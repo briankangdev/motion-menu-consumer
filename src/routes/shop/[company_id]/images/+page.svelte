@@ -99,10 +99,10 @@
       <div class="header" bind:this={header_ref}>
         {#if $company.name}
           <div class="row">
-            <h1>{$company.name}</h1>
+            <h1 data-testid="company-name">{$company.name}</h1>
           </div>
 
-          <p>
+          <p data-testid="company-description">
             {#if $company.description}
               {$company.description}
             {/if}
@@ -138,10 +138,11 @@
               onClick={() => goto(`/shop/${company_id}/reviews`)}
               title={$_("all_reviews")}
               variant="borderless"
+              test_id="all-reviews"
             />
           {:else}
             <div class="row center">
-              <p>{$_("no_reviews")}</p>
+              <p data-testid="no-reviews">{$_("no_reviews")}</p>
             </div>
           {/if}
           <Button
@@ -149,6 +150,7 @@
             title={`+ ${$_("add_review")}`}
             variant="black"
             handleButtonTrack={() => handleButtonTrack("add-review")}
+            test_id="add-review"
           />
         </div>
       </section>

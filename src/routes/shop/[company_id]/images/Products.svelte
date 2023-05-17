@@ -21,7 +21,7 @@
     <strong>Featured</strong>
     {#if products_with_media.length === 0}
       <div>
-        <span>{$_("no_images")}</span>
+        <span data-test="no-images">{$_("no_images")}</span>
       </div>
     {:else}
       <p>
@@ -41,6 +41,7 @@
         onClick={() => goto(`/shop/${company_id}`)}
         title={`+ ${products_count - products_with_media.length} more items`}
         variant="blue"
+        test_id="more-items"
       />
     </div>
   {/if}
