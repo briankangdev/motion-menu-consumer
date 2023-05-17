@@ -16,6 +16,8 @@
   import Masonry from "../../../../components/Masonry.svelte";
   import ProductCard from "../../../../components/cards/product-card/ProductCard.svelte";
   import Products from "./Products.svelte";
+  import analytics from "$lib/analytics/index.js";
+  import { IMAGES_PAGE } from "$lib/analytics/types.js";
 
   export let data;
   let company_id = data.company_id;
@@ -23,7 +25,13 @@
   //reviews section
   const REVIEWS_DISPLAYED_COUNT = 3;
 
-  let reviews_displayed = $reviews.slice(0, REVIEWS_DISPLAYED_COUNT);
+  let reviews_sorted_by_featured = $reviews.sort(
+    (a, b) => +b.featured - +a.featured
+  );
+  let reviews_displayed = reviews_sorted_by_featured.slice(
+    0,
+    REVIEWS_DISPLAYED_COUNT
+  );
 
   //menu section
   $: ordered_tags = $company.tag_priority
@@ -58,11 +66,16 @@
 
       let max_height = header_height + reviews_height;
 
-      console.log({ max_height, products_height, menu_ref });
-
       menu_ref.style.height = `${max_height - products_height}px`;
     }
   });
+
+  //metrics tracking
+  const handleButtonTrack = (button_name: string) => {
+    analytics.track.buttonClick(IMAGES_PAGE, button_name, {
+      company_id: $company.id,
+    });
+  };
 </script>
 
 <svelte:head>
@@ -135,6 +148,7 @@
             onClick={() => goto(`/shop/${company_id}/reviews/form`)}
             title={`+ ${$_("add_review")}`}
             variant="black"
+            handleButtonTrack={() => handleButtonTrack("add-review")}
           />
         </div>
       </section>
@@ -355,6 +369,7 @@
 
     .menu {
       display: block;
+      max-height: 600px;
       overflow-y: auto;
       overflow-x: hidden;
       /* to avoid scrollbar */
