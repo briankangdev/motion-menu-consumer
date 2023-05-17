@@ -35,13 +35,15 @@
     <Carrousel products={products_with_media} {company_id} variant="shadow" />
   {/if}
 
-  <div class="row center">
-    <Button
-      onClick={() => goto(`/shop/${company_id}`)}
-      title={`+ ${products_count - products_with_media.length} more items`}
-      variant="blue"
-    />
-  </div>
+  {#if products_count - products_with_media.length > 0}
+    <div class="row center">
+      <Button
+        onClick={() => goto(`/shop/${company_id}`)}
+        title={`+ ${products_count - products_with_media.length} more items`}
+        variant="blue"
+      />
+    </div>
+  {/if}
 </section>
 
 <style>
