@@ -56,13 +56,9 @@ export const grouped_by_tags = derived([dic, ids], ([$dic, $ids]) => {
   }, {});
 });
 
-export const ids_with_videos = derived([dic, ids], ([$dic, $ids]) => {
-  return $ids.filter((id) => $dic[id].videos_count > 0);
-});
-
-export const ids_with_images = derived([dic, ids], ([$dic, $ids]) => {
+export const ids_with_media = derived([dic, ids], ([$dic, $ids]) => {
   return $ids.filter(
-    (id) => $dic[id].images_count > 0 && $dic[id].videos_count < 1
+    (id) => $dic[id].images_count > 0 || $dic[id].videos_count > 0
   );
 });
 

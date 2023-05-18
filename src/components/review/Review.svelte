@@ -47,6 +47,7 @@
 
 <style>
   .review-container {
+    height: calc(100% - 40px);
     display: flex;
     flex-direction: column;
     font-size: 0.9rem;
@@ -60,9 +61,9 @@
   }
 
   .review-main {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 10px;
   }
 
@@ -76,8 +77,8 @@
 
   .review-date-container {
     min-width: 100px;
-    align-self: flex-end;
     display: flex;
+    align-self: flex-end;
     justify-content: flex-end;
   }
 

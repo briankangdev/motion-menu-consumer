@@ -67,5 +67,7 @@
   "company_reviews": "Reseñas sobre {company_name}",
   "reviews": "Reseñas",
   "no_reviews": "Actualmente no hay reseñas. ¡Puedes ser el primero en escribir una!",
-  "total_reviews": "Los clientes han escrito {total_reviews} reseñas."
+  "total_reviews": "Los clientes han escrito {total_reviews} reseñas.",
+
+  "all_reviews": "Todas las reseñas"
 }
