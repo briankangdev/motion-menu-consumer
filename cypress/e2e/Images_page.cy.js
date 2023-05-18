@@ -61,4 +61,10 @@ describe("Images Page", () => {
       cy.get("[data-testid=all-reviews]").should("exist");
     });
   });
+
+  context("menu", () => {
+    it("render menu masonry", () => {
+      cy.get("[data-testid=menu]").should("exist");
+    });
+  });
 });

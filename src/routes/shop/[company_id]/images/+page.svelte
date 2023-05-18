@@ -161,7 +161,7 @@
         <Products {company_id} />
       </div>
 
-      <section class="menu" bind:this={menu_ref}>
+      <section class="menu" bind:this={menu_ref} data-testid="menu">
         <div class="input-container">
           <h2>Menu</h2>
           <input
