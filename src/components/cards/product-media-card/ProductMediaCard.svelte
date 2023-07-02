@@ -6,7 +6,7 @@
   export let company_id: CompanySlug;
   export let product: IProduct;
   export let variant: Variant;
-  export let card_size: number = 150;
+  export let card_size: number = 180;
   export let handleTrack: (
     name: IProduct["name"],
     id: IProduct["id"]
@@ -24,7 +24,7 @@
     variant === "shadow" ? "product-overlay" : "product-overlay hidden";
 
   // media
-  let image_src: string = `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_auto,w_200,h_200,dpr_auto,c_fill/${images[0].public_id}`;
+  let image_src: string = `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_100,w_300,h_300,dpr_auto,c_fill/${images[0].public_id}`;
 
   let video: HTMLVideoElement | undefined; // video tag
   let video_sources: string[] | undefined = videos.map(
@@ -132,8 +132,8 @@
     height: 100%;
     background: linear-gradient(
       0deg,
-      rgba(54, 54, 54, 0.62) 0%,
-      rgba(255, 255, 255, 0) 100%
+      rgba(54, 54, 54, 0.50) 0%,
+      rgba(255, 255, 255, 0) 35%
     );
     display: flex;
     justify-content: flex-end;
