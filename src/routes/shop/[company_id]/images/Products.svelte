@@ -1,5 +1,5 @@
 <script>
-  import { _ } from "svelte-i18n";
+  import { _ as t } from "svelte-i18n";
   import {
     ids_with_media,
     ids as products_ids,
@@ -11,22 +11,24 @@
 
   export let company_id;
 
-  //products section
   $: products_with_media = $ids_with_media.map((id) => $products_dic[id]);
   $: products_count = $products_ids.length;
 </script>
 
 <section class="products">
   <div class="info">
-    <strong>Featured</strong>
+    <strong>{$t("routes.shop.images.featured")}</strong>
     {#if products_with_media.length === 0}
       <div>
-        <span data-test="no-images">{$_("no_images")}</span>
+        <span data-test="no-images">{$t("routes.shop.iamges.no_images")}</span>
       </div>
     {:else}
       <p>
-        Total {products_count} items found. Click the
-        <span class="blue">blue button</span> to check the full menu.
+        {$t("routes.shop.images.summary", {
+          values: {
+            count: products_count,
+          },
+        })}
       </p>
     {/if}
   </div>
@@ -35,16 +37,14 @@
     <Carrousel products={products_with_media} {company_id} variant="shadow" />
   {/if}
 
-  {#if products_count - products_with_media.length > 0}
-    <div class="row center">
-      <Button
-        onClick={() => goto(`/shop/${company_id}`)}
-        title={`+ ${products_count - products_with_media.length} more items`}
-        variant="blue"
-        test_id="more-items"
-      />
-    </div>
-  {/if}
+  <div class="row center">
+    <Button
+      onClick={() => goto(`/shop/${company_id}`)}
+      title={$t("routes.shop.images.show_all_items")}
+      variant="blue"
+      test_id="more-items"
+    />
+  </div>
 </section>
 
 <style>

@@ -69,5 +69,16 @@
   "no_reviews": "Actualmente no hay reseñas. ¡Puedes ser el primero en escribir una!",
   "total_reviews": "Los clientes han escrito {total_reviews} reseñas.",
 
-  "all_reviews": "Todas las reseñas"
+  "all_reviews": "Todas las reseñas",
+
+  "routes": {
+    "shop": {
+      "images": {
+        "featured": "Featured",
+        "no_images": "No hay imagenes",
+        "summary": "Encontramos {count} items. Apretá Cargar para ver carta completa.",
+        "show_all_items": "+ Cargar todos los items"
+      }
+    }
+  }
 }
