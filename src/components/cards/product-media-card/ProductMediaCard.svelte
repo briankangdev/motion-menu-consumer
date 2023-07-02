@@ -2,11 +2,12 @@
   import type { CompanySlug } from "src/stores/company";
   import type { IProduct } from "src/stores/products";
   import type { Variant } from "./types";
+  import { onMount } from "svelte";
 
   export let company_id: CompanySlug;
   export let product: IProduct;
   export let variant: Variant;
-  export let card_size: number = 180;
+  export let card_size: number = 200;
   export let handleTrack: (
     name: IProduct["name"],
     id: IProduct["id"]
@@ -24,7 +25,7 @@
     variant === "shadow" ? "product-overlay" : "product-overlay hidden";
 
   // media
-  let image_src: string = `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_100,w_300,h_300,dpr_auto,c_fill/${images[0].public_id}`;
+  let image_src: string = `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_100,w_${card_size},h_${card_size},dpr_auto,c_fill/${images[0].public_id}`;
 
   let video: HTMLVideoElement | undefined; // video tag
   let video_sources: string[] | undefined = videos.map(
@@ -55,6 +56,12 @@
       video_index = index < video_sources.length - 1 ? index + 1 : 0;
     }
   }
+
+  onMount(() => {
+    console.log(`${card_size} ${images[0].public_id}`);
+    const bigger_card_size = card_size * 2;
+    image_src = `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_100,w_${bigger_card_size},h_${bigger_card_size},dpr_auto,c_fill/${images[0].public_id}`;
+  });
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -132,7 +139,7 @@
     height: 100%;
     background: linear-gradient(
       0deg,
-      rgba(54, 54, 54, 0.50) 0%,
+      rgba(54, 54, 54, 0.5) 0%,
       rgba(255, 255, 255, 0) 35%
     );
     display: flex;

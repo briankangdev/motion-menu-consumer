@@ -9,7 +9,7 @@
   export let products: IProduct[];
   export let company_id: CompanySlug;
   export let variant: Variant;
-  export let card_size: number = 150;
+  export let card_size: number = 200;
 
   //ref
   let carrousel_wrap: HTMLElement;
