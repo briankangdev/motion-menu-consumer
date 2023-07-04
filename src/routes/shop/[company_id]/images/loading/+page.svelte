@@ -39,15 +39,15 @@
         <Skeleton
           loading={true}
           rows={{ default: 1 }}
-          rows_width_percent={{ default: [70] }}
-          row_height={{ default: 40 }}
+          rows_width_percent={{ default: [70], desktop: [100] }}
+          row_height={{ default: 40, desktop: 50 }}
         />
 
         <Skeleton
           loading={true}
-          rows={{ default: 1 }}
-          rows_width_percent={{ default: [40] }}
-          row_height={{ default: 25 }}
+          rows={{ default: 1, desktop: 3 }}
+          rows_width_percent={{ default: [40], desktop: [80, 100, 50] }}
+          row_height={{ default: 25, desktop: 15 }}
           gap={{ default: 5 }}
         />
       </div>
@@ -81,7 +81,7 @@
               loading={true}
               rows={{ default: 1 }}
               rows_width_percent={{ default: [100] }}
-              row_height={{ default: 170 }}
+              row_height={{ default: 170, desktop: 120 }}
             />
           </div>
         {/each}
@@ -102,8 +102,8 @@
               loading={true}
               rows={{ default: 2 }}
               rows_width_percent={{ default: [100] }}
-              row_height={{ default: 160 }}
-              gap={{ default: 20 }}
+              row_height={{ default: 160, desktop: 150 }}
+              gap={{ default: 20, desktop: 10 }}
             />
           {/each}
         </div>
