@@ -139,6 +139,7 @@ class User {
 
     is_authenticated.set(true);
     jwt_token.set(token);
+    console.log(jwt_token);
     sub.set(user?.sub);
     iss.set(user?.iss);
     exp.set(expiration);

@@ -18,6 +18,8 @@ client.interceptors.request.use((config) => {
   if (typeof window === "undefined") return config; // if server side, don't add token
 
   let token = get(jwt_token);
+  console.log("token", token);
+
   if (token) {
     custom_headers.Authorization = `Bearer ${token}`;
   }
