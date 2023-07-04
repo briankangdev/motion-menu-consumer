@@ -29,14 +29,14 @@
     <div class="congrats-emoji">🥳</div>
     <Button
       onClick={() => {
-        goto(`/shop/${company_id}`);
+        goto(`/shop/${company_id}/images`);
       }}
       title={$_("back_to_menu")}
       variant="primary"
     />
     <p>{$_("success_message")}</p>
   </section>
-  <HistoryBack previous_page={`/shop/${company_id}/review`} />
+  <HistoryBack />
 </main>
 
 <style>

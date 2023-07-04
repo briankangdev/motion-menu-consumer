@@ -7,6 +7,7 @@
   import Logo from "../../../../../components/Logo.svelte";
   import analytics from "../../../../../lib/analytics";
   import ReviewForm from "../../../../../components/review-form/ReviewForm.svelte";
+  import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";
 
   let company_id: ICompany["id"] = $company.id;
   let loading: boolean = true;
@@ -50,6 +51,8 @@
     <ReviewForm {trackSubmitForm} {loading} page="form" />
     <p>{$_("success_message")}</p>
   </section>
+
+  <HistoryBack />
 </main>
 
 <style>

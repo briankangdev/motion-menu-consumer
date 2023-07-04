@@ -36,7 +36,7 @@
       const response = await createReview(comment, company_id);
       if (response) {
         toast.success($_("review_post_success_message"));
-        goto(`/shop/${company_id}/review/success`);
+        goto(`/shop/${company_id}/reviews/success`);
       } else {
         toast.error($_("review_post_error_message"));
       }

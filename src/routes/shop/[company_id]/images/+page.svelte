@@ -80,13 +80,13 @@
 
 <svelte:head>
   {#if $company.name}
-    <title>{$company.name} Motion Menu Photos</title>
+    <title>{$company.name} Images | QR Menu</title>
   {:else}
     <title>Motion Menu</title>
   {/if}
   <meta
     name="description"
-    content={`${$company.name} digital ${$_("menu")} - motion menu`}
+    content={`${$company.name} digital ${$_("menu")} - Motion Menu`}
   />
 </svelte:head>
 
@@ -145,13 +145,17 @@
               <p data-testid="no-reviews">{$_("no_reviews")}</p>
             </div>
           {/if}
-          <Button
-            onClick={() => goto(`/shop/${company_id}/reviews/form`)}
-            title={`+ ${$_("add_review")}`}
-            variant="black"
-            handleButtonTrack={() => handleButtonTrack("add-review")}
-            test_id="add-review"
-          />
+
+          <div class="add-review-button">
+            <Button
+              onClick={() => goto(`/shop/${company_id}/reviews/form`)}
+              title={`+ ${$_("add_review")}`}
+              variant="black"
+              handleButtonTrack={() => handleButtonTrack("add-review")}
+              test_id="add-review"
+              additional_class="add-review-button"
+            />
+          </div>
         </div>
       </section>
     </div>
@@ -234,6 +238,7 @@
   }
 
   .left-desktop-section {
+    min-width: 320px;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -329,6 +334,10 @@
     align-items: center;
     overflow-x: auto;
     margin-bottom: 20px;
+    gap: 0.3em;
+
+    /* tag values are capitalized */
+    text-transform: capitalize;
   }
 
   .desktop-products {
@@ -395,6 +404,10 @@
       margin: 0 !important;
       padding: 0 !important;
       gap: 30px;
+    }
+
+    .add-review-button {
+      display: none;
     }
   }
 </style>

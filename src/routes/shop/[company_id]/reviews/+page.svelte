@@ -112,7 +112,7 @@
       <div class="back-to-menu">
         <Button
           onClick={() => {
-            goto(`/shop/${$company.slug}`);
+            goto(`/shop/${$company.slug}/images`);
           }}
           title={$_("back_to_menu")}
           variant="borderless"
