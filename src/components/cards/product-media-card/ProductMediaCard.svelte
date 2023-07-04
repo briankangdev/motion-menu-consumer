@@ -58,7 +58,6 @@
   }
 
   onMount(() => {
-    console.log(`${card_size} ${images[0].public_id}`);
     const bigger_card_size = card_size * 2;
     image_src = `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_100,w_${bigger_card_size},h_${bigger_card_size},dpr_auto,c_fill/${images[0].public_id}`;
   });

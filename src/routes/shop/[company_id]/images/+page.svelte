@@ -146,16 +146,13 @@
             </div>
           {/if}
 
-          <div class="add-review-button">
-            <Button
-              onClick={() => goto(`/shop/${company_id}/reviews/form`)}
-              title={`+ ${$_("add_review")}`}
-              variant="black"
-              handleButtonTrack={() => handleButtonTrack("add-review")}
-              test_id="add-review"
-              additional_class="add-review-button"
-            />
-          </div>
+          <Button
+            onClick={() => goto(`/shop/${company_id}/reviews/form`)}
+            title={`+ ${$_("add_review")}`}
+            variant="black"
+            handleButtonTrack={() => handleButtonTrack("add-review")}
+            test_id="add-review"
+          />
         </div>
       </section>
     </div>
@@ -404,10 +401,6 @@
       margin: 0 !important;
       padding: 0 !important;
       gap: 30px;
-    }
-
-    .add-review-button {
-      display: none;
     }
   }
 </style>
