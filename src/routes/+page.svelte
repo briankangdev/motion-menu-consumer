@@ -5,8 +5,9 @@
   import Navbar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
   import Faq from "../components/Faq.svelte";
-  import Skeleton from "../components/skeleton/Skeleton.svelte";
   import FeatureFlag from "../lib/feature_flag";
+  import analytics from "../lib/analytics";
+  import { HOME_PAGE } from "../lib/analytics/types";
   import { Line } from "svelte-chartjs";
   import {
     Chart as ChartJS,
@@ -19,8 +20,6 @@
     CategoryScale,
   } from "chart.js";
   import { user, type IUser } from "../stores/user";
-  import { flag, video_public_id, chart_data } from "./config";
-  import { trackUserStay, handleButtonClick } from "./analytics";
 
   ChartJS.register(
     Title,
@@ -32,17 +31,43 @@
     CategoryScale
   );
 
+  const data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "Visit",
+        borderColor: "#0064C8",
+        data: [10, 30, 50, 20, 25, 44, 80],
+      },
+    ],
+  };
+
+  const flag = "landing_page_copy";
+  let video_public_id = "tgeweblar8soskbe6gzy";
   let title_value: string;
-  const user_id: IUser["distinct_id"] = $user.distinct_id;
+  let on_mount_time: Date;
+  let user_id: IUser["distinct_id"] = $user.distinct_id;
 
   onMount(async () => {
-    await FeatureFlag.initSession(user_id);
-    title_value = (await FeatureFlag.getValue(flag)) as string;
-    trackUserStay(title_value);
+    await FeatureFlag.initSession(user_id); // the client needs to be initialized before we can use its methods
+    title_value = (await FeatureFlag.getValue(flag)) as string; // get the value of the feature flag we are using for AB testing
+
+    // TRACK how long user stays in the page
+    on_mount_time = new Date(); // get the time when the page was loaded
+    window.onbeforeunload = function () {
+      let exit_time = new Date(); // get the time when the page was closed
+      let user_stayed = exit_time.getTime() - on_mount_time.getTime() / 1000; // calculate the time the user was on the page in seconds
+      analytics.track.pageStay(HOME_PAGE, user_stayed, {
+        page: HOME_PAGE,
+        title_value,
+      }); // send the time the user was on the page to mixpanel
+    };
   });
 
   const handleButtonTrack = (button_name: string) => {
-    handleButtonClick(button_name, title_value);
+    analytics.track.buttonClick(HOME_PAGE, button_name, {
+      title_value,
+    });
   };
 </script>
 
@@ -56,17 +81,9 @@
 <main>
   <div class="row">
     <div>
-      <div class="title">
-        <Skeleton
-          loading={!title_value}
-          rows={{ default: 3 }}
-          rows_width_percent={{ default: [40, 60, 80], desktop: [60, 80, 100] }}
-          row_height={{ default: 32, desktop: 42 }}
-          gap={{ default: 15, desktop: 26 }}
-        >
-          <h1>{$_(title_value)}</h1>
-        </Skeleton>
-      </div>
+      {#if title_value}
+        <h1>{$_(title_value)}</h1>
+      {/if}
       <p>
         {$_("home_description")}
       </p>
@@ -131,7 +148,7 @@
     </div>
 
     <div class="chart">
-      <Line {chart_data} />
+      <Line {data} />
     </div>
   </div>
 
@@ -155,14 +172,6 @@
 
   .divider {
     margin-top: 80px;
-  }
-
-  .title {
-    margin: 32px 0;
-  }
-
-  .title h1 {
-    margin: 0;
   }
 
   h1 {
