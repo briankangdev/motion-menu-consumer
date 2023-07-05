@@ -11,9 +11,12 @@
   type ReviewPage = "index" | "form";
 
   //props
-  export let trackSubmitForm: (aditional_props: {
-    authenticated: boolean;
-  }) => void;
+  export let trackSubmitForm: (
+    company_id: ICompany["id"],
+    aditional_props: {
+      authenticated: boolean;
+    }
+  ) => void;
 
   //optional props
   export let COMMENT_MIN_LENGTH: number = 3;
@@ -45,11 +48,11 @@
     if (comment.length > COMMENT_MIN_LENGTH) {
       if ($is_authenticated) {
         await sendReview();
-        trackSubmitForm({ authenticated: true });
+        trackSubmitForm(company_id, { authenticated: true });
       } else {
         await $user.loginWithPopup();
         await sendReview();
-        trackSubmitForm({ authenticated: false });
+        trackSubmitForm(company_id, { authenticated: false });
       }
     } else {
       error_occurred = true; //if comment is too short show error message
