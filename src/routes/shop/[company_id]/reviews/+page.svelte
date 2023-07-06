@@ -7,8 +7,6 @@
   import { reviews, reviews_meta } from "../../../../stores/reviews";
   import { loadReviewsByPage } from "../../../../services/reviews_service";
   import { getScrollPercent } from "../../../../utils/get_scroll_percent";
-  import { REVIEW_INDEX_PAGE } from "../../../../lib/analytics/types";
-  import analytics from "../../../../lib/analytics";
   import Logo from "../../../../components/Logo.svelte";
   import ReviewForm from "../../../../components/review-form/ReviewForm.svelte";
   import Review from "../../../../components/review/Review.svelte";
@@ -16,6 +14,11 @@
   import LoadingSpinner from "../../../../components/LoadingSpinner.svelte";
   import Button from "../../../../components/button/Button.svelte";
   import Skeleton from "../../../../components/skeleton/Skeleton.svelte";
+  import {
+    trackVisitPage,
+    trackSubmitForm,
+    trackButtonClick,
+  } from "./analytics";
 
   let company_name: ICompany["name"] = $company.name //company name with every first letter in uppercase
     .split(" ")
@@ -29,11 +32,13 @@
   $: actual_page = $reviews_meta.page;
 
   onMount(() => {
-    analytics.track.visitPage(REVIEW_INDEX_PAGE, {
-      company_id: $company.id,
-    });
+    trackVisitPage($company.id);
     window.addEventListener("scroll", handleScroll);
   });
+
+  const handleButtonTrack = (button_name: string) => {
+    trackButtonClick($company.id, button_name);
+  };
 
   $: if ($is_authenticated !== undefined) {
     //$is_authenticated is undefined until client side is hydrated
@@ -55,21 +60,6 @@
       await loadReviewsByPage($company.slug, actual_page + 1);
       loading_reviews = false;
     }
-  };
-
-  const trackSubmitForm = (aditional_props: {
-    authenticated: boolean;
-  }): void => {
-    analytics.track.submitForm(REVIEW_INDEX_PAGE, "review-form", {
-      company_id: $company.id,
-      ...aditional_props,
-    });
-  };
-
-  const handleButtonTrack = (button_name: string) => {
-    analytics.track.buttonClick(REVIEW_INDEX_PAGE, button_name, {
-      company_id: $company.id,
-    });
   };
 </script>
 

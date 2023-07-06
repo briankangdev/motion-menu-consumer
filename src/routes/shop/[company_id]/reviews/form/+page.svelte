@@ -1,36 +1,24 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
-  import { REVIEW_FORM_PAGE } from "../../../../../lib/analytics/types";
-  import { is_authenticated } from "../../../../../stores/user_store";
   import { company, type ICompany } from "../../../../../stores/company";
+  import { is_authenticated } from "../../../../../stores/user_store";
   import Logo from "../../../../../components/Logo.svelte";
-  import analytics from "../../../../../lib/analytics";
   import ReviewForm from "../../../../../components/review-form/ReviewForm.svelte";
   import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";
+  import { trackVisitPage, trackSubmitForm } from "./analytics";
 
   let company_id: ICompany["id"] = $company.id;
   let loading: boolean = true;
 
   onMount(() => {
-    analytics.track.visitPage(REVIEW_FORM_PAGE, {
-      company_id,
-    });
+    trackVisitPage(company_id);
   });
 
   $: if ($is_authenticated !== undefined) {
     //$is_authenticated is undefined until client side is hydrated
     loading = false;
   }
-
-  const trackSubmitForm = (aditional_props: {
-    authenticated: boolean;
-  }): void => {
-    analytics.track.submitForm(REVIEW_FORM_PAGE, "review-form", {
-      company_id,
-      ...aditional_props,
-    });
-  };
 </script>
 
 <svelte:head>
