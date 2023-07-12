@@ -1,7 +1,7 @@
 <script lang="ts">
   type Variant = "primary" | "black" | "borderless" | "blue";
 
-  export let onClick: () => void;
+  export let onClick: () => void = () => {}; // optional function
   export let handleButtonTrack: () => void = () => {}; // optional function
   export let title: string;
   export let variant: Variant;
