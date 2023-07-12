@@ -68,9 +68,7 @@
   "reviews": "Reseñas",
   "no_reviews": "Actualmente no hay reseñas. ¡Puedes ser el primero en escribir una!",
   "total_reviews": "Los clientes han escrito {total_reviews} reseñas.",
-
   "all_reviews": "Todas las reseñas",
-
   "routes": {
     "shop": {
       "images": {
@@ -78,6 +76,26 @@
         "no_images": "No hay imagenes",
         "summary": "Encontramos {count} items. Apretá Cargar para ver carta completa.",
         "show_all_items": "+ Cargar todos los items"
+      },
+      "profiling": {
+        "head_title": "Elige el nombre de tu tienda",
+        "title": "Cuéntanos sobre tu negocio",
+        "description": "Ayudanos a personalizar tu carta contandonos más sobre tu negocio.",
+        "input_label": "Nombre de la tienda",
+        "input_placeholder": "Bill Pizza",
+        "input_error": {
+          "length": "El nombre de la tienda debe tener entre 3 y 30 caracteres",
+          "no_special": "El nombre de la tienda no puede contener caracteres especiales"
+        },
+        "categories": {
+          "pizza": "Pizza",
+          "coffee": "Café",
+          "stakes": "Parilla"
+        },
+        "button": "Continuar",
+
+        "success_message": "Estamos creando tu carta. Por favor espera unos segundos.",
+        "error_message": "Error al crear tu carta. Por favor, inténtalo de nuevo más tarde."
       }
     }
   }
