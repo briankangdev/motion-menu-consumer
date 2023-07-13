@@ -1,8 +1,8 @@
 import "../support/commands";
+import translation from "../../src/lib/translation/en.json";
 
 describe("Profiling Page", () => {
   const TEST_COMPANY_ID = 50;
-  const language = window.navigator.language.split(/[-_]/)[0]; // language without region code
 
   beforeEach(() => {
     cy.visit(`/shop/${TEST_COMPANY_ID}/profiling`);
@@ -14,13 +14,10 @@ describe("Profiling Page", () => {
   context("shop name validation", () => {
     it("check error message when shop name is empty", () => {
       cy.get("[data-testid=submit-button]").click();
+      console.log(translation);
 
-      cy.readFile(`src/lib/translation/${language}.json`).then(
-        (translation) => {
-          cy.get("[data-testid=error-message]").contains(
-            translation.routes.shop.profiling.input_error.length
-          );
-        }
+      cy.get("[data-testid=error-message]").contains(
+        translation.routes.shop.profiling.input_error.length
       );
     });
 
@@ -29,12 +26,8 @@ describe("Profiling Page", () => {
 
       cy.get("[data-testid=shop-name-input]").clear().type(shortName).blur();
 
-      cy.readFile(`src/lib/translation/${language}.json`).then(
-        (translation) => {
-          cy.get("[data-testid=error-message]").contains(
-            translation.routes.shop.profiling.input_error.length
-          );
-        }
+      cy.get("[data-testid=error-message]").contains(
+        translation.routes.shop.profiling.input_error.length
       );
     });
 
@@ -43,12 +36,8 @@ describe("Profiling Page", () => {
 
       cy.get("[data-testid=shop-name-input]").clear().type(longName).blur();
 
-      cy.readFile(`src/lib/translation/${language}.json`).then(
-        (translation) => {
-          cy.get("[data-testid=error-message]").contains(
-            translation.routes.shop.profiling.input_error.length
-          );
-        }
+      cy.get("[data-testid=error-message]").contains(
+        translation.routes.shop.profiling.input_error.length
       );
     });
 
@@ -73,12 +62,8 @@ describe("Profiling Page", () => {
         .type(specialCharName)
         .blur();
 
-      cy.readFile(`src/lib/translation/${language}.json`).then(
-        (translation) => {
-          cy.get("[data-testid=error-message]").contains(
-            translation.routes.shop.profiling.input_error.no_special
-          );
-        }
+      cy.get("[data-testid=error-message]").contains(
+        translation.routes.shop.profiling.input_error.no_special
       );
     });
 
