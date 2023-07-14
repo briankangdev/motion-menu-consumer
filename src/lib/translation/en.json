@@ -67,7 +67,6 @@
   "reviews": "Reviews",
   "no_reviews": "Currently, there are no reviews.You can become the first reviewer!",
   "total_reviews": "Customers have written {total_reviews} reviews.",
-
   "all_reviews": "All reviews",
 
   "routes": {
@@ -77,6 +76,25 @@
         "no_images": "No images found",
         "summary": "Total {count} items found. Click 'Show all items' button to get the full menu.",
         "show_all_items": "+ Show all items"
+      },
+      "profiling": {
+        "head_title": "Choose your shop's name",
+        "title": "Tell us about your business",
+        "description": "Help us customize your menu by telling us a bit about your business.",
+        "input_label": "Shop's name",
+        "input_placeholder": "Bill Pizza",
+        "input_error": {
+          "length": "Shop name must be between 3 and 30 characters",
+          "no_special": "Shop name can't contain special characters"
+        },
+        "categories": {
+          "pizza": "Pizza",
+          "coffee": "Coffee",
+          "stakes": "Stake"
+        },
+        "button": "Continue",
+        "success_message": "We are creating your menu. Please wait a few seconds.",
+        "error_message": "Error while creating your menu. Please try again later."
       }
     }
   }
