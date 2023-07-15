@@ -10,12 +10,11 @@
 
   type ReviewPage = "index" | "form";
 
-  //props
+  // props
   export let trackSubmitForm: (aditional_props: {
     authenticated: boolean;
   }) => void;
 
-  //optional props
   export let COMMENT_MIN_LENGTH: number = 3;
   export let page: ReviewPage = "index";
   export let height: { default: number; desktop?: number } = {
@@ -152,10 +151,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .submit .submit-button {
-    min-width: 120px;
   }
 
   textarea:focus {

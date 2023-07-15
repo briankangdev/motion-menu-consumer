@@ -16,6 +16,7 @@
   import LoadingSpinner from "../../../../components/LoadingSpinner.svelte";
   import Button from "../../../../components/button/Button.svelte";
   import Skeleton from "../../../../components/skeleton/Skeleton.svelte";
+  import Navbar from "../../../../components/Navbar.svelte";
 
   let company_name: ICompany["name"] = $company.name //company name with every first letter in uppercase
     .split(" ")
@@ -78,130 +79,124 @@
   <meta name="description" content={$_("review-index_description")} />
 </svelte:head>
 
-<main>
-  <header>
-    <Logo />
-  </header>
-
-  <section>
-    <div class="form-section">
-      <div>
-        <Skeleton
-          loading={loading_client}
-          rows={{ default: 3, desktop: 2 }}
-          rows_width_percent={{ default: [70, 90, 100], desktop: [80, 100] }}
-          row_height={{ default: 40, desktop: 50 }}
-        >
-          <h1 data-testid="review-index-title">
-            {$_("company_reviews", { values: { company_name } })}
-          </h1>
-        </Skeleton>
-        <p class="form-description mobile">{$_("review-index_description")}</p>
-        <p class="form-description desktop">{$company.description}</p>
-      </div>
-      <ReviewForm
-        {trackSubmitForm}
+<Navbar />
+<!-- <div> -->
+<div class="container">
+  <div class="form-section">
+    <div>
+      <Skeleton
         loading={loading_client}
-        page={"index"}
-        height={{
-          default: 100,
-          desktop: 150,
-        }}
-      />
-      <p class="success-message">{$_("success_message")}</p>
-      <div class="back-to-menu">
-        <Button
-          onClick={() => {
-            goto(`/shop/${$company.slug}/images`);
-          }}
-          title={$_("back_to_menu")}
-          variant="borderless"
-          handleButtonTrack={() => handleButtonTrack("menu-page")}
-        />
-      </div>
-    </div>
-    <div class="reviews-section">
-      <div class="reviews-header">
-        <h1>
-          {$_("reviews")}
+        rows={{ default: 3, desktop: 2 }}
+        rows_width_percent={{ default: [70, 90, 100], desktop: [80, 100] }}
+        row_height={{ default: 40, desktop: 50 }}
+      >
+        <h1 data-testid="review-index-title">
+          {$_("company_reviews", { values: { company_name } })}
         </h1>
-        <p>{$_("review-index_description")}</p>
-      </div>
-      {#if $reviews.length > 0}
-        <div class="reviews">
-          <div>
-            <Skeleton
-              loading={loading_client}
-              rows={{ default: 1 }}
-              rows_width_percent={{
-                default: [80],
-                desktop: [40],
-              }}
-              row_height={{ default: 14 }}
-            >
-              <p class="total-reviews" data-testid="total-reviews">
-                {$_("total_reviews", { values: { total_reviews } })}
-              </p>
-            </Skeleton>
-          </div>
-          {#each $reviews as review}
-            <Review
-              loading={loading_client}
-              name={review.user.name}
-              body={review.body}
-              created_at={review.created_at}
-            />
-          {/each}
-          {#if $reviews.length < total_reviews}
-            <div class="reviews-loading">
-              {#if loading_reviews}
-                <LoadingSpinner size={30} />
-              {/if}
-            </div>
-          {/if}
-        </div>
-      {:else}
-        <p class="no-reviews">{$_("no_reviews")}</p>
-      {/if}
+      </Skeleton>
+      <p class="form-description mobile">{$_("review-index_description")}</p>
+      <p class="form-description desktop">{$company.description}</p>
     </div>
-  </section>
-  <HistoryBack />
-</main>
+
+    <ReviewForm
+      {trackSubmitForm}
+      loading={loading_client}
+      page={"index"}
+      height={{
+        default: 100,
+        desktop: 150,
+      }}
+    />
+    <p class="success-message">{$_("success_message")}</p>
+
+    <div class="back-to-menu">
+      <Button
+        onClick={() => {
+          goto(`/shop/${$company.slug}/images`);
+        }}
+        title={$_("back_to_menu")}
+        variant="borderless"
+        handleButtonTrack={() => handleButtonTrack("menu-page")}
+      />
+    </div>
+  </div>
+
+  <div class="reviews-section">
+    <div class="reviews-header">
+      <h1>
+        {$_("reviews")}
+      </h1>
+      <p>{$_("review-index_description")}</p>
+    </div>
+    {#if $reviews.length > 0}
+      <div class="reviews">
+        <div>
+          <Skeleton
+            loading={loading_client}
+            rows={{ default: 1 }}
+            rows_width_percent={{
+              default: [80],
+              desktop: [40],
+            }}
+            row_height={{ default: 14 }}
+          >
+            <p class="total-reviews" data-testid="total-reviews">
+              {$_("total_reviews", { values: { total_reviews } })}
+            </p>
+          </Skeleton>
+        </div>
+        {#each $reviews as review}
+          <Review
+            loading={loading_client}
+            name={review.user.name}
+            body={review.body}
+            created_at={review.created_at}
+          />
+        {/each}
+        {#if $reviews.length < total_reviews}
+          <div class="reviews-loading">
+            {#if loading_reviews}
+              <LoadingSpinner size={30} />
+            {/if}
+          </div>
+        {/if}
+      </div>
+    {:else}
+      <p class="no-reviews">{$_("no_reviews")}</p>
+    {/if}
+  </div>
+</div>
+
+<HistoryBack />
+
+<!-- </div> -->
 
 <style>
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
-  header {
-    padding: 4px 0 4px 12px;
-  }
-
-  section {
-    padding: 0 30px;
+  .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+
+    max-width: 1024px;
+    width: 100%;
+    padding: 0 1em;
   }
 
   .form-section {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 1em;
   }
 
   h1 {
     font-weight: 600;
     line-height: 1.2;
-    font-size: 40px;
     word-break: break-word;
   }
 
   p {
-    margin-top: 10px;
+    margin-top: 1em;
   }
 
   p.form-description.desktop {
@@ -224,10 +219,10 @@
 
   .reviews {
     width: 100%;
-    margin: 30px 0;
+    margin: 1em 0;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1em;
   }
 
   .reviews-loading {
@@ -254,31 +249,13 @@
   }
 
   @media (min-width: 768px) {
-    section {
-      padding: 0 140px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    header {
-      padding: 30px 0 30px 50px;
-    }
-
-    section {
-      --space-between: 90px;
-      padding: 0 var(--space-between);
+    .container {
       flex-direction: row;
+      justify-content: space-around;
       align-items: flex-start;
-      justify-content: space-between;
-      gap: var(--space-between);
-    }
-
-    .form-section {
-      width: 40%;
-    }
-
-    h1 {
-      font-size: 50px;
+      flex-wrap: wrap;
+      gap: 2em;
+      margin: auto;
     }
 
     p.form-description.desktop {
@@ -287,10 +264,6 @@
 
     p.form-description.mobile {
       display: none;
-    }
-
-    .reviews-section {
-      width: 60%;
     }
 
     .reviews-header {
@@ -303,6 +276,14 @@
 
     .back-to-menu {
       display: flex;
+    }
+
+    .form-section {
+      max-width: 35%;
+    }
+
+    .reviews-section {
+      max-width: 60%;
     }
   }
 </style>
