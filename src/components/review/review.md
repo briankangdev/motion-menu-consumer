@@ -20,7 +20,6 @@ The Review component is a Svelte component that displays a review with a name, b
     name="Veronica"
     body="I love this app."
     created_at="2022-12-10T18:00:00.000Z"
-    //short_body_char_limit: 150 --> optional
 />
 ```
 ## Props
@@ -31,7 +30,6 @@ The Review component is a Svelte component that displays a review with a name, b
 
 - **created_at**: The date when the review was created in string format.
 
-- **short_body_char_limit**: A Number value that determines the maximum number of characters to show in the short version of the review. Default is 150.
 
 ## Preview
 

@@ -10,7 +10,6 @@
     filtered_ids,
   } from "../../../../stores/products";
   import { reviews } from "../../../../stores/reviews";
-  import Logo from "../../../../components/Logo.svelte";
   import Button from "../../../../components/button/Button.svelte";
   import Review from "../../../../components/review/Review.svelte";
   import Masonry from "../../../../components/Masonry.svelte";
@@ -18,6 +17,7 @@
   import Products from "./Products.svelte";
   import analytics from "$lib/analytics/index.js";
   import { IMAGES_PAGE } from "$lib/analytics/types.js";
+  import Navbar from "../../../../components/navbar/index.svelte";
 
   export let data;
   let company_id = data.company_id;
@@ -70,7 +70,7 @@
     }
   });
 
-  //metrics tracking
+  // metrics tracking
   const handleButtonTrack = (button_name: string) => {
     analytics.track.buttonClick(IMAGES_PAGE, button_name, {
       company_id: $company.id,
@@ -90,10 +90,8 @@
   />
 </svelte:head>
 
+<Navbar />
 <div class="container">
-  <div class="logo">
-    <Logo />
-  </div>
   <main>
     <div class="left-desktop-section">
       <div class="header" bind:this={header_ref}>

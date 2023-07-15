@@ -64,10 +64,6 @@
     padding-right: 30px;
   }
 
-  .blue {
-    color: var(--blue);
-  }
-
   .row {
     display: flex;
     flex-direction: row;
