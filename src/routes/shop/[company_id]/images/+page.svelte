@@ -223,11 +223,6 @@
     padding: 0;
   }
 
-  .logo {
-    margin-top: 10px;
-    padding-left: 20px;
-  }
-
   main {
     padding-left: 30px;
   }
@@ -237,16 +232,6 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
-  }
-
-  h1 {
-    text-transform: capitalize;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-    margin-top: 0px;
   }
 
   .header {
@@ -290,9 +275,7 @@
   }
 
   .input-container h2 {
-    font-size: 30px;
     margin: 0;
-    margin-right: 20px;
   }
 
   .input-transparent {

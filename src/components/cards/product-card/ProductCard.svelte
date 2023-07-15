@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { CompanySlug } from "src/stores/company";
   import type { IProduct } from "src/stores/products";
+  import TruncatedText from "../../TruncatedText.svelte";
 
   export let company_id: CompanySlug;
   export let product: IProduct;
@@ -16,11 +17,11 @@
   }
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   class="product-card"
   data-testid="product-card"
-  on:click={() => handleClick()}
+  on:click={handleClick}
+  on:keydown={handleClick}
 >
   <a
     class="product-link"
@@ -31,7 +32,10 @@
       <div class="info-top">
         <h3 class="product-name" data-testid="product-name">{name}</h3>
         <p class="product-description" data-testid="product-description">
-          {description}
+          <TruncatedText
+            original_text={description}
+            enable_more_button={false}
+          />
         </p>
       </div>
       <p class="product-price" data-testid="product-price">${price}</p>
@@ -48,7 +52,7 @@
   }
 
   .product-card {
-    width: 150px;
+    min-width: 150px;
     min-height: 150px;
     user-select: none;
     word-break: break-word;

@@ -2,7 +2,7 @@
   import { _ as t } from "svelte-i18n";
   import { time_ago } from "../../utils/time_ago";
   import Skeleton from "../skeleton/Skeleton.svelte";
-  import TruncatedText from "../truncated_text/index.svelte";
+  import TruncatedText from "../TruncatedText.svelte";
 
   export let name: string;
   export let body: string;
