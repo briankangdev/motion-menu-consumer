@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
   import { Motion } from "svelte-motion";
-  import Navbar from "../components/navbar/index.svelte";
+  import Navbar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
   import Faq from "../components/Faq.svelte";
   import FeatureFlag from "../lib/feature_flag";
