@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { _ } from "svelte-i18n";
-  import Logo from "../../../components/Logo.svelte";
+  import { _ as t } from "svelte-i18n";
   import {
     dic as products_dic,
     query,
@@ -11,6 +10,7 @@
   import { company } from "../../../stores/company.js";
   import Masonry from "../../../components/Masonry.svelte";
   import Card from "../../../components/Card.svelte";
+  import Navbar from "../../../components/Navbar.svelte";
 
   // Fetch products data given id
   export let data;
@@ -42,20 +42,22 @@
   />
 </svelte:head>
 
+<Navbar />
 <main>
   <div class="header">
-    <Logo />
-    <div class="row">
+    <div class="info">
       <h1>{$company.name}</h1>
-      <a href={`/shop/${company_id}/images`}><h5>{$_("images")}</h5></a>
+      <p>{$company.description}</p>
     </div>
+
+    <a href={`/shop/${company_id}/images`}><h5>{$t("images")}</h5></a>
   </div>
 
   <div class="input-container">
     <input
       class="input-transparent"
       type="text"
-      placeholder={$_("menu_search_placeholder")}
+      placeholder={$t("menu_search_placeholder")}
       bind:value={$query}
     />
   </div>
@@ -76,44 +78,49 @@
     {/each}
   </div>
 
-  <Masonry
-    stretchFirst={false}
-    gridGap={"10"}
-    colWidth={"minmax(Min(50%, 225px), 1fr)"}
-    items={$query.length > 1
-      ? Object.values($filtered_ids)
-      : Object.values($grouped_by_tags).flatMap((x) => x)}
-  >
-    {#if $query.length > 1}
-      {#each Object.values($filtered_ids) as product_id}
-        <Card {company_id} product={$products_dic[product_id]} show_media={false} />
-      {/each}
-    {:else}
-      {#each all_tags as tag_name}
-        {#if $grouped_by_tags[tag_name]}
-          <h1 class="tag">{tag_name}</h1>
-          {#each $grouped_by_tags[tag_name] as product_id}
-            <Card {company_id} product={$products_dic[product_id]} show_media={false} />
-          {/each}
-        {/if}
-      {/each}
-    {/if}
-  </Masonry>
-
-  <!-- {#if Object.keys($products_dic).length === 0}
-    <div class="pagination">Loading...</div>
-  {/if} -->
+  <div class="menu-container">
+    <Masonry
+      stretchFirst={false}
+      gridGap={"10"}
+      colWidth={"minmax(Min(50%, 225px), 1fr)"}
+      items={$query.length > 1
+        ? Object.values($filtered_ids)
+        : Object.values($grouped_by_tags).flatMap((x) => x)}
+    >
+      {#if $query.length > 1}
+        {#each Object.values($filtered_ids) as product_id}
+          <Card
+            {company_id}
+            product={$products_dic[product_id]}
+            show_media={false}
+          />
+        {/each}
+      {:else}
+        {#each all_tags as tag_name}
+          {#if $grouped_by_tags[tag_name]}
+            <h1 class="tag">{tag_name}</h1>
+            {#each $grouped_by_tags[tag_name] as product_id}
+              <Card
+                {company_id}
+                product={$products_dic[product_id]}
+                show_media={false}
+              />
+            {/each}
+          {/if}
+        {/each}
+      {/if}
+    </Masonry>
+  </div>
 </main>
 
 <style>
-  :global(body) {
-    padding: 0px;
-  }
-
   main {
-    margin-top: 10px;
-    padding-left: 0px;
-    padding-right: 5px;
+    margin-top: 1em;
+    padding: 0 1em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   h1 {
@@ -127,13 +134,16 @@
   }
 
   .header {
-    padding: 30px 50px;
-  }
+    width: 100%;
+    max-width: 768px;
+    padding: 1em 1em;
 
-  .row {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
   }
 
   .pagination {
@@ -190,6 +200,9 @@
     justify-content: flex-start;
     align-items: center;
     overflow-x: auto;
+    width: 100%;
+    max-width: 1024px;
+    padding: 0 1em;
   }
 
   .image-link {
@@ -221,5 +234,10 @@
   .tag-button.active {
     background-color: #f3f3f4;
     color: #000;
+  }
+
+  .menu-container {
+    width: 100vw;
+    max-width: 1024px;
   }
 </style>

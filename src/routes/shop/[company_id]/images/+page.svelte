@@ -17,7 +17,7 @@
   import Products from "./Products.svelte";
   import analytics from "$lib/analytics/index.js";
   import { IMAGES_PAGE } from "$lib/analytics/types.js";
-  import Navbar from "../../../../components/navbar/index.svelte";
+  import Navbar from "../../../../components/Navbar.svelte";
 
   export let data;
   let company_id = data.company_id;
@@ -91,140 +91,132 @@
 </svelte:head>
 
 <Navbar />
-<div class="container">
-  <main>
-    <div class="left-desktop-section">
-      <div class="header" bind:this={header_ref}>
-        {#if $company.name}
-          <div class="row">
-            <h1 data-testid="company-name">{$company.name}</h1>
+
+<main>
+  <div class="left-desktop-section">
+    <div class="header" bind:this={header_ref}>
+      {#if $company.name}
+        <div class="row">
+          <h1 data-testid="company-name">{$company.name}</h1>
+        </div>
+
+        <p data-testid="company-description">
+          {#if $company.description}
+            {$company.description}
+          {/if}
+        </p>
+      {/if}
+    </div>
+
+    <div class="mobile-products">
+      <Products {company_id} />
+    </div>
+
+    <section class="reviews" bind:this={reviews_ref}>
+      {#if $reviews.length > 0}
+        {#each reviews_displayed as review}
+          <div class="review">
+            <Review
+              name={review.user.name}
+              body={review.body}
+              created_at={review.created_at}
+            />
           </div>
-
-          <p data-testid="company-description">
-            {#if $company.description}
-              {$company.description}
-            {/if}
-          </p>
-        {/if}
-      </div>
-
-      <div class="mobile-products">
-        <Products {company_id} />
-      </div>
-
-      <section class="reviews" bind:this={reviews_ref}>
-        {#if $reviews.length > 0}
-          {#each reviews_displayed as review}
-            <div class="review">
-              <Review
-                name={review.user.name}
-                body={review.body}
-                created_at={review.created_at}
-              />
-            </div>
-          {/each}
-        {/if}
-        <div
-          class="review-buttons"
-          style={`--review-buttons-width: ${review_buttons_width};
+        {/each}
+      {/if}
+      <div
+        class="review-buttons"
+        style={`--review-buttons-width: ${review_buttons_width};
           margin-right: ${$reviews.length > 0 ? "30px" : "0px"};
           padding-right: ${$reviews.length > 0 ? "0px" : "30px"}
         `}
-        >
-          {#if $reviews.length > 0}
-            <Button
-              onClick={() => goto(`/shop/${company_id}/reviews`)}
-              title={$_("all_reviews")}
-              variant="borderless"
-              test_id="all-reviews"
-            />
-          {:else}
-            <div class="row center">
-              <p data-testid="no-reviews">{$_("no_reviews")}</p>
-            </div>
-          {/if}
-
+      >
+        {#if $reviews.length > 0}
           <Button
-            onClick={() => goto(`/shop/${company_id}/reviews/form`)}
-            title={`+ ${$_("add_review")}`}
-            variant="black"
-            handleButtonTrack={() => handleButtonTrack("add-review")}
-            test_id="add-review"
+            onClick={() => goto(`/shop/${company_id}/reviews`)}
+            title={$_("all_reviews")}
+            variant="borderless"
+            test_id="all-reviews"
           />
-        </div>
-      </section>
+        {:else}
+          <div class="row center">
+            <p data-testid="no-reviews">{$_("no_reviews")}</p>
+          </div>
+        {/if}
+
+        <Button
+          onClick={() => goto(`/shop/${company_id}/reviews/form`)}
+          title={`+ ${$_("add_review")}`}
+          variant="black"
+          handleButtonTrack={() => handleButtonTrack("add-review")}
+          test_id="add-review"
+        />
+      </div>
+    </section>
+  </div>
+
+  <div class="right-desktop-section">
+    <div class="desktop-products" bind:this={products_ref}>
+      <Products {company_id} />
     </div>
 
-    <div class="right-desktop-section">
-      <div class="desktop-products" bind:this={products_ref}>
-        <Products {company_id} />
+    <section class="menu" bind:this={menu_ref} data-testid="menu">
+      <div class="input-container">
+        <h2>Menu</h2>
+        <input
+          class="input-transparent"
+          type="text"
+          placeholder={$_("menu_search_placeholder")}
+          bind:value={$query}
+        />
       </div>
 
-      <section class="menu" bind:this={menu_ref} data-testid="menu">
-        <div class="input-container">
-          <h2>Menu</h2>
-          <input
-            class="input-transparent"
-            type="text"
-            placeholder={$_("menu_search_placeholder")}
-            bind:value={$query}
+      <div class="tag-container">
+        {#each all_tags as tag}
+          <Button
+            title={tag}
+            active={tag === $query}
+            variant="black"
+            onClick={() => {
+              if ($query === tag) {
+                $query = "";
+              } else {
+                $query = tag;
+              }
+            }}
           />
-        </div>
+        {/each}
+      </div>
 
-        <div class="tag-container">
-          {#each all_tags as tag}
-            <Button
-              title={tag}
-              active={tag === $query}
-              variant="black"
-              onClick={() => {
-                if ($query === tag) {
-                  $query = "";
-                } else {
-                  $query = tag;
-                }
-              }}
-            />
+      <Masonry
+        stretchFirst={false}
+        gridGap={"10"}
+        colWidth={"minmax(Min(33%, 220px), 1fr)"}
+        items={$query.length > 1
+          ? Object.values($filtered_ids)
+          : Object.values($grouped_by_tags).flatMap((x) => x)}
+      >
+        {#if $query.length > 1}
+          {#each Object.values($filtered_ids) as product_id}
+            <ProductCard {company_id} product={$products_dic[product_id]} />
           {/each}
-        </div>
-
-        <Masonry
-          stretchFirst={false}
-          gridGap={"10"}
-          colWidth={"minmax(Min(33%, 220px), 1fr)"}
-          items={$query.length > 1
-            ? Object.values($filtered_ids)
-            : Object.values($grouped_by_tags).flatMap((x) => x)}
-        >
-          {#if $query.length > 1}
-            {#each Object.values($filtered_ids) as product_id}
-              <ProductCard {company_id} product={$products_dic[product_id]} />
-            {/each}
-          {:else}
-            {#each all_tags as tag_name}
-              {#if $grouped_by_tags[tag_name]}
-                {#each $grouped_by_tags[tag_name] as product_id}
-                  <ProductCard
-                    {company_id}
-                    product={$products_dic[product_id]}
-                  />
-                {/each}
-              {/if}
-            {/each}
-          {/if}
-        </Masonry>
-      </section>
-    </div>
-  </main>
-</div>
+        {:else}
+          {#each all_tags as tag_name}
+            {#if $grouped_by_tags[tag_name]}
+              {#each $grouped_by_tags[tag_name] as product_id}
+                <ProductCard {company_id} product={$products_dic[product_id]} />
+              {/each}
+            {/if}
+          {/each}
+        {/if}
+      </Masonry>
+    </section>
+  </div>
+</main>
 
 <style>
-  :global(body) {
-    padding: 0;
-  }
-
   main {
-    padding-left: 30px;
+    padding: 0 1em;
   }
 
   .left-desktop-section {

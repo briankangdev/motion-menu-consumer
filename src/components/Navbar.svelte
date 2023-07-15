@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Logo from "../Logo.svelte";
+  import Logo from "./Logo.svelte";
   import { _ as t } from "svelte-i18n";
 
   export let handleButtonTrack: (button: string) => void = () => {}; // optional function
@@ -26,10 +26,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1280px;
+    max-width: 1024px;
     margin: auto;
-    margin-top: 15px;
-    padding: 0 15px;
+    margin-top: 1em;
+    padding: 0 1em;
   }
 
   .links {
@@ -39,6 +39,6 @@
   }
 
   a {
-    margin-right: 13px;
+    margin-right: 0.8em;
   }
 </style>
