@@ -10,7 +10,6 @@
     filtered_ids,
   } from "../../../../stores/products";
   import { reviews } from "../../../../stores/reviews";
-  import Logo from "../../../../components/Logo.svelte";
   import Button from "../../../../components/button/Button.svelte";
   import Review from "../../../../components/review/Review.svelte";
   import Masonry from "../../../../components/Masonry.svelte";
@@ -18,6 +17,7 @@
   import Products from "./Products.svelte";
   import analytics from "$lib/analytics/index.js";
   import { IMAGES_PAGE } from "$lib/analytics/types.js";
+  import Navbar from "../../../../components/navbar/index.svelte";
 
   export let data;
   let company_id = data.company_id;
@@ -70,7 +70,7 @@
     }
   });
 
-  //metrics tracking
+  // metrics tracking
   const handleButtonTrack = (button_name: string) => {
     analytics.track.buttonClick(IMAGES_PAGE, button_name, {
       company_id: $company.id,
@@ -90,10 +90,8 @@
   />
 </svelte:head>
 
+<Navbar />
 <div class="container">
-  <div class="logo">
-    <Logo />
-  </div>
   <main>
     <div class="left-desktop-section">
       <div class="header" bind:this={header_ref}>
@@ -225,11 +223,6 @@
     padding: 0;
   }
 
-  .logo {
-    margin-top: 10px;
-    padding-left: 20px;
-  }
-
   main {
     padding-left: 30px;
   }
@@ -239,16 +232,6 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
-  }
-
-  h1 {
-    text-transform: capitalize;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-    margin-top: 0px;
   }
 
   .header {
@@ -292,9 +275,7 @@
   }
 
   .input-container h2 {
-    font-size: 30px;
     margin: 0;
-    margin-right: 20px;
   }
 
   .input-transparent {

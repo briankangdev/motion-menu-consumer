@@ -17,7 +17,7 @@
 
 <section class="products">
   <div class="info">
-    <strong>{$t("routes.shop.images.featured")}</strong>
+    <h2>{$t("routes.shop.images.featured")}</h2>
     {#if products_with_media.length === 0}
       <div>
         <span data-test="no-images">{$t("routes.shop.iamges.no_images")}</span>
@@ -54,18 +54,10 @@
     gap: 20px;
   }
 
-  .products .info strong {
-    font-size: 18px;
-  }
-
   .products .info p {
     margin: 0;
     font-size: 14px;
     padding-right: 30px;
-  }
-
-  .blue {
-    color: var(--blue);
   }
 
   .row {

@@ -1,15 +1,14 @@
 <script lang="ts">
-  import { _ } from "svelte-i18n";
+  import { _ as t } from "svelte-i18n";
   import { time_ago } from "../../utils/time_ago";
   import Skeleton from "../skeleton/Skeleton.svelte";
+  import TruncatedText from "../TruncatedText.svelte";
 
   export let name: string;
   export let body: string;
   export let created_at: string;
-  export let short_body_char_limit: number = 150;
   export let loading: boolean = false;
 
-  let shortBody: string = body.slice(0, short_body_char_limit).trim();
   let { message, values } = time_ago(created_at);
 </script>
 
@@ -17,17 +16,7 @@
   <div class="review-main">
     <div class="review-name" data-testid="name">{name}</div>
     <div class="review-body" data-testid="body">
-      {#if shortBody.length < body.length}
-        {shortBody}...
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <span
-          class="review-more"
-          data-testid="more"
-          on:click={() => (shortBody = body)}>{$_("more")}</span
-        >
-      {:else}
-        {body}
-      {/if}
+      <TruncatedText original_text={body} class_name="review-more" />
     </div>
   </div>
   <div class="review-date-container">
@@ -39,7 +28,7 @@
       variant="dark"
     >
       <div class="review-date" data-testid="date">
-        {$_(message, { values })}
+        {$t(message, { values })}
       </div>
     </Skeleton>
   </div>

@@ -25,14 +25,17 @@
     variant === "shadow" ? "product-overlay" : "product-overlay hidden";
 
   // media
-  let image_src: string = `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_100,w_${card_size},h_${card_size},dpr_auto,c_fill/${images[0].public_id}`;
+  const CDN_BASE_URL: string = "https://res.cloudinary.com/dnaexfddx";
+  let image_src: string = `${CDN_BASE_URL}/image/upload/f_auto,q_100,c_fill,w_${card_size},h_${card_size},dpr_auto/${images[0].public_id}`;
 
   let video: HTMLVideoElement | undefined; // video tag
   let video_sources: string[] | undefined = videos.map(
     (video) => video.public_id
   );
   let video_index: number = 0; // index used to manage what video is playing
-  let video_src: string | undefined = video_sources[video_index];
+  let video_src:
+    | string
+    | undefined = `${CDN_BASE_URL}/video/upload/c_fill,w_${card_size},h_${card_size}/q_auto:best,f_auto:video/${video_sources[video_index]}`;
 
   function handleClick() {
     handleTrack(name, id);
@@ -59,7 +62,7 @@
 
   onMount(() => {
     const bigger_card_size = card_size * 2;
-    image_src = `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_100,w_${bigger_card_size},h_${bigger_card_size},dpr_auto,c_fill/${images[0].public_id}`;
+    image_src = `${CDN_BASE_URL}/image/upload/f_auto,q_100,w_${bigger_card_size},h_${bigger_card_size},dpr_auto,c_fill/${images[0].public_id}`;
   });
 </script>
 

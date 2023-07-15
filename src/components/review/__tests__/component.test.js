@@ -7,7 +7,6 @@ const props = {
   name: "Test",
   body: "Test body",
   created_at: "2022-01-01T00:00:00.000Z", // 1 year ago
-  short_body_char_limit: 150,
   //link: "/review" --> optional
   //clickable: true --> optional
 };
@@ -33,7 +32,7 @@ describe("review component", () => {
 
   describe("body of the review", () => {
     it("not render the entire body if it's too long, render the 'more' button", () => {
-      const text = "a".repeat(props.short_body_char_limit + 1);
+      const text = "a".repeat(151);
       render(Review, {
         ...props,
         body: text,
@@ -47,7 +46,7 @@ describe("review component", () => {
     });
 
     it("render the full body if it's short, don't render the 'more' button", () => {
-      const text = "a".repeat(props.short_body_char_limit - 1);
+      const text = "a".repeat(149);
       render(Review, { ...props, body: text });
 
       const body = screen.queryByTestId("body");
@@ -58,7 +57,7 @@ describe("review component", () => {
     });
 
     it("render the full body if the 'more' button is clicked", async () => {
-      const text = "a".repeat(props.short_body_char_limit + 10);
+      const text = "a".repeat(160);
 
       render(Review, { ...props, body: text });
       const body = screen.queryByTestId("body");
@@ -71,7 +70,7 @@ describe("review component", () => {
     });
 
     it("hide the 'more' button once is clicked", async () => {
-      const text = "a".repeat(props.short_body_char_limit + 10);
+      const text = "a".repeat(160);
 
       render(Review, { ...props, body: text });
       let more = screen.queryByTestId("more");
