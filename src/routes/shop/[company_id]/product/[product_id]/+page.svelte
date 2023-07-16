@@ -15,14 +15,15 @@
 
   onMount(() => {
     // Cached img does not fire load event, so we check if it's complete first.
-    if (img_ref.complete) {
+    if (img_ref?.complete) {
+      console.log("img_ref.complete");
       is_content_loading = false;
     }
 
     // video.readyState == 3 is when Data for the current playback position as well as for
     // at least a little bit of time into the future is available.
-    if (video_ref.readyState >= 3) {
-      console.log("video cached");
+    if (video_ref?.readyState >= 3) {
+      console.log("vidoe readyState >= 3");
       is_content_loading = false;
     }
   });
@@ -38,9 +39,8 @@
 <div class="container">
   {#if product}
     <div
-      class={`gallery ${
-        product.images_count + product.videos_count < 2 && "single-view"
-      }`}
+      class="gallery"
+      class:single-view={product.images_count + product.videos_count == 1}
     >
       <div class="placeholder">
         <Skeleton
