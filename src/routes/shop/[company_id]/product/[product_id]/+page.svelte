@@ -16,14 +16,12 @@
   onMount(() => {
     // Cached img does not fire load event, so we check if it's complete first.
     if (img_ref?.complete) {
-      console.log("img_ref.complete");
       is_content_loading = false;
     }
 
     // video.readyState == 3 is when Data for the current playback position as well as for
     // at least a little bit of time into the future is available.
     if (video_ref?.readyState >= 3) {
-      console.log("vidoe readyState >= 3");
       is_content_loading = false;
     }
   });
@@ -42,7 +40,7 @@
       class="gallery"
       class:single-view={product.images_count + product.videos_count == 1}
     >
-      <div class="placeholder">
+      <div class="placeholder" class:loading={is_content_loading}>
         <Skeleton
           loading={is_content_loading}
           rows={{ default: 1 }}
@@ -55,6 +53,7 @@
       {#each product.videos as video}
         <video
           class="video"
+          class:loading={is_content_loading}
           playsinline
           autoplay
           muted
@@ -72,6 +71,7 @@
         <img
           bind:this={img_ref}
           class="img"
+          class:loading={is_content_loading}
           src={`${CDN_BASE_URL}/image/upload/c_fill,f_auto,q_100,w_${SIZE},h_${SIZE},dpr_2.0,g_auto/${image.public_id}`}
           alt={product.name}
           on:load={onContentLoad}
@@ -113,6 +113,10 @@
     border-radius: 3px;
   }
 
+  .img.loading {
+    display: none;
+  }
+
   .video {
     width: 250px;
     height: 250px;
@@ -120,10 +124,14 @@
     border-radius: 3px;
   }
 
+  .video.loading {
+    display: none;
+  }
+
   .description {
     width: 100%;
     max-width: 400px;
-    padding: 0px 1em;
+    padding: 0;
     margin: 1em 0;
     display: flex;
     flex-direction: column;
@@ -170,7 +178,12 @@
   }
 
   .placeholder {
-    width: 100%;
+    display: none;
+  }
+
+  .placeholder.loading {
+    display: block;
+    width: 250px;
   }
 
   @media (min-width: 768px) {
