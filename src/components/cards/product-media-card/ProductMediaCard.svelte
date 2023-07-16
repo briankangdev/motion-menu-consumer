@@ -85,6 +85,7 @@
         data-testid="product-video"
         bind:this={video}
         src={video_src}
+        playsinline
         autoplay
         muted
         on:ended={() => handleVideoEnded(video_index)}
