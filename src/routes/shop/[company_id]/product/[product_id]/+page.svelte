@@ -17,8 +17,6 @@
     // Cached img does not fire load event, so we check if it's complete first.
     if (img_ref.complete) {
       is_content_loading = false;
-    } else {
-      img_ref.addEventListener("load", onContentLoad);
     }
 
     // video.readyState == 3 is when Data for the current playback position as well as for
@@ -26,8 +24,6 @@
     if (video_ref.readyState >= 3) {
       console.log("video cached");
       is_content_loading = false;
-    } else {
-      video_ref.addEventListener("loadeddata", onContentLoad);
     }
   });
 
@@ -78,6 +74,7 @@
           class="img"
           src={`${CDN_BASE_URL}/image/upload/c_fill,f_auto,q_100,w_${SIZE},h_${SIZE},dpr_2.0,g_auto/${image.public_id}`}
           alt={product.name}
+          on:load={onContentLoad}
         />
       {/each}
     </div>
@@ -111,12 +108,14 @@
 
   .img {
     width: 250px;
+    height: 250px;
     object-fit: cover;
     border-radius: 3px;
   }
 
   .video {
     width: 250px;
+    height: 250px;
     object-fit: cover;
     border-radius: 3px;
   }
