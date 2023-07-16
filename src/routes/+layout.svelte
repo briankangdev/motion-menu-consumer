@@ -16,7 +16,5 @@
 
 <div class="app">
   <Toaster />
-  <main>
-    <slot />
-  </main>
+  <slot />
 </div>

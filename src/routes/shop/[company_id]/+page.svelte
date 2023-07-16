@@ -3,14 +3,13 @@
   import {
     dic as products_dic,
     query,
-    ids,
     grouped_by_tags,
     filtered_ids,
   } from "../../../stores/products.js";
   import { company } from "../../../stores/company.js";
   import Masonry from "../../../components/Masonry.svelte";
-  import Card from "../../../components/Card.svelte";
   import Navbar from "../../../components/Navbar.svelte";
+  import ProductCard from "../../../components/cards/product-card/ProductCard.svelte";
 
   // Fetch products data given id
   export let data;
@@ -89,10 +88,10 @@
     >
       {#if $query.length > 1}
         {#each Object.values($filtered_ids) as product_id}
-          <Card
+          <ProductCard
             {company_id}
             product={$products_dic[product_id]}
-            show_media={false}
+            enable_link={true}
           />
         {/each}
       {:else}
@@ -100,10 +99,10 @@
           {#if $grouped_by_tags[tag_name]}
             <h1 class="tag">{tag_name}</h1>
             {#each $grouped_by_tags[tag_name] as product_id}
-              <Card
+              <ProductCard
                 {company_id}
                 product={$products_dic[product_id]}
-                show_media={false}
+                enable_link={true}
               />
             {/each}
           {/if}

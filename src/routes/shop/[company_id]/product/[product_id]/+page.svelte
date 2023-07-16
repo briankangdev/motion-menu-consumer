@@ -1,47 +1,82 @@
 <script lang="ts">
-  import Logo from "../../../../../components/Logo.svelte";
+  import Navbar from "../../../../../components/Navbar.svelte";
   import { dic } from "../../../../../stores/products";
+  import Skeleton from "../../../../../components/skeleton/Skeleton.svelte";
+  import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";
+  import { onMount } from "svelte";
+
+  let is_content_loading = true;
+  let img_ref;
+  let video_ref;
+
+  const onContentLoad = () => {
+    is_content_loading = false;
+  };
+
+  onMount(() => {
+    // Cached img does not fire load event, so we check if it's complete first.
+    if (img_ref.complete) {
+      is_content_loading = false;
+    } else {
+      img_ref.addEventListener("load", onContentLoad);
+    }
+
+    // video.readyState == 3 is when Data for the current playback position as well as for
+    // at least a little bit of time into the future is available.
+    if (video_ref.readyState >= 3) {
+      console.log("video cached");
+      is_content_loading = false;
+    } else {
+      video_ref.addEventListener("loadeddata", onContentLoad);
+    }
+  });
+
+  const CDN_BASE_URL = "https://res.cloudinary.com/dnaexfddx";
+  const SIZE = 300;
 
   export let data;
   let product = $dic[data.product_id];
-
-  function goBack() {
-    window.history.back();
-  }
 </script>
 
-<div class="logo">
-  <Logo />
-</div>
-
+<Navbar />
 <div class="container">
   {#if product}
     <div
-      class={`image-container ${
-        product.images_count + product.videos_count < 2 && "one-image"
+      class={`gallery ${
+        product.images_count + product.videos_count < 2 && "single-view"
       }`}
     >
+      <div class="placeholder">
+        <Skeleton
+          loading={is_content_loading}
+          rows={{ default: 1 }}
+          rows_width_percent={{ default: [100] }}
+          row_height={{ default: 250, desktop: 300 }}
+          variant="light"
+        />
+      </div>
+
       {#each product.videos as video}
-        <video class="video" playsinline autoplay muted loop>
+        <video
+          class="video"
+          playsinline
+          autoplay
+          muted
+          loop
+          bind:this={video_ref}
+          on:loadeddata={onContentLoad}
+        >
           <source
-            src={`https://res.cloudinary.com/dnaexfddx/video/upload/w_250,h_250,dpr_2.0,c_fill/v1617422473/${video.public_id}.webm`}
-            type="video/webm"
-          />
-          <source
-            src={`https://res.cloudinary.com/dnaexfddx/video/upload/w_250,h_250,dpr_2.0,c_fill/v1617422473/${video.public_id}d.mp4`}
-            type="video/mp4"
-          />
-          <source
-            src={`https://res.cloudinary.com/dnaexfddx/video/upload/w_250,h_250,dpr_2.0,c_fill/v1617422473/${video.public_id}.ogg`}
-            type="video/ogg"
+            src={`${CDN_BASE_URL}/video/upload/c_fill,w_${SIZE},h_${SIZE}/f_auto:video/${video.public_id}`}
           />
           Your browser does not support the video tag.
         </video>
       {/each}
       {#each product.images as image}
         <img
+          bind:this={img_ref}
           class="img"
-          src={`https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_auto,w_250,h_250,dpr_2.0,c_fill,g_auto/${image.public_id}.jpg`}
+          src={`${CDN_BASE_URL}/image/upload/c_fill,f_auto,q_100,w_${SIZE},h_${SIZE},dpr_2.0,g_auto/${image.public_id}`}
           alt={product.name}
         />
       {/each}
@@ -56,118 +91,110 @@
       <p class="price">$ {product.price}</p>
     </div>
   {/if}
-
-  <div class="footer">
-    <button class="button" on:click={goBack}>Go back</button>
-  </div>
 </div>
+<footer />
+
+<HistoryBack />
 
 <style>
   .container {
-    margin-top: 23px;
+    margin: 2em auto 0 auto;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-  }
-  .logo {
-    margin-left: 15px;
-    margin-top: 15px;
+
+    max-width: 1024px;
   }
 
   .img {
-    width: 90%;
+    width: 250px;
     object-fit: cover;
     border-radius: 3px;
   }
 
   .video {
-    width: 90%;
+    width: 250px;
     object-fit: cover;
     border-radius: 3px;
   }
 
   .description {
     width: 100%;
-    max-width: 300px;
-    padding: 0px 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    max-width: 400px;
+    padding: 0px 1em;
+    margin: 1em 0;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
   }
 
-  .image-container {
+  .gallery {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     overflow-x: auto;
-    margin-left: 15px;
+    width: 100%;
   }
 
-  .one-image {
+  .single-view {
     margin: 0;
     justify-content: center;
   }
 
-  .image-container > img,
-  .image-container > video {
+  .gallery > img,
+  .gallery > video {
     margin-right: 10px;
   }
 
-  .one-image > img,
-  .one-image > video {
+  .single-view > img,
+  .single-view > video {
     margin-right: 0px;
   }
 
-  .tag {
-    border-radius: 3px;
-    background-color: #ef476f;
-    color: #fff;
-    padding: 5px 10px;
-    text-transform: capitalize;
-    margin-right: 3px;
-  }
-
   h1 {
-    color: black;
     text-transform: capitalize;
+    margin: 0;
   }
 
   .price {
     font-weight: bold;
     margin: 0;
+    align-self: flex-end;
   }
 
-  .button {
-    background-color: rgba(51, 51, 51, 0.05);
-    border-radius: 8px;
-    border-width: 0;
-    color: #333333;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    margin: 1rem 0 1rem 0;
-    padding: 10px 12px;
-    text-align: center;
-    transition: all 200ms;
-    white-space: nowrap;
-    user-select: none;
-    touch-action: manipulation;
-    text-transform: capitalize;
+  footer {
+    height: 5em;
   }
 
-  .footer {
-    position: sticky;
-    left: 0;
-    bottom: 0;
+  .placeholder {
     width: 100%;
-    display: flex;
-    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: flex-start;
+    }
+
+    .gallery {
+      flex-direction: column;
+      overflow-y: auto;
+      gap: 1em;
+      width: fit-content;
+    }
+
+    .video,
+    .img {
+      width: 300px;
+    }
+
+    .placeholder {
+      width: 300px;
+    }
   }
 </style>

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { _ as t } from "svelte-i18n";
   import Like from "./like/Like.svelte";
   import {
     createProductLike,
@@ -8,9 +7,7 @@
   import type { IProduct } from "src/stores/products";
   import { user } from "../stores/user";
   import type { CompanySlug } from "src/stores/company";
-
-  // If description is longer than this, it will show more button.
-  const MAX_DESCRIPTION_LENGTH = 150;
+  import TruncatedText from "./TruncatedText.svelte";
 
   export let company_id: CompanySlug;
   export let product: IProduct;
@@ -21,11 +18,6 @@
     images[0]?.public_id;
   let isLiked: boolean = $user.likes.includes(id);
   let captionVisible = false;
-
-  let sliced_description: string = description
-    .slice(0, MAX_DESCRIPTION_LENGTH)
-    .trim();
-  let show_full_description: boolean = false;
 
   $: {
     // Reassign variables when product changes
@@ -70,20 +62,7 @@
   <div class="card">
     <div class="no-image">
       <h3 class="title">{name}</h3>
-
-      {#if description}
-        {#if show_full_description == false && description.length > MAX_DESCRIPTION_LENGTH}
-          <p class="description">{sliced_description}...</p>
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <span
-            class="review-more"
-            data-testid="more"
-            on:click={() => (show_full_description = true)}>{$t("more")}</span
-          >
-        {:else}
-          <p class="description">{description}</p>
-        {/if}
-      {/if}
+      <TruncatedText original_text={description} />
 
       <div class="card-footer">
         <Like

@@ -75,11 +75,4 @@
     color: rgb(142, 142, 142);
     font-size: 0.7rem;
   }
-
-  .review-more {
-    color: rgb(142, 142, 142);
-    cursor: pointer;
-    position: relative;
-    z-index: 2;
-  }
 </style>
