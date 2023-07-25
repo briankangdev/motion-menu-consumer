@@ -20,7 +20,7 @@
     <h2>{$t("routes.shop.images.featured")}</h2>
     {#if products_with_media.length === 0}
       <div>
-        <span data-test="no-images">{$t("routes.shop.iamges.no_images")}</span>
+        <span data-test="no-images">{$t("routes.shop.images.no_images")}</span>
       </div>
     {:else}
       <p>
