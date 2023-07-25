@@ -88,10 +88,13 @@
           "no_special": "Shop name can't contain special characters"
         },
         "categories": {
+          "empty": "Empty",
           "pizza": "Pizza",
           "coffee": "Coffee",
           "stakes": "Stake"
         },
+        "categories_description_title": "Copy products from the template shop!",
+        "categories_description": "Choose a template shop, +10 products will be copied into your shop. Skip the process by selecting \"empty\" value.",
         "button": "Continue",
         "success_message": "We are creating your menu. Please wait a few seconds.",
         "error_message": "Error while creating your menu. Please try again later."
