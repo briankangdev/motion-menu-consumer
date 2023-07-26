@@ -3,7 +3,10 @@
   import Button from "../button/Button.svelte";
   import type { CompanyCategory } from "src/stores/company";
 
-  export let createShop: (shop_name: string, category: CompanyCategory) => void;
+  export let handleSubmitCallback: (
+    shop_name: string,
+    category: CompanyCategory
+  ) => void;
 
   const categories: CompanyCategory[] = ["empty", "pizza", "coffee", "stakes"];
   let category_selected: CompanyCategory = "empty";
@@ -37,7 +40,7 @@
     if (error) {
       return;
     } else {
-      createShop(shop_name, category_selected);
+      handleSubmitCallback(shop_name, category_selected);
     }
   }
 </script>
@@ -87,9 +90,9 @@
     </div>
     <div class="categories_description">
       <p style="font-weight: 600;">
-        {$_("routes.shop.profiling.categories_description_title")}
+        {$_("components.profiling_form.categories_description_title")}
       </p>
-      <p>{$_("routes.shop.profiling.categories_description")}</p>
+      <p>{$_("components.profiling_form.categories_description")}</p>
     </div>
   </div>
   <div class="profiling_submit">

@@ -24,7 +24,10 @@
     stakes: 214,
   };
 
-  const createShop = async (shop_name: string, category: CompanyCategory) => {
+  const handleSubmitCallback = async (
+    shop_name: string,
+    category: CompanyCategory
+  ) => {
     try {
       await updateCompany({ name: shop_name });
 
@@ -78,7 +81,7 @@
         {$_("routes.shop.profiling.description")}
       </p>
     </div>
-    <ProfilingForm {createShop} />
+    <ProfilingForm {handleSubmitCallback} />
   </section>
 </main>
 
