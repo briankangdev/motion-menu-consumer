@@ -1,5 +1,5 @@
 <script lang="ts">
-  import analytics from "$lib/analytics";
+  import analytics from "../lib/analytics";
   import Logo from "./Logo.svelte";
   import { _ as t } from "svelte-i18n";
 </script>
