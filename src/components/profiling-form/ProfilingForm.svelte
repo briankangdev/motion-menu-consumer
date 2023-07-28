@@ -1,6 +1,8 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Button from "../button/Button.svelte";
+  import { PROFILING_PAGE } from "../../lib/analytics/types";
+  import analytics from "../../lib/analytics";
 
   type Category = "pizza" | "coffee" | "stakes";
 
@@ -35,9 +37,14 @@
 
   function handleSubmit() {
     checkInput();
+
     if (error) {
       return;
     } else {
+      analytics.track(`${PROFILING_PAGE}.continue-button.click`, {
+        // company_id: $company.id,
+      });
+
       createShop(shop_name);
     }
   }
@@ -84,6 +91,7 @@
       </div>
     {/each}
   </div>
+
   <div class="profiling_submit">
     <Button
       title={$_("routes.shop.profiling.button")}

@@ -1,8 +1,7 @@
 <script lang="ts">
+  import analytics from "$lib/analytics";
   import Logo from "./Logo.svelte";
   import { _ as t } from "svelte-i18n";
-
-  export let handleButtonTrack: (button: string) => void = () => {}; // optional function
 </script>
 
 <header>
@@ -16,7 +15,9 @@
     > -->
     <a
       href="https://admin.motion.menu/sign_in"
-      on:click={() => handleButtonTrack("sign-in")}>{$t("sign_in")}</a
+      on:click={() => {
+        analytics.track("navbar.sign-in-button.click");
+      }}>{$t("sign_in")}</a
     >
   </div>
 </header>
