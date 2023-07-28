@@ -53,19 +53,22 @@
     title_value = (await FeatureFlag.getValue(flag)) as string; // get the value of the feature flag we are using for AB testing
 
     // TRACK how long user stays in the page
-    on_mount_time = new Date(); // get the time when the page was loaded
-    window.onbeforeunload = function () {
-      let exit_time = new Date(); // get the time when the page was closed
-      let user_stayed = exit_time.getTime() - on_mount_time.getTime() / 1000; // calculate the time the user was on the page in seconds
-      analytics.track.pageStay(HOME_PAGE, user_stayed, {
-        page: HOME_PAGE,
-        title_value,
-      }); // send the time the user was on the page to mixpanel
-    };
+    // on_mount_time = new Date(); // get the time when the page was loaded
+
+    // window.onbeforeunload = function () {
+    // let exit_time = new Date(); // get the time when the page was closed
+    // let user_stayed = exit_time.getTime() - on_mount_time.getTime() / 1000; // calculate the time the user was on the page in seconds
+
+    // send the time the user was on the page to mixpanel
+    // analytics.track.pageStay(HOME_PAGE, user_stayed, {
+    //   page: HOME_PAGE,
+    //   title_value,
+    // });
+    // };
   });
 
   const handleButtonTrack = (button_name: string) => {
-    analytics.track.buttonClick(HOME_PAGE, button_name, {
+    analytics.track(`${HOME_PAGE}.${button_name}.click`, {
       title_value,
     });
   };
@@ -77,7 +80,7 @@
   <link rel="canonical" href="https://motion.menu" />
 </svelte:head>
 
-<Navbar {handleButtonTrack} />
+<Navbar />
 <main>
   <div class="row">
     <div>

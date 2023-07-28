@@ -13,7 +13,7 @@
   let loading: boolean = true;
 
   onMount(() => {
-    analytics.track.visitPage(REVIEW_FORM_PAGE, {
+    analytics.track(`${REVIEW_FORM_PAGE}.visit`, {
       company_id,
     });
   });
@@ -26,7 +26,7 @@
   const trackSubmitForm = (aditional_props: {
     authenticated: boolean;
   }): void => {
-    analytics.track.submitForm(REVIEW_FORM_PAGE, "review-form", {
+    analytics.track(`${REVIEW_FORM_PAGE}.review-form.submit`, {
       company_id,
       ...aditional_props,
     });
