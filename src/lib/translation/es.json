@@ -88,15 +88,22 @@
           "no_special": "El nombre de la tienda no puede contener caracteres especiales"
         },
         "categories": {
+          "empty": "Vacío",
           "pizza": "Pizza",
           "coffee": "Café",
           "stakes": "Parilla"
         },
         "button": "Continuar",
-
         "success_message": "Estamos creando tu carta. Por favor espera unos segundos.",
         "error_message": "Error al crear tu carta. Por favor, inténtalo de nuevo más tarde."
       }
+    }
+  },
+
+  "components": {
+    "profiling_form": {
+      "categories_description_title": "¡Copia productos de una plantilla!",
+      "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\"."
     }
   }
 }

@@ -1,17 +1,58 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { goto } from "$app/navigation";
-  import { company, type ICompany } from "../../../../stores/company";
+  import {
+    company,
+    type CompanyCategory,
+    type ICompany,
+  } from "../../../../stores/company";
+  // import { PROFILING_PAGE } from "../../../../lib/analytics/types";
+  // import analytics from "../../../../lib/analytics";
+
   import Logo from "../../../../components/Logo.svelte";
   import toast from "svelte-french-toast";
   import ProfilingForm from "../../../../components/profiling-form/ProfilingForm.svelte";
+  import { updateCompany } from "../../../../api/company";
+  import {
+    checkCopyProductsStatus,
+    copyProductsFromCompany,
+  } from "../../../../api/products";
 
-  const createShop = async (shop_name: string) => {
-    if (true) {
-      toast.success($_("routes.shop.profiling.success_message"));
+  const category_template_ids: Record<CompanyCategory, ICompany["id"]> = {
+    empty: null,
+    pizza: 201,
+    coffee: 212,
+    stakes: 214,
+  };
+
+  const handleSubmitCallback = async (
+    shop_name: string,
+    category: CompanyCategory
+  ) => {
+    try {
+      await updateCompany({ name: shop_name });
+
+      // if category is not empty, copy products from template
+      if (category !== "empty") {
+        const { job_id } = await copyProductsFromCompany(
+          category_template_ids[category]
+        );
+        const { status } = await checkCopyProductsStatus(job_id);
+
+        if (!["working", "completed"].includes(status)) {
+          throw new Error($_("routes.shop.profiling.error_message"));
+        }
+      }
+
+      toast.success($_("routes.shop.profiling.success_message"), {
+        id: "profiling_success_notification",
+      });
       goto(`/shop/${$company.id}/images/loading`);
-    } else {
-      toast.error($_("routes.shop.profiling.error_message"));
+    } catch (error) {
+      toast.error($_("routes.shop.profiling.error_message"), {
+        id: "profiling_error_notification",
+      });
+      console.error(error);
     }
   };
 </script>
@@ -31,11 +72,11 @@
       <h1 data-testid="profiling-title">
         {$_("routes.shop.profiling.title")}
       </h1>
-      <p class="description">
+      <p class="header_description">
         {$_("routes.shop.profiling.description")}
       </p>
     </div>
-    <ProfilingForm {createShop} />
+    <ProfilingForm {handleSubmitCallback} />
   </section>
 </main>
 

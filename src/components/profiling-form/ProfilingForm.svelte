@@ -1,15 +1,15 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Button from "../button/Button.svelte";
-  import { PROFILING_PAGE } from "../../lib/analytics/types";
-  import analytics from "../../lib/analytics";
+  import type { CompanyCategory } from "src/stores/company";
 
-  type Category = "pizza" | "coffee" | "stakes";
+  export let handleSubmitCallback: (
+    shop_name: string,
+    category: CompanyCategory
+  ) => void;
 
-  export let createShop: (shop_name: string) => void;
-
-  const categories: Category[] = ["pizza", "coffee", "stakes"];
-  let category_selected: Category = "pizza";
+  const categories: CompanyCategory[] = ["empty", "pizza", "coffee", "stakes"];
+  let category_selected: CompanyCategory = "empty";
   let shop_name: string = "";
 
   let error: boolean = false;
@@ -41,11 +41,7 @@
     if (error) {
       return;
     } else {
-      analytics.track(`${PROFILING_PAGE}.continue-button.click`, {
-        // company_id: $company.id,
-      });
-
-      createShop(shop_name);
+      handleSubmitCallback(shop_name, category_selected)
     }
   }
 </script>
@@ -69,27 +65,36 @@
     {/if}
   </div>
   <div class="profiling_categories">
-    {#each categories as category}
-      <div
-        class={`profiling_category ${
-          category_selected === category ? "checked" : ""
-        }`}
-      >
-        <input
-          type="radio"
-          name="category"
-          id={category}
-          value={category}
-          on:click={() => {
-            category_selected = category;
-          }}
-          checked={category_selected === category}
-        />
-        <label for={category}>
-          {$_(`routes.shop.profiling.categories.${category}`)}
-        </label>
-      </div>
-    {/each}
+    <div class="categories">
+      {#each categories as category}
+        <div
+          class={`profiling_category ${
+            category_selected === category ? "checked" : ""
+          }`}
+        >
+          <input
+            type="radio"
+            name="category"
+            data-testid="category-input"
+            id={category}
+            value={category}
+            on:click={() => {
+              category_selected = category;
+            }}
+            checked={category_selected === category}
+          />
+          <label for={category}>
+            {$_(`routes.shop.profiling.categories.${category}`)}
+          </label>
+        </div>
+      {/each}
+    </div>
+    <div class="categories_description">
+      <p style="font-weight: 600;">
+        {$_("components.profiling_form.categories_description_title")}
+      </p>
+      <p>{$_("components.profiling_form.categories_description")}</p>
+    </div>
   </div>
 
   <div class="profiling_submit">
@@ -145,10 +150,21 @@
 
   .profiling_categories {
     display: flex;
+    gap: 20px;
+  }
+
+  .categories {
+    display: flex;
     flex-direction: column;
     text-transform: capitalize;
     gap: 7px;
     padding-left: 10px;
+  }
+
+  .categories_description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .profiling_category {
