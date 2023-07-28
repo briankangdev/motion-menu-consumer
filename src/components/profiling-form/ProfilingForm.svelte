@@ -37,10 +37,11 @@
 
   function handleSubmit() {
     checkInput();
+
     if (error) {
       return;
     } else {
-      handleSubmitCallback(shop_name, category_selected);
+      handleSubmitCallback(shop_name, category_selected)
     }
   }
 </script>
@@ -95,6 +96,7 @@
       <p>{$_("components.profiling_form.categories_description")}</p>
     </div>
   </div>
+
   <div class="profiling_submit">
     <Button
       title={$_("routes.shop.profiling.button")}

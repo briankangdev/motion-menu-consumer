@@ -8,6 +8,7 @@
   } from "../../../../stores/company";
   // import { PROFILING_PAGE } from "../../../../lib/analytics/types";
   // import analytics from "../../../../lib/analytics";
+
   import Logo from "../../../../components/Logo.svelte";
   import toast from "svelte-french-toast";
   import ProfilingForm from "../../../../components/profiling-form/ProfilingForm.svelte";
@@ -53,12 +54,6 @@
       });
       console.error(error);
     }
-  };
-
-  const handleButtonTrack = (button_name: string) => {
-    // analytics.track.buttonClick(PROFILING_PAGE, button_name, {
-    //   company_id: $company.id,
-    // });
   };
 </script>
 

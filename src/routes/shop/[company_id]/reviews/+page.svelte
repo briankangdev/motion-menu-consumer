@@ -30,7 +30,7 @@
   $: actual_page = $reviews_meta.page;
 
   onMount(() => {
-    analytics.track.visitPage(REVIEW_INDEX_PAGE, {
+    analytics.track(`${REVIEW_INDEX_PAGE}.visit`, {
       company_id: $company.id,
     });
     window.addEventListener("scroll", handleScroll);
@@ -61,14 +61,14 @@
   const trackSubmitForm = (aditional_props: {
     authenticated: boolean;
   }): void => {
-    analytics.track.submitForm(REVIEW_INDEX_PAGE, "review-form", {
+    analytics.track(`${REVIEW_INDEX_PAGE}.review-form.submit`, {
       company_id: $company.id,
       ...aditional_props,
     });
   };
 
   const handleButtonTrack = (button_name: string) => {
-    analytics.track.buttonClick(REVIEW_INDEX_PAGE, button_name, {
+    analytics.track(`${REVIEW_INDEX_PAGE}.${button_name}`, {
       company_id: $company.id,
     });
   };
