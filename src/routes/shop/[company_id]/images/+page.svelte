@@ -18,6 +18,8 @@
   import analytics from "$lib/analytics/index.js";
   import { IMAGES_PAGE } from "$lib/analytics/types.js";
   import Navbar from "../../../../components/Navbar.svelte";
+  import toast from "svelte-french-toast";
+  import SuccessNotification from "../../../../components/success-notification/SuccessNotification.svelte";
 
   export let data;
   let company_id = data.company_id;
@@ -67,6 +69,13 @@
       let max_height = header_height + reviews_height;
 
       menu_ref.style.height = `${max_height - products_height}px`;
+    }
+
+    //show success notification if the user is coming from the loading page
+    if (history.state.from === "loading") {
+      toast(SuccessNotification as any, {
+        duration: 5000,
+      });
     }
   });
 

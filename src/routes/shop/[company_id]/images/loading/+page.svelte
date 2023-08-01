@@ -11,6 +11,7 @@
       () =>
         goto(`/shop/${$company.id}/images/`, {
           replaceState: true,
+          state: { from: "loading" },
         }),
       3000
     )
