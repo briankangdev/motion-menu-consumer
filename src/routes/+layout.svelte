@@ -15,6 +15,6 @@
 </script>
 
 <div class="app">
-  <Toaster />
+  <Toaster position="bottom-left" />
   <slot />
 </div>
