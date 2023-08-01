@@ -104,6 +104,13 @@
     "profiling_form": {
       "categories_description_title": "Copy products from the template shop!",
       "categories_description": "Choose a template shop, +10 products will be copied into your shop. Skip the process by selecting \"empty\" value."
+    },
+    "success_notification": {
+      "title": "Your QR menu was generated.",
+      "text_A": "Start edit your items ",
+      "link_A": "here",
+      "link_B": "Here",
+      "text_B": " is your QR code."
     }
   }
 }
