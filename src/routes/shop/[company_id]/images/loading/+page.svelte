@@ -9,9 +9,8 @@
   onMount(() =>
     setTimeout(
       () =>
-        goto(`/shop/${$company.id}/images/`, {
+        goto(`/shop/${$company.id}/images?new=true`, {
           replaceState: true,
-          state: { from: "loading" },
         }),
       3000
     )

@@ -59,8 +59,8 @@
   let reviews_ref = null;
   let menu_ref = null;
 
-  //when the page is mounted, adjust the height of the menu
   onMount(() => {
+    //when the page is mounted, adjust the height of the menu
     if (header_ref && products_ref && reviews_ref) {
       let header_height = header_ref.getBoundingClientRect().height;
       let products_height = products_ref.getBoundingClientRect().height;
@@ -71,8 +71,11 @@
       menu_ref.style.height = `${max_height - products_height}px`;
     }
 
-    //show success notification if the user is coming from the loading page
-    if (history.state.from === "loading") {
+    //get params from url and if 'new' is true, show success notification
+    const url = new URL(window.location.href);
+    const shop_is_new = url.searchParams.get("new");
+
+    if (shop_is_new) {
       toast(SuccessNotification as any, {
         duration: 5000,
       });
