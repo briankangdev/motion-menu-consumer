@@ -123,9 +123,9 @@
 
   <div class="reviews-section">
     <div class="reviews-header">
-      <h1>
+      <h2>
         {$_("reviews")}
-      </h1>
+      </h2>
       <p>{$_("review-index_description")}</p>
     </div>
     {#if $reviews.length > 0}
@@ -187,12 +187,6 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
-  }
-
-  h1 {
-    font-weight: 600;
-    line-height: 1.2;
-    word-break: break-word;
   }
 
   p {

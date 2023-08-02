@@ -34,6 +34,7 @@
     border-radius: 12px;
     cursor: pointer;
     border: none;
+    text-transform: var(--text-transform);
   }
 
   .button:hover {

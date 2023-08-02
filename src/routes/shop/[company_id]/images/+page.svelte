@@ -1,7 +1,6 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { goto } from "$app/navigation";
-  import { onMount } from "svelte";
   import { company } from "../../../../stores/company.js";
   import {
     dic as products_dic,
@@ -33,7 +32,7 @@
     REVIEWS_DISPLAYED_COUNT
   );
 
-  //menu section
+  // menu section
   $: ordered_tags = $company.tag_priority
     ? $company.tag_priority
         .split(",")
@@ -47,32 +46,9 @@
 
   $: all_tags = ordered_tags.concat(unordered_tags);
 
-  //styles
-  let review_buttons_width =
-    $reviews.length > 0 ? "160px" : "calc(100% - 30px)";
-
-  //refs to adjust the height of the masonry
-  let header_ref = null;
-  let products_ref = null;
-  let reviews_ref = null;
-  let menu_ref = null;
-
-  //when the page is mounted, adjust the height of the menu
-  onMount(() => {
-    if (header_ref && products_ref && reviews_ref) {
-      let header_height = header_ref.getBoundingClientRect().height;
-      let products_height = products_ref.getBoundingClientRect().height;
-      let reviews_height = reviews_ref.getBoundingClientRect().height;
-
-      let max_height = header_height + reviews_height;
-
-      menu_ref.style.height = `${max_height - products_height}px`;
-    }
-  });
-
   // metrics tracking
   const handleButtonTrack = (button_name: string) => {
-    analytics.track.buttonClick(IMAGES_PAGE, button_name, {
+    analytics.track(`${IMAGES_PAGE}.${button_name}.click`, {
       company_id: $company.id,
     });
   };
@@ -94,7 +70,7 @@
 
 <main>
   <div class="left-desktop-section">
-    <div class="header" bind:this={header_ref}>
+    <div class="header">
       {#if $company.name}
         <div class="row">
           <h1 data-testid="company-name">{$company.name}</h1>
@@ -112,7 +88,7 @@
       <Products {company_id} />
     </div>
 
-    <section class="reviews" bind:this={reviews_ref}>
+    <section class="reviews">
       {#if $reviews.length > 0}
         {#each reviews_displayed as review}
           <div class="review">
@@ -124,13 +100,8 @@
           </div>
         {/each}
       {/if}
-      <div
-        class="review-buttons"
-        style={`--review-buttons-width: ${review_buttons_width};
-          margin-right: ${$reviews.length > 0 ? "30px" : "0px"};
-          padding-right: ${$reviews.length > 0 ? "0px" : "30px"}
-        `}
-      >
+
+      <div class="review-buttons">
         {#if $reviews.length > 0}
           <Button
             onClick={() => goto(`/shop/${company_id}/reviews`)}
@@ -156,11 +127,11 @@
   </div>
 
   <div class="right-desktop-section">
-    <div class="desktop-products" bind:this={products_ref}>
+    <div class="desktop-products">
       <Products {company_id} />
     </div>
 
-    <section class="menu" bind:this={menu_ref} data-testid="menu">
+    <section class="menu" data-testid="menu">
       <div class="input-container">
         <h2>Menu</h2>
         <input
@@ -184,6 +155,7 @@
                 $query = tag;
               }
             }}
+            --text-transform="capitalize"
           />
         {/each}
       </div>
@@ -236,8 +208,9 @@
   }
 
   .reviews {
-    margin: 0 0 20px 0;
-    height: 170px;
+    width: 100%;
+    /* margin: 0 0 20px 0; */
+    /* height: 170px; */
     display: flex;
     overflow-x: scroll;
     gap: 30px;
@@ -249,7 +222,7 @@
   }
 
   .review-buttons {
-    width: var(--review-buttons-width);
+    width: 60%;
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
@@ -331,6 +304,7 @@
     }
 
     .right-desktop-section {
+      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 25px;
