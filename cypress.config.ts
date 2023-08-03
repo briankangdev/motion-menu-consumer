@@ -12,5 +12,6 @@ export default defineConfig({
         "https://motion-menu-api-staging.herokuapp.com",
     },
     supportFile: false,
+    chromeWebSecurity: false, //to allow cross origin requests
   },
 });

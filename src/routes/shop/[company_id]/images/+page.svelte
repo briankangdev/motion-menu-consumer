@@ -17,6 +17,9 @@
   import analytics from "$lib/analytics/index.js";
   import { IMAGES_PAGE } from "$lib/analytics/types.js";
   import Navbar from "../../../../components/Navbar.svelte";
+  import toast from "svelte-french-toast";
+  import SuccessNotification from "../../../../components/success-notification/SuccessNotification.svelte";
+  import { onMount } from "svelte";
 
   export let data;
   let company_id = data.company_id;
@@ -45,6 +48,18 @@
   );
 
   $: all_tags = ordered_tags.concat(unordered_tags);
+
+  onMount(() => {
+    //get params from url and if 'new_shop_owner' is true, show success notification
+    const url = new URL(window.location.href);
+    const shop_is_new = url.searchParams.get("new_shop_owner");
+
+    if (shop_is_new) {
+      toast(SuccessNotification as any, {
+        duration: 5000,
+      });
+    }
+  });
 
   // metrics tracking
   const handleButtonTrack = (button_name: string) => {

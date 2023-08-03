@@ -104,6 +104,13 @@
     "profiling_form": {
       "categories_description_title": "¡Copia productos de una plantilla!",
       "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\"."
+    },
+    "success_notification": {
+      "title": "Tu carta QR fue generada.",
+      "text_A": "¡Empieza a editar tus productos ",
+      "link_A": "aquí",
+      "link_B": "Aquí",
+      "text_B": " está tu código QR."
     }
   }
 }
