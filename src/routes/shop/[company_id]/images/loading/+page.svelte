@@ -9,7 +9,7 @@
   onMount(() =>
     setTimeout(
       () =>
-        goto(`/shop/${$company.id}/images?new=true`, {
+        goto(`/shop/${$company.id}/images?new_shop_owner=true`, {
           replaceState: true,
         }),
       3000

@@ -71,9 +71,9 @@
       menu_ref.style.height = `${max_height - products_height}px`;
     }
 
-    //get params from url and if 'new' is true, show success notification
+    //get params from url and if 'new_shop_owner' is true, show success notification
     const url = new URL(window.location.href);
-    const shop_is_new = url.searchParams.get("new");
+    const shop_is_new = url.searchParams.get("new_shop_owner");
 
     if (shop_is_new) {
       toast(SuccessNotification as any, {
