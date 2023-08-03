@@ -26,7 +26,7 @@
 
   // media
   const CDN_BASE_URL: string = "https://res.cloudinary.com/dnaexfddx";
-  let image_src: string = `${CDN_BASE_URL}/image/upload/f_auto,q_100,c_fill,w_${card_size},h_${card_size},dpr_auto/${images[0].public_id}`;
+  let image_src: string = `${CDN_BASE_URL}/image/upload/f_auto,q_100,c_fill,w_${card_size},h_${card_size},dpr_auto/${images[0]?.public_id}`;
 
   let video: HTMLVideoElement | undefined; // video tag
   let video_sources: string[] | undefined = videos.map(
@@ -62,7 +62,7 @@
 
   onMount(() => {
     const bigger_card_size = card_size * 2;
-    image_src = `${CDN_BASE_URL}/image/upload/f_auto,q_100,w_${bigger_card_size},h_${bigger_card_size},dpr_auto,c_fill/${images[0].public_id}`;
+    image_src = `${CDN_BASE_URL}/image/upload/f_auto,q_100,w_${bigger_card_size},h_${bigger_card_size},dpr_auto,c_fill/${images[0]?.public_id}`;
   });
 </script>
 
