@@ -8,7 +8,7 @@
 
   export let products: IProduct[];
   export let company_id: CompanySlug;
-  export let variant: Variant;
+  export let variant: Variant = "primary";
   export let card_size: number = 200;
 
   //ref
