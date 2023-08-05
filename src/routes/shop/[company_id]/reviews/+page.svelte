@@ -168,7 +168,7 @@
         {/if}
       </div>
     {:else}
-      <p class="no-reviews">{$t("routes.shop.reivews.no_reviews")}</p>
+      <p class="no-reviews">{$t("routes.shop.reviews.no_reviews")}</p>
     {/if}
   </div>
 </div>

@@ -128,10 +128,6 @@
   <slot />
 </div>
 
-<!-- 
-$w: var(--col-width); // minmax(Min(20em, 100%), 1fr);
-$s: var(--grid-gap); // .5em;
--->
 <style>
   :global(.__grid--masonry) {
     display: grid;

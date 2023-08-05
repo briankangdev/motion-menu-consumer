@@ -35,6 +35,11 @@
       $query = tag;
     }
   };
+
+  $: items =
+    $query.length > 1
+      ? Object.values($filtered_ids)
+      : Object.values($grouped_by_tags).flatMap((x) => x);
 </script>
 
 <svelte:head>
@@ -82,14 +87,12 @@
   <div class="menu-container">
     <Masonry
       stretchFirst={false}
-      gridGap={"10"}
-      colWidth={"minmax(Min(50%, 225px), 1fr)"}
-      items={$query.length > 1
-        ? Object.values($filtered_ids)
-        : Object.values($grouped_by_tags).flatMap((x) => x)}
+      grid_gap="10"
+      col_width="minmax(Min(50%, 225px), 1fr)"
+      {items}
     >
       {#if $query.length > 1}
-        {#each Object.values($filtered_ids) as product_id}
+        {#each Object.values($filtered_ids) as product_id (product_id)}
           <ProductCard
             {company_id}
             product={$products_dic[product_id]}
@@ -97,10 +100,10 @@
           />
         {/each}
       {:else}
-        {#each all_tags as tag_name}
+        {#each all_tags as tag_name (tag_name)}
           {#if $grouped_by_tags[tag_name]}
             <h1 class="tag">{tag_name}</h1>
-            {#each $grouped_by_tags[tag_name] as product_id}
+            {#each $grouped_by_tags[tag_name] as product_id (product_id)}
               <ProductCard
                 {company_id}
                 product={$products_dic[product_id]}
