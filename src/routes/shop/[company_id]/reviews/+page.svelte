@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { _ } from "svelte-i18n";
+  import { _ as t } from "svelte-i18n";
   import { goto } from "$app/navigation";
   import { is_authenticated } from "../../../../stores/user_store";
   import { company, type ICompany } from "../../../../stores/company";
@@ -75,8 +75,8 @@
 </script>
 
 <svelte:head>
-  <title>{$_("review-index_title")}</title>
-  <meta name="description" content={$_("review-index_description")} />
+  <title>{$t("routes.shop.reviews.title")}</title>
+  <meta name="description" content={$t("routes.shop.reviews.description")} />
 </svelte:head>
 
 <Navbar />
@@ -91,10 +91,14 @@
         row_height={{ default: 40, desktop: 50 }}
       >
         <h1 data-testid="review-index-title">
-          {$_("company_reviews", { values: { company_name } })}
+          {$t("routes.shop.reviews.company_reviews", {
+            values: { company_name },
+          })}
         </h1>
       </Skeleton>
-      <p class="form-description mobile">{$_("review-index_description")}</p>
+      <p class="form-description mobile">
+        {$t("routes.shop.reviews.description")}
+      </p>
       <p class="form-description desktop">{$company.description}</p>
     </div>
 
@@ -107,14 +111,14 @@
         desktop: 150,
       }}
     />
-    <p class="success-message">{$_("success_message")}</p>
+    <p class="success-message">{$t("success_message")}</p>
 
     <div class="back-to-menu">
       <Button
         onClick={() => {
           goto(`/shop/${$company.slug}/images`);
         }}
-        title={$_("back_to_menu")}
+        title={$t("back_to_menu")}
         variant="borderless"
         handleButtonTrack={() => handleButtonTrack("menu-page")}
       />
@@ -124,9 +128,9 @@
   <div class="reviews-section">
     <div class="reviews-header">
       <h2>
-        {$_("reviews")}
+        {$t("routes.shop.reviews.title")}
       </h2>
-      <p>{$_("review-index_description")}</p>
+      <p>{$t("routes.shop.reviews.description")}</p>
     </div>
     {#if $reviews.length > 0}
       <div class="reviews">
@@ -141,7 +145,9 @@
             row_height={{ default: 14 }}
           >
             <p class="total-reviews" data-testid="total-reviews">
-              {$_("total_reviews", { values: { total_reviews } })}
+              {$t("routes.shop.reviews.total_reviews", {
+                values: { total_reviews },
+              })}
             </p>
           </Skeleton>
         </div>
@@ -162,7 +168,7 @@
         {/if}
       </div>
     {:else}
-      <p class="no-reviews">{$_("no_reviews")}</p>
+      <p class="no-reviews">{$t("routes.shop.reivews.no_reviews")}</p>
     {/if}
   </div>
 </div>

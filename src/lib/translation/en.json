@@ -1,116 +1,116 @@
 {
-  "today": "Today",
+  "back_to_menu": "Back to menu",
+  "check_menu": "Check out the menu",
+  "comment_error_message": "Your comment can't be less than 3 characters",
+  "components": {
+    "profiling_form": {
+      "categories_description": "Choose a template shop, +10 products will be copied into your shop. Skip the process by selecting \"empty\" value.",
+      "categories_description_title": "Copy products from the template shop!"
+    },
+    "success_notification": {
+      "link_A": "here",
+      "link_B": "Here",
+      "text_A": "Start edit your items ",
+      "text_B": " is your QR code.",
+      "title": "Your QR menu was generated."
+    }
+  },
   "day_ago": "{days} day ago",
   "days_ago": "{days} days ago",
-  "week_ago": "{weeks} week ago",
-  "weeks_ago": "{weeks} weeks ago",
-  "month_ago": "{months} month ago",
-  "months_ago": "{months} months ago",
-  "year_ago": "{years} year ago",
-  "years_ago": "{years} years ago",
-  "more": "more",
-
+  "featured_products": "Featured Products",
+  "footer_title": "If you are interested in the product, please contact me",
+  "free_plan": "Free plan",
+  "get_started": "Free To Get Started",
+  "home_analytics_description": "Get more insights from the digital menu and our point of sales system.",
+  "home_analytics_title": "Know better about your customers",
+  "home_content_description": "Grab customer attention and increase sales. Get valuable feedback from your customers.",
+  "home_content_title": "Customers love videos and images. A boring menu is not enough!",
+  "home_description": "Motion Menu empowers restaurants and coffee shops across the globe. Customers buy what they see, we present your products in the most attractive way.",
+  "home_meta_description": "Best Instagram feel QR digital menu app where users can build relationships with your restaurant and coffee shop.",
   "home_title": "Get QR code for your business!",
   "home_title_A": "Get QR code for your business!",
   "home_title_B": "Customer is looking for an interactive menu!",
-  "home_description": "Motion Menu empowers restaurants and coffee shops across the globe. Customers buy what they see, we present your products in the most attractive way.",
-  "home_meta_description": "Best Instagram feel QR digital menu app where users can build relationships with your restaurant and coffee shop.",
-  "home_content_title": "Customers love videos and images. A boring menu is not enough!",
-  "home_content_description": "Grab customer attention and increase sales. Get valuable feedback from your customers.",
   "home_video_caption": "You can upload a video clip!",
-  "home_analytics_title": "Know better about your customers",
-  "home_analytics_description": "Get more insights from the digital menu and our point of sales system.",
+  "how_to_use": "How to use?",
   "images": "Images",
   "menu": "Menu",
-  "sign_in": "Sign in",
-  "sign_up": "Sign up",
-  "footer_title": "If you are interested in the product, please contact me",
-  "menu_search_placeholder": "search for dish, drink, etc",
-  "featured_products": "Featured Products",
+  "month_ago": "{months} month ago",
+  "months_ago": "{months} months ago",
+  "more": "more",
   "more_products": "More products",
   "no_images": "There is no image to show",
-  "check_menu": "Check out the menu",
-  "get_started": "Free To Get Started",
-  "how_to_use": "How to use?",
-  "partners": "Partners",
   "orders": "Orders",
-  "free_plan": "Free plan",
-  "simplest_solution": "How it works?",
-  "step_1_title": "Sign Up",
-  "step_1_description": "Register your shop.",
-  "step_2_title": "Add products",
-  "step_2_description": "Add dishes and upload images.",
-  "step_3_title": "Print QR code",
-  "step_3_description": "Show it to the customers.",
-
-  "thank_you": "Thank you!",
-  "success_title": "Shop owner would love to see your review.",
-  "back_to_menu": "Back to menu",
-  "success_message": "Your comment will be reviewed and published later.",
-
-  "review_form_title": "Leave a review",
+  "partners": "Partners",
   "review_form_description": "Leave a review and help other customers to choose the best restaurant.",
-  "support": "Support",
-  "with_your_comment": "with your comment",
-  "share_your_thought": "Share your thought!",
-  "type_something": "Type something...",
-  "sign-up_to_share_review": "It looks like, you don't have account. Please sign up to leave review.",
-  "add_review": "Add review",
-  "sign-up_to_share": "Create",
-  "comment_error_message": "Your comment can't be less than 3 characters",
+  "review_form_title": "Leave a review",
   "review_post_error_message": "Error while posting your comment. Please try again later.",
   "review_post_success_message": "Your comment has been posted successfully.",
-
-  "review-index_title": "Reviews",
-  "review-index_description": "You can support your favorite shop with well written comment.",
-  "company_reviews": "{company_name} Reviews",
   "reviews": "Reviews",
-  "no_reviews": "Currently, there are no reviews.You can become the first reviewer!",
-  "total_reviews": "Customers have written {total_reviews} reviews.",
-  "all_reviews": "All reviews",
-
   "routes": {
     "shop": {
       "images": {
+        "add_review": "Add review",
+        "all_reviews": "All reviews",
         "featured": "Featured",
+        "menu": "Menu",
+        "menu_search_placeholder": "Search for dish, drink, etc",
         "no_images": "No images found",
+        "no_reviews": "Currently, there are no reviews.You can become the first reviewer!",
+        "show_all_items": "+ Show all items",
         "summary": "Total {count} items found. Click 'Show all items' button to get the full menu.",
-        "show_all_items": "+ Show all items"
+        "total_reviews": "Customers have written {total_reviews} reviews."
       },
+      "menu_search_placeholder": "Search for dish, drink, etc",
       "profiling": {
-        "head_title": "Choose your shop's name",
-        "title": "Tell us about your business",
+        "button": "Continue",
+        "categories": {
+          "coffee": "Coffee",
+          "empty": "Empty",
+          "pizza": "Pizza",
+          "stakes": "Stake"
+        },
         "description": "Help us customize your menu by telling us a bit about your business.",
-        "input_label": "Shop's name",
-        "input_placeholder": "Bill Pizza",
+        "error_message": "Error while creating your menu. Please try again later.",
+        "head_title": "Choose your shop's name",
         "input_error": {
           "length": "Shop name must be between 3 and 30 characters",
           "no_special": "Shop name can't contain special characters"
         },
-        "categories": {
-          "empty": "Empty",
-          "pizza": "Pizza",
-          "coffee": "Coffee",
-          "stakes": "Stake"
-        },
-        "button": "Continue",
+        "input_label": "Shop's name",
+        "input_placeholder": "Bill Pizza",
         "success_message": "We are creating your menu. Please wait a few seconds.",
-        "error_message": "Error while creating your menu. Please try again later."
+        "title": "Tell us about your business"
+      },
+      "reviews": {
+        "company_reviews": "{company_name} Reviews",
+        "description": "You can support your favorite shop with well written comment.",
+        "no_reviews": "Currently, there are no reviews.You can become the first reviewer!",
+        "title": "Reviews",
+        "total_reviews": "Customers have written {total_reviews} reviews."
       }
     }
   },
-
-  "components": {
-    "profiling_form": {
-      "categories_description_title": "Copy products from the template shop!",
-      "categories_description": "Choose a template shop, +10 products will be copied into your shop. Skip the process by selecting \"empty\" value."
-    },
-    "success_notification": {
-      "title": "Your QR menu was generated.",
-      "text_A": "Start edit your items ",
-      "link_A": "here",
-      "link_B": "Here",
-      "text_B": " is your QR code."
-    }
-  }
+  "share_your_thought": "Share your thought!",
+  "sign_in": "Sign in",
+  "sign_up": "Sign up",
+  "sign-up_to_share": "Create",
+  "sign-up_to_share_review": "It looks like, you don't have account. Please sign up to leave review.",
+  "simplest_solution": "How it works?",
+  "step_1_description": "Register your shop.",
+  "step_1_title": "Sign Up",
+  "step_2_description": "Add dishes and upload images.",
+  "step_2_title": "Add products",
+  "step_3_description": "Show it to the customers.",
+  "step_3_title": "Print QR code",
+  "success_message": "Your comment will be reviewed and published later.",
+  "success_title": "Shop owner would love to see your review.",
+  "support": "Support",
+  "thank_you": "Thank you!",
+  "today": "Today",
+  "type_something": "Type something...",
+  "week_ago": "{weeks} week ago",
+  "weeks_ago": "{weeks} weeks ago",
+  "with_your_comment": "with your comment",
+  "year_ago": "{years} year ago",
+  "years_ago": "{years} years ago"
 }

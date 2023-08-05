@@ -27,6 +27,14 @@
   );
 
   $: all_tags = ordered_tags.concat(unordered_tags);
+
+  const onTagClick = (tag) => () => {
+    if ($query === tag) {
+      $query = "";
+    } else {
+      $query = tag;
+    }
+  };
 </script>
 
 <svelte:head>
@@ -56,7 +64,7 @@
     <input
       class="input-transparent"
       type="text"
-      placeholder={$t("menu_search_placeholder")}
+      placeholder={$t("routes.shop.menu_search_placeholder")}
       bind:value={$query}
     />
   </div>
@@ -66,13 +74,7 @@
       <button
         type="button"
         class={`tag-button ${tag === $query && "active"}`}
-        on:click={() => {
-          if ($query === tag) {
-            $query = "";
-          } else {
-            $query = tag;
-          }
-        }}>{tag}</button
+        on:click={onTagClick(tag)}>{tag}</button
       >
     {/each}
   </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from "svelte-i18n";
+  import { _ as t } from "svelte-i18n";
   import { goto } from "$app/navigation";
   import { company } from "../../../../stores/company.js";
   import {
@@ -67,6 +67,11 @@
       company_id: $company.id,
     });
   };
+
+  $: items =
+    $query.length > 1
+      ? Object.values($filtered_ids)
+      : Object.values($grouped_by_tags).flatMap((x) => x);
 </script>
 
 <svelte:head>
@@ -77,7 +82,9 @@
   {/if}
   <meta
     name="description"
-    content={`${$company.name} digital ${$_("menu")} - Motion Menu`}
+    content={`${$company.name} digital ${$t(
+      "routes.shop.images.menu"
+    )} - Motion Menu`}
   />
 </svelte:head>
 
@@ -120,19 +127,21 @@
         {#if $reviews.length > 0}
           <Button
             onClick={() => goto(`/shop/${company_id}/reviews`)}
-            title={$_("all_reviews")}
+            title={$t("routes.shop.images.all_reviews")}
             variant="borderless"
             test_id="all-reviews"
           />
         {:else}
           <div class="row center">
-            <p data-testid="no-reviews">{$_("no_reviews")}</p>
+            <p data-testid="no-reviews">
+              {$t("routes.shop.images.no_reviews")}
+            </p>
           </div>
         {/if}
 
         <Button
           onClick={() => goto(`/shop/${company_id}/reviews/form`)}
-          title={`+ ${$_("add_review")}`}
+          title={`+ ${$t("routes.shop.images.add_review")}`}
           variant="black"
           handleButtonTrack={() => handleButtonTrack("add-review")}
           test_id="add-review"
@@ -148,11 +157,11 @@
 
     <section class="menu" data-testid="menu">
       <div class="input-container">
-        <h2>Menu</h2>
+        <h2>{$t("routes.shop.images.menu")}</h2>
         <input
           class="input-transparent"
           type="text"
-          placeholder={$_("menu_search_placeholder")}
+          placeholder={$t("routes.shop.images.menu_search_placeholder")}
           bind:value={$query}
         />
       </div>
@@ -165,9 +174,9 @@
             variant="black"
             onClick={() => {
               if ($query === tag) {
-                $query = "";
+                query.set("");
               } else {
-                $query = tag;
+                query.set(tag);
               }
             }}
             --text-transform="capitalize"
@@ -177,18 +186,16 @@
 
       <Masonry
         stretchFirst={false}
-        gridGap={"10"}
-        colWidth={"minmax(Min(33%, 220px), 1fr)"}
-        items={$query.length > 1
-          ? Object.values($filtered_ids)
-          : Object.values($grouped_by_tags).flatMap((x) => x)}
+        grid_gap="10"
+        col_width="minmax(Min(33%, 220px), 1fr)"
+        {items}
       >
         {#if $query.length > 1}
-          {#each Object.values($filtered_ids) as product_id}
+          {#each $filtered_ids as product_id (product_id)}
             <ProductCard {company_id} product={$products_dic[product_id]} />
           {/each}
         {:else}
-          {#each all_tags as tag_name}
+          {#each all_tags as tag_name (tag_name)}
             {#if $grouped_by_tags[tag_name]}
               {#each $grouped_by_tags[tag_name] as product_id}
                 <ProductCard {company_id} product={$products_dic[product_id]} />

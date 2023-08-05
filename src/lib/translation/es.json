@@ -1,116 +1,114 @@
 {
-  "today": "Hoy",
+  "back_to_menu": "Volver a la carta",
+  "check_menu": "Fijáte la carta",
+  "comment_error_message": "Tu comentario no puede tener menos de 3 caracteres",
+  "components": {
+    "profiling_form": {
+      "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\".",
+      "categories_description_title": "¡Copia productos de una plantilla!"
+    },
+    "success_notification": {
+      "link_A": "aquí",
+      "link_B": "Aquí",
+      "text_A": "¡Empieza a editar tus productos ",
+      "text_B": " está tu código QR.",
+      "title": "Tu carta QR fue generada."
+    }
+  },
   "day_ago": "Hace {days} día",
   "days_ago": "Hace {days} días",
-  "week_ago": "Hace {weeks} semana",
-  "weeks_ago": "Hace {weeks} semanas",
-  "month_ago": "Hace {months} mes",
-  "months_ago": "Hace {months} meses",
-  "year_ago": "Hace {years} año",
-  "years_ago": "Hace {years} años",
-  "more": "más",
-
+  "featured_products": "Productos Populares",
+  "footer_title": "Si estás interesado en la carta digital, por favor avisáme por",
+  "free_plan": "Plan gratis",
+  "get_started": "Empezar Plan Gratis",
+  "home_analytics_description": "La carta digital y el punto de venta muestran las métricas principales de su negocio.",
+  "home_analytics_title": "Analizá su negocio para mejorar la experiencia",
+  "home_content_description": "Buena experiencia del cliente afecta a la venta. Presentá tus productos en la manera más atractiva e intuitiva",
+  "home_content_title": "Clients quieren videos e imágenes.",
+  "home_description": "Estamos contruyendo herramientas cluinarias para mejorar la experience de los clientes. La carta QR y el sistema punto de venta transformara tu negocio.",
+  "home_meta_description": "El mejor QR menu para restaurantes y cafeterías. Un espacio nuevo para marketing y branding.",
   "home_title": "La carta más atractiva para clientes!",
   "home_title_A": "Mejora tu restaurante y acercate a tus clientes",
   "home_title_B": "El menú interactivo que tu cliente necesita",
-  "home_description": "Estamos contruyendo herramientas cluinarias para mejorar la experience de los clientes. La carta QR y el sistema punto de venta transformara tu negocio.",
-  "home_meta_description": "El mejor QR menu para restaurantes y cafeterías. Un espacio nuevo para marketing y branding.",
-
-  "home_content_title": "Clients quieren videos e imágenes.",
-  "home_content_description": "Buena experiencia del cliente afecta a la venta. Presentá tus productos en la manera más atractiva e intuitiva",
-  "home_analytics_title": "Analizá su negocio para mejorar la experiencia",
-  "home_analytics_description": "La carta digital y el punto de venta muestran las métricas principales de su negocio.",
-
+  "how_to_use": "¿Cómo se usa?",
   "images": "Imagenes",
   "menu": "Carta",
-  "sign_in": "Ingresar",
-  "sign_up": "Registrar",
-  "footer_title": "Si estás interesado en la carta digital, por favor avisáme por",
-  "menu_search_placeholder": "busca comidas, bebidas, etc",
-  "featured_products": "Productos Populares",
+  "month_ago": "Hace {months} mes",
+  "months_ago": "Hace {months} meses",
+  "more": "más",
   "more_products": "Más productos",
   "no_images": "No hay imagenes para mostrar",
-  "check_menu": "Fijáte la carta",
-  "get_started": "Empezar Plan Gratis",
-  "how_to_use": "¿Cómo se usa?",
-  "partners": "Partners",
   "orders": "Pedidos",
-  "free_plan": "Plan gratis",
-  "simplest_solution": "¿Cómo empezar?",
-  "step_1_title": "Registrar La Tienda",
-  "step_1_description": "Hay que registrar la tienda.",
-  "step_2_title": "Agregar los productos",
-  "step_2_description": "Agregar los platos y subir imagenes.",
-  "step_3_title": "Imprimir el código QR",
-  "step_3_description": "Muestrá el código a los clientes.",
-
-  "thank_you": "Muchas gracias!",
-  "success_title": "A la tienda le encantará leer su opinión.",
-  "back_to_menu": "Volver a la carta",
-  "success_message": "Su comentario será revisado y publicado pronto.",
-
-  "review_form_title": "Deja un comentario",
+  "partners": "Partners",
   "review_form_description": "Deja un comentario y ayuda a otros clientes a elegir el mejor restaurante.",
-  "support": "Apoyanos",
-  "with_your_comment": "con tu comentario",
-  "share_your_thought": "¡Comparte tu opinión!",
-  "type_something": "Escribe algo...",
-  "sign-up_to_share_review": "Parece que no tienes una cuenta. Por favor regístrate y tu comentario será publicado.",
-  "add_review": "Añadir comentario",
-  "sign-up_to_share": "Crear",
-  "comment_error_message": "Tu comentario no puede tener menos de 3 caracteres",
+  "review_form_title": "Deja un comentario",
   "review_post_error_message": "Error al publicar tu comentario. Por favor, inténtalo de nuevo más tarde.",
   "review_post_success_message": "Tu comentario ha sido enviado con éxito.",
-
-  "review-index_title": "Reseñas",
-  "review-index_description": "Puedes apoyar a tu negocio favorito con una buena reseña.",
-  "company_reviews": "Reseñas sobre {company_name}",
-  "reviews": "Reseñas",
-  "no_reviews": "Actualmente no hay reseñas. ¡Puedes ser el primero en escribir una!",
-  "total_reviews": "Los clientes han escrito {total_reviews} reseñas.",
-  "all_reviews": "Todas las reseñas",
   "routes": {
     "shop": {
       "images": {
-        "featured": "Featured",
+        "add_review": "Añadir comentario",
+        "all_reviews": "Todas las comentarios",
+        "featured": "Destacados",
+        "menu": "Carta",
+        "menu_search_placeholder": "Busca comidas, bebidas, etc",
         "no_images": "No hay imagenes",
+        "no_reviews": "Actualmente no hay comentarios. ¡Puedes ser el primero en escribir una!",
+        "show_all_items": "+ Cargar todos los items",
         "summary": "Encontramos {count} items. Apretá Cargar para ver carta completa.",
-        "show_all_items": "+ Cargar todos los items"
+        "total_reviews": "Los clientes han escrito {total_reviews} comentarios."
       },
+      "menu_search_placeholder": "Busca comidas, bebidas, etc",
       "profiling": {
-        "head_title": "Elige el nombre de tu tienda",
-        "title": "Cuéntanos sobre tu negocio",
+        "button": "Continuar",
+        "categories": {
+          "coffee": "Café",
+          "empty": "Vacío",
+          "pizza": "Pizza",
+          "stakes": "Parilla"
+        },
         "description": "Ayudanos a personalizar tu carta contandonos más sobre tu negocio.",
-        "input_label": "Nombre de la tienda",
-        "input_placeholder": "Bill Pizza",
+        "error_message": "Error al crear tu carta. Por favor, inténtalo de nuevo más tarde.",
+        "head_title": "Elige el nombre de tu tienda",
         "input_error": {
           "length": "El nombre de la tienda debe tener entre 3 y 30 caracteres",
           "no_special": "El nombre de la tienda no puede contener caracteres especiales"
         },
-        "categories": {
-          "empty": "Vacío",
-          "pizza": "Pizza",
-          "coffee": "Café",
-          "stakes": "Parilla"
-        },
-        "button": "Continuar",
+        "input_label": "Nombre de la tienda",
+        "input_placeholder": "Bill Pizza",
         "success_message": "Estamos creando tu carta. Por favor espera unos segundos.",
-        "error_message": "Error al crear tu carta. Por favor, inténtalo de nuevo más tarde."
+        "title": "Cuéntanos sobre tu negocio"
+      },
+      "reviews": {
+        "company_reviews": "Comentarios sobre {company_name}",
+        "description": "Puedes apoyar a tu negocio favorito con un buen comentario.",
+        "no_reviews": "Actualmente no hay comentarios. ¡Puedes ser el primero en escribir una!",
+        "title": "Comentarios",
+        "total_reviews": "Los clientes han escrito {total_reviews} comentarios."
       }
     }
   },
-
-  "components": {
-    "profiling_form": {
-      "categories_description_title": "¡Copia productos de una plantilla!",
-      "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\"."
-    },
-    "success_notification": {
-      "title": "Tu carta QR fue generada.",
-      "text_A": "¡Empieza a editar tus productos ",
-      "link_A": "aquí",
-      "link_B": "Aquí",
-      "text_B": " está tu código QR."
-    }
-  }
+  "share_your_thought": "¡Comparte tu opinión!",
+  "sign_in": "Ingresar",
+  "sign_up": "Registrar",
+  "sign-up_to_share": "Crear",
+  "sign-up_to_share_review": "Parece que no tienes una cuenta. Por favor regístrate y tu comentario será publicado.",
+  "simplest_solution": "¿Cómo empezar?",
+  "step_1_description": "Hay que registrar la tienda.",
+  "step_1_title": "Registrar La Tienda",
+  "step_2_description": "Agregar los platos y subir imagenes.",
+  "step_2_title": "Agregar los productos",
+  "step_3_description": "Muestrá el código a los clientes.",
+  "step_3_title": "Imprimir el código QR",
+  "success_message": "Su comentario será revisado y publicado pronto.",
+  "success_title": "A la tienda le encantará leer su opinión.",
+  "support": "Apoyanos",
+  "thank_you": "Muchas gracias!",
+  "today": "Hoy",
+  "type_something": "Escribe algo...",
+  "week_ago": "Hace {weeks} semana",
+  "weeks_ago": "Hace {weeks} semanas",
+  "with_your_comment": "con tu comentario",
+  "year_ago": "Hace {years} año",
+  "years_ago": "Hace {years} años"
 }
