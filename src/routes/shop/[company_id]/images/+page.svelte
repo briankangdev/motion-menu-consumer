@@ -197,7 +197,7 @@
         {:else}
           {#each all_tags as tag_name (tag_name)}
             {#if $grouped_by_tags[tag_name]}
-              {#each $grouped_by_tags[tag_name] as product_id (product_id))}
+              {#each $grouped_by_tags[tag_name] as product_id (product_id)}
                 <ProductCard {company_id} product={$products_dic[product_id]} />
               {/each}
             {/if}
