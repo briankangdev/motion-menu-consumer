@@ -21,7 +21,7 @@
   let grid_rows: number = 2;
   let grid_gap: number = 10;
   let spacer_style: string = `
-  display: grid;
+  display: inline-grid;
   grid-template-columns:
   repeat(${Math.ceil(products.length / grid_rows)}, 1fr); 
   grid-template-rows: repeat(${grid_rows}, 1fr);
