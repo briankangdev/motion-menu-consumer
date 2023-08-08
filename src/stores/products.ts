@@ -31,9 +31,18 @@ export interface IGroupedProducts {
   [key: string]: Array<IProduct["id"]>;
 }
 
+// Dictionary is used to store all products
 export const dic: Writable<IProductDictionary> = writable({});
+
+// Query string is used to filter products by name or tag
+// It is used on the shop menu page
 export const query: Writable<string> = writable("");
 
+// Tag order is used to sort products by tag
+// If it's empty, products are sorted by name
+export const sorted_tag_str: Writable<string> = writable("");
+
+// Ids are used to fetch data from the dictionary
 export const ids = derived(dic, ($dic) => {
   let list = Object.values($dic).map((product) => product.id);
   return list.filter((v, i) => list.indexOf(v) === i);
@@ -74,5 +83,19 @@ export const filtered_ids = derived(
         })
       );
     });
+  }
+);
+
+export const ids_sorted_by_tags = derived(
+  [ids, grouped_by_tags, sorted_tag_str],
+  ([$ids, $grouped_by_tags, $sorted_tag_str]) => {
+    if ($sorted_tag_str === null || $sorted_tag_str === "") {
+      return $ids;
+    }
+
+    const tags = $sorted_tag_str.split(",").map((tag) => tag.trim());
+
+    // Return a flat map of product ids sorted by tag order string
+    return tags.flatMap((tag) => $grouped_by_tags[tag] || []);
   }
 );
