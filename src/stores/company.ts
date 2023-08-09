@@ -13,6 +13,11 @@ export interface ICompany {
 
 export type CompanySlug = ICompany["slug"];
 
-export type CompanyCategory = "empty" | "pizza" | "coffee" | "stakes";
+export type CompanyCategory =
+  | "empty"
+  | "pizza"
+  | "coffee"
+  | "hamburger"
+  | "saigon";
 
 export const company = writable<ICompany>(null);

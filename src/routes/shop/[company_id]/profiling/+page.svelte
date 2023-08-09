@@ -6,8 +6,8 @@
     type CompanyCategory,
     type ICompany,
   } from "../../../../stores/company";
-  // import { PROFILING_PAGE } from "../../../../lib/analytics/types";
-  // import analytics from "../../../../lib/analytics";
+  import { PROFILING_PAGE } from "../../../../lib/analytics/types";
+  import analytics from "../../../../lib/analytics";
 
   import Logo from "../../../../components/Logo.svelte";
   import toast from "svelte-french-toast";
@@ -20,9 +20,10 @@
 
   const category_template_ids: Record<CompanyCategory, ICompany["id"]> = {
     empty: null,
-    pizza: 201,
-    coffee: 212,
-    stakes: 214,
+    pizza: 99, // TODO: These are PROD ids, need to update on staging
+    coffee: 100,
+    hamburger: 101,
+    saigon: 102,
   };
 
   const handleSubmitCallback = async (
@@ -31,6 +32,11 @@
   ) => {
     try {
       await updateCompany({ name: shop_name });
+
+      analytics.track(`${PROFILING_PAGE}.continue-button.click`, {
+        company_id: $company.id,
+        demo: category,
+      });
 
       // if category is not empty, copy products from template
       if (category !== "empty") {

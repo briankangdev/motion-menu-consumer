@@ -10,10 +10,19 @@
   import Masonry from "../../../components/Masonry.svelte";
   import Navbar from "../../../components/Navbar.svelte";
   import ProductCard from "../../../components/cards/product-card/ProductCard.svelte";
+  import { onMount } from "svelte";
+  import analytics from "../../../lib/analytics";
+  import { MENU_PAGE } from "../../../lib/analytics/types.js";
 
   // Fetch products data given id
   export let data;
   let company_id = data.company_id;
+
+  onMount(() => {
+    analytics.track(`${MENU_PAGE}.visit`, {
+      company_id: company_id,
+    });
+  });
 
   $: ordered_tags = $company.tag_priority
     ? $company.tag_priority
