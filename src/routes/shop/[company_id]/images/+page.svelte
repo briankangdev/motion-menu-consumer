@@ -58,7 +58,18 @@
       toast(SuccessNotification as any, {
         duration: 5000,
       });
+
+      analytics.track(`${IMAGES_PAGE}.visit`, {
+        company_id: $company.id,
+        new_shop_owner: true,
+      });
+
+      return;
     }
+
+    analytics.track(`${IMAGES_PAGE}.visit`, {
+      company_id: $company.id,
+    });
   });
 
   // metrics tracking
