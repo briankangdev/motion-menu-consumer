@@ -25,6 +25,7 @@
     "tslib": "^2.4.1",
     "typescript": "^4.9.3",
     "vite": "^4.0.3",
+    "vite-plugin-mkcert": "^1.16.0",
     "vitest": "^0.25.3"
   },
   "type": "module",
@@ -33,6 +34,8 @@
     "axios": "^1.2.0",
     "chart.js": "^4.1.1",
     "flagsmith": "^3.14.1",
+    "google-auth-library": "^9.0.0",
+    "js-cookie": "^3.0.5",
     "mixpanel-browser": "^2.45.0",
     "svelte-chartjs": "^3.1.0",
     "svelte-french-toast": "^1.1.0",
