@@ -3,6 +3,7 @@ import type { AxiosInstance } from "axios";
 import { env } from "$env/dynamic/public";
 import { jwt_token } from "../stores/user_store";
 import { get } from "svelte/store";
+import { Cookies } from "js-cookie";
 
 interface ICustomHeaders extends AxiosHeaders {
   Authorization?: string;
@@ -22,6 +23,10 @@ client.interceptors.request.use((config) => {
   if (token) {
     custom_headers.Authorization = `Bearer ${token}`;
   }
+
+  custom_headers["access-token"] = Cookies.get("access-token");
+  custom_headers["client"] = Cookies.get("client");
+  custom_headers["uid"] = Cookies.get("uid");
 
   return config;
 });
