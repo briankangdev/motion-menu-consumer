@@ -1,4 +1,4 @@
-import { getCompany } from "../../../../../services/profile_service";
+import { getCompany } from "../../../../../services/company_service";
 
 interface IRouteParams {
   params: {

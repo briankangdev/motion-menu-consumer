@@ -1,5 +1,5 @@
 import { loadReviewsByPage } from "../../../../services/reviews_service";
-import { getCompany } from "../../../../services/profile_service";
+import { getCompany } from "../../../../services/company_service";
 import type { ICompany } from "src/stores/company";
 
 interface IRouteParams {
