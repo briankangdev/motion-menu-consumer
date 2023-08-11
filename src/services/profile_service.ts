@@ -1,7 +1,14 @@
-import { get_company } from "../api/company";
-import { company, type CompanySlug } from "../stores/company";
+import { profile_ids } from "../stores/profile";
+import { validate_token } from "../api/profile";
 
-export async function getCompany(company_id: CompanySlug) {
-  const response = await get_company(company_id);
-  company.update((prev) => ({ ...prev, ...response.data }));
+export async function getProfile(
+  uid: string,
+  client_id: string,
+  accessToken: string
+) {
+  const response = await validate_token(uid, client_id, accessToken);
+
+  if (response.success) {
+    profile_ids.update((prev) => ({ ...prev, ...response.data }));
+  }
 }
