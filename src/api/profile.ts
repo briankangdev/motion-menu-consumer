@@ -1,6 +1,5 @@
 import client from "./client";
 import type { IProfile, IProfileIds } from "../stores/profile";
-import { Cookies } from "js-cookie";
 
 interface IProfileResponse {
   profile: IProfile;

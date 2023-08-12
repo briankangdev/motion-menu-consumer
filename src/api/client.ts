@@ -3,7 +3,7 @@ import type { AxiosInstance } from "axios";
 import { env } from "$env/dynamic/public";
 import { jwt_token } from "../stores/user_store";
 import { get } from "svelte/store";
-import { Cookies } from "js-cookie";
+import Cookies from "js-cookie";
 
 interface ICustomHeaders extends AxiosHeaders {
   Authorization?: string;
