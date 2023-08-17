@@ -20,6 +20,11 @@
     CategoryScale,
   } from "chart.js";
   import { user, type IUser } from "../stores/user";
+  import { profile_ids } from "../stores/profile.js";
+
+  export let data;
+
+  const is_authenticated = data.is_authenticated;
 
   ChartJS.register(
     Title,
@@ -31,7 +36,7 @@
     CategoryScale
   );
 
-  const data = {
+  const line_data = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
@@ -80,7 +85,7 @@
   <link rel="canonical" href="https://motion.menu" />
 </svelte:head>
 
-<Navbar />
+<Navbar profile_name={is_authenticated ? $profile_ids.name : null} />
 <main>
   <div class="row">
     <div>
@@ -151,7 +156,7 @@
     </div>
 
     <div class="chart">
-      <Line {data} />
+      <Line data={line_data} />
     </div>
   </div>
 
