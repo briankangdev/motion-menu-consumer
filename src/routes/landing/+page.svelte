@@ -2,6 +2,7 @@
   import { PUBLIC_GOOGLE_OAUTH_CLIENT_ID } from "$env/static/public";
   import { onMount } from "svelte";
   import { google_sign_in } from "../../api/profile";
+  import { goto } from "$app/navigation";
 
   onMount(() => {
     // It forces to execute the script after the page is re-rendered
@@ -13,8 +14,13 @@
     document.head.appendChild(script);
 
     window.onGoogleSignIn = async (response) => {
-      console.log(response.credential);
-      const response_data = await google_sign_in(response.credential);
+      const profile = await google_sign_in(response.credential);
+
+      if (profile.is_new_account) {
+        goto(`/shop/${profile.id}/profiling`);
+      } else {
+        goto(`/shop/${profile.id}`);
+      }
     };
   });
 </script>
