@@ -20,11 +20,6 @@
     CategoryScale,
   } from "chart.js";
   import { user, type IUser } from "../stores/user";
-  import { profile_ids } from "../stores/profile.js";
-
-  export let data;
-
-  const is_authenticated = data.is_authenticated;
 
   ChartJS.register(
     Title,
@@ -85,7 +80,7 @@
   <link rel="canonical" href="https://motion.menu" />
 </svelte:head>
 
-<Navbar profile_name={is_authenticated ? $profile_ids.name : null} />
+<Navbar />
 <main>
   <div class="row">
     <div>
