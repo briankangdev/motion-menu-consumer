@@ -19,7 +19,7 @@
       if (profile.is_new_account) {
         goto(`/shop/${profile.id}/profiling`);
       } else {
-        goto(`/shop/${profile.id}`);
+        goto(`/shop/${profile.id}/images`);
       }
     };
   });
