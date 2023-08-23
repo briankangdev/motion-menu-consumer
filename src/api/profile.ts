@@ -28,7 +28,7 @@ export const google_sign_in = async (id_token: string): Promise<IProfile> => {
 export const sign_out = async (): Promise<ISignOutResponse> => {
   const response = await client.delete(`/api/v1/companies/auth/sign_out`);
 
-  Cookies.remove("accessToken");
+  Cookies.remove("access-token");
   Cookies.remove("token-type");
   Cookies.remove("client");
   Cookies.remove("uid");
@@ -40,11 +40,11 @@ export const sign_out = async (): Promise<ISignOutResponse> => {
 export const validate_token = async (
   uid: string,
   client_id: string,
-  accessToken: string
+  access_token: string
 ): Promise<IValidateTokenResponse> => {
   const response = await client.get("/api/v1/companies/auth/validate_token", {
     headers: {
-      "access-token": accessToken,
+      "access-token": access_token,
       "token-type": "Bearer",
       client: client_id,
       uid,
