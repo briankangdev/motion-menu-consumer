@@ -17,9 +17,10 @@
       const profile = await google_sign_in(response.credential);
 
       if (profile.is_new_account) {
-        goto(`/shop/${profile.id}/profiling`);
+        //invalidateAll: true is to force the page to re-render and update the profile_data store
+        goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
       } else {
-        goto(`/shop/${profile.id}/images`);
+        goto(`/shop/${profile.id}/images`, { invalidateAll: true });
       }
     };
   });
