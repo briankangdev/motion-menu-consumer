@@ -3,6 +3,8 @@
   import { onMount } from "svelte";
   import { google_sign_in } from "../../api/profile";
   import { goto } from "$app/navigation";
+  import { LANDING_PAGE } from "$lib/analytics/types";
+  import analytics from "$lib/analytics";
 
   onMount(() => {
     // It forces to execute the script after the page is re-rendered
@@ -17,9 +19,17 @@
       const profile = await google_sign_in(response.credential);
 
       if (profile.is_new_account) {
+        analytics.track(`${LANDING_PAGE}.sign_up`, {
+          profile_id: profile.id,
+        });
+
         //invalidateAll: true is to force the page to re-render and update the profile_data store
         goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
       } else {
+        analytics.track(`${LANDING_PAGE}.sign_in`, {
+          profile_id: profile.id,
+        });
+
         goto(`/shop/${profile.id}/images`, { invalidateAll: true });
       }
     };
