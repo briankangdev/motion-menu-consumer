@@ -31,7 +31,7 @@
     CategoryScale
   );
 
-  const data = {
+  const line_data = {
     labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
@@ -151,7 +151,7 @@
     </div>
 
     <div class="chart">
-      <Line {data} />
+      <Line data={line_data} />
     </div>
   </div>
 

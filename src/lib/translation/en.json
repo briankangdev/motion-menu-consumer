@@ -47,6 +47,9 @@
   "review_post_success_message": "Your comment has been posted successfully.",
   "reviews": "Reviews",
   "routes": {
+    "home": {
+      "welcome": "Welcome"
+    },
     "shop": {
       "images": {
         "add_review": "Add review",

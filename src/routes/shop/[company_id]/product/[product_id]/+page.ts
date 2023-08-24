@@ -1,4 +1,4 @@
-import { getCompany } from "../../../../../services/profile_service";
+import { getCompany } from "../../../../../services/company_service";
 import { loadProduct } from "../../../../../services/products_service";
 import { getProductLikes } from "../../../../../services/like_service";
 

@@ -45,6 +45,9 @@
   "review_post_error_message": "Error al publicar tu comentario. Por favor, inténtalo de nuevo más tarde.",
   "review_post_success_message": "Tu comentario ha sido enviado con éxito.",
   "routes": {
+    "home": {
+      "welcome": "Bienvenido"
+    },
     "shop": {
       "images": {
         "add_review": "Añadir comentario",
