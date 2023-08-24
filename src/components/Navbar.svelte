@@ -25,7 +25,7 @@
 
     {#if profile_name}
       <div class="profile">
-        <span>{$t("welcome")}, {profile_name}</span>
+        <span>{$t("routes.home.welcome")}, {profile_name}</span>
         <button
           class="sign-out"
           on:click={() => {

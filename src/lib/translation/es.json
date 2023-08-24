@@ -1,5 +1,4 @@
 {
-  "welcome": "Bienvenido",
   "back_to_menu": "Volver a la carta",
   "check_menu": "Fijáte la carta",
   "comment_error_message": "Tu comentario no puede tener menos de 3 caracteres",
@@ -46,6 +45,9 @@
   "review_post_error_message": "Error al publicar tu comentario. Por favor, inténtalo de nuevo más tarde.",
   "review_post_success_message": "Tu comentario ha sido enviado con éxito.",
   "routes": {
+    "home": {
+      "welcome": "Bienvenido"
+    },
     "shop": {
       "images": {
         "add_review": "Añadir comentario",

@@ -1,5 +1,4 @@
 {
-  "welcome": "Welcome",
   "back_to_menu": "Back to menu",
   "check_menu": "Check out the menu",
   "comment_error_message": "Your comment can't be less than 3 characters",
@@ -48,6 +47,9 @@
   "review_post_success_message": "Your comment has been posted successfully.",
   "reviews": "Reviews",
   "routes": {
+    "home": {
+      "welcome": "Welcome"
+    },
     "shop": {
       "images": {
         "add_review": "Add review",
