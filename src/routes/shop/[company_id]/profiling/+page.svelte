@@ -16,7 +16,7 @@
   import {
     checkCopyProductsStatus,
     copyProductsFromCompany,
-  } from "../../../../api/products";
+  } from "../../../../api/copy_content_from_template";
 
   const category_template_ids: Record<CompanyCategory, ICompany["id"]> = {
     empty: null,

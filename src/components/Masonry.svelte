@@ -142,7 +142,7 @@
     align-self: start;
   }
 
-  :global(.__grid--masonry.__stretch-first > h1) {
+  :global(.__grid--masonry.__stretch-first > h1, hr) {
     grid-column: 1/ -1;
   }
 </style>

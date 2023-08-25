@@ -5,6 +5,8 @@
     query,
     grouped_by_tags,
     filtered_ids,
+    tags_by_priority,
+    NO_TAG,
   } from "../../../stores/products.js";
   import { company } from "../../../stores/company.js";
   import Masonry from "../../../components/Masonry.svelte";
@@ -24,20 +26,7 @@
     });
   });
 
-  $: ordered_tags = $company.tag_priority
-    ? $company.tag_priority
-        .split(",")
-        .map((tag) => tag.toLowerCase().trim())
-        .filter((v, i, a) => a.indexOf(v) === i)
-    : [];
-
-  $: unordered_tags = Object.keys($grouped_by_tags).filter(
-    (key) => !ordered_tags.includes(key)
-  );
-
-  $: all_tags = ordered_tags.concat(unordered_tags);
-
-  const onTagClick = (tag) => () => {
+  const onTagClick = (tag: string) => () => {
     if ($query === tag) {
       $query = "";
     } else {
@@ -84,11 +73,11 @@
   </div>
 
   <div class="tag-container">
-    {#each all_tags as tag}
+    {#each $tags_by_priority as tag}
       <button
         type="button"
-        class={`tag-button ${tag === $query && "active"}`}
-        on:click={onTagClick(tag)}>{tag}</button
+        class={`tag-button ${tag.name === $query && "active"}`}
+        on:click={onTagClick(tag.name)}>{tag.name}</button
       >
     {/each}
   </div>
@@ -109,10 +98,10 @@
           />
         {/each}
       {:else}
-        {#each all_tags as tag_name (tag_name)}
-          {#if $grouped_by_tags[tag_name]}
-            <h1 class="tag">{tag_name}</h1>
-            {#each $grouped_by_tags[tag_name] as product_id (product_id)}
+        {#each $tags_by_priority as tag (tag.name)}
+          {#if $grouped_by_tags[tag.name]}
+            <h1 class="tag">{tag.name}</h1>
+            {#each $grouped_by_tags[tag.name] as product_id (product_id)}
               <ProductCard
                 {company_id}
                 product={$products_dic[product_id]}
@@ -120,6 +109,15 @@
               />
             {/each}
           {/if}
+        {/each}
+
+        <hr class="menu-divider" />
+        {#each $grouped_by_tags[NO_TAG] as product_id (product_id)}
+          <ProductCard
+            {company_id}
+            product={$products_dic[product_id]}
+            enable_link={true}
+          />
         {/each}
       {/if}
     </Masonry>
@@ -242,6 +240,7 @@
     border: 0;
     margin-right: 5px;
     min-width: 100px;
+    cursor: pointer;
   }
 
   .tag-button.active {
@@ -252,5 +251,15 @@
   .menu-container {
     width: 100vw;
     max-width: 1024px;
+  }
+
+  .menu-divider {
+    border: 0;
+    border-top: 1px solid #a7a7a7;
+    border-radius: 8px;
+    opacity: 0.3;
+    margin-top: 4em;
+    margin-bottom: 2em;
+    width: 90%;
   }
 </style>
