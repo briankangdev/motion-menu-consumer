@@ -1,7 +1,7 @@
 import { browser } from "$app/environment";
 import type { CompanySlug } from "src/stores/company";
-import { getProducts, getProduct } from "../api/products";
-import { dic, type IProduct } from "../stores/products";
+import { getProducts, getProduct, getProductTags } from "../api/products";
+import { dic, tags_by_priority, type IProduct } from "../stores/products";
 
 export async function loadProductsByPage(
   company_id: CompanySlug,
@@ -37,4 +37,12 @@ export async function loadProduct(product_id: IProduct["id"]) {
     ...prev,
     [response.data.id]: response.data,
   }));
+}
+
+export async function loadProductTags(company_id: CompanySlug) {
+  const response = await getProductTags(company_id);
+
+  const tags = response.data.data;
+
+  tags_by_priority.set(tags);
 }

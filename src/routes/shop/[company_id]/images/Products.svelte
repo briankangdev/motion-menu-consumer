@@ -4,24 +4,17 @@
     ids_with_media,
     ids as products_ids,
     dic as products_dic,
-    sorted_tag_str,
     ids_sorted_by_tags,
   } from "../../../../stores/products";
-  import { company } from "../../../../stores/company";
   import Carrousel from "../../../../components/carrousel/Carrousel.svelte";
   import Button from "../../../../components/button/Button.svelte";
   import { goto } from "$app/navigation";
 
   export let company_id;
 
-  sorted_tag_str.set($company.tag_priority);
-
-  $: products_with_media =
-    $company.tag_priority === null
-      ? $ids_with_media.map((id) => $products_dic[id])
-      : $ids_sorted_by_tags
-          .filter((id) => $ids_with_media.includes(id))
-          .map((id) => $products_dic[id]);
+  $: products_with_media = $ids_sorted_by_tags
+    .filter((id) => $ids_with_media.includes(id))
+    .map((id) => $products_dic[id]);
 </script>
 
 <section class="products">

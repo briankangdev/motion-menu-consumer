@@ -1,6 +1,8 @@
 import { derived, writable } from "svelte/store";
 import type { Writable } from "svelte/store";
 
+export const NO_TAG = "no-tag";
+
 export interface IProduct {
   id: number;
   name: string;
@@ -40,7 +42,14 @@ export const query: Writable<string> = writable("");
 
 // Tag order is used to sort products by tag
 // If it's empty, products are sorted by name
-export const sorted_tag_str: Writable<string> = writable("");
+// export const sorted_tag_str: Writable<string> = writable("");
+
+interface ITag {
+  id: number;
+  name: string;
+}
+
+export const tags_by_priority: Writable<ITag[]> = writable([]);
 
 // Ids are used to fetch data from the dictionary
 export const ids = derived(dic, ($dic) => {
@@ -51,10 +60,11 @@ export const ids = derived(dic, ($dic) => {
 export const grouped_by_tags = derived([dic, ids], ([$dic, $ids]) => {
   return $ids.reduce((result: IGroupedProducts, product_id: IProduct["id"]) => {
     // Identify which tag the product belongs to
+    // It picks the first tag if there is any
     let tag: IProduct["tags"][0]["name"] =
       $dic[product_id].tags.length > 0
         ? $dic[product_id].tags[0].name.toLowerCase().trim()
-        : "No tag";
+        : NO_TAG;
 
     // Assign array of product ids given tag and sort by name
     result[tag] = [...(result[tag] || []), product_id].sort((a, b) =>
@@ -75,9 +85,11 @@ export const filtered_ids = derived(
   [ids, dic, query],
   ([$ids, $dic, $query]) => {
     let term = $query.toLowerCase();
+
     return $ids.filter((id) => {
       return (
         $dic[id].name.toLowerCase().includes(term) ||
+        $dic[id].description.toLowerCase().includes(term) ||
         $dic[id].tags.some((tag) => {
           return tag.name.toLowerCase().includes(term);
         })
@@ -86,16 +98,12 @@ export const filtered_ids = derived(
   }
 );
 
+// Product ids sorted by tag priority.
+// ex) [18, 23, 22]
 export const ids_sorted_by_tags = derived(
-  [ids, grouped_by_tags, sorted_tag_str],
-  ([$ids, $grouped_by_tags, $sorted_tag_str]) => {
-    if ($sorted_tag_str === null || $sorted_tag_str === "") {
-      return $ids;
-    }
-
-    const tags = $sorted_tag_str.split(",").map((tag) => tag.trim());
-
+  [ids, grouped_by_tags, tags_by_priority],
+  ([$ids, $grouped_by_tags, $tags_by_priority]) => {
     // Return a flat map of product ids sorted by tag order string
-    return tags.flatMap((tag) => $grouped_by_tags[tag] || []);
+    return $tags_by_priority.flatMap((tag) => $grouped_by_tags[tag.name] || []);
   }
 );

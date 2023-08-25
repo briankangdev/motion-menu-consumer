@@ -1,5 +1,4 @@
-import { loadReviewsByPage } from "../../../../services/reviews_service";
-import { getCompany } from "../../../../services/company_service";
+import { loadCompany } from "../../../../services/company_service";
 import type { ICompany } from "src/stores/company";
 
 interface IRouteParams {
@@ -11,5 +10,5 @@ interface IRouteParams {
 export async function load({ params }: IRouteParams) {
   let company_slug: ICompany["slug"] = params.company_id;
 
-  await getCompany(company_slug);
+  await loadCompany(company_slug);
 }

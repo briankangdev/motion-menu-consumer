@@ -7,6 +7,8 @@
     query,
     grouped_by_tags,
     filtered_ids,
+    tags_by_priority,
+    NO_TAG,
   } from "../../../../stores/products";
   import { reviews } from "../../../../stores/reviews";
   import Button from "../../../../components/button/Button.svelte";
@@ -35,22 +37,8 @@
     REVIEWS_DISPLAYED_COUNT
   );
 
-  // menu section
-  $: ordered_tags = $company.tag_priority
-    ? $company.tag_priority
-        .split(",")
-        .map((tag) => tag.toLowerCase().trim())
-        .filter((v, i, a) => a.indexOf(v) === i)
-    : [];
-
-  $: unordered_tags = Object.keys($grouped_by_tags).filter(
-    (key) => !ordered_tags.includes(key)
-  );
-
-  $: all_tags = ordered_tags.concat(unordered_tags);
-
   onMount(() => {
-    //get params from url and if 'new_shop_owner' is true, show success notification
+    // Get params from url and if 'new_shop_owner' is true, show success notification
     const url = new URL(window.location.href);
     const shop_is_new = url.searchParams.get("new_shop_owner");
 
@@ -178,16 +166,16 @@
       </div>
 
       <div class="tag-container">
-        {#each all_tags as tag}
+        {#each $tags_by_priority as tag}
           <Button
-            title={tag}
-            active={tag === $query}
+            title={tag.name}
+            active={tag.name === $query}
             variant="black"
             onClick={() => {
-              if ($query === tag) {
+              if ($query === tag.name) {
                 query.set("");
               } else {
-                query.set(tag);
+                query.set(tag.name);
               }
             }}
             --text-transform="capitalize"
@@ -206,12 +194,22 @@
             <ProductCard {company_id} product={$products_dic[product_id]} />
           {/each}
         {:else}
-          {#each all_tags as tag_name (tag_name)}
-            {#if $grouped_by_tags[tag_name]}
-              {#each $grouped_by_tags[tag_name] as product_id (product_id)}
+          <!-- When search query is empty -->
+          {#each $tags_by_priority as tag}
+            {#if $grouped_by_tags[tag.name]}
+              {#each $grouped_by_tags[tag.name] as product_id (product_id)}
                 <ProductCard {company_id} product={$products_dic[product_id]} />
               {/each}
             {/if}
+          {/each}
+
+          <hr class="menu-divider" />
+          {#each $grouped_by_tags[NO_TAG] as product_id (product_id)}
+            <ProductCard
+              {company_id}
+              product={$products_dic[product_id]}
+              enable_link={true}
+            />
           {/each}
         {/if}
       </Masonry>
@@ -242,8 +240,6 @@
 
   .reviews {
     width: 100%;
-    /* margin: 0 0 20px 0; */
-    /* height: 170px; */
     display: flex;
     overflow-x: scroll;
     gap: 30px;
@@ -322,6 +318,16 @@
 
   .mobile-products {
     display: block;
+  }
+
+  .menu-divider {
+    border: 0;
+    border-top: 1px solid #a7a7a7;
+    border-radius: 8px;
+    opacity: 0.3;
+    margin-top: 4em;
+    margin-bottom: 2em;
+    width: 90%;
   }
 
   @media (min-width: 768px) {

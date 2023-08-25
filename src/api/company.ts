@@ -7,7 +7,7 @@ interface IResponse {
 
 interface IUpdateParams extends Partial<ICompany> {}
 
-export const get_company = async (
+export const getCompany = async (
   company_id: CompanySlug
 ): Promise<IResponse> => {
   const response = await client.get(`/api/v1/companies/${company_id}`);
