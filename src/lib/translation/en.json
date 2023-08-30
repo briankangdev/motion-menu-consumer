@@ -3,6 +3,26 @@
   "check_menu": "Check out the menu",
   "comment_error_message": "Your comment can't be less than 3 characters",
   "components": {
+    "sign-up_form": {
+      "email_input_label": "Email",
+      "email_input_placeholder": "example@email.com",
+      "password_input_label": "Password",
+      "password_input_placeholder": "****",
+      "password_confirmation_input_label": "Password Confirmation",
+      "password_confirmation_input_placeholder": "****",
+      "button": "Generate QR",
+      "input_error": {
+        "email": {
+          "valid": "Email must be a valid email address",
+          "length": "Email must be between 5 and 100 characters"
+        },
+        "password": {
+          "length": "Password must be between 5 and 100 characters"
+        },
+        "password_confirmation": "Password confirmation doesn't match password"
+      },
+      "success_message": "Your account has been created successfully."
+    },
     "profiling_form": {
       "categories_description": "Choose a template shop, +10 products will be copied into your shop. Skip the process by selecting \"empty\" value.",
       "categories_description_title": "Copy products from the template shop!"
@@ -50,6 +70,15 @@
     "home": {
       "welcome": "Welcome"
     },
+    "landing": {
+      "head_title": "Create your account at Motion Menu",
+      "title": "Get your QR menu instantly!",
+      "description": "Create an account using either Google or email. We build a QR menu for you.",
+      "success_cases": {
+        "title": "Success cases",
+        "description": "Complete the following form and you will get a demo QR menu. Please reach out to us if you need any support."
+      }
+    },
     "shop": {
       "images": {
         "add_review": "Add review",
@@ -70,7 +99,9 @@
           "coffee": "Coffee",
           "empty": "Empty",
           "pizza": "Pizza",
-          "stakes": "Stake"
+          "stakes": "Stake",
+          "hamburger": "Hamburger",
+          "saigon": "Saigon"
         },
         "description": "Help us customize your menu by telling us a bit about your business.",
         "error_message": "Error while creating your menu. Please try again later.",
