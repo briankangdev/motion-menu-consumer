@@ -1,14 +1,20 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Button from "../button/Button.svelte";
-  import type { CompanyCategory } from "src/stores/company";
+  import type { CompanyCategory } from "../../stores/company";
 
   export let handleSubmitCallback: (
     shop_name: string,
     category: CompanyCategory
   ) => void;
 
-  const categories: CompanyCategory[] = ["empty", "pizza", "coffee", "stakes"];
+  const categories: CompanyCategory[] = [
+    "empty",
+    "pizza",
+    "coffee",
+    "hamburger",
+    "saigon",
+  ];
   let category_selected: CompanyCategory = "empty";
   let shop_name: string = "";
 
@@ -41,7 +47,7 @@
     if (error) {
       return;
     } else {
-      handleSubmitCallback(shop_name, category_selected)
+      handleSubmitCallback(shop_name, category_selected);
     }
   }
 </script>
