@@ -71,8 +71,12 @@
       const { data: profile } = await sign_in(email, password);
       goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
     } catch (error) {
+      const error_message: string = $_(
+        `components.sign-up_form.errors.${error.response.data.errors.full_messages[0]}`
+      );
+
       console.log(error);
-      toast.error(error.response.data.errors.full_messages[0]);
+      toast.error(error_message);
       loading_submit = false;
     }
   };

@@ -21,6 +21,9 @@
         },
         "password_confirmation": "La confirmación de la contraseña no coincide con la contraseña"
       },
+      "errors": {
+        "Email has already been taken": "El email ya está en uso"
+      },
       "success_message": "Tu cuenta ha sido creada con éxito."
     },
     "profiling_form": {
