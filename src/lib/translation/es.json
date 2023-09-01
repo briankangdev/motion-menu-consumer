@@ -10,7 +10,18 @@
       "password_input_placeholder": "****",
       "password_confirmation_input_label": "Confirme la contraseña",
       "password_confirmation_input_placeholder": "****",
-      "button": "Generar QR"
+      "button": "Generar QR",
+      "input_error": {
+        "email": {
+          "valid": "El email debe ser una dirección de correo electrónico válida",
+          "length": "El email debe tener entre 5 y 100 caracteres"
+        },
+        "password": {
+          "length": "La contraseña debe tener entre 5 y 100 caracteres"
+        },
+        "password_confirmation": "La confirmación de la contraseña no coincide con la contraseña"
+      },
+      "success_message": "Tu cuenta ha sido creada con éxito."
     },
     "profiling_form": {
       "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\".",
