@@ -109,7 +109,11 @@
   }
 </script>
 
-<form class="sign-up_form" on:submit|preventDefault={handleSubmit}>
+<form
+  class="sign-up_form"
+  on:submit|preventDefault={handleSubmit}
+  data-testid="sign-up-form"
+>
   <div class="input">
     <label for="email">{$_("components.sign-up_form.email_input_label")}</label>
     <input

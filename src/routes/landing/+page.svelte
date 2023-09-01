@@ -10,10 +10,15 @@
   import SignUpForm from "../../components/signup-form/SignUpForm.svelte";
   import SuccessCasesCarrousel from "../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
   import toast from "svelte-french-toast";
+  import { user, type IUser } from "../../stores/user";
 
-  let loading_submit = false;
+  let loading_submit: boolean = false;
+  let user_id: IUser["distinct_id"] = $user.distinct_id;
 
   onMount(() => {
+    analytics.track(`${LANDING_PAGE}.visit`, {
+      user_id,
+    });
     // It forces to execute the script after the page is re-rendered
     // Otherwise, the button will not be rendered
     const script = document.createElement("script");
@@ -24,6 +29,11 @@
 
     window.onGoogleSignIn = async (response) => {
       const profile = await google_sign_in(response.credential);
+
+      analytics.track(`${LANDING_PAGE}.sign-up-button.click`, {
+        user_id,
+        provider: "google",
+      });
 
       if (profile.is_new_account) {
         analytics.track(`${LANDING_PAGE}.sign_up`, {
@@ -52,9 +62,13 @@
       loading_submit = true;
       await sign_up(name, email, password, password_confirmation);
       toast.success($_("components.sign-up_form.success_message"));
+      analytics.track(`${LANDING_PAGE}.sign-up-button.click`, {
+        user_id,
+        provider: "email",
+      });
       loading_submit = false;
-      const { data: profile } = await sign_in(email, password);
 
+      const { data: profile } = await sign_in(email, password);
       goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
     } catch (error) {
       console.log(error);
@@ -82,7 +96,7 @@
       <p>
         {$_("routes.landing.description")}
       </p>
-      <div class="google_sign_in">
+      <div class="google_sign_in" data-testid="google-sign-in">
         <div
           id="g_id_onload"
           data-client_id={PUBLIC_GOOGLE_OAUTH_CLIENT_ID}
@@ -108,7 +122,8 @@
       <h1 data-testid="success-cases-title">
         {$_("routes.landing.success_cases.title")}
       </h1>
-      <p>
+      <!-- data-testid="success-cases-description" is not working -->
+      <p class="success-cases-description">
         {$_("routes.landing.success_cases.description")}
       </p>
     </div>

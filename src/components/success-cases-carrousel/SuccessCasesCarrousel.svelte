@@ -37,7 +37,7 @@
   });
 </script>
 
-<div class="carrousel" data-testid="carrousel">
+<div class="carrousel" data-testid="success-cases-carrousel">
   <div
     class="carrousel__wrapper"
     bind:this={carrousel_wrap}
