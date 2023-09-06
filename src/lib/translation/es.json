@@ -3,6 +3,29 @@
   "check_menu": "Fijáte la carta",
   "comment_error_message": "Tu comentario no puede tener menos de 3 caracteres",
   "components": {
+    "sign-up_form": {
+      "email_input_label": "Email",
+      "email_input_placeholder": "ejemplo@email.com",
+      "password_input_label": "Contraseña",
+      "password_input_placeholder": "****",
+      "password_confirmation_input_label": "Confirme la contraseña",
+      "password_confirmation_input_placeholder": "****",
+      "button": "Generar QR",
+      "input_error": {
+        "email": {
+          "valid": "El email debe ser una dirección de correo electrónico válida",
+          "length": "El email debe tener entre 5 y 100 caracteres"
+        },
+        "password": {
+          "length": "La contraseña debe tener entre 5 y 100 caracteres"
+        },
+        "password_confirmation": "La confirmación de la contraseña no coincide con la contraseña"
+      },
+      "errors": {
+        "Email has already been taken": "El email ya está en uso"
+      },
+      "success_message": "Tu cuenta ha sido creada con éxito."
+    },
     "profiling_form": {
       "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\".",
       "categories_description_title": "¡Copia productos de una plantilla!"
@@ -47,6 +70,15 @@
   "routes": {
     "home": {
       "welcome": "Bienvenido"
+    },
+    "landing": {
+      "head_title": "Crea tu cuenta en Motion Menu",
+      "title": "¡Obtenga su menú QR al instante!",
+      "description": "Cree una cuenta usando Google o su cuenta de mail. Construimos un menú QR para ti.",
+      "success_cases": {
+        "title": "Casos de éxito",
+        "description": "Complete el siguiente formulario y obtendrá un menú QR de demostración. Comuníquese con nosotros si necesita algún soporte."
+      }
     },
     "shop": {
       "images": {
