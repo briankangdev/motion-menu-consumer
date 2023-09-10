@@ -3,8 +3,9 @@
   import Logo from "./Logo.svelte";
   import { _ as t } from "svelte-i18n";
   import { profile_data } from "../stores/profile";
-  import { signOut } from "../services/profile_service";
+  import { signOut } from "../services/auth_service";
   import GoSignOut from "svelte-icons/go/GoSignOut.svelte";
+  import { goto } from "$app/navigation";
 
   let profile_name = "";
 
@@ -30,6 +31,7 @@
           class="sign-out"
           on:click={() => {
             signOut();
+            goto("/", { invalidateAll: true });
           }}
         >
           <GoSignOut />
