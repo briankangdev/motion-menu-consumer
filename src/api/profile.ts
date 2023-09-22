@@ -20,6 +20,24 @@ interface ISignInResponse {
   data: IProfileData;
 }
 
+// Helper function to set cookies
+const setCookies = (headers: any) => {
+  Cookies.set("access-token", headers["access-token"]);
+  Cookies.set("token-type", headers["token-type"]);
+  Cookies.set("client", headers.client);
+  Cookies.set("uid", headers.uid);
+  Cookies.set("expiry", headers.expiry);
+};
+
+// Helper function to remove cookies
+const removeCookies = () => {
+  Cookies.remove("access-token");
+  Cookies.remove("token-type");
+  Cookies.remove("client");
+  Cookies.remove("uid");
+  Cookies.remove("expiry");
+};
+
 export const sign_up = async (
   name: string,
   email: string,
@@ -45,13 +63,7 @@ export const sign_in = async (
     email,
     password,
   });
-
-  Cookies.set("access-token", response.headers["access-token"]);
-  Cookies.set("token-type", response.headers["token-type"]);
-  Cookies.set("client", response.headers.client);
-  Cookies.set("uid", response.headers.uid);
-  Cookies.set("expiry", response.headers.expiry);
-
+  setCookies(response.headers);
   return response.data;
 };
 
@@ -59,25 +71,13 @@ export const google_sign_in = async (id_token: string): Promise<IProfile> => {
   const response = await client.post(`/api/v1/companies/oauth/google`, {
     id_token,
   });
-
-  Cookies.set("access-token", response.headers["access-token"]);
-  Cookies.set("token-type", response.headers["token-type"]);
-  Cookies.set("client", response.headers.client);
-  Cookies.set("uid", response.headers.uid);
-  Cookies.set("expiry", response.headers.expiry);
-
+  setCookies(response.headers);
   return response.data;
 };
 
 export const sign_out = async (): Promise<ISignOutResponse> => {
   const response = await client.delete(`/api/v1/companies/auth/sign_out`);
-
-  Cookies.remove("access-token");
-  Cookies.remove("token-type");
-  Cookies.remove("client");
-  Cookies.remove("uid");
-  Cookies.remove("expiry");
-
+  removeCookies();
   return response.data;
 };
 
