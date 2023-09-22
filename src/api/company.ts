@@ -1,5 +1,5 @@
 import client from "./client";
-import type { CompanySlug, ICompany } from "src/stores/company";
+import type { CompanySlug, ICompany } from "../stores/company";
 
 interface IResponse {
   data: ICompany;

@@ -1,4 +1,4 @@
-import type { ICompany } from "src/stores/company";
+import type { ICompany } from "../stores/company";
 import client from "./client";
 
 interface IResponseCopyProducts {

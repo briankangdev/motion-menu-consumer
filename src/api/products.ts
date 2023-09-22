@@ -1,6 +1,6 @@
 import client from "./client";
-import type { IProduct } from "src/stores/products";
-import type { CompanySlug, ICompany } from "src/stores/company";
+import type { IProduct } from "../stores/products";
+import type { CompanySlug } from "../stores/company";
 
 interface IResponseProducts {
   data: { [key: string]: IProduct };
@@ -9,14 +9,6 @@ interface IResponseProducts {
 
 interface IResponseProduct {
   data: IProduct;
-}
-
-interface IResponseCopyProducts {
-  job_id: string;
-}
-
-interface IResponseCopyProductsStatus {
-  status: string;
 }
 
 export const getProducts = async (
