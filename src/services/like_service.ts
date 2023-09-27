@@ -12,10 +12,10 @@ import {
   type ILike,
 } from "../api/likes";
 import mixpanel from "mixpanel-browser";
-import type { IUser } from "src/stores/user";
-import type { IProduct } from "src/stores/products";
+import type { IUser } from "../stores/user";
+import type { IProduct } from "../stores/products";
 import { user } from "../stores/user";
-import type { CompanySlug } from "src/stores/company";
+import type { CompanySlug } from "../stores/company";
 
 let user_distinct_id: IUser["distinct_id"];
 
