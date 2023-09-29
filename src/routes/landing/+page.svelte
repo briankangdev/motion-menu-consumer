@@ -92,64 +92,68 @@
     <Logo />
   </header>
 
-  <section>
-    <div class="landing_header">
-      <h1 data-testid="profiling-title">
-        {$_("routes.landing.title")}
-      </h1>
-      <p>
-        {$_("routes.landing.description")}
-      </p>
-      <div class="google_sign_in" data-testid="google-sign-in">
-        <div
-          id="g_id_onload"
-          data-client_id={PUBLIC_GOOGLE_OAUTH_CLIENT_ID}
-          data-callback="onGoogleSignIn"
-          data-auto_prompt="false"
-        />
-        <div
-          class="g_id_signin"
-          data-type="standard"
-          data-size="large"
-          data-theme="outline"
-          data-text="sign_in_with"
-          data-shape="rectangular"
-          data-logo_alignment="left"
-        />
+  <div class="container">
+    <section>
+      <div class="landing_header">
+        <h1 data-testid="profiling-title">
+          {$_("routes.landing.title")}
+        </h1>
+        <p>
+          {$_("routes.landing.description")}
+        </p>
+        <div class="google_sign_in" data-testid="google-sign-in">
+          <div
+            id="g_id_onload"
+            data-client_id={PUBLIC_GOOGLE_OAUTH_CLIENT_ID}
+            data-callback="onGoogleSignIn"
+            data-auto_prompt="false"
+          />
+          <div
+            class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="outline"
+            data-text="sign_in_with"
+            data-shape="rectangular"
+            data-logo_alignment="left"
+          />
+        </div>
       </div>
-    </div>
-    <SignUpForm {handleSubmitCallback} {loading_submit} />
-  </section>
+      <SignUpForm {handleSubmitCallback} {loading_submit} />
+    </section>
 
-  <section class="success_cases">
-    <div class="success_cases_header">
-      <h1 data-testid="success-cases-title">
-        {$_("routes.landing.success_cases.title")}
-      </h1>
-      <!-- data-testid="success-cases-description" is not working -->
-      <p class="success-cases-description">
-        {$_("routes.landing.success_cases.description")}
-      </p>
-    </div>
-    <SuccessCasesCarrousel />
-  </section>
+    <section class="success_cases">
+      <div class="success_cases_header">
+        <h1 data-testid="success-cases-title">
+          {$_("routes.landing.success_cases.title")}
+        </h1>
+        <!-- data-testid="success-cases-description" is not working -->
+        <p class="success-cases-description">
+          {$_("routes.landing.success_cases.description")}
+        </p>
+      </div>
+      <SuccessCasesCarrousel />
+    </section>
+  </div>
 </main>
 
 <style>
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
   header {
     padding: 4px 0 4px 12px;
   }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   section {
-    padding: 0 30px 20px 30px;
+    /* padding: 0 30px 20px 30px; */
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 90%;
   }
 
   .landing_header,
@@ -164,7 +168,6 @@
     width: 90%;
     height: 1px;
     background-color: #f3f3f4;
-    margin: 0 auto;
     margin-top: 10px;
   }
 
@@ -176,7 +179,6 @@
   }
 
   .google_sign_in {
-    margin: 0 auto;
     height: 40px; /* This is to prevent the button from altering the user interface. */
   }
 
@@ -186,13 +188,20 @@
     }
 
     section {
-      width: 400px;
-      margin: 0 auto;
+      max-width: 400px;
       gap: 15px;
     }
 
     h1 {
       font-size: 50px;
+    }
+
+    .container {
+      flex-direction: row;
+      justify-content: space-around;
+
+      max-width: 1280px;
+      margin: 0 auto;
     }
   }
 </style>
