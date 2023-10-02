@@ -22,6 +22,7 @@
   import toast from "svelte-french-toast";
   import SuccessNotification from "../../../../components/success-notification/SuccessNotification.svelte";
   import { onMount } from "svelte";
+  import Footer from "../../../../components/Footer.svelte";
 
   export let data;
   let company_id = data.company_id;
@@ -219,6 +220,8 @@
     </section>
   </div>
 </main>
+
+<Footer />
 
 <style>
   main {

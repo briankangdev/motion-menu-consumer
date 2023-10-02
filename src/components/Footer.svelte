@@ -32,7 +32,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        margin-top: 15px;
+        margin-top: 5em;
         padding: 35px 0;
         background-color: #f2f2f2;
     }
