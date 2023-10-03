@@ -3,32 +3,35 @@
   "check_menu": "Fijáte la carta",
   "comment_error_message": "Tu comentario no puede tener menos de 3 caracteres",
   "components": {
+    "navbar": {
+      "open_app": "Abrir app"
+    },
+    "profiling_form": {
+      "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\".",
+      "categories_description_title": "¡Copia productos de una plantilla!"
+    },
     "sign-up_form": {
+      "button": "Generar QR",
       "email_input_label": "Email",
       "email_input_placeholder": "ejemplo@email.com",
-      "password_input_label": "Contraseña",
-      "password_input_placeholder": "****",
-      "password_confirmation_input_label": "Confirme la contraseña",
-      "password_confirmation_input_placeholder": "****",
-      "button": "Generar QR",
+      "errors": {
+        "Email has already been taken": "El email ya está en uso"
+      },
       "input_error": {
         "email": {
-          "valid": "El email debe ser una dirección de correo electrónico válida",
-          "length": "El email debe tener entre 5 y 100 caracteres"
+          "length": "El email debe tener entre 5 y 100 caracteres",
+          "valid": "El email debe ser una dirección de correo electrónico válida"
         },
         "password": {
           "length": "La contraseña debe tener entre 5 y 100 caracteres"
         },
         "password_confirmation": "La confirmación de la contraseña no coincide con la contraseña"
       },
-      "errors": {
-        "Email has already been taken": "El email ya está en uso"
-      },
+      "password_confirmation_input_label": "Confirme la contraseña",
+      "password_confirmation_input_placeholder": "****",
+      "password_input_label": "Contraseña",
+      "password_input_placeholder": "****",
       "success_message": "Tu cuenta ha sido creada con éxito."
-    },
-    "profiling_form": {
-      "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\".",
-      "categories_description_title": "¡Copia productos de una plantilla!"
     },
     "success_notification": {
       "link_A": "aquí",
@@ -72,13 +75,13 @@
       "welcome": "Bienvenido"
     },
     "landing": {
-      "head_title": "Crea tu cuenta en Motion Menu",
-      "title": "¡Obtenga su menú QR al instante!",
       "description": "Cree una cuenta usando Google o su cuenta de mail. Construimos un menú QR para ti.",
+      "head_title": "Crea tu cuenta en Motion Menu",
       "success_cases": {
-        "title": "Casos de éxito",
-        "description": "Complete el siguiente formulario y obtendrá un menú QR de demostración. Comuníquese con nosotros si necesita algún soporte."
-      }
+        "description": "Complete el siguiente formulario y obtendrá un menú QR de demostración. Comuníquese con nosotros si necesita algún soporte.",
+        "title": "Casos de éxito"
+      },
+      "title": "¡Obtenga su menú QR al instante!"
     },
     "shop": {
       "images": {
