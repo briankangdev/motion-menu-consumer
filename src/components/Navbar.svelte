@@ -3,8 +3,6 @@
   import Logo from "./Logo.svelte";
   import { _ as t } from "svelte-i18n";
   import { profile_data } from "../stores/profile";
-  import { signOut } from "../services/profile_service";
-  import GoSignOut from "svelte-icons/go/GoSignOut.svelte";
 
   let profile_name = "";
 
@@ -71,16 +69,5 @@
 
   .profile span {
     margin-right: 0.8em;
-  }
-
-  button.sign-out {
-    padding: 0;
-    background: none;
-    border: none;
-    width: 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 </style>
