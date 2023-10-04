@@ -15,6 +15,7 @@
   import { onMount } from "svelte";
   import analytics from "../../../lib/analytics";
   import { MENU_PAGE } from "../../../lib/analytics/types.js";
+  import Footer from "../../../components/Footer.svelte";
 
   // Fetch products data given id
   export let data;
@@ -123,6 +124,8 @@
     </Masonry>
   </div>
 </main>
+
+<Footer />
 
 <style>
   main {
