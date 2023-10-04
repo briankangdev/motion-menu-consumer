@@ -26,7 +26,7 @@ client.interceptors.request.use((config) => {
   }
 
   // Company authentification
-  custom_headers["access-token"] = Cookies.get("access-token");
+  custom_headers["access-token"] = Cookies.get("accessToken");
   custom_headers["client"] = Cookies.get("client");
   custom_headers["uid"] = Cookies.get("uid");
 

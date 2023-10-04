@@ -22,16 +22,20 @@ interface ISignInResponse {
 
 // Helper function to set cookies
 const setCookies = (headers: any) => {
-  Cookies.set("access-token", headers["access-token"]);
-  Cookies.set("token-type", headers["token-type"]);
-  Cookies.set("client", headers.client);
-  Cookies.set("uid", headers.uid);
-  Cookies.set("expiry", headers.expiry);
+  // set cookies with subdomain .motion.menu to read and login in admin.motion.menu
+  const domain =
+    process.env.NODE_ENV === "production" ? ".motion.menu" : "localhost";
+
+  Cookies.set("accessToken", headers["access-token"], { domain });
+  Cookies.set("token-type", headers["token-type"], { domain });
+  Cookies.set("client", headers.client, { domain });
+  Cookies.set("uid", headers.uid, { domain });
+  Cookies.set("expiry", headers.expiry, { domain });
 };
 
 // Helper function to remove cookies
 const removeCookies = () => {
-  Cookies.remove("access-token");
+  Cookies.remove("accessToken");
   Cookies.remove("token-type");
   Cookies.remove("client");
   Cookies.remove("uid");

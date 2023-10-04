@@ -3,7 +3,7 @@ import { profile_data } from "../stores/profile.js";
 export const load = async ({ cookies }) => {
   const uid = cookies.get("uid");
   const client_id = cookies.get("client");
-  const access_token = cookies.get("access-token");
+  const access_token = cookies.get("accessToken");
   const is_authenticated = !!uid && !!client_id && !!access_token;
 
   if (!is_authenticated) {
