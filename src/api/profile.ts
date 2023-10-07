@@ -1,6 +1,6 @@
 import client from "./client";
 import type { IProfile, IProfileData } from "../stores/profile";
-import Cookies from "js-cookie";
+import Cookies from "../lib/cookies";
 
 interface ISignOutResponse {
   success: boolean;
@@ -26,7 +26,7 @@ const setCookies = (headers: any) => {
   const domain =
     process.env.NODE_ENV === "production" ? ".motion.menu" : "localhost";
 
-  Cookies.set("accessToken", headers["access-token"], { domain });
+  Cookies.set("access-token", headers["access-token"], { domain });
   Cookies.set("token-type", headers["token-type"], { domain });
   Cookies.set("client", headers.client, { domain });
   Cookies.set("uid", headers.uid, { domain });
@@ -35,7 +35,7 @@ const setCookies = (headers: any) => {
 
 // Helper function to remove cookies
 const removeCookies = () => {
-  Cookies.remove("accessToken");
+  Cookies.remove("access-token");
   Cookies.remove("token-type");
   Cookies.remove("client");
   Cookies.remove("uid");
@@ -46,7 +46,7 @@ export const sign_up = async (
   name: string,
   email: string,
   password: string,
-  password_confirmation: string
+  password_confirmation: string,
 ): Promise<ISignUpResponse> => {
   const response = await client.post("/api/v1/companies/auth", {
     name,
@@ -61,7 +61,7 @@ export const sign_up = async (
 
 export const sign_in = async (
   email: string,
-  password: string
+  password: string,
 ): Promise<ISignInResponse> => {
   const response = await client.post(`/api/v1/companies/auth/sign_in`, {
     email,
@@ -88,7 +88,7 @@ export const sign_out = async (): Promise<ISignOutResponse> => {
 export const validate_token = async (
   uid: string,
   client_id: string,
-  access_token: string
+  access_token: string,
 ): Promise<IValidateTokenResponse> => {
   const response = await client.get("/api/v1/companies/auth/validate_token", {
     headers: {
