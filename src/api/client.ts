@@ -1,16 +1,16 @@
 import axios, { AxiosHeaders } from "axios";
 import type { AxiosInstance } from "axios";
-import { env } from "$env/dynamic/public";
+import { PUBLIC_MOTION_MENU_API_ENDPOINT } from "$env/static/public";
 import { jwt_token } from "../stores/user_store";
 import { get } from "svelte/store";
-import Cookies from "js-cookie";
+import Cookies from "../lib/cookies";
 
 interface ICustomHeaders extends AxiosHeaders {
   Authorization?: string;
 }
 
 const client: AxiosInstance = axios.create({
-  baseURL: env.PUBLIC_MOTION_MENU_API_ENDPOINT,
+  baseURL: PUBLIC_MOTION_MENU_API_ENDPOINT,
 });
 
 client.interceptors.request.use((config) => {
@@ -26,7 +26,7 @@ client.interceptors.request.use((config) => {
   }
 
   // Company authentification
-  custom_headers["access-token"] = Cookies.get("accessToken");
+  custom_headers["access-token"] = Cookies.get("access-token");
   custom_headers["client"] = Cookies.get("client");
   custom_headers["uid"] = Cookies.get("uid");
 

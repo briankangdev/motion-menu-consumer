@@ -30,6 +30,7 @@
   "type": "module",
   "dependencies": {
     "@auth0/auth0-spa-js": "^2.0.1",
+    "@types/js-cookie": "^3.0.4",
     "axios": "^1.2.0",
     "chart.js": "^4.1.1",
     "flagsmith": "^3.14.1",
