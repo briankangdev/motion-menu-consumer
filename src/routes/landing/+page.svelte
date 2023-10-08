@@ -1,7 +1,7 @@
 <script lang="ts">
   import { PUBLIC_GOOGLE_OAUTH_CLIENT_ID } from "$env/static/public";
   import { onMount } from "svelte";
-  import { google_sign_in, sign_up, sign_in } from "../../api/profile";
+  import { googleSignIn, signIn, signUp } from "../../services/profile_service";
   import { goto } from "$app/navigation";
   import { LANDING_PAGE } from "$lib/analytics/types";
   import analytics from "$lib/analytics";
@@ -29,7 +29,7 @@
     document.head.appendChild(script);
 
     window.onGoogleSignIn = async (response) => {
-      const profile = await google_sign_in(response.credential);
+      const profile = await googleSignIn(response.credential);
 
       analytics.track(`${LANDING_PAGE}.sign-up-button.click`, {
         user_id,
@@ -61,7 +61,7 @@
     const name = email.split("@")[0]; //We set a default name for the user
     try {
       loading_submit = true;
-      await sign_up(name, email, password, password_confirmation);
+      await signUp(name, email, password, password_confirmation);
       toast.success($_("components.sign-up_form.success_message"));
       analytics.track(`${LANDING_PAGE}.sign-up-button.click`, {
         user_id,
@@ -69,7 +69,7 @@
       });
       loading_submit = false;
 
-      const { data: profile } = await sign_in(email, password);
+      const { data: profile } = await signIn(email, password);
       goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
     } catch (error) {
       const error_message: string = $_(

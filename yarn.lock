@@ -3187,10 +3187,10 @@ svelte-check@^2.9.2:
     svelte-preprocess "^4.0.0"
     typescript "*"
 
-svelte-french-toast@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/svelte-french-toast/-/svelte-french-toast-1.1.0.tgz#ae7c320b260f2f1a633536f6d63aac60347cb326"
-  integrity sha512-OWlOJD0iqZpL4apMbtsbSZKYukBz9CuME2KoW/zzHfFWVImXVH5zAiCmUU4N0OSPo9fY34TZKIL/5+Sbt5KkPA==
+svelte-french-toast@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/svelte-french-toast/-/svelte-french-toast-1.2.0.tgz#bfe3696ee1e3cbdee2a300e0153dede7d6d802eb"
+  integrity sha512-5PW+6RFX3xQPbR44CngYAP1Sd9oCq9P2FOox4FZffzJuZI2mHOB7q5gJBVnOiLF5y3moVGZ7u2bYt7+yPAgcEQ==
   dependencies:
     svelte-writable-derived "^3.1.0"
 
