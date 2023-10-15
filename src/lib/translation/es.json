@@ -75,13 +75,36 @@
       "welcome": "Bienvenido"
     },
     "landing": {
-      "description": "Cree una cuenta usando Google o su cuenta de mail. Construimos un menú QR para ti.",
+      "carousel": {
+        "description": "Consumidores escanean código QR para ver la carta. Puedes compartir el link de su carta por redes sociales.",
+        "title": "Consumidores quieren ver videos y fotos"
+      },
+      "description": "Cada vez más gente visita instagram o google map antes de ir a los restaurantes. Pero es dificíl hacer marketing online porque promocionar un restaurante require esfuerzos especiales.",
       "head_title": "Crea tu cuenta en Motion Menu",
+      "how_long_it_takes": {
+        "description": "Crear la carta QR tarda 3 minutos.\n\nCrear nuevos videos y fotos require más tiempo. Nos mandamos gente a su local. Tenemos que coordinar bien.",
+        "title": "Tarda mucho tiempo?"
+      },
+      "no_image": {
+        "description": "Sabemos que obtener fotos y vidoes perfectos es dificíl y puede ser tedioso. Nos armamos un equipo dedicado para cubrir las necesidades.",
+        "title": "Qué pasa si yo no tengo fotos perfectos?"
+      },
+      "not_good_with_computers": {
+        "description": "Tenemos chat en vivo para asistir la configuración inicial. Podemos ayudarte a cargar los items y fotos.",
+        "title": "No soy bueno en manejar computadora."
+      },
       "success_cases": {
         "description": "Complete el siguiente formulario y obtendrá un menú QR de demostración. Comuníquese con nosotros si necesita algún soporte.",
         "title": "Casos de éxito"
       },
-      "title": "¡Obtenga su menú QR al instante!"
+      "title": "¿Siente dificíl arrancar marketing digital para su restaurante?",
+      "try": {
+        "description": "Empiezá 14 días de pureba. No require tarjeta de crédito",
+        "title": "Probar la carta QR!"
+      },
+      "video_demo": {
+        "description": "Ves, video es la llave para atraer más clientes."
+      }
     },
     "shop": {
       "images": {

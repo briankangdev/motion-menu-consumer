@@ -77,13 +77,36 @@
       "welcome": "Welcome"
     },
     "landing": {
-      "description": "Create an account using either Google or email. We build a QR menu for you.",
+      "carousel": {
+        "description": "Customers scan QR code and get the digital menu. You can also share the link on social media.",
+        "title": "Videos and images are what customers want"
+      },
+      "description": "We all know that more and more customers are going restaurants that appear on instagram or google map. But restaurant marketing is difficult and requires special efforts.",
       "head_title": "Create your account at Motion Menu",
+      "how_long_it_takes": {
+        "description": "Getting QR menu won't take more than 3 minutes.\n\nGetting new videos and images takes more time. We send our people to your location.",
+        "title": "How long it takes?"
+      },
+      "no_image": {
+        "description": "Our team knows that getting perfect food image is hard and requires consistent update. We built a team and service to cover that needs.",
+        "title": "What if I don't have perfact images and videos?"
+      },
+      "not_good_with_computers": {
+        "description": "We have real time chat to assist your needs. We can help you to upload all your items and guide you how to do it.",
+        "title": "I'm not good with computers."
+      },
       "success_cases": {
         "description": "Complete the following form and you will get a demo QR menu. Please reach out to us if you need any support.",
         "title": "Success cases"
       },
-      "title": "Get your QR menu instantly!"
+      "title": "Isn’t it hard to advertise a restaurant?",
+      "try": {
+        "description": "Start 14 days free trial today. No credit card is required.",
+        "title": "Try QR menu!"
+      },
+      "video_demo": {
+        "description": "You see, video is key to get more customers"
+      }
     },
     "shop": {
       "images": {

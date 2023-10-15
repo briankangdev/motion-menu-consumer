@@ -12,6 +12,7 @@
   import SuccessCasesCarrousel from "../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
   import toast from "svelte-french-toast";
   import { user, type IUser } from "../../stores/user";
+  import Button from "../../components/button/Button.svelte";
 
   let loading_submit: boolean = false;
   let user_id: IUser["distinct_id"] = $user.distinct_id;
@@ -94,14 +95,61 @@
   </header>
 
   <div class="container">
-    <section>
-      <div class="landing_header">
-        <h1 data-testid="profiling-title">
-          {$_("routes.landing.title")}
+    <div class="row">
+      <section>
+        <div class="landing_header">
+          <h1 data-testid="profiling-title">
+            {$_("routes.landing.title")}
+          </h1>
+          <p>
+            {$_("routes.landing.description")}
+          </p>
+        </div>
+      </section>
+
+      <section class="solution">
+        <video autoplay muted loop>
+          <source
+            src="https://res.cloudinary.com/dnaexfddx/video/upload/w_150,h_150,dpr_2.0,c_fill/v1689298292/proveat/videos/qxfjxvholtg897uglz76.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+
+        <p>{$_("routes.landing.video_demo.description")}</p>
+      </section>
+    </div>
+
+    <div class="row reverse">
+      <section class="carousel">
+        <h1>{$_("routes.landing.carousel.title")}</h1>
+        <p>{$_("routes.landing.carousel.description")}</p>
+      </section>
+
+      <SuccessCasesCarrousel />
+    </div>
+
+    <div class="row">
+      <section class="no_image">
+        <h1>{$_("routes.landing.no_image.title")}</h1>
+        <p>{$_("routes.landing.no_image.description")}</p>
+
+        <!-- TODO -->
+        <!-- <Button
+          variant="primary"
+          title="Learn more"
+          test_id="learn_more_marketing"
+        /> -->
+      </section>
+
+      <section>
+        <h1>
+          {$_("routes.landing.try.title")}
         </h1>
         <p>
-          {$_("routes.landing.description")}
+          {$_("routes.landing.try.description")}
         </p>
+
         <div class="google_sign_in" data-testid="google-sign-in">
           <div
             id="g_id_onload"
@@ -119,21 +167,28 @@
             data-logo_alignment="left"
           />
         </div>
-      </div>
-      <SignUpForm {handleSubmitCallback} {loading_submit} />
-    </section>
 
-    <section class="success_cases">
-      <div class="success_cases_header">
-        <h1 data-testid="success-cases-title">
-          {$_("routes.landing.success_cases.title")}
-        </h1>
-        <!-- data-testid="success-cases-description" is not working -->
-        <p class="success-cases-description">
-          {$_("routes.landing.success_cases.description")}
-        </p>
-      </div>
-      <SuccessCasesCarrousel />
+        <hr />
+
+        <SignUpForm {handleSubmitCallback} {loading_submit} />
+      </section>
+    </div>
+
+    <section>
+      <h1>
+        {$_("routes.landing.not_good_with_computers.title")}
+      </h1>
+      <p>
+        {$_("routes.landing.not_good_with_computers.description")}
+      </p>
+    </section>
+    <section>
+      <h1>
+        {$_("routes.landing.how_long_it_takes.title")}
+      </h1>
+      <p>
+        {$_("routes.landing.how_long_it_takes.description")}
+      </p>
     </section>
   </div>
 </main>
@@ -145,10 +200,26 @@
     padding: 4px 0 4px 12px;
   }
 
+  h1 {
+    font-weight: 600;
+    line-height: 1.2;
+    font-size: 45px;
+    word-break: break-word;
+    margin-bottom: 0;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   section {
@@ -159,26 +230,34 @@
     width: 90%;
   }
 
-  .landing_header,
-  .success_cases_header {
+  .landing_header {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  .landing_header::after {
+  hr {
     content: "";
-    width: 90%;
-    height: 1px;
-    background-color: #f3f3f4;
+    width: 80%;
+    background-color: var(--gray);
+    opacity: 0.3;
     margin-top: 10px;
   }
 
-  h1 {
-    font-weight: 600;
-    line-height: 1.2;
-    font-size: 45px;
-    word-break: break-word;
+  section.solution {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  section.solution video {
+    width: 250px;
+  }
+
+  section.solution p {
+    color: var(--gray);
   }
 
   .google_sign_in {
@@ -200,11 +279,21 @@
     }
 
     .container {
-      flex-direction: row;
-      justify-content: space-around;
-
+      /* flex-direction: column; */
+      /* flex-wrap: wrap; */
+      /* justify-content: space-around; */
       max-width: 1280px;
       margin: 0 auto;
+    }
+
+    .row {
+      width: 100%;
+      justify-content: space-around;
+      margin-bottom: 5em;
+    }
+
+    .row.reverse {
+      flex-direction: row-reverse;
     }
   }
 </style>

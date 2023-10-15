@@ -103,15 +103,6 @@ describe("Landing Page", () => {
   });
 
   context('"Success cases" section', () => {
-    it("shows the title", () => {
-      cy.get("[data-testid=success-cases-title]").should("be.visible");
-    });
-
-    it("shows the description", () => {
-      //[data-testid=success-cases-description] is not working
-      cy.get(".success-cases-description").should("be.visible");
-    });
-
     it("shows the carrousel", () => {
       cy.get("[data-testid=success-cases-carrousel]").should("be.visible");
     });
