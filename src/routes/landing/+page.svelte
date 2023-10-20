@@ -279,9 +279,6 @@
     }
 
     .container {
-      /* flex-direction: column; */
-      /* flex-wrap: wrap; */
-      /* justify-content: space-around; */
       max-width: 1280px;
       margin: 0 auto;
     }

@@ -3,6 +3,15 @@
   "check_menu": "Fijáte la carta",
   "comment_error_message": "Tu comentario no puede tener menos de 3 caracteres",
   "components": {
+    "marketing_form": {
+      "contact": "Empezar",
+      "email": {
+        "invalid": "Email es invalido",
+        "label": "Email",
+        "placeholder": "shop@email.com",
+        "required": "Email es requerido"
+      }
+    },
     "navbar": {
       "open_app": "Abrir app"
     },
@@ -92,6 +101,43 @@
       "not_good_with_computers": {
         "description": "Tenemos chat en vivo para asistir la configuración inicial. Podemos ayudarte a cargar los items y fotos.",
         "title": "No soy bueno en manejar computadora."
+      },
+      "restaurant_marketing": {
+        "dedicated_team": {
+          "description": "Mejoramos los contenidos de Instagram y Google Maps. Son las dos principales fuentes que forman a la primera impresión.\n\nLa primera impresión es importante para la venta.",
+          "title": "Equipo dedicado para gestionar contenidos"
+        },
+        "dm": {
+          "description": "Una vez que nos envíe un mensaje, le guiaremos cómo empezar.",
+          "title": "Envíanos un DM para empezar"
+        },
+        "email": {
+          "title": "Envíanos un correo electrónico si no tienes Instagram"
+        },
+        "how_long": {
+          "description": "El trabajo requiere tiempo y esfuerzo. Coordinemos bien para no perder tu tiempo.\n\nPrimero queremos visitar tu ubicación para entender mejor tu negocio.",
+          "title": "¿Cuánto tiempo tarda?"
+        },
+        "marketing_form": {
+          "success": "Gracias por su interés. Nos pondremos en contacto pronto."
+        },
+        "meta": {
+          "description": "Online marketing para restaurantes Motion Menu",
+          "head": "¿Por qué es difícil hacer marketing en Instagram para los restaurantes?"
+        },
+        "qr_menu": {
+          "description": "Creemos que los clientes quieren ver videos e imágenes de buena calidad.",
+          "learn_more": "Conocer más",
+          "title": "Menú QR diseñado para restaurantes"
+        },
+        "use_content": {
+          "description": "Sí. Todo los imagenens creados te pertenecen. Usen donde quieras.",
+          "title": "¿Puedo usar los imagenes en otro lugar?"
+        },
+        "why_is_hard": {
+          "description": "Instagram juega un papel importante cuando los clientes buscan un lugar para cenar. Quieren ver lo que tienes.\n\nPor lo tanto, queremos imágenes de la mejor calidad para representar nuestro negocio. Pero es difícil obtener imágenes y videos excelentes.",
+          "title": "¿Por qué es difícil hacer marketing en Instagram para los restaurantes?"
+        }
       },
       "success_cases": {
         "description": "Complete el siguiente formulario y obtendrá un menú QR de demostración. Comuníquese con nosotros si necesita algún soporte.",

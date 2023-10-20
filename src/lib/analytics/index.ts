@@ -14,6 +14,7 @@ interface IProps {
 
 interface IAnalytics {
   init: (config: IConfig) => void;
+  identify: (id: string) => void;
   setUserId: () => void;
   track: (event_name: string, props?: IProps) => void;
 }
@@ -21,6 +22,9 @@ interface IAnalytics {
 const analytics: IAnalytics = {
   init: (config) => {
     mixpanel.init(PUBLIC_PROJECT_TOKEN, config);
+  },
+  identify: (id: string) => {
+    mixpanel.identify(id);
   },
   setUserId: () => {
     user.update((prev) => ({
