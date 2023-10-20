@@ -3,6 +3,15 @@
   "check_menu": "Check out the menu",
   "comment_error_message": "Your comment can't be less than 3 characters",
   "components": {
+    "marketing_form": {
+      "contact": "Contact us",
+      "email": {
+        "invalid": "Email is invalid",
+        "label": "Email",
+        "placeholder": "shop@email.com",
+        "required": "Email is required"
+      }
+    },
     "navbar": {
       "open_app": "Open app"
     },
@@ -89,11 +98,49 @@
       },
       "no_image": {
         "description": "Our team knows that getting perfect food image is hard and requires consistent update. We built a team and service to cover that needs.",
-        "title": "What if I don't have perfact images and videos?"
+        "title": "What if I don't have perfact images and videos?",
+        "learn_more": "Learn more"
       },
       "not_good_with_computers": {
         "description": "We have real time chat to assist your needs. We can help you to upload all your items and guide you how to do it.",
         "title": "I'm not good with computers."
+      },
+      "restaurant_marketing": {
+        "dedicated_team": {
+          "description": "We improve instgram contents and google map photos. They are the two main sources that shape the first impression.\n\nFirst impression is important when it comes to the decision making.",
+          "title": "Dedicated team to manage contents"
+        },
+        "dm": {
+          "description": "Once you send us message, we will guide you how to set up first meeting.",
+          "title": "DM us to get started"
+        },
+        "email": {
+          "title": "Send us email if you don't have instagram"
+        },
+        "how_long": {
+          "description": "It takes time and efforts. Let's coordinate well so we dont't waste your time.\n\nWe first want to visit your location to better understand your business.",
+          "title": "How long does it take?"
+        },
+        "marketing_form": {
+          "success": "Thank you for your interest. We will contact you soon."
+        },
+        "meta": {
+          "description": "Online restaurant marketing made easy by motion menu",
+          "head": "Why instagram marketing is hard for restaurants?"
+        },
+        "qr_menu": {
+          "description": "We believe videos and photos are what customers want to see.",
+          "learn_more": "Learn more",
+          "title": "QR Menu built for restaurant"
+        },
+        "use_content": {
+          "description": "Yes of course. All created contents belong to you. Use them anywhere you want.",
+          "title": "Can I use contents in other places?"
+        },
+        "why_is_hard": {
+          "description": "Instagram plays a big role when cusotmers look for a plce for a dinner. They want to see what you sell and how the place looks like.\n\nSo we want best quality images to represent our business. But it's hard to get great images and videos.",
+          "title": "Why instagram marketing is hard for restaurants?"
+        }
       },
       "success_cases": {
         "description": "Complete the following form and you will get a demo QR menu. Please reach out to us if you need any support.",

@@ -82,6 +82,11 @@
       loading_submit = false;
     }
   };
+
+  function onLearnMoreMarketingClick() {
+    analytics.track(`${LANDING_PAGE}.learn_more_marketing_button.click`);
+    goto("/landing/restaurant-marketing");
+  }
 </script>
 
 <svelte:head>
@@ -134,12 +139,12 @@
         <h1>{$_("routes.landing.no_image.title")}</h1>
         <p>{$_("routes.landing.no_image.description")}</p>
 
-        <!-- TODO -->
-        <!-- <Button
+        <Button
           variant="primary"
-          title="Learn more"
+          title={$_("routes.landing.no_image.learn_more")}
           test_id="learn_more_marketing"
-        /> -->
+          onClick={onLearnMoreMarketingClick}
+        />
       </section>
 
       <section>
@@ -279,9 +284,6 @@
     }
 
     .container {
-      /* flex-direction: column; */
-      /* flex-wrap: wrap; */
-      /* justify-content: space-around; */
       max-width: 1280px;
       margin: 0 auto;
     }
