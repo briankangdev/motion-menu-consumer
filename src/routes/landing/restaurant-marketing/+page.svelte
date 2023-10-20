@@ -34,7 +34,7 @@
 
   const learnMoreClick = () => {
     analytics.track(`${MARKETING_LANDING_PAGE}.learn_more_button.click`);
-    goto("/qr-menu");
+    goto("/landing");
   };
 </script>
 
