@@ -31,12 +31,12 @@
     analytics.track(`${MARKETING_LANDING_PAGE}.marketing_form.submit`, {
       email,
     });
-    fb("Contact", { type: "email" });
+    fb.track("Contact", { type: "email" });
   };
 
   const learnMoreClick = () => {
     analytics.track(`${MARKETING_LANDING_PAGE}.learn_more_button.click`);
-    fb("ViewContent", { page: "qr-menu" });
+    fb.track("ViewContent", { page: "qr-menu" });
 
     goto("/landing");
   };
@@ -121,7 +121,7 @@
           title="Send DM"
           onClick={() => {
             analytics.track(`${MARKETING_LANDING_PAGE}.send_dm_button.click`);
-            fb("Contact", { type: "dm" });
+            fb.track("Contact", { type: "dm" });
 
             window.open(INSTAGRAM_DM_LINK, "_blank");
           }}

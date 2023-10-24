@@ -90,7 +90,7 @@
 
   function onLearnMoreMarketingClick() {
     analytics.track(`${LANDING_PAGE}.learn_more_marketing_button.click`);
-    fb("ViewContent", { page: "restaurant-marketing" });
+    fb.track("ViewContent", { page: "restaurant-marketing" });
 
     goto("/landing/restaurant-marketing");
   }
