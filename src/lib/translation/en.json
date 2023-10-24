@@ -59,7 +59,7 @@
   "home_analytics_description": "Get more insights from the digital menu and our point of sales system.",
   "home_analytics_title": "Know better about your customers",
   "home_content_description": "Grab customer attention and increase sales. Get valuable feedback from your customers.",
-  "home_content_title": "Customers love videos and images. A boring menu is not enough!",
+  "home_content_title": "Customers love videos and images",
   "home_description": "Motion Menu empowers restaurants and coffee shops across the globe. Customers buy what they see, we present your products in the most attractive way.",
   "home_meta_description": "Best Instagram feel QR digital menu app where users can build relationships with your restaurant and coffee shop.",
   "home_title": "Get QR code for your business!",
@@ -83,7 +83,8 @@
   "reviews": "Reviews",
   "routes": {
     "home": {
-      "welcome": "Welcome"
+      "welcome": "Welcome",
+      "trigger": "Restaurant marketing got complicated in Social Media era"
     },
     "landing": {
       "carousel": {

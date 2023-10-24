@@ -45,7 +45,7 @@
   const flag = "landing_page_copy";
   let video_public_id = "tgeweblar8soskbe6gzy";
   let title_value: string;
-  let on_mount_time: Date;
+  // let on_mount_time: Date;
   let user_id: IUser["distinct_id"] = $user.distinct_id;
 
   onMount(async () => {
@@ -85,7 +85,7 @@
   <div class="row">
     <div>
       {#if title_value}
-        <h1>{$_(title_value)}</h1>
+        <h1>{$_("routes.home.trigger")}</h1>
       {/if}
       <p>
         {$_("home_description")}

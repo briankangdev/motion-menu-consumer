@@ -13,6 +13,7 @@
   import toast from "svelte-french-toast";
   import { user, type IUser } from "../../stores/user";
   import Button from "../../components/button/Button.svelte";
+  import { fb } from "@beyonk/svelte-facebook-pixel";
 
   let loading_submit: boolean = false;
   let user_id: IUser["distinct_id"] = $user.distinct_id;
@@ -42,6 +43,8 @@
           profile_id: profile.id,
         });
 
+        fb.track("CompleteRegistration", { type: "google" });
+
         //invalidateAll: true is to force the page to re-render and update the profile_data store
         goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
       } else {
@@ -68,6 +71,8 @@
         user_id,
         provider: "email",
       });
+      fb.track("CompleteRegistration", { type: "email" });
+
       loading_submit = false;
 
       const { data: profile } = await signIn(email, password);
@@ -85,6 +90,8 @@
 
   function onLearnMoreMarketingClick() {
     analytics.track(`${LANDING_PAGE}.learn_more_marketing_button.click`);
+    fb("ViewContent", { page: "restaurant-marketing" });
+
     goto("/landing/restaurant-marketing");
   }
 </script>

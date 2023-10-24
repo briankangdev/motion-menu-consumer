@@ -11,6 +11,7 @@
   import Button from "../../../components/button/Button.svelte";
   import MarketingForm from "../../../components/marketing-form/MarketingForm.svelte";
   import IoLogoInstagram from "svelte-icons/io/IoLogoInstagram.svelte";
+  import { fb } from "@beyonk/svelte-facebook-pixel";
 
   const INSTAGRAM_DM_LINK = "https://ig.me/m/motion_menu";
 
@@ -30,10 +31,13 @@
     analytics.track(`${MARKETING_LANDING_PAGE}.marketing_form.submit`, {
       email,
     });
+    fb("Contact", { type: "email" });
   };
 
   const learnMoreClick = () => {
     analytics.track(`${MARKETING_LANDING_PAGE}.learn_more_button.click`);
+    fb("ViewContent", { page: "qr-menu" });
+
     goto("/landing");
   };
 </script>
@@ -117,6 +121,8 @@
           title="Send DM"
           onClick={() => {
             analytics.track(`${MARKETING_LANDING_PAGE}.send_dm_button.click`);
+            fb("Contact", { type: "dm" });
+
             window.open(INSTAGRAM_DM_LINK, "_blank");
           }}
         />
