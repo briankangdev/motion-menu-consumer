@@ -7,7 +7,6 @@
   import analytics from "$lib/analytics";
   import { _ } from "svelte-i18n";
   import Logo from "../../components/Logo.svelte";
-  import Footer from "../../components/Footer.svelte";
   import SignUpForm from "../../components/signup-form/SignUpForm.svelte";
   import SuccessCasesCarrousel from "../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
   import toast from "svelte-french-toast";
@@ -204,8 +203,6 @@
     </section>
   </div>
 </main>
-
-<Footer />
 
 <style>
   header {

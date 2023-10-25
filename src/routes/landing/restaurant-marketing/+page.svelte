@@ -5,7 +5,6 @@
   import analytics from "$lib/analytics";
   import { _ } from "svelte-i18n";
   import Logo from "../../../components/Logo.svelte";
-  import Footer from "../../../components/Footer.svelte";
   import toast from "svelte-french-toast";
   import { user, type IUser } from "../../../stores/user";
   import Button from "../../../components/button/Button.svelte";
@@ -155,8 +154,6 @@
     </div>
   </div>
 </main>
-
-<Footer />
 
 <style>
   header {
