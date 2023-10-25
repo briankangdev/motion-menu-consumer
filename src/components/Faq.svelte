@@ -9,12 +9,6 @@
         customers.
       </p>
     </li>
-    <li>
-      <h4>QR restaurant menu is FREE?</h4>
-      <p>
-        We are testing our products. Your contribution will be very helpful.
-      </p>
-    </li>
   </ul>
 </div>
 

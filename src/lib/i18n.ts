@@ -1,5 +1,5 @@
 import { browser } from "$app/environment";
-import { register, init } from "svelte-i18n";
+import { register, init, getLocaleFromQueryString } from "svelte-i18n";
 
 const defaultLocale: string = "en";
 
@@ -8,7 +8,7 @@ register("es", () => import("./translation/es.json"));
 
 init({
   fallbackLocale: "en",
-  initialLocale: browser
-    ? (window.navigator.language as string)
-    : defaultLocale,
+  initialLocale:
+    getLocaleFromQueryString("lang") ||
+    (browser ? (window.navigator.language as string) : defaultLocale),
 });

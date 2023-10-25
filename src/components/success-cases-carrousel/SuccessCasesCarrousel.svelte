@@ -1,10 +1,18 @@
 <script lang="ts">
   export let card_width: number = 250;
 
+  const WIDTH = 180;
+  const HEIGHT = 390;
+
+  function imageUrl(id) {
+    return `https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_auto,w_${WIDTH},h_${HEIGHT},dpr_2,c_fill/${id}`;
+  }
+
   let images: string[] = [
-    "https://i.imgur.com/jnRz4pW.png",
-    "https://i.imgur.com/0QSNNnT.png",
-    "https://i.imgur.com/suDVkrn.png",
+    imageUrl("v1697382742/motion%20menu/qr_scanning_demo.jpg"),
+    imageUrl("v1697383679/motion%20menu/saigon_demo.png"),
+    imageUrl("v1697383710/motion%20menu/blue_coffee_demo.png"),
+    imageUrl("v1697383624/motion%20menu/great_pizza_demo.png"),
   ];
 </script>
 
@@ -25,6 +33,7 @@
     width: 100%;
     overflow-x: scroll;
     display: flex;
+    max-width: 500px;
   }
 
   .carrousel::-webkit-scrollbar {

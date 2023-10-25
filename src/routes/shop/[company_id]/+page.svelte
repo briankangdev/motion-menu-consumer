@@ -113,13 +113,16 @@
         {/each}
 
         <hr class="menu-divider" />
-        {#each $grouped_by_tags[NO_TAG] as product_id (product_id)}
-          <ProductCard
-            {company_id}
-            product={$products_dic[product_id]}
-            enable_link={true}
-          />
-        {/each}
+
+        {#if $grouped_by_tags[NO_TAG]}
+          {#each $grouped_by_tags[NO_TAG] as product_id (product_id)}
+            <ProductCard
+              {company_id}
+              product={$products_dic[product_id]}
+              enable_link={true}
+            />
+          {/each}
+        {/if}
       {/if}
     </Masonry>
   </div>

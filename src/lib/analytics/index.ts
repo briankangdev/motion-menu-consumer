@@ -1,5 +1,5 @@
 import mixpanel from "mixpanel-browser";
-import { env } from "$env/dynamic/public";
+import { PUBLIC_PROJECT_TOKEN } from "$env/static/public";
 import { user } from "../../stores/user";
 
 const EVENT_PREFIX = "consumer";
@@ -14,13 +14,17 @@ interface IProps {
 
 interface IAnalytics {
   init: (config: IConfig) => void;
+  identify: (id: string) => void;
   setUserId: () => void;
   track: (event_name: string, props?: IProps) => void;
 }
 
 const analytics: IAnalytics = {
   init: (config) => {
-    mixpanel.init(env.PUBLIC_PROJECT_TOKEN, config);
+    mixpanel.init(PUBLIC_PROJECT_TOKEN, config);
+  },
+  identify: (id: string) => {
+    mixpanel.identify(id);
   },
   setUserId: () => {
     user.update((prev) => ({

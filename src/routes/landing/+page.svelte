@@ -1,7 +1,7 @@
 <script lang="ts">
   import { PUBLIC_GOOGLE_OAUTH_CLIENT_ID } from "$env/static/public";
   import { onMount } from "svelte";
-  import { google_sign_in, sign_up, sign_in } from "../../api/profile";
+  import { googleSignIn, signIn, signUp } from "../../services/profile_service";
   import { goto } from "$app/navigation";
   import { LANDING_PAGE } from "$lib/analytics/types";
   import analytics from "$lib/analytics";
@@ -12,6 +12,8 @@
   import SuccessCasesCarrousel from "../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
   import toast from "svelte-french-toast";
   import { user, type IUser } from "../../stores/user";
+  import Button from "../../components/button/Button.svelte";
+  import { fb } from "@beyonk/svelte-facebook-pixel";
 
   let loading_submit: boolean = false;
   let user_id: IUser["distinct_id"] = $user.distinct_id;
@@ -29,7 +31,7 @@
     document.head.appendChild(script);
 
     window.onGoogleSignIn = async (response) => {
-      const profile = await google_sign_in(response.credential);
+      const profile = await googleSignIn(response.credential);
 
       analytics.track(`${LANDING_PAGE}.sign-up-button.click`, {
         user_id,
@@ -40,6 +42,8 @@
         analytics.track(`${LANDING_PAGE}.sign_up`, {
           profile_id: profile.id,
         });
+
+        fb.track("CompleteRegistration", { type: "google" });
 
         //invalidateAll: true is to force the page to re-render and update the profile_data store
         goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
@@ -61,15 +65,17 @@
     const name = email.split("@")[0]; //We set a default name for the user
     try {
       loading_submit = true;
-      await sign_up(name, email, password, password_confirmation);
+      await signUp(name, email, password, password_confirmation);
       toast.success($_("components.sign-up_form.success_message"));
       analytics.track(`${LANDING_PAGE}.sign-up-button.click`, {
         user_id,
         provider: "email",
       });
+      fb.track("CompleteRegistration", { type: "email" });
+
       loading_submit = false;
 
-      const { data: profile } = await sign_in(email, password);
+      const { data: profile } = await signIn(email, password);
       goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
     } catch (error) {
       const error_message: string = $_(
@@ -81,6 +87,13 @@
       loading_submit = false;
     }
   };
+
+  function onLearnMoreMarketingClick() {
+    analytics.track(`${LANDING_PAGE}.learn_more_marketing_button.click`);
+    fb.track("ViewContent", { page: "restaurant-marketing" });
+
+    goto("/landing/restaurant-marketing");
+  }
 </script>
 
 <svelte:head>
@@ -94,14 +107,61 @@
   </header>
 
   <div class="container">
-    <section>
-      <div class="landing_header">
-        <h1 data-testid="profiling-title">
-          {$_("routes.landing.title")}
+    <div class="row">
+      <section>
+        <div class="landing_header">
+          <h1 data-testid="profiling-title">
+            {$_("routes.landing.title")}
+          </h1>
+          <p>
+            {$_("routes.landing.description")}
+          </p>
+        </div>
+      </section>
+
+      <section class="solution">
+        <video autoplay muted loop>
+          <source
+            src="https://res.cloudinary.com/dnaexfddx/video/upload/w_150,h_150,dpr_2.0,c_fill/v1689298292/proveat/videos/qxfjxvholtg897uglz76.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+
+        <p>{$_("routes.landing.video_demo.description")}</p>
+      </section>
+    </div>
+
+    <div class="row reverse">
+      <section class="carousel">
+        <h1>{$_("routes.landing.carousel.title")}</h1>
+        <p>{$_("routes.landing.carousel.description")}</p>
+      </section>
+
+      <SuccessCasesCarrousel />
+    </div>
+
+    <div class="row">
+      <section class="no_image">
+        <h1>{$_("routes.landing.no_image.title")}</h1>
+        <p>{$_("routes.landing.no_image.description")}</p>
+
+        <Button
+          variant="primary"
+          title={$_("routes.landing.no_image.learn_more")}
+          test_id="learn_more_marketing"
+          onClick={onLearnMoreMarketingClick}
+        />
+      </section>
+
+      <section>
+        <h1>
+          {$_("routes.landing.try.title")}
         </h1>
         <p>
-          {$_("routes.landing.description")}
+          {$_("routes.landing.try.description")}
         </p>
+
         <div class="google_sign_in" data-testid="google-sign-in">
           <div
             id="g_id_onload"
@@ -119,21 +179,28 @@
             data-logo_alignment="left"
           />
         </div>
-      </div>
-      <SignUpForm {handleSubmitCallback} {loading_submit} />
-    </section>
 
-    <section class="success_cases">
-      <div class="success_cases_header">
-        <h1 data-testid="success-cases-title">
-          {$_("routes.landing.success_cases.title")}
-        </h1>
-        <!-- data-testid="success-cases-description" is not working -->
-        <p class="success-cases-description">
-          {$_("routes.landing.success_cases.description")}
-        </p>
-      </div>
-      <SuccessCasesCarrousel />
+        <hr />
+
+        <SignUpForm {handleSubmitCallback} {loading_submit} />
+      </section>
+    </div>
+
+    <section>
+      <h1>
+        {$_("routes.landing.not_good_with_computers.title")}
+      </h1>
+      <p>
+        {$_("routes.landing.not_good_with_computers.description")}
+      </p>
+    </section>
+    <section>
+      <h1>
+        {$_("routes.landing.how_long_it_takes.title")}
+      </h1>
+      <p>
+        {$_("routes.landing.how_long_it_takes.description")}
+      </p>
     </section>
   </div>
 </main>
@@ -145,10 +212,26 @@
     padding: 4px 0 4px 12px;
   }
 
+  h1 {
+    font-weight: 600;
+    line-height: 1.2;
+    font-size: 45px;
+    word-break: break-word;
+    margin-bottom: 0;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   section {
@@ -159,26 +242,34 @@
     width: 90%;
   }
 
-  .landing_header,
-  .success_cases_header {
+  .landing_header {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  .landing_header::after {
+  hr {
     content: "";
-    width: 90%;
-    height: 1px;
-    background-color: #f3f3f4;
+    width: 80%;
+    background-color: var(--gray);
+    opacity: 0.3;
     margin-top: 10px;
   }
 
-  h1 {
-    font-weight: 600;
-    line-height: 1.2;
-    font-size: 45px;
-    word-break: break-word;
+  section.solution {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  section.solution video {
+    width: 250px;
+  }
+
+  section.solution p {
+    color: var(--gray);
   }
 
   .google_sign_in {
@@ -200,11 +291,18 @@
     }
 
     .container {
-      flex-direction: row;
-      justify-content: space-around;
-
       max-width: 1280px;
       margin: 0 auto;
+    }
+
+    .row {
+      width: 100%;
+      justify-content: space-around;
+      margin-bottom: 5em;
+    }
+
+    .row.reverse {
+      flex-direction: row-reverse;
     }
   }
 </style>
