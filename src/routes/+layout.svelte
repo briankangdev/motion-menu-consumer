@@ -5,6 +5,7 @@
   import { user as user_service } from "../services/user_service";
   import { onMount } from "svelte";
   import { FacebookPixel, fb } from "@beyonk/svelte-facebook-pixel";
+  import Footer from "../components/Footer.svelte";
 
   onMount(async () => {
     // user class needs to be instantiated before it can be used in the store
@@ -25,4 +26,5 @@
   <FacebookPixel pixels={[DATASET_ID]} />
   <Toaster position="bottom-left" />
   <slot />
+  <Footer />
 </div>

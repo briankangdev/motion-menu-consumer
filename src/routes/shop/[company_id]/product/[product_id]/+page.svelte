@@ -52,7 +52,6 @@
     </div>
   {/if}
 </div>
-<footer />
 
 <HistoryBack />
 
@@ -103,10 +102,6 @@
     font-weight: bold;
     margin: 0;
     align-self: flex-end;
-  }
-
-  footer {
-    height: 5em;
   }
 
   @media (min-width: 768px) {

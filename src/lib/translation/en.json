@@ -48,6 +48,10 @@
       "text_A": "Start edit your items ",
       "text_B": " is your QR code.",
       "title": "Your QR menu was generated."
+    },
+    "review_form": {
+      "add_review": "Add review",
+      "sign_up_to_share": "Sign up to share"
     }
   },
   "day_ago": "{days} day ago",
@@ -204,7 +208,6 @@
   "share_your_thought": "Share your thought!",
   "sign_in": "Sign in",
   "sign_up": "Sign up",
-  "sign-up_to_share": "Create",
   "sign-up_to_share_review": "It looks like, you don't have account. Please sign up to leave review.",
   "simplest_solution": "How it works?",
   "step_1_description": "Register your shop.",
