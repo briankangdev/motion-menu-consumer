@@ -100,8 +100,8 @@
           onClick={() => {}}
           title={$_(
             $is_authenticated
-              ? "routes.shop.images.add_review"
-              : "sign-up_to_share"
+              ? "components.review-form.add_review"
+              : "components.review-form.sign_up_to_share"
           )}
           variant="blue"
           test_id="submit-button"

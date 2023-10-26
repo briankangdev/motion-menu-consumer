@@ -48,6 +48,10 @@
       "text_A": "¡Empieza a editar tus productos ",
       "text_B": " está tu código QR.",
       "title": "Tu carta QR fue generada."
+    },
+    "review_form": {
+      "add_review": "Añadir comentario",
+      "sign_up_to_share": "Regístrate para compartir"
     }
   },
   "day_ago": "Hace {days} día",
@@ -199,7 +203,6 @@
   "share_your_thought": "¡Comparte tu opinión!",
   "sign_in": "Ingresar",
   "sign_up": "Registrar",
-  "sign-up_to_share": "Crear",
   "sign-up_to_share_review": "Parece que no tienes una cuenta. Por favor regístrate y tu comentario será publicado.",
   "simplest_solution": "¿Cómo empezar?",
   "step_1_description": "Hay que registrar la tienda.",
