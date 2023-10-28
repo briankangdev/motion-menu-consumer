@@ -1,123 +1,85 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
-  import { Motion } from "svelte-motion";
+  // import { Motion } from "svelte-motion";
   import Navbar from "../components/Navbar.svelte";
-  import Faq from "../components/Faq.svelte";
   import FeatureFlag from "../lib/feature_flag";
   import analytics from "../lib/analytics";
   import { HOME_PAGE } from "../lib/analytics/types";
-  import { Line } from "svelte-chartjs";
-  import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    LineElement,
-    LinearScale,
-    PointElement,
-    CategoryScale,
-  } from "chart.js";
   import { user, type IUser } from "../stores/user";
+  import Button from "../components/button/Button.svelte";
+  import { fb } from "@beyonk/svelte-facebook-pixel";
+  import { goto } from "$app/navigation";
 
-  ChartJS.register(
-    Title,
-    Tooltip,
-    Legend,
-    LineElement,
-    LinearScale,
-    PointElement,
-    CategoryScale
-  );
-
-  const line_data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-      {
-        label: "Visit",
-        borderColor: "#0064C8",
-        data: [10, 30, 50, 20, 25, 44, 80],
-      },
-    ],
-  };
+  const INSTAGRAM_DM_LINK = "https://ig.me/m/motion_menu";
 
   const flag = "landing_page_copy";
   let video_public_id = "tgeweblar8soskbe6gzy";
   let title_value: string;
-  // let on_mount_time: Date;
+
   let user_id: IUser["distinct_id"] = $user.distinct_id;
 
   onMount(async () => {
     await FeatureFlag.initSession(user_id); // the client needs to be initialized before we can use its methods
     title_value = (await FeatureFlag.getValue(flag)) as string; // get the value of the feature flag we are using for AB testing
-
-    // TRACK how long user stays in the page
-    // on_mount_time = new Date(); // get the time when the page was loaded
-
-    // window.onbeforeunload = function () {
-    // let exit_time = new Date(); // get the time when the page was closed
-    // let user_stayed = exit_time.getTime() - on_mount_time.getTime() / 1000; // calculate the time the user was on the page in seconds
-
-    // send the time the user was on the page to mixpanel
-    // analytics.track.pageStay(HOME_PAGE, user_stayed, {
-    //   page: HOME_PAGE,
-    //   title_value,
-    // });
-    // };
   });
 
-  const handleButtonTrack = (button_name: string) => {
-    analytics.track(`${HOME_PAGE}.${button_name}.click`, {
+  const onMarketingButtonClick = () => {
+    analytics.track(`${HOME_PAGE}.learn_more_marketing_button.click`, {
       title_value,
     });
+    fb.track("Contact", { type: "dm" });
+
+    window.open(INSTAGRAM_DM_LINK, "_blank");
+  };
+
+  const onMenuButtonClick = () => {
+    analytics.track(`${HOME_PAGE}.learn_more_menu_button.click`, {
+      title_value,
+    });
+
+    fb.track("ViewContent", { page: "qr-menu" });
+
+    goto("/landing");
   };
 </script>
 
 <svelte:head>
-  <title>Motion Menu | QR Menu for restaurant and coffee shops</title>
-  <meta name="description" content={$_("home_meta_description")} />
+  <title>{$_("routes.home.meta.title")}</title>
+  <meta name="description" content={$_("routes.home.meta.description")} />
   <link rel="canonical" href="https://motion.menu" />
 </svelte:head>
 
 <Navbar />
 <main>
   <div class="row">
-    <div>
+    <div class="trigger-container">
       {#if title_value}
-        <h1>{$_("routes.home.trigger")}</h1>
+        <h1>{$_("routes.home.trigger.title")}</h1>
+        <p>{$_("routes.home.trigger.description")}</p>
       {/if}
-      <p>
-        {$_("home_description")}
-      </p>
-
-      <div style="padding-top: 15px;">
-        <a
-          class="button"
-          href="https://admin.motion.menu/sign_up"
-          on:click={() => handleButtonTrack("get-started")}
-        >
-          {$_("get_started")}</a
-        >
-      </div>
-    </div>
-
-    <div class="header-right">
-      <Motion
-        initial={{ y: 45, opacity: 0 }}
-        animate={{ y: 15, opacity: 1 }}
-        transition={{ type: "spring", duration: 0.8, damping: 5 }}
-        let:motion
-      />
-
-      <img
-        alt="Motion QR menu preview"
-        class="menu-preview"
-        src="https://res.cloudinary.com/dnaexfddx/image/upload/f_auto,q_auto/v1674934439/motion%20menu/landing-menu-preview.png"
-      />
     </div>
   </div>
 
   <div class="row divider">
+    <img
+      src="https://res.cloudinary.com/dnaexfddx/image/upload/w_400/v1698450999/motion%20menu/landing_bad_food.jpg"
+      alt="bad example"
+    />
+
+    <div class="column">
+      <h1>
+        {$_("routes.home.dont_lose")}
+      </h1>
+    </div>
+  </div>
+
+  <div class="row divider">
+    <div class="column">
+      <h1>{$_("routes.home.photos_and_videos.title")}</h1>
+      <p>{$_("routes.home.photos_and_videos.description")}</p>
+    </div>
+
     <div>
       <video class="video" playsinline autoplay muted loop>
         <source
@@ -134,28 +96,56 @@
         />
         Your browser does not support the video tag.
       </video>
-      <p class="caption">{$_("home_video_caption")}</p>
-    </div>
 
-    <div>
-      <h1>{$_("home_content_title")}</h1>
-      <p>{$_("home_content_description")}</p>
+      <!-- <p class="caption">{$_("routes.home")}</p> -->
     </div>
   </div>
 
   <div class="row divider">
     <div>
-      <h1>{$_("home_analytics_title")}</h1>
-      <p>{$_("home_analytics_description")}</p>
-    </div>
-
-    <div class="chart">
-      <Line data={line_data} />
+      <h1>{$_("routes.home.two_solutions")}</h1>
     </div>
   </div>
 
   <div class="row divider">
-    <Faq />
+    <div class="column">
+      <h1>
+        {$_("routes.home.team.title")}
+      </h1>
+      <p>{$_("routes.home.team.description")}</p>
+
+      <Button
+        variant="primary"
+        title={$_("routes.home.team.send_dm")}
+        onClick={onMarketingButtonClick}
+      />
+    </div>
+
+    <img
+      src="https://res.cloudinary.com/dnaexfddx/image/upload/w_400/v1698450061/motion%20menu/landing_marketing_demo.png"
+      alt="marketing"
+    />
+  </div>
+
+  <div class="row divider">
+    <img
+      class="qr-menu"
+      src="https://res.cloudinary.com/dnaexfddx/image/upload/w_400/v1698371773/motion%20menu/home_qr_demo.png"
+      alt="marketing"
+    />
+
+    <div class="column">
+      <h1>
+        {$_("routes.home.qr_menu.title")}
+      </h1>
+      <p>{$_("routes.home.qr_menu.description")}</p>
+
+      <Button
+        variant="primary"
+        title={$_("routes.home.qr_menu.learn_more")}
+        onClick={onMenuButtonClick}
+      />
+    </div>
   </div>
 </main>
 
@@ -175,19 +165,9 @@
   }
 
   h1 {
-    color: black;
+    color: var(--black);
     font-weight: 600;
-    max-width: 9em;
     font-size: 3em;
-  }
-
-  .menu-preview {
-    max-width: 600px;
-    margin-top: 30px;
-  }
-
-  .caption {
-    color: #333333;
   }
 
   p {
@@ -199,24 +179,19 @@
     border-radius: 3px;
   }
 
-  .button {
-    background-color: #222;
-    color: #fff;
-    outline: none;
-    border-radius: 8px;
-    text-align: center;
-    border: none;
-    padding: 10px 16px;
-    cursor: pointer;
-
-    transition: all 200ms ease;
+  .trigger-container {
+    max-width: 650px;
+    margin-top: 5em;
+    margin-bottom: 3em;
   }
 
-  .chart {
-    width: 100%;
-    max-width: 30em;
-    display: flex;
-    justify-content: center;
+  .column {
+    max-width: 500px;
+  }
+
+  img.qr-menu {
+    max-width: 230px;
+    object-fit: contain;
   }
 
   @media only screen and (max-width: 768px) {
@@ -226,14 +201,19 @@
 
     img {
       width: 100%;
+      max-width: 460px;
+      margin-top: 1em;
     }
 
-    .header-right {
-      margin-top: 10px;
+    .row {
+      padding: 0 1em;
+      margin-top: 3em;
+
+      flex-direction: column;
     }
 
-    .chart {
-      max-width: 100%;
+    .trigger-container {
+      margin: 0;
     }
   }
 </style>

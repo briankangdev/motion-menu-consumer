@@ -19,6 +19,10 @@
       "categories_description": "Choose a template shop, +10 products will be copied into your shop. Skip the process by selecting \"empty\" value.",
       "categories_description_title": "Copy products from the template shop!"
     },
+    "review_form": {
+      "add_review": "Add review",
+      "sign_up_to_share": "Sign up to share"
+    },
     "sign-up_form": {
       "button": "Generate QR",
       "email_input_label": "Email",
@@ -48,10 +52,6 @@
       "text_A": "Start edit your items ",
       "text_B": " is your QR code.",
       "title": "Your QR menu was generated."
-    },
-    "review_form": {
-      "add_review": "Add review",
-      "sign_up_to_share": "Sign up to share"
     }
   },
   "day_ago": "{days} day ago",
@@ -60,16 +60,6 @@
   "footer_title": "If you are interested in the product, please contact me",
   "free_plan": "Free plan",
   "get_started": "Free To Get Started",
-  "home_analytics_description": "Get more insights from the digital menu and our point of sales system.",
-  "home_analytics_title": "Know better about your customers",
-  "home_content_description": "Grab customer attention and increase sales. Get valuable feedback from your customers.",
-  "home_content_title": "Customers love videos and images",
-  "home_description": "Motion Menu empowers restaurants and coffee shops across the globe. Customers buy what they see, we present your products in the most attractive way.",
-  "home_meta_description": "Best Instagram feel QR digital menu app where users can build relationships with your restaurant and coffee shop.",
-  "home_title": "Get QR code for your business!",
-  "home_title_A": "Get QR code for your business!",
-  "home_title_B": "Customer is looking for an interactive menu!",
-  "home_video_caption": "You can upload a video clip!",
   "how_to_use": "How to use?",
   "images": "Images",
   "menu": "Menu",
@@ -87,8 +77,31 @@
   "reviews": "Reviews",
   "routes": {
     "home": {
-      "welcome": "Welcome",
-      "trigger": "Restaurant marketing got complicated in Social Media era"
+      "dont_lose": "Don't loose customers with poorly taken photos",
+      "meta": {
+        "description": "Content team and QR menu for restaurants and coffee shops",
+        "title": "Restaurant marketing to survive in the social media era"
+      },
+      "photos_and_videos": {
+        "description": "There is nothing better than videos and photos to attract cusotmers. We aim to get the best quality content for your business.",
+        "title": "Photos and videos are key to survive"
+      },
+      "qr_menu": {
+        "description": "We carefully designed a digital menu to host photos and videos.",
+        "learn_more": "Learn more",
+        "title": "QR menu to show what you have"
+      },
+      "team": {
+        "description": "Dedicated team will be in contact with you. We schedule and guide you to get the best photos and videos.",
+        "send_dm": "Send DM",
+        "title": "A team to take outstanding photos"
+      },
+      "trigger": {
+        "description": "Customers check instagram and google map before they visit a restaurant. Photos play a big role in their decision making. But we know it's hard to get great photos and videos.",
+        "title": "Social media made restaurant marketing difficult"
+      },
+      "two_solutions": "Two solutions to battle with",
+      "welcome": "Welcome"
     },
     "landing": {
       "carousel": {
@@ -103,8 +116,8 @@
       },
       "no_image": {
         "description": "Our team knows that getting perfect food image is hard and requires consistent update. We built a team and service to cover that needs.",
-        "title": "What if I don't have perfact images and videos?",
-        "learn_more": "Learn more"
+        "learn_more": "Learn more",
+        "title": "What if I don't have perfact images and videos?"
       },
       "not_good_with_computers": {
         "description": "We have real time chat to assist your needs. We can help you to upload all your items and guide you how to do it.",
