@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { goto } from "$app/navigation";
-  import { MARKETING_LANDING_PAGE } from "$lib/analytics/types";
-  import analytics from "$lib/analytics";
   import { _ } from "svelte-i18n";
-  import Logo from "../../../components/Logo.svelte";
-  import toast from "svelte-french-toast";
-  import { user, type IUser } from "../../../stores/user";
-  import Button from "../../../components/button/Button.svelte";
-  import MarketingForm from "../../../components/marketing-form/MarketingForm.svelte";
-  import IoLogoInstagram from "svelte-icons/io/IoLogoInstagram.svelte";
   import { fb } from "@beyonk/svelte-facebook-pixel";
+  import { goto } from "$app/navigation";
+  import { gtag } from "ga-gtag";
+  import { MARKETING_LANDING_PAGE } from "$lib/analytics/types";
+  import { onMount } from "svelte";
+  import { user, type IUser } from "../../../stores/user";
+  import analytics from "$lib/analytics";
+  import Button from "../../../components/button/Button.svelte";
+  import IoLogoInstagram from "svelte-icons/io/IoLogoInstagram.svelte";
+  import Logo from "../../../components/Logo.svelte";
+  import MarketingForm from "../../../components/marketing-form/MarketingForm.svelte";
+  import toast from "svelte-french-toast";
 
   const INSTAGRAM_DM_LINK = "https://ig.me/m/motion_menu";
 
@@ -30,14 +31,34 @@
     analytics.track(`${MARKETING_LANDING_PAGE}.marketing_form.submit`, {
       email,
     });
+
     fb.track("Contact", { type: "email" });
+
+    gtag("event", "conversion", {
+      // landing_contact
+      send_to: "AW-319698844/vOWzCPrm8fEYEJzvuJgB",
+    });
   };
 
-  const learnMoreClick = () => {
+  const onLearnMoreClick = () => {
     analytics.track(`${MARKETING_LANDING_PAGE}.learn_more_button.click`);
+
     fb.track("ViewContent", { page: "qr-menu" });
 
     goto("/landing");
+  };
+
+  const onSendDMClick = () => {
+    analytics.track(`${MARKETING_LANDING_PAGE}.send_dm_button.click`);
+
+    fb.track("Contact", { type: "dm" });
+
+    gtag("event", "conversion", {
+      // landing_contact
+      send_to: "AW-319698844/vOWzCPrm8fEYEJzvuJgB",
+    });
+
+    window.open(INSTAGRAM_DM_LINK, "_blank");
   };
 </script>
 
@@ -115,16 +136,7 @@
           <IoLogoInstagram />
         </div>
 
-        <Button
-          variant="black"
-          title="Send DM"
-          onClick={() => {
-            analytics.track(`${MARKETING_LANDING_PAGE}.send_dm_button.click`);
-            fb.track("Contact", { type: "dm" });
-
-            window.open(INSTAGRAM_DM_LINK, "_blank");
-          }}
-        />
+        <Button variant="black" title="Send DM" onClick={onSendDMClick} />
       </section>
 
       <section>
@@ -148,7 +160,7 @@
         <Button
           variant="primary"
           title={$_("routes.landing.restaurant_marketing.qr_menu.learn_more")}
-          onClick={learnMoreClick}
+          onClick={onLearnMoreClick}
         />
       </section>
     </div>

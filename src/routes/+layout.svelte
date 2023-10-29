@@ -6,6 +6,7 @@
   import { onMount } from "svelte";
   import { FacebookPixel, fb } from "@beyonk/svelte-facebook-pixel";
   import Footer from "../components/Footer.svelte";
+  import { install } from "ga-gtag";
 
   onMount(async () => {
     // user class needs to be instantiated before it can be used in the store
@@ -17,13 +18,15 @@
     if (fb) {
       fb.track("PageView");
     }
+
+    install("G-W3DG7SGZ9E", { send_page_view: false });
   });
 
-  const DATASET_ID = "2803302726481229";
+  const FACEBOOK_DATASET_ID = "2803302726481229";
 </script>
 
 <div class="app">
-  <FacebookPixel pixels={[DATASET_ID]} />
+  <FacebookPixel pixels={[FACEBOOK_DATASET_ID]} />
   <Toaster position="bottom-left" />
   <slot />
   <Footer />
