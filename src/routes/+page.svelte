@@ -83,15 +83,15 @@
     <div>
       <video class="video" playsinline autoplay muted loop>
         <source
-          src={`https://res.cloudinary.com/dnaexfddx/video/upload/w_340,h_340,c_fill/v1617422473/${video_public_id}.webm`}
+          src={`https://res.cloudinary.com/dnaexfddx/video/upload/w_340,h_340,c_fill/v1627693812/${video_public_id}.webm`}
           type="video/webm"
         />
         <source
-          src={`https://res.cloudinary.com/dnaexfddx/video/upload/w_340,h_340,c_fill/v1617422473/${video_public_id}d.mp4`}
+          src={`https://res.cloudinary.com/dnaexfddx/video/upload/w_340,h_340,c_fill/v1627693812/${video_public_id}.mp4`}
           type="video/mp4"
         />
         <source
-          src={`https://res.cloudinary.com/dnaexfddx/video/upload/w_340,h_340,c_fill/v1617422473/${video_public_id}.ogg`}
+          src={`https://res.cloudinary.com/dnaexfddx/video/upload/w_340,h_340,c_fill/v1627693812/${video_public_id}.ogg`}
           type="video/ogg"
         />
         Your browser does not support the video tag.
