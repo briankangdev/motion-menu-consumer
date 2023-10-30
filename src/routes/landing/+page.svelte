@@ -3,8 +3,7 @@
   import { fb } from "@beyonk/svelte-facebook-pixel";
   import { googleSignIn, signIn, signUp } from "../../services/profile_service";
   import { goto } from "$app/navigation";
-  import { gtag } from "ga-gtag";
-  import { LANDING_PAGE } from "$lib/analytics/types";
+  import { LANDING_PAGE } from "../../lib/analytics/types";
   import { onMount } from "svelte";
   import { PUBLIC_GOOGLE_OAUTH_CLIENT_ID } from "$env/static/public";
   import { user, type IUser } from "../../stores/user";
@@ -14,6 +13,7 @@
   import SignUpForm from "../../components/signup-form/SignUpForm.svelte";
   import SuccessCasesCarrousel from "../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
   import toast from "svelte-french-toast";
+  import { trackLandingSignup } from "../../lib/analytics/google";
 
   let loading_submit: boolean = false;
   let user_id: IUser["distinct_id"] = $user.distinct_id;
@@ -45,9 +45,7 @@
 
         fb.track("CompleteRegistration", { type: "google" });
 
-        gtag("event", "conversion", {
-          send_to: "AW-319698844/8E5ZCP3m8fEYEJzvuJgB",
-        });
+        trackLandingSignup();
 
         //invalidateAll: true is to force the page to re-render and update the profile_data store
         goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
@@ -76,6 +74,8 @@
         provider: "email",
       });
       fb.track("CompleteRegistration", { type: "email" });
+
+      trackLandingSignup();
 
       loading_submit = false;
 
