@@ -35,6 +35,7 @@
     "axios": "^1.2.0",
     "chart.js": "^4.1.1",
     "flagsmith": "^3.14.1",
+    "ga-gtag": "^1.1.7",
     "js-cookie": "^3.0.5",
     "mixpanel-browser": "^2.45.0",
     "svelte-chartjs": "^3.1.0",

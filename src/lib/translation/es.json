@@ -48,6 +48,10 @@
       "text_A": "¡Empieza a editar tus productos ",
       "text_B": " está tu código QR.",
       "title": "Tu carta QR fue generada."
+    },
+    "review_form": {
+      "add_review": "Añadir comentario",
+      "sign_up_to_share": "Regístrate para compartir"
     }
   },
   "day_ago": "Hace {days} día",
@@ -55,16 +59,6 @@
   "featured_products": "Productos Populares",
   "footer_title": "Si estás interesado en la carta digital, por favor avisáme por",
   "free_plan": "Plan gratis",
-  "get_started": "Empezar Plan Gratis",
-  "home_analytics_description": "La carta digital y el punto de venta muestran las métricas principales de su negocio.",
-  "home_analytics_title": "Analizá su negocio para mejorar la experiencia",
-  "home_content_description": "Buena experiencia del cliente afecta a la venta. Presentá tus productos en la manera más atractiva e intuitiva",
-  "home_content_title": "Clients quieren videos e imágenes.",
-  "home_description": "Estamos contruyendo herramientas cluinarias para mejorar la experience de los clientes. La carta QR y el sistema punto de venta transformara tu negocio.",
-  "home_meta_description": "El mejor QR menu para restaurantes y cafeterías. Un espacio nuevo para marketing y branding.",
-  "home_title": "La carta más atractiva para clientes!",
-  "home_title_A": "Mejora tu restaurante y acercate a tus clientes",
-  "home_title_B": "El menú interactivo que tu cliente necesita",
   "how_to_use": "¿Cómo se usa?",
   "images": "Imagenes",
   "menu": "Carta",
@@ -81,7 +75,30 @@
   "review_post_success_message": "Tu comentario ha sido enviado con éxito.",
   "routes": {
     "home": {
-      "welcome": "Bienvenido"
+      "dont_lose": "No te pierdas más clientes por fotos malas",
+      "meta": {
+        "description": "Equipo marketing de restaurantes y la carta QR",
+        "title": "Marketing restaurante para sobrevivir en rededs sociales"
+      },
+      "photos_and_videos": {
+        "description": "Fotos y videos de alta calidad atraen más gente. El objectivo es obtener el mejor contenido para tu negocio.",
+        "title": "Fotos y videos son llaves para sobrevivir"
+      },
+      "qr_menu": {
+        "description": "Nos diseñamos la carta QR para subir videos y fotos.",
+        "learn_more": "Conocer más",
+        "title": "Carta QR para restaurantes"
+      },
+      "team": {
+        "description": "Equipo dedicado va a estar en contacto con vos. Te guiaremos para hacer la reunión.",
+        "send_dm": "Mandar DM",
+        "title": "Equipo para sacar fotos atracitvas"
+      },
+      "trigger": {
+        "description": "Consumidores chequean instagram y google map antes de visitar un lugar. Los fotos son importantes caundo toman la decisión. Pero entendemos que es un trabajo duro.",
+        "title": "Redes sociales cambiaron la forma de hacer marketing para restaurantes"
+      },
+      "two_solutions": "Dos soluciones para combatir"
     },
     "landing": {
       "carousel": {
@@ -199,7 +216,6 @@
   "share_your_thought": "¡Comparte tu opinión!",
   "sign_in": "Ingresar",
   "sign_up": "Registrar",
-  "sign-up_to_share": "Crear",
   "sign-up_to_share_review": "Parece que no tienes una cuenta. Por favor regístrate y tu comentario será publicado.",
   "simplest_solution": "¿Cómo empezar?",
   "step_1_description": "Hay que registrar la tienda.",

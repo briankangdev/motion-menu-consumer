@@ -98,7 +98,11 @@
       <div class="submit-button">
         <Button
           onClick={() => {}}
-          title={$_($is_authenticated ? "add_review" : "sign-up_to_share")}
+          title={$_(
+            $is_authenticated
+              ? "components.review-form.add_review"
+              : "components.review-form.sign_up_to_share"
+          )}
           variant="blue"
           test_id="submit-button"
         />

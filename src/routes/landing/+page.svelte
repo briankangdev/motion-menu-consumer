@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { PUBLIC_GOOGLE_OAUTH_CLIENT_ID } from "$env/static/public";
-  import { onMount } from "svelte";
+  import { _ } from "svelte-i18n";
+  import { fb } from "@beyonk/svelte-facebook-pixel";
   import { googleSignIn, signIn, signUp } from "../../services/profile_service";
   import { goto } from "$app/navigation";
-  import { LANDING_PAGE } from "$lib/analytics/types";
+  import { LANDING_PAGE } from "../../lib/analytics/types";
+  import { onMount } from "svelte";
+  import { PUBLIC_GOOGLE_OAUTH_CLIENT_ID } from "$env/static/public";
+  import { user, type IUser } from "../../stores/user";
   import analytics from "$lib/analytics";
-  import { _ } from "svelte-i18n";
+  import Button from "../../components/button/Button.svelte";
   import Logo from "../../components/Logo.svelte";
-  import Footer from "../../components/Footer.svelte";
   import SignUpForm from "../../components/signup-form/SignUpForm.svelte";
   import SuccessCasesCarrousel from "../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
   import toast from "svelte-french-toast";
-  import { user, type IUser } from "../../stores/user";
-  import Button from "../../components/button/Button.svelte";
-  import { fb } from "@beyonk/svelte-facebook-pixel";
+  import { trackLandingSignup } from "../../lib/analytics/google";
 
   let loading_submit: boolean = false;
   let user_id: IUser["distinct_id"] = $user.distinct_id;
@@ -45,6 +45,8 @@
 
         fb.track("CompleteRegistration", { type: "google" });
 
+        trackLandingSignup();
+
         //invalidateAll: true is to force the page to re-render and update the profile_data store
         goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
       } else {
@@ -72,6 +74,8 @@
         provider: "email",
       });
       fb.track("CompleteRegistration", { type: "email" });
+
+      trackLandingSignup();
 
       loading_submit = false;
 
@@ -204,8 +208,6 @@
     </section>
   </div>
 </main>
-
-<Footer />
 
 <style>
   header {
