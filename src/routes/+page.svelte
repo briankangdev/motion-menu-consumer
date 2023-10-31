@@ -42,6 +42,12 @@
 
     goto("/landing");
   };
+
+  const handleNavbarButtonClick = (button_name: string) => {
+    analytics.track(`${HOME_PAGE}.${button_name}.click`, {
+      title_value,
+    });
+  };
 </script>
 
 <svelte:head>
@@ -50,7 +56,7 @@
   <link rel="canonical" href="https://motion.menu" />
 </svelte:head>
 
-<Navbar />
+<Navbar handleButtonTrack={handleNavbarButtonClick} />
 <main>
   <div class="row">
     <div class="trigger-container">
