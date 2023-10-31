@@ -44,7 +44,7 @@
   };
 
   const handleNavbarButtonClick = (button_name: string) => {
-    analytics.track(`${HOME_PAGE}.${button_name}.click`, {
+    analytics.track(`${HOME_PAGE}.navbar.${button_name}.click`, {
       title_value,
     });
   };
