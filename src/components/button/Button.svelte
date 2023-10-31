@@ -1,5 +1,5 @@
 <script lang="ts">
-  type Variant = "primary" | "black" | "borderless" | "blue";
+  type Variant = "primary" | "black" | "borderless" | "blue" | "red";
 
   export let onClick: () => void = () => {}; // optional function
   export let handleButtonTrack: () => void = () => {}; // optional function
@@ -8,7 +8,7 @@
   export let test_id: string = "button";
   export let active: boolean = false;
 
-  let variants: Variant[] = ["primary", "black", "borderless", "blue"];
+  let variants: Variant[] = ["primary", "black", "borderless", "blue", "red"];
   let class_name: string = variants.includes(variant)
     ? `button ${variant}`
     : `button ${variants[0]}`; //if variant is not valid, use the first one as default
@@ -37,7 +37,7 @@
     text-transform: var(--text-transform);
   }
 
-  .button:hover {
+  .button:hover:not(.active) {
     text-decoration: underline;
   }
 
@@ -89,5 +89,15 @@
   .button.blue:active,
   .button.blue.active {
     background-color: #1e5f9c;
+  }
+
+  .button.red {
+    background-color: transparent;
+    color: var(--red);
+  }
+
+  .button.red:active,
+  .button.red.active {
+    background-color: rgba(0, 0, 0, 0.05);
   }
 </style>
