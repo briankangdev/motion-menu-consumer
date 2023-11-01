@@ -23,8 +23,8 @@
       {#each product.videos as video}
         <VideoPlaceholder
           src={`${CDN_BASE_URL}/video/upload/c_fill,w_${SIZE},h_${SIZE}/f_auto:video/${video.public_id}`}
-          --width="250px"
-          --height="250px"
+          --width="280px"
+          --height="280px"
           --desktop-width="300px"
           --desktop-height="300px"
         />
@@ -34,8 +34,8 @@
         <ImagePlaceholder
           src={`${CDN_BASE_URL}/image/upload/c_fill,f_auto,q_100,w_${SIZE},h_${SIZE},dpr_2.0,g_auto/${image.public_id}`}
           alt={product.name}
-          --width="250px"
-          --height="250px"
+          --width="280px"
+          --height="280px"
           --desktop-width="300px"
           --desktop-height="300px"
         />
@@ -58,6 +58,7 @@
 <style>
   .container {
     margin: 2em auto 0 auto;
+    padding: 0 1em;
 
     display: flex;
     flex-direction: column;
