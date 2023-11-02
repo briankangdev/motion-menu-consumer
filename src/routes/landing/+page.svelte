@@ -9,11 +9,11 @@
   import { user, type IUser } from "../../stores/user";
   import analytics from "$lib/analytics";
   import Button from "../../components/button/Button.svelte";
-  import Logo from "../../components/Logo.svelte";
   import SignUpForm from "../../components/signup-form/SignUpForm.svelte";
   import SuccessCasesCarrousel from "../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
   import toast from "svelte-french-toast";
   import { trackLandingSignup } from "../../lib/analytics/google";
+  import Navbar from "../../components/Navbar.svelte";
 
   let loading_submit: boolean = false;
   let user_id: IUser["distinct_id"] = $user.distinct_id;
@@ -105,11 +105,8 @@
   <meta name="description" content={$_("routes.landing.description")} />
 </svelte:head>
 
+<Navbar />
 <main>
-  <header>
-    <Logo />
-  </header>
-
   <div class="container">
     <div class="row">
       <section>

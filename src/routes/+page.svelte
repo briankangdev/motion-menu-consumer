@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
   // import { Motion } from "svelte-motion";
-  import Navbar from "../components/Navbar.svelte";
   import FeatureFlag from "../lib/feature_flag";
   import analytics from "../lib/analytics";
   import { HOME_PAGE } from "../lib/analytics/types";
@@ -10,6 +9,7 @@
   import Button from "../components/button/Button.svelte";
   import { fb } from "@beyonk/svelte-facebook-pixel";
   import { goto } from "$app/navigation";
+  import Navbar from "../components/Navbar.svelte";
 
   const INSTAGRAM_DM_LINK = "https://ig.me/m/motion_menu";
 

@@ -9,7 +9,6 @@
   import { getScrollPercent } from "../../../../utils/get_scroll_percent";
   import { REVIEW_INDEX_PAGE } from "../../../../lib/analytics/types";
   import analytics from "../../../../lib/analytics";
-  import Logo from "../../../../components/Logo.svelte";
   import ReviewForm from "../../../../components/review-form/ReviewForm.svelte";
   import Review from "../../../../components/review/Review.svelte";
   import HistoryBack from "../../../../components/history-back/HistoryBack.svelte";

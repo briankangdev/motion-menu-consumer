@@ -14,6 +14,7 @@
 </script>
 
 <Navbar />
+
 <div class="container">
   {#if product}
     <div

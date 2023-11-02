@@ -1,8 +1,15 @@
 <script lang="ts">
-  import analytics from "../lib/analytics";
   import Logo from "./Logo.svelte";
   import { _ as t } from "svelte-i18n";
   import { profile_data } from "../stores/profile";
+  import Button from "./button/Button.svelte";
+  import { signOut } from "../services/profile_service";
+  import analytics from "../lib/analytics";
+  import IoIosMenu from "svelte-icons/io/IoIosMenu.svelte";
+
+  export let handleButtonTrack = (button_name: string) => {
+    analytics.track(`components.navbar.${button_name}.click`);
+  };
 
   let profile_name = "";
 
@@ -15,29 +22,75 @@
   <Logo />
 
   <div class="links">
-    <!-- <a href="https://guide.motion.menu">{$t("how_to_use")}</a>
-    <a
-      href="https://admin.motion.menu/sign_up"
-      on:click={() => handleButtonTrack("sign-up")}>{$t("sign_up")}</a
-    > -->
+    <div class="dropdown-icon">
+      <IoIosMenu />
+    </div>
 
-    {#if profile_name}
-      <div class="profile">
-        <span>{$t("routes.home.welcome")}, {profile_name}</span>
-
-        <a href="https://admin.motion.menu/products">
-          {$t("components.navbar.open_app")}
-        </a>
-      </div>
-    {:else}
-      <a
-        href="https://admin.motion.menu/sign_in"
-        on:click={() => {
-          analytics.track("navbar.sign-in-button.click");
-        }}
-        >{$t("sign_in")}
+    <div class="dropdown">
+      <a href="/landing">
+        <Button
+          title={$t("components.navbar.QR_menu")}
+          variant="borderless"
+          onClick={() => {
+            handleButtonTrack("qr-menu");
+          }}
+        />
       </a>
-    {/if}
+      <a href="/landing/restaurant-marketing">
+        <Button
+          title={$t("components.navbar.photos_and_videos")}
+          variant="borderless"
+          onClick={() => {
+            handleButtonTrack("photos-and-videos");
+          }}
+        />
+      </a>
+      {#if profile_name}
+        <div class="dropdown-profile-button">
+          <Button
+            title={$t("components.navbar.greeting", {
+              values: {
+                name: profile_name,
+              },
+            })}
+            variant="borderless"
+            active
+          />
+        </div>
+        <!-- container has padding to don't lose hover when moving mouse to dropdown -->
+        <div class="dropdown-profile-container">
+          <div class="dropdown-profile">
+            <a href="https://admin.motion.menu/products">
+              <Button
+                title={$t("components.navbar.open_app")}
+                variant="borderless"
+                onClick={() => {
+                  handleButtonTrack("open-app");
+                }}
+              />
+            </a>
+            <Button
+              title={$t("components.navbar.sign_out")}
+              variant="red"
+              onClick={async () => {
+                await signOut();
+                handleButtonTrack("sign-out");
+              }}
+            />
+          </div>
+        </div>
+      {:else}
+        <a href="https://admin.motion.menu/sign_in">
+          <Button
+            title={$t("components.navbar.sign_in")}
+            variant="borderless"
+            onClick={() => {
+              handleButtonTrack("sign-in");
+            }}
+          />
+        </a>
+      {/if}
+    </div>
   </div>
 </header>
 
@@ -56,18 +109,85 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    position: relative;
   }
 
-  a {
-    margin-right: 0.8em;
-  }
-
-  .profile {
+  .dropdown-icon {
+    width: 25px;
+    color: var(--black);
     display: flex;
+    justify-content: center;
     align-items: center;
   }
 
-  .profile span {
-    margin-right: 0.8em;
+  .dropdown {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    background-color: var(--white);
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 5px;
+    padding: 1em;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .links:hover > .dropdown {
+    display: flex;
+  }
+
+  .dropdown-profile-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 10px;
+    border-radius: 5px;
+  }
+
+  .dropdown-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  @media (min-width: 768px) {
+    .dropdown-icon {
+      display: none;
+    }
+
+    .dropdown {
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      position: static;
+      background-color: transparent;
+      box-shadow: none;
+      padding: 0;
+      gap: 10px;
+    }
+
+    .dropdown-profile-container {
+      display: none;
+      width: 150px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding-top: 50px;
+    }
+
+    .dropdown-profile {
+      background-color: var(--white);
+    }
+
+    .dropdown-profile-button:hover + .dropdown-profile-container,
+    .dropdown-profile-container:hover {
+      display: flex;
+    }
   }
 </style>

@@ -8,10 +8,10 @@
   import analytics from "../../../lib/analytics";
   import Button from "../../../components/button/Button.svelte";
   import IoLogoInstagram from "svelte-icons/io/IoLogoInstagram.svelte";
-  import Logo from "../../../components/Logo.svelte";
   import MarketingForm from "../../../components/marketing-form/MarketingForm.svelte";
   import toast from "svelte-french-toast";
   import { trackLandingContact } from "../../../lib/analytics/google";
+  import Navbar from "../../../components/Navbar.svelte";
 
   const INSTAGRAM_DM_LINK = "https://ig.me/m/motion_menu";
 
@@ -64,11 +64,8 @@
   />
 </svelte:head>
 
+<Navbar />
 <main>
-  <header>
-    <Logo />
-  </header>
-
   <div class="container">
     <div class="row">
       <section>

@@ -1,10 +1,10 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { company } from "../../../../../stores/company.js";
-  import Logo from "../../../../../components/Logo.svelte";
   import Skeleton from "../../../../../components/skeleton/Skeleton.svelte";
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
+  import Navbar from "../../../../../components/Navbar.svelte";
 
   onMount(() =>
     setTimeout(
@@ -29,10 +29,8 @@
   />
 </svelte:head>
 
+<Navbar />
 <div class="container">
-  <div class="logo">
-    <Logo />
-  </div>
   <main>
     <div class="left-desktop-section">
       <div class="header">

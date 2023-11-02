@@ -12,16 +12,9 @@
         "required": "Email is required"
       }
     },
-    "navbar": {
-      "open_app": "Open app"
-    },
     "profiling_form": {
       "categories_description": "Choose a template shop, +10 products will be copied into your shop. Skip the process by selecting \"empty\" value.",
       "categories_description_title": "Copy products from the template shop!"
-    },
-    "review_form": {
-      "add_review": "Add review",
-      "sign_up_to_share": "Sign up to share"
     },
     "sign-up_form": {
       "button": "Generate QR",
@@ -52,6 +45,18 @@
       "text_A": "Start edit your items ",
       "text_B": " is your QR code.",
       "title": "Your QR menu was generated."
+    },
+    "review_form": {
+      "add_review": "Add review",
+      "sign_up_to_share": "Sign up to share"
+    },
+    "navbar": {
+      "QR_menu": "QR Menu",
+      "photos_and_videos": "Photos & videos",
+      "sign_in": "Sign in",
+      "sign_out": "Sign out",
+      "greeting": "Hi! {name}",
+      "open_app": "Open app"
     }
   },
   "day_ago": "{days} day ago",

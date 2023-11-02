@@ -8,8 +8,6 @@
   } from "../../../../stores/company";
   import { PROFILING_PAGE } from "../../../../lib/analytics/types";
   import analytics from "../../../../lib/analytics";
-
-  import Logo from "../../../../components/Logo.svelte";
   import toast from "svelte-french-toast";
   import ProfilingForm from "../../../../components/profiling-form/ProfilingForm.svelte";
   import { updateCompany } from "../../../../api/company";
@@ -17,6 +15,7 @@
     checkCopyProductsStatus,
     copyProductsFromCompany,
   } from "../../../../api/copy_content_from_template";
+  import Navbar from "../../../../components/Navbar.svelte";
 
   const category_template_ids: Record<CompanyCategory, ICompany["id"]> = {
     empty: null,
@@ -68,11 +67,8 @@
   <meta name="description" content={$_("routes.shop.profiling.description")} />
 </svelte:head>
 
+<Navbar />
 <main>
-  <header>
-    <Logo />
-  </header>
-
   <section>
     <div class="profiling_header">
       <h1 data-testid="profiling-title">

@@ -4,10 +4,10 @@
   import { REVIEW_FORM_PAGE } from "../../../../../lib/analytics/types";
   import { is_authenticated } from "../../../../../stores/user_store";
   import { company, type ICompany } from "../../../../../stores/company";
-  import Logo from "../../../../../components/Logo.svelte";
   import analytics from "../../../../../lib/analytics";
   import ReviewForm from "../../../../../components/review-form/ReviewForm.svelte";
   import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";
+  import Navbar from "../../../../../components/Navbar.svelte";
 
   let company_id: ICompany["id"] = $company.id;
   let loading: boolean = true;
@@ -38,11 +38,8 @@
   <meta name="description" content={$_("review_form_description")} />
 </svelte:head>
 
+<Navbar />
 <main>
-  <header>
-    <Logo />
-  </header>
-
   <section>
     <h1>
       <span class="text-blue">{$_("support")}</span>

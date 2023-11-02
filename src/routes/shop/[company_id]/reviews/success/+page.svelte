@@ -2,9 +2,9 @@
   import { _ } from "svelte-i18n";
   import type { CompanySlug } from "../../../../../stores/company";
   import Button from "../../../../../components/button/Button.svelte";
-  import Logo from "../../../../../components/Logo.svelte";
   import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";
   import { goto } from "$app/navigation";
+  import Navbar from "../../../../../components/Navbar.svelte";
 
   export let data;
 
@@ -16,11 +16,8 @@
   <meta name="description" content="Thank you for your review" />
 </svelte:head>
 
+<Navbar />
 <main>
-  <header>
-    <Logo />
-  </header>
-
   <section>
     <h1>
       <span class="text-blue">{$_("thank_you")}</span>
