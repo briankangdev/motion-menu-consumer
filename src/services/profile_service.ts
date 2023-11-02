@@ -25,14 +25,15 @@ export async function signUp(
   name: string,
   email: string,
   password: string,
-  password_confirmation: string,
+  password_confirmation: string
 ) {
   const { data, headers } = await profile_api.signUp(
     name,
     email,
     password,
-    password_confirmation,
+    password_confirmation
   );
+  setCookies(headers);
 
   return data;
 }
@@ -40,27 +41,27 @@ export async function signUp(
 export async function signIn(email: string, password: string) {
   const { data, headers } = await profile_api.signIn(email, password);
   setCookies(headers);
-
   return data;
 }
 
 export async function googleSignIn(id_token: string) {
-  const { data } = await profile_api.googleSignIn(id_token);
+  const { data, headers } = await profile_api.googleSignIn(id_token);
+  setCookies(headers);
   return data;
 }
 
 export async function getProfile(
   uid: string,
   client_id: string,
-  access_token: string,
+  access_token: string
 ) {
   try {
     const response = await profile_api.validateToken(
       uid,
       client_id,
-      access_token,
+      access_token
     );
-    profile_data.update((prev) => ({ ...prev, ...response.data }));
+    profile_data.update((prev) => ({ ...prev, ...response.data.data }));
   } catch (error) {
     console.error(error);
     removeCookies();

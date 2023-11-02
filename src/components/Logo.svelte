@@ -9,3 +9,11 @@
     class="logo"
   />
 </a>
+
+<style>
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

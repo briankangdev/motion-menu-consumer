@@ -12,9 +12,6 @@
         "required": "Email es requerido"
       }
     },
-    "navbar": {
-      "open_app": "Abrir app"
-    },
     "profiling_form": {
       "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\".",
       "categories_description_title": "¡Copia productos de una plantilla!"
@@ -52,6 +49,14 @@
     "review_form": {
       "add_review": "Añadir comentario",
       "sign_up_to_share": "Regístrate para compartir"
+    },
+    "navbar": {
+      "QR_menu": "Menu QR",
+      "photos_and_videos": "Fotos y videos",
+      "sign_in": "Ingresar",
+      "sign_out": "Cerrar sesión",
+      "greeting": "Hola, {name}",
+      "open_app": "Abrir app"
     }
   },
   "day_ago": "Hace {days} día",

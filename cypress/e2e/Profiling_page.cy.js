@@ -14,7 +14,6 @@ describe("Profiling Page", () => {
   context("shop name validation", () => {
     it("checks error message when shop name is empty", () => {
       cy.get("[data-testid=submit-button]").click();
-      console.log(translation);
 
       cy.get("[data-testid=error-message]").contains(
         translation.routes.shop.profiling.input_error.length
