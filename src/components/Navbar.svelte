@@ -2,11 +2,14 @@
   import Logo from "./Logo.svelte";
   import { _ as t } from "svelte-i18n";
   import { profile_data } from "../stores/profile";
-  import TiThMenu from "svelte-icons/ti/TiThMenu.svelte";
   import Button from "./button/Button.svelte";
   import { signOut } from "../services/profile_service";
+  import analytics from "../lib/analytics";
+  import IoIosMenu from "svelte-icons/io/IoIosMenu.svelte";
 
-  export let handleButtonTrack: (button_name: string) => void = () => {};
+  export let handleButtonTrack = (button_name: string) => {
+    analytics.track(`components.navbar.${button_name}.click`);
+  };
 
   let profile_name = "";
 
@@ -20,7 +23,7 @@
 
   <div class="links">
     <div class="dropdown-icon">
-      <TiThMenu />
+      <IoIosMenu />
     </div>
 
     <div class="dropdown">

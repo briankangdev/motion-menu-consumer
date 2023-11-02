@@ -1,6 +1,6 @@
 import { loadReviewsByPage } from "../../../../services/reviews_service";
 import { loadCompany } from "../../../../services/company_service";
-import type { ICompany } from "src/stores/company";
+import type { ICompany } from "../../../../stores/company";
 
 interface IRouteParams {
   params: {
