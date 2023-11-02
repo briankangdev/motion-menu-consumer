@@ -87,8 +87,6 @@
   />
 </svelte:head>
 
-<Navbar />
-
 <main>
   <div class="left-desktop-section">
     <div class="header">

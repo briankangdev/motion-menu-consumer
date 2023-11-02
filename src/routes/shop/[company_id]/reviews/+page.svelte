@@ -78,7 +78,6 @@
   <meta name="description" content={$t("routes.shop.reviews.description")} />
 </svelte:head>
 
-<Navbar />
 <!-- <div> -->
 <div class="container">
   <div class="form-section">

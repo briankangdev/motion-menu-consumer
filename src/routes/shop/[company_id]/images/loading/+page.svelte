@@ -29,7 +29,6 @@
   />
 </svelte:head>
 
-<Navbar />
 <div class="container">
   <main>
     <div class="left-desktop-section">

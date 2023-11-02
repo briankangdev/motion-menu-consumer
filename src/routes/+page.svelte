@@ -50,7 +50,6 @@
   <link rel="canonical" href="https://motion.menu" />
 </svelte:head>
 
-<Navbar />
 <main>
   <div class="row">
     <div class="trigger-container">

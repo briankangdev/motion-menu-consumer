@@ -64,7 +64,6 @@
   />
 </svelte:head>
 
-<Navbar />
 <main>
   <div class="container">
     <div class="row">

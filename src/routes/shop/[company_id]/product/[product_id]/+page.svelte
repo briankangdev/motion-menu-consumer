@@ -13,8 +13,6 @@
   let product = $dic[data.product_id];
 </script>
 
-<Navbar />
-
 <div class="container">
   {#if product}
     <div

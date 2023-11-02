@@ -38,7 +38,6 @@
   <meta name="description" content={$_("review_form_description")} />
 </svelte:head>
 
-<Navbar />
 <main>
   <section>
     <h1>

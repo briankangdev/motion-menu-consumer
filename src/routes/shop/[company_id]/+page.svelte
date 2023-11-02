@@ -52,7 +52,6 @@
   />
 </svelte:head>
 
-<Navbar />
 <main>
   <div class="header">
     <div class="info">

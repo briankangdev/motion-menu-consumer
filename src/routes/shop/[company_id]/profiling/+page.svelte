@@ -67,7 +67,6 @@
   <meta name="description" content={$_("routes.shop.profiling.description")} />
 </svelte:head>
 
-<Navbar />
 <main>
   <section>
     <div class="profiling_header">

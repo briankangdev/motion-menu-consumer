@@ -16,7 +16,6 @@
   <meta name="description" content="Thank you for your review" />
 </svelte:head>
 
-<Navbar />
 <main>
   <section>
     <h1>

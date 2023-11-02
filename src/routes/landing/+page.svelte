@@ -105,7 +105,6 @@
   <meta name="description" content={$_("routes.landing.description")} />
 </svelte:head>
 
-<Navbar />
 <main>
   <div class="container">
     <div class="row">

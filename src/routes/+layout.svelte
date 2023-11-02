@@ -7,6 +7,7 @@
   import { FacebookPixel, fb } from "@beyonk/svelte-facebook-pixel";
   import Footer from "../components/Footer.svelte";
   import { install } from "ga-gtag";
+  import Navbar from "../components/Navbar.svelte";
 
   onMount(async () => {
     // user class needs to be instantiated before it can be used in the store
@@ -28,6 +29,7 @@
 <div class="app">
   <FacebookPixel pixels={[FACEBOOK_DATASET_ID]} />
   <Toaster position="bottom-left" />
+  <Navbar />
   <slot />
   <Footer />
 </div>
