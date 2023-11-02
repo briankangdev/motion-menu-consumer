@@ -44,7 +44,7 @@
 
     if (shop_is_new) {
       toast(SuccessNotification as any, {
-        duration: 5000,
+        duration: 15000,
       });
 
       analytics.track(`${IMAGES_PAGE}.visit`, {
