@@ -111,7 +111,10 @@
         "title": "Consumidores quieren ver videos y fotos"
       },
       "description": "Cada vez más gente visita instagram o google map antes de ir a los restaurantes. Pero es dificíl hacer marketing online porque promocionar un restaurante require esfuerzos especiales.",
-      "head_title": "Crea tu cuenta en Motion Menu",
+      "head": {
+        "description": "QR Menu menu digital para restaurantes. Marketing restaurantes para sobrevivir en redes sociales",
+        "title": "QR Menu y carta digital para restaurantes | Motion Menu"
+      },
       "how_long_it_takes": {
         "description": "Crear la carta QR tarda 3 minutos.\n\nCrear nuevos videos y fotos require más tiempo. Nos mandamos gente a su local. Tenemos que coordinar bien.",
         "title": "Tarda mucho tiempo?"

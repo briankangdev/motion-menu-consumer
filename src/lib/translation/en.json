@@ -12,9 +12,21 @@
         "required": "Email is required"
       }
     },
+    "navbar": {
+      "greeting": "Hi! {name}",
+      "open_app": "Open app",
+      "photos_and_videos": "Photos & videos",
+      "QR_menu": "QR Menu",
+      "sign_in": "Sign in",
+      "sign_out": "Sign out"
+    },
     "profiling_form": {
       "categories_description": "Choose a template shop, +10 products will be copied into your shop. Skip the process by selecting \"empty\" value.",
       "categories_description_title": "Copy products from the template shop!"
+    },
+    "review_form": {
+      "add_review": "Add review",
+      "sign_up_to_share": "Sign up to share"
     },
     "sign-up_form": {
       "button": "Generate QR",
@@ -45,18 +57,6 @@
       "text_A": "Start edit your items ",
       "text_B": " is your QR code.",
       "title": "Your QR menu was generated."
-    },
-    "review_form": {
-      "add_review": "Add review",
-      "sign_up_to_share": "Sign up to share"
-    },
-    "navbar": {
-      "QR_menu": "QR Menu",
-      "photos_and_videos": "Photos & videos",
-      "sign_in": "Sign in",
-      "sign_out": "Sign out",
-      "greeting": "Hi! {name}",
-      "open_app": "Open app"
     }
   },
   "day_ago": "{days} day ago",
@@ -114,7 +114,10 @@
         "title": "Videos and images are what customers want"
       },
       "description": "We all know that more and more customers are going restaurants that appear on instagram or google map. But restaurant marketing is difficult and requires special efforts.",
-      "head_title": "Create your account at Motion Menu",
+      "head": {
+        "description": "QR Menu and digital menu for restaurants and coffee shops. We help you to get the best photos and videos for your business.",
+        "title": "QR Menu and digital menu for restaurants | Motion Menu"
+      },
       "how_long_it_takes": {
         "description": "Getting QR menu won't take more than 3 minutes.\n\nGetting new videos and images takes more time. We send our people to your location.",
         "title": "How long it takes?"

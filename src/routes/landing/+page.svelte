@@ -101,8 +101,8 @@
 </script>
 
 <svelte:head>
-  <title>{$_("routes.landing.head_title")}</title>
-  <meta name="description" content={$_("routes.landing.description")} />
+  <title>{$_("routes.landing.head.title")}</title>
+  <meta name="description" content={$_("routes.landing.head.description")} />
 </svelte:head>
 
 <Navbar />
