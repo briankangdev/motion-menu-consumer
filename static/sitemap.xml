@@ -4,15 +4,18 @@
         <loc>http://www.motion.menu</loc>
     </url>
     <url>
+        <loc>http://motion.menu</loc>
+    </url>
+    <url>
         <loc>http://guide.motion.menu</loc>
     </url>
     <url>
         <loc>http://admin.motion.menu</loc>
     </url>
     <url>
-        <loc>https://motion.menu/shop/maum-0956cb2e-8bee-4e30-8589-fa46db21ec8d</loc>
+        <loc>https://motion.menu/landing</loc>
     </url>
     <url>
-        <loc>https://motion.menu/shop/maum-0956cb2e-8bee-4e30-8589-fa46db21ec8d/menu</loc>
+        <loc>https://motion.menu/landing/restaurant-marketing</loc>
     </url>
 </urlset>
