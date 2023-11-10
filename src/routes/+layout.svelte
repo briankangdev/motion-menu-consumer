@@ -8,7 +8,6 @@
   import Footer from "../components/Footer.svelte";
   // import { install } from "ga-gtag";
   import { partytownSnippet } from "@builder.io/partytown/integration";
-  import { t } from "svelte-i18n";
 
   onMount(async () => {
     // user class needs to be instantiated before it can be used in the store
