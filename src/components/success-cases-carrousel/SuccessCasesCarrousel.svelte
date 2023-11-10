@@ -34,6 +34,8 @@
     overflow-x: scroll;
     display: flex;
     max-width: 500px;
+
+    gap: 1em;
   }
 
   .carrousel::-webkit-scrollbar {

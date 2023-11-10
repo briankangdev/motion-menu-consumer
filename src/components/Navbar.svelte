@@ -27,7 +27,7 @@
     </div>
 
     <div class="dropdown">
-      <a href="/landing">
+      <a href="/landing/qr-menu">
         <Button
           title={$t("components.navbar.QR_menu")}
           variant="borderless"

@@ -1,19 +1,23 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { fb } from "@beyonk/svelte-facebook-pixel";
-  import { googleSignIn, signIn, signUp } from "../../services/profile_service";
+  import {
+    googleSignIn,
+    signIn,
+    signUp,
+  } from "../../../services/profile_service";
   import { goto } from "$app/navigation";
-  import { LANDING_PAGE } from "../../lib/analytics/types";
+  import { LANDING_PAGE } from "../../../lib/analytics/types";
   import { onMount } from "svelte";
   import { PUBLIC_GOOGLE_OAUTH_CLIENT_ID } from "$env/static/public";
-  import { user, type IUser } from "../../stores/user";
+  import { user, type IUser } from "../../../stores/user";
   import analytics from "$lib/analytics";
-  import Button from "../../components/button/Button.svelte";
-  import SignUpForm from "../../components/signup-form/SignUpForm.svelte";
-  import SuccessCasesCarrousel from "../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
+  import Button from "../../../components/button/Button.svelte";
+  import SignUpForm from "../../../components/signup-form/SignUpForm.svelte";
+  import SuccessCasesCarrousel from "../../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
   import toast from "svelte-french-toast";
-  import { trackLandingSignup } from "../../lib/analytics/google";
-  import Navbar from "../../components/Navbar.svelte";
+  import { trackLandingSignup } from "../../../lib/analytics/google";
+  import Navbar from "../../../components/Navbar.svelte";
 
   let loading_submit: boolean = false;
   let user_id: IUser["distinct_id"] = $user.distinct_id;

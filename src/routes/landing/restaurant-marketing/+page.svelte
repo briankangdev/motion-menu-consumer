@@ -42,7 +42,7 @@
 
     fb.track("ViewContent", { page: "qr-menu" });
 
-    goto("/landing");
+    goto("/landing/qr-menu");
   };
 
   const onSendDMClick = () => {
