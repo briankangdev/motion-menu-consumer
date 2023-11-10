@@ -5,7 +5,6 @@
   import { user as user_service } from "../services/user_service";
   import { onMount } from "svelte";
   import { FacebookPixel, fb } from "@beyonk/svelte-facebook-pixel";
-
   import Footer from "../components/Footer.svelte";
   // import { install } from "ga-gtag";
   import { partytownSnippet } from "@builder.io/partytown/integration";
