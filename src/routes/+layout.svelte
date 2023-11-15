@@ -6,7 +6,6 @@
   import { onMount } from "svelte";
   import { FacebookPixel, fb } from "@beyonk/svelte-facebook-pixel";
   import Footer from "../components/Footer.svelte";
-  // import { install } from "ga-gtag";
   import { partytownSnippet } from "@builder.io/partytown/integration";
 
   onMount(async () => {
@@ -20,7 +19,6 @@
       fb.track("PageView");
     }
 
-    // install("G-W3DG7SGZ9E", { send_page_view: false });
   });
 
   const FACEBOOK_DATASET_ID = "2803302726481229";
