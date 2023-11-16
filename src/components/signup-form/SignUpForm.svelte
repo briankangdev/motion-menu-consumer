@@ -2,6 +2,7 @@
   import { _ } from "svelte-i18n";
   import Button from "../button/Button.svelte";
   import LoadingSpinner from "../LoadingSpinner.svelte";
+  import { object, string, ref } from "yup";
 
   export let handleSubmitCallback: (
     email: string,
@@ -15,16 +16,6 @@
   let password: string = "";
   let password_confirmation: string = "";
 
-  let error: {
-    email: boolean;
-    password: boolean;
-    password_confirmation: boolean;
-  } = {
-    email: false,
-    password: false,
-    password_confirmation: false,
-  };
-
   let error_message: {
     email: string;
     password: string;
@@ -35,54 +26,59 @@
     password_confirmation: "",
   };
 
-  const checkInput = {
-    //email validation
+  //Create validation schema
+  let schema = object({
+    email: string()
+      .email($_("components.sign-up_form.input_error.email.valid"))
+      .min(5, $_("components.sign-up_form.input_error.email.length"))
+      .max(100, $_("components.sign-up_form.input_error.email.length")),
+    password: string()
+      .min(5, $_("components.sign-up_form.input_error.password.length"))
+      .max(100, $_("components.sign-up_form.input_error.password.length")),
+    password_confirmation: string().oneOf(
+      [ref("password"), null],
+      $_("components.sign-up_form.input_error.password_confirmation")
+    ),
+  });
+
+  let checkInput = {
     email: () => {
-      //if email is empty or invalid
-      if (!/^[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+\.[a-zA-Z0-9-_.]+$/.test(email)) {
-        error_message.email = $_(
-          `components.sign-up_form.input_error.email.valid`
-        );
-        error.email = true;
-        return;
-      }
-      //if email is less than 5 characters or more than 100 characters
-      if (email.length < 5 || email.length > 100) {
-        error_message.email = $_(
-          `components.sign-up_form.input_error.email.length`
-        );
-        error.email = true;
-        return;
-      }
-      error.email = false;
-      error_message.email = "";
+      schema
+        .validate({ email })
+        .then(() => {
+          error_message.email = "";
+        })
+        .catch((error) => {
+          error_message.email = error.errors[0];
+        });
     },
-    //password validation
     password: () => {
-      //if password is less than 5 characters or more than 100 characters
-      if (password.length < 5 || password.length > 100) {
-        error_message.password = $_(
-          `components.sign-up_form.input_error.password.length`
-        );
-        error.password = true;
-        return;
-      }
-      error.password = false;
-      error_message.password = "";
+      schema
+        .validate({ password })
+        .then(() => {
+          error_message.password = "";
+        })
+        .catch((error) => {
+          error_message.password = error.errors[0];
+        });
     },
-    //password confirmation validation
     password_confirmation: () => {
-      if (password !== password_confirmation) {
-        error_message.password_confirmation = $_(
-          `components.sign-up_form.input_error.password_confirmation`
-        );
-        error.password_confirmation = true;
-        return;
-      }
-      error.password_confirmation = false;
-      error_message.password_confirmation = "";
+      schema
+        .validate({ password_confirmation })
+        .then(() => {
+          error_message.password_confirmation = "";
+        })
+        .catch((error) => {
+          error_message.password_confirmation = error.errors[0];
+        });
     },
   };
+
+  function checkAllInputs() {
+    checkInput.email();
+    checkInput.password();
+    checkInput.password_confirmation();
+  }
 
   const handleInput = {
     email: (event: Event) => {
@@ -97,13 +93,9 @@
   };
 
   function handleSubmit() {
-    checkInput.email();
-    checkInput.password();
-    checkInput.password_confirmation();
+    checkAllInputs();
 
-    if (error.email || error.password || error.password_confirmation) {
-      return;
-    } else {
+    if (Object.values(error_message).every((error) => error === "")) {
       handleSubmitCallback(email, password, password_confirmation);
     }
   }
@@ -125,7 +117,7 @@
       on:input={handleInput.email}
       on:blur={checkInput.email}
     />
-    {#if error.email}
+    {#if error_message.email}
       <p class="error_message" data-testid="email-error-message">
         {error_message.email}
       </p>
@@ -145,7 +137,7 @@
       on:input={handleInput.password}
       on:blur={checkInput.password}
     />
-    {#if error.password}
+    {#if error_message.password}
       <p class="error_message" data-testid="password-error-message">
         {error_message.password}
       </p>
@@ -167,7 +159,7 @@
       on:input={handleInput.password_confirmation}
       on:blur={checkInput.password_confirmation}
     />
-    {#if error.password_confirmation}
+    {#if error_message.password_confirmation}
       <p
         class="error_message"
         data-testid="password-confirmation-error-message"

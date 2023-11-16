@@ -7,6 +7,7 @@
   import { is_authenticated, user } from "../../stores/user_store";
   import Button from "../../components/button/Button.svelte";
   import LoadingSpinner from "../../components/LoadingSpinner.svelte";
+  import { object, string } from "yup";
 
   type ReviewPage = "index" | "form";
 
@@ -26,6 +27,11 @@
   let comment: string = "";
   let error_occurred: boolean = false;
 
+  // Create validation schema
+  let schema = object({
+    comment: string().min(COMMENT_MIN_LENGTH, $_("comment_error_message")),
+  });
+
   const handleInput = () => (event: Event) => {
     comment = (event.target as HTMLInputElement).value;
   };
@@ -41,18 +47,21 @@
       }
     };
 
-    if (comment.length > COMMENT_MIN_LENGTH) {
-      if ($is_authenticated) {
-        await sendReview();
-        trackSubmitForm({ authenticated: true });
-      } else {
-        await $user.loginWithPopup();
-        await sendReview();
-        trackSubmitForm({ authenticated: false });
-      }
-    } else {
-      error_occurred = true; //if comment is too short show error message
-    }
+    schema
+      .validate({ comment })
+      .then(async () => {
+        if ($is_authenticated) {
+          await sendReview();
+          trackSubmitForm({ authenticated: true });
+        } else {
+          await $user.loginWithPopup();
+          await sendReview();
+          trackSubmitForm({ authenticated: false });
+        }
+      })
+      .catch(() => {
+        error_occurred = true;
+      });
   };
 </script>
 
