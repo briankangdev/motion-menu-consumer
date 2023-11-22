@@ -7,7 +7,7 @@
   import { is_authenticated, user } from "../../stores/user_store";
   import Button from "../../components/button/Button.svelte";
   import LoadingSpinner from "../../components/LoadingSpinner.svelte";
-  import { object, string } from "yup";
+  import { review_schema as schema } from "../../lib/validation_schemas";
 
   type ReviewPage = "index" | "form";
 
@@ -16,7 +16,6 @@
     authenticated: boolean;
   }) => void;
 
-  export let COMMENT_MIN_LENGTH: number = 3;
   export let page: ReviewPage = "index";
   export let height: { default: number; desktop?: number } = {
     default: 200,
@@ -28,9 +27,6 @@
   let error_occurred: boolean = false;
 
   // Create validation schema
-  let schema = object({
-    comment: string().min(COMMENT_MIN_LENGTH, $_("comment_error_message")),
-  });
 
   const handleInput = () => (event: Event) => {
     comment = (event.target as HTMLInputElement).value;
@@ -47,21 +43,19 @@
       }
     };
 
-    schema
-      .validate({ comment })
-      .then(async () => {
-        if ($is_authenticated) {
-          await sendReview();
-          trackSubmitForm({ authenticated: true });
-        } else {
-          await $user.loginWithPopup();
-          await sendReview();
-          trackSubmitForm({ authenticated: false });
-        }
-      })
-      .catch(() => {
-        error_occurred = true;
-      });
+    try {
+      await schema.validate({ comment });
+      if ($is_authenticated) {
+        await sendReview();
+        trackSubmitForm({ authenticated: true });
+      } else {
+        await $user.loginWithPopup();
+        await sendReview();
+        trackSubmitForm({ authenticated: false });
+      }
+    } catch (error) {
+      error_occurred = true;
+    }
   };
 </script>
 

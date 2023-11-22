@@ -2,7 +2,7 @@
   import { _ } from "svelte-i18n";
   import Button from "../button/Button.svelte";
   import type { CompanyCategory } from "../../stores/company";
-  import { object, string } from "yup";
+  import { profiling_schema as schema } from "../../lib/validation_schemas";
 
   export let handleSubmitCallback: (
     shop_name: string,
@@ -21,27 +21,13 @@
 
   let error_message: string = "";
 
-  // Create validation schema
-  let schema = object({
-    shop_name: string()
-      .matches(
-        /^[a-zA-Z0-9- ]*$/,
-        $_("routes.shop.profiling.input_error.no_special")
-      )
-      .min(3, $_("routes.shop.profiling.input_error.length"))
-      .max(30, $_("routes.shop.profiling.input_error.length")),
-  });
-
-  function checkInput() {
-    schema
-      .validate({ shop_name })
-      .then(() => {
-        error_message = "";
-      })
-      .catch((err) => {
-        error_message = err.errors[0];
-        console.log(err);
-      });
+  async function checkInput() {
+    try {
+      await schema.validate({ shop_name });
+      error_message = "";
+    } catch (error) {
+      error_message = $_(error.errors[0]);
+    }
   }
 
   function handleInput(event: Event) {

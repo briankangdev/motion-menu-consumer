@@ -2,7 +2,7 @@
   import { _ } from "svelte-i18n";
   import Button from "../button/Button.svelte";
   import LoadingSpinner from "../LoadingSpinner.svelte";
-  import { object, string, ref } from "yup";
+  import { sign_up_schema as schema } from "../../lib/validation_schemas";
 
   export let handleSubmitCallback: (
     email: string,
@@ -26,58 +26,44 @@
     password_confirmation: "",
   };
 
-  //Create validation schema
-  let schema = object({
-    email: string()
-      .email($_("components.sign-up_form.input_error.email.valid"))
-      .min(5, $_("components.sign-up_form.input_error.email.length"))
-      .max(100, $_("components.sign-up_form.input_error.email.length")),
-    password: string()
-      .min(5, $_("components.sign-up_form.input_error.password.length"))
-      .max(100, $_("components.sign-up_form.input_error.password.length")),
-    password_confirmation: string().oneOf(
-      [ref("password"), null],
-      $_("components.sign-up_form.input_error.password_confirmation")
-    ),
-  });
-
   let checkInput = {
-    email: () => {
-      schema
-        .validate({ email })
-        .then(() => {
-          error_message.email = "";
-        })
-        .catch((error) => {
-          error_message.email = error.errors[0];
-        });
+    email: async () => {
+      try {
+        await schema.validate({ email });
+        error_message.email = "";
+      } catch (error) {
+        error_message.email = $_(error.errors[0]);
+      }
     },
-    password: () => {
-      schema
-        .validate({ password })
-        .then(() => {
-          error_message.password = "";
-        })
-        .catch((error) => {
-          error_message.password = error.errors[0];
-        });
+    password: async () => {
+      try {
+        await schema.validate({ password });
+        error_message.password = "";
+      } catch (error) {
+        error_message.password = $_(error.errors[0]);
+      }
     },
-    password_confirmation: () => {
-      schema
-        .validate({ password_confirmation })
-        .then(() => {
-          error_message.password_confirmation = "";
-        })
-        .catch((error) => {
-          error_message.password_confirmation = error.errors[0];
+    password_confirmation: async () => {
+      try {
+        await schema.validateAt("password_confirmation", {
+          password, // need to pass password to validate
+          password_confirmation,
         });
+        error_message.password_confirmation = "";
+      } catch (error) {
+        console.log(error.errors);
+
+        error_message.password_confirmation = $_(error.errors[0]);
+      }
     },
   };
 
-  function checkAllInputs() {
-    checkInput.email();
-    checkInput.password();
-    checkInput.password_confirmation();
+  async function checkAllInputs() {
+    await Promise.all([
+      checkInput.email(),
+      checkInput.password(),
+      checkInput.password_confirmation(),
+    ]);
   }
 
   const handleInput = {
@@ -92,8 +78,8 @@
     },
   };
 
-  function handleSubmit() {
-    checkAllInputs();
+  async function handleSubmit() {
+    await checkAllInputs();
 
     if (Object.values(error_message).every((error) => error === "")) {
       handleSubmitCallback(email, password, password_confirmation);
