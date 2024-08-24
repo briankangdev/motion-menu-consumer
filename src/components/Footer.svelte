@@ -1,6 +1,6 @@
 <script>
-    import { _ } from 'svelte-i18n';
-    import IoLogoInstagram from 'svelte-icons/io/IoLogoInstagram.svelte';
+    import { _ } from "svelte-i18n";
+    import IoLogoInstagram from "svelte-icons/io/IoLogoInstagram.svelte";
 </script>
 
 <footer>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="link-container">
-        <a href="https://admin.motion.menu">Owners</a>
+        <a href="https://admin.motion.menu" rel="external">Owners</a>
         <a href="/privacy">Privacy</a>
         <a href="mailto:support@motion.menu">support@motion.menu</a>
 

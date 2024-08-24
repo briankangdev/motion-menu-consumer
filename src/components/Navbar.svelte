@@ -60,7 +60,7 @@
         <!-- container has padding to don't lose hover when moving mouse to dropdown -->
         <div class="dropdown-profile-container">
           <div class="dropdown-profile">
-            <a href="https://admin.motion.menu/products">
+            <a href="https://admin.motion.menu/products" rel="external">
               <Button
                 title={$t("components.navbar.open_app")}
                 variant="borderless"

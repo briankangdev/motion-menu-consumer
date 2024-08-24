@@ -6,13 +6,16 @@
   <b>{$_("components.success_notification.title")}</b>
   <div>
     {$_("components.success_notification.text_A")}
-    <a href="https://admin.motion.menu/products" data-testid="link-to-products"
-      >{$_("components.success_notification.link_A")}</a
+    <a
+      href="https://admin.motion.menu/products"
+      data-testid="link-to-products"
+      rel="external">{$_("components.success_notification.link_A")}</a
     >!🎉
   </div>
   <div>
     <a
       href="https://admin.motion.menu/digital-menu"
+      rel="external"
       data-testid="link-to-digital-menu"
       >{$_("components.success_notification.link_B")}</a
     >

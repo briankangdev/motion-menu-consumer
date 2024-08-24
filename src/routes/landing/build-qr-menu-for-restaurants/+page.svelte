@@ -137,7 +137,7 @@
         <SignUpForm {handleSubmitCallback} {loading_submit} />
 
         <br />
-        <a href="https://admin.motion.menu/sign_in">
+        <a href="https://admin.motion.menu/sign_in" rel="external">
           <Button
             title={$_("routes.build_qr.have_account_button.title")}
             variant="borderless"
