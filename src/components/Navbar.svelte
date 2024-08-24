@@ -80,12 +80,12 @@
           </div>
         </div>
       {:else}
-        <a href="https://admin.motion.menu/sign_in">
+        <a href="https://admin.motion.menu/sign_up">
           <Button
-            title={$t("components.navbar.sign_in")}
+            title={$t("components.navbar.try_qr")}
             variant="borderless"
             onClick={() => {
-              handleButtonTrack("sign-in");
+              handleButtonTrack("sign-up");
             }}
           />
         </a>
