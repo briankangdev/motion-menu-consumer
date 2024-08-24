@@ -80,7 +80,7 @@
           </div>
         </div>
       {:else}
-        <a href="https://admin.motion.menu/sign_up">
+        <a href="/landing/build-qr-menu-for-restaurants">
           <Button
             title={$t("components.navbar.try_qr")}
             variant="borderless"

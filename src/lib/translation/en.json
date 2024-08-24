@@ -182,6 +182,23 @@
         "description": "You see, video is key to get more customers"
       }
     },
+    "build_qr": {
+      "head": {
+        "title": "Build a QR menu that reaches millions",
+        "description": "Create a powerful QR menu designed to reach millions on social media and boost your restaurant’s online presence."
+      },
+      "have_account_button": {
+        "title": "Already have account?"
+      },
+      "try": {
+        "description": "Start 14 days free trial today. No credit card is required.",
+        "title": "Try QR menu!"
+      },
+      "carousel": {
+        "description": "Customers scan QR code and get the digital menu. You can also share the link on social media.",
+        "title": "Videos and images are what customers want"
+      }
+    },
     "shop": {
       "images": {
         "add_review": "Add review",
