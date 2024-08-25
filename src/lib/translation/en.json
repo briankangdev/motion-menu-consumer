@@ -18,8 +18,8 @@
       "photos_and_videos": "Photos & videos",
       "QR_menu": "QR Menu",
       "sign_in": "Sign in",
-      "try_qr": "Try QR Menu",
-      "sign_out": "Sign out"
+      "sign_out": "Sign out",
+      "try_qr": "Try QR Menu"
     },
     "profiling_form": {
       "categories_description": "Choose a template shop, +10 products will be copied into your shop. Skip the process by selecting \"empty\" value.",
@@ -82,6 +82,23 @@
   "review_post_success_message": "Your comment has been posted successfully.",
   "reviews": "Reviews",
   "routes": {
+    "build_qr": {
+      "carousel": {
+        "description": "Customers scan QR code and get the digital menu. You can also share the link on social media.",
+        "title": "Videos and images are what customers want"
+      },
+      "have_account_button": {
+        "title": "Already have account?"
+      },
+      "head": {
+        "description": "Create a powerful QR menu designed to reach millions on social media and boost your restaurant’s online presence.",
+        "title": "Build a QR menu that reaches millions"
+      },
+      "try": {
+        "description": "Start 14 days free trial today. No credit card is required.",
+        "title": "Try QR menu!"
+      }
+    },
     "home": {
       "dont_lose": "Don't loose customers with poorly taken photos",
       "meta": {
@@ -110,6 +127,64 @@
       "welcome": "Welcome"
     },
     "landing": {
+      "blog": {
+        "how_to_build_qr_menu": {
+          "benefits": {
+            "analytics": "Analytics and Insights: QR codes can track customer interactions, providing valuable data on popular items, peak times, and customer preferences, helping you optimize your offerings and marketing strategies.",
+            "contactless": "Contactless Dining: QR menus offer a touch-free way for customers to view your restaurant's offerings, enhancing safety and hygiene, especially in the current health-conscious environment.",
+            "title": "What are the benefits of QR menu?",
+            "visual": "A QR menu enhances visual appeal by showcasing high-quality images of your dishes, helping customers make informed choices. Engaging visuals can boost appetite and interest, making your offerings more enticing compared to traditional printed menus."
+          },
+          "conclusion": {
+            "description": "Building a QR menu for your restaurant is a straightforward process that can significantly enhance the dining experience. By following these steps, you can create a QR menu that is not only functional but also a powerful tool for engaging with your customers. Start today and take your restaurant's service to the next level.",
+            "title": "Conclusion"
+          },
+          "cta_button": "Free QR Code",
+          "faqs": {
+            "q1": {
+              "answer": "Yes, most QR code generators allow you to update your menu without changing the QR code itself.",
+              "question": "Can I update my QR menu easily?"
+            },
+            "q2": {
+              "answer": "Yes, they offer a contactless and hygienic option for viewing menus, making them safer than traditional menus.",
+              "question": "Are QR menus safe to use?"
+            }
+          },
+          "head": {
+            "description": "Learn how to generate a QR menu with Motion Menu in a few simple steps. From signing up to printing and displaying your QR code, this guide covers everything you need to create an engaging, contactless menu for your restaurant.",
+            "title": "How to Generate a QR code for Restaurants"
+          },
+          "how_to": {
+            "step_1": {
+              "description": "Click the link below to sign up using your Google or email account to get started.",
+              "title": "Sign Up for Motion Menu"
+            },
+            "step_2": {
+              "description": "Enter your business name and select a prefilled template to create your digital menu.",
+              "title": "Set Up Your Business"
+            },
+            "step_3": {
+              "description": "Once in the app, navigate to the 'Digital Menu' link in the navigation bar.",
+              "title": "Access Your Digital Menu"
+            },
+            "step_4": {
+              "description": "Click on the QR code to download the image of your menu.",
+              "title": "Download Your QR Code"
+            },
+            "step_5": {
+              "description": "Print the downloaded QR code image and display it prominently for your customers.",
+              "title": "Print and Display"
+            },
+            "title": "How to generate QR menu?"
+          },
+          "introduction": "In today's digital age, offering a QR menu is essential for restaurants. A QR menu not only enhances the dining experience but also aligns with safety and hygiene standards. If you're wondering how to build a QR menu for your restaurant, this guide will walk you through the process step by step.",
+          "title": "How to Generate a QR code for Restaurants",
+          "why_needs_qr_menu": {
+            "description": "Implementing a QR menu in your restaurant offers significant benefits: it provides a contactless and safe dining experience, allowing customers to access your menu without handling physical items; it allows for easy and instant updates to menu items, prices, or promotions, saving time and printing costs; and it enhances the overall customer experience by offering a visually appealing, interactive menu that can include images and detailed descriptions.",
+            "title": "Why Your Restaurant Needs a QR Menu"
+          }
+        }
+      },
       "carousel": {
         "description": "Customers scan QR code and get the digital menu. You can also share the link on social media.",
         "title": "Videos and images are what customers want"
@@ -180,23 +255,6 @@
       },
       "video_demo": {
         "description": "You see, video is key to get more customers"
-      }
-    },
-    "build_qr": {
-      "head": {
-        "title": "Build a QR menu that reaches millions",
-        "description": "Create a powerful QR menu designed to reach millions on social media and boost your restaurant’s online presence."
-      },
-      "have_account_button": {
-        "title": "Already have account?"
-      },
-      "try": {
-        "description": "Start 14 days free trial today. No credit card is required.",
-        "title": "Try QR menu!"
-      },
-      "carousel": {
-        "description": "Customers scan QR code and get the digital menu. You can also share the link on social media.",
-        "title": "Videos and images are what customers want"
       }
     },
     "shop": {

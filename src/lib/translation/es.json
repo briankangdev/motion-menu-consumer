@@ -12,9 +12,22 @@
         "required": "Email es requerido"
       }
     },
+    "navbar": {
+      "greeting": "Hola, {name}",
+      "open_app": "Abrir app",
+      "photos_and_videos": "Fotos y videos",
+      "QR_menu": "Menu QR",
+      "sign_in": "Ingresar",
+      "sign_out": "Cerrar sesión",
+      "try_qr": "Obtener QR"
+    },
     "profiling_form": {
       "categories_description": "Elige una plantilla de carta y +10 productos serán copiados a tu carta. Podés saltar este paso seleccionando la opción \"vacío\".",
       "categories_description_title": "¡Copia productos de una plantilla!"
+    },
+    "review_form": {
+      "add_review": "Añadir comentario",
+      "sign_up_to_share": "Regístrate para compartir"
     },
     "sign-up_form": {
       "button": "Generar QR",
@@ -45,19 +58,6 @@
       "text_A": "¡Empieza a editar tus productos ",
       "text_B": " está tu código QR.",
       "title": "Tu carta QR fue generada."
-    },
-    "review_form": {
-      "add_review": "Añadir comentario",
-      "sign_up_to_share": "Regístrate para compartir"
-    },
-    "navbar": {
-      "QR_menu": "Menu QR",
-      "photos_and_videos": "Fotos y videos",
-      "sign_in": "Ingresar",
-      "try_qr": "Obtener QR",
-      "sign_out": "Cerrar sesión",
-      "greeting": "Hola, {name}",
-      "open_app": "Abrir app"
     }
   },
   "day_ago": "Hace {days} día",
@@ -107,6 +107,60 @@
       "two_solutions": "Dos soluciones para combatir"
     },
     "landing": {
+      "blog": {
+        "how_to_build_qr_menu": {
+          "benefits": {
+            "analytics": "Análisis e Insights: Los códigos QR pueden rastrear las interacciones de los clientes, proporcionando datos valiosos sobre los artículos populares, las horas pico y las preferencias de los clientes, ayudándote a optimizar tus ofertas y estrategias de marketing.",
+            "contactless": "Las cartas QR ofrecen una forma sin contacto para que los clientes vean las ofertas de tu restaurante, mejorando la seguridad y la higiene, especialmente en el entorno actual consciente de la salud.",
+            "title": "¿Cuáles son los beneficios del menú QR?",
+            "visual": "Un menú QR mejora el atractivo visual al mostrar imágenes de alta calidad de tus platos, ayudando a los clientes a tomar decisiones informadas. Los visuales atractivos pueden aumentar el apetito y el interés."
+          },
+          "conclusion": {
+            "description": "Crear un menú QR para tu restaurante es un proceso sencillo que puede mejorar significativamente la experiencia gastronómica. Siguiendo estos pasos, puedes crear un menú QR que no solo sea funcional, sino también una poderosa herramienta para interactuar con tus clientes. Comienza hoy y lleva el servicio de tu restaurante al siguiente nivel.",
+            "title": "Conclusión"
+          },
+          "cta_button": "Generar Código QR Gratis",
+          "faqs": {
+            "q1": {
+              "answer": "Sí, la mayoría de los generadores de códigos QR te permiten actualizar tu menú sin cambiar el código QR en sí.",
+              "question": "¿Puedo actualizar mi menú QR fácilmente?"
+            },
+            "q2": {
+              "answer": "Sí, ofrecen una opción sin contacto e higiénica para ver los menús, haciéndolos más seguros que los menús tradicionales.",
+              "question": "¿Son seguros de usar los menús QR?"
+            }
+          },
+          "head": {
+            "description": "Aprende a generar un menú QR con Motion Menu en unos sencillos pasos. Desde registrarte hasta imprimir y mostrar tu código QR, esta guía cubre todo lo que necesitas para crear un menú digital atractivo y sin contacto para tu restaurante.",
+            "title": "Cómo Crear un Menú QR para Restaurantes: Una Guía Paso a Paso"
+          },
+          "how_to": {
+            "step_1": {
+              "description": "Una vez en terminas la registración, navega hasta el enlace \"Menú Digital\" en la barra de navegación.",
+              "title": "Registrar en Motion Menu"
+            },
+            "step_2": {
+              "description": "Haz clic en el código QR para descargar la imagen de tu menú.",
+              "title": "Descarga tu código QR"
+            },
+            "step_3": {
+              "description": "Imprime la imagen del código QR descargada y muéstrala a tus clientes.",
+              "title": "Imprime QR y muestra"
+            },
+            "step_4": {
+              "description": "Coloca los códigos QR impresos en las mesas de tu restaurante para un fácil acceso.",
+              "title": "Coloca en las Mesas"
+            },
+            "title": "¿Cómo generar un carta QR?"
+          },
+          "introduction": "En la era digital actual, ofrecer una carta QR es esencial para los restaurantes. Un menú QR no solo mejora la experiencia gastronómica, sino que también se alinea con los estándares de seguridad e higiene. Si te preguntas cómo crear un menú QR para tu restaurante, esta guía te guiará a través del proceso paso a paso.",
+          "title": "Cómo Generar un código QR para Restaurantes",
+          "why_needs_qr_menu": {
+            "description": "Implementar una carta QR en tu restaurante ofrece beneficios significativos: proporciona una experiencia gastronómica más atractiva, permitiendo a los clientes ver los imagenes y videos. Permite actualizaciones fáciles e instantáneas de los elementos del menú, precios o promociones, ahorrando tiempo y costos de impresión; y mejora la experiencia general del cliente al ofrecer un menú interactivo visualmente atractivo que puede incluir imágenes y descripciones detalladas.",
+            "title": "¿Por qué tu Restaurante Necesita un Menú QR?"
+          }
+        }
+      },
       "carousel": {
         "description": "Consumidores escanean código QR para ver la carta. Puedes compartir el link de su carta por redes sociales.",
         "title": "Consumidores quieren ver videos y fotos"
@@ -122,8 +176,8 @@
       },
       "no_image": {
         "description": "Sabemos que obtener fotos y vidoes perfectos es dificíl y puede ser tedioso. Nos armamos un equipo dedicado para cubrir las necesidades.",
-        "title": "Qué pasa si yo no tengo fotos perfectos?",
-        "learn_more": "Conocer más"
+        "learn_more": "Conocer más",
+        "title": "Qué pasa si yo no tengo fotos perfectos?"
       },
       "not_good_with_computers": {
         "description": "Tenemos chat en vivo para asistir la configuración inicial. Podemos ayudarte a cargar los items y fotos.",
