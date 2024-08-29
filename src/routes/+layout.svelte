@@ -32,15 +32,6 @@
   </script>
 
   {@html "<script>" + partytownSnippet() + "</script>"}
-
-  <!-- Global Tag Manager (PartyTown) -->
-  <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-W3DG7SGZ9E"></script>
-	<script type="text/partytown">
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'G-W3DG7SGZ9E');
-	</script>
 </svelte:head>
 
 <div class="app">
