@@ -16,13 +16,18 @@
   import SignUpForm from "../../../components/signup-form/SignUpForm.svelte";
   import SuccessCasesCarrousel from "../../../components/success-cases-carrousel/SuccessCasesCarrousel.svelte";
   import toast from "svelte-french-toast";
-  import { trackLandingSignup } from "../../../lib/analytics/google";
+  import {
+    trackLandingSignupVisit,
+    trackLandingSignup,
+  } from "../../../lib/analytics/google";
   import Navbar from "../../../components/Navbar.svelte";
 
   let loading_submit: boolean = false;
   let user_id: IUser["distinct_id"] = $user.distinct_id;
 
   onMount(() => {
+    trackLandingSignupVisit();
+
     analytics.track(`${BUILD_QR_PAGE}.visit`, {
       user_id,
     });
