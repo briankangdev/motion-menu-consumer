@@ -9,8 +9,6 @@
   import { partytownSnippet } from "@builder.io/partytown/integration";
   import { install } from "ga-gtag";
 
-  install('G-W3DG7SGZ9E');
-
   onMount(async () => {
     // user class needs to be instantiated before it can be used in the store
     if (!$user) {
@@ -21,6 +19,8 @@
     if (fb) {
       fb.track("PageView");
     }
+
+    install('G-W3DG7SGZ9E');
   });
 
   const FACEBOOK_DATASET_ID = "2803302726481229";
