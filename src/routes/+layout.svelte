@@ -7,6 +7,7 @@
   import { FacebookPixel, fb } from "@beyonk/svelte-facebook-pixel";
   import Footer from "../components/Footer.svelte";
   import { partytownSnippet } from "@builder.io/partytown/integration";
+  import { install } from "ga-gtag";
 
   onMount(async () => {
     // user class needs to be instantiated before it can be used in the store
@@ -19,6 +20,7 @@
       fb.track("PageView");
     }
 
+    install('G-W3DG7SGZ9E');
   });
 
   const FACEBOOK_DATASET_ID = "2803302726481229";
