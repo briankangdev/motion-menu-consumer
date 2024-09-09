@@ -6,7 +6,6 @@
   import { onMount } from "svelte";
   import { FacebookPixel, fb } from "@beyonk/svelte-facebook-pixel";
   import Footer from "../components/Footer.svelte";
-  import { partytownSnippet } from "@builder.io/partytown/integration";
 
   onMount(async () => {
     // user class needs to be instantiated before it can be used in the store
@@ -22,16 +21,6 @@
 
   const FACEBOOK_DATASET_ID = "2803302726481229";
 </script>
-
-<svelte:head>
-  <script>
-    partytown = {
-      forward: ["dataLayer.push"],
-    };
-  </script>
-
-  {@html "<script>" + partytownSnippet() + "</script>"}
-</svelte:head>
 
 <div class="app">
   <FacebookPixel pixels={[FACEBOOK_DATASET_ID]} />
