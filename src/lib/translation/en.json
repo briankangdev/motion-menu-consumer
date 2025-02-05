@@ -34,7 +34,8 @@
       "email_input_label": "Email",
       "email_input_placeholder": "example@email.com",
       "errors": {
-        "Email has already been taken": "Email has already been taken"
+        "Email has already been taken": "Email has already been taken",
+        "Friendly is reserved": "Can't use this email or name"
       },
       "input_error": {
         "email": {
