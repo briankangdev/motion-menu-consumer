@@ -80,6 +80,15 @@
           </div>
         </div>
       {:else}
+        <a href="https://admin.motion.menu">
+          <Button
+            title={$t("components.navbar.sign_in")}
+            variant="borderless"
+            onClick={() => {
+              handleButtonTrack("sign-in");
+            }}
+          />
+        </a>
         <a href="/landing/build-qr-menu-for-restaurants">
           <Button
             title={$t("components.navbar.try_qr")}
