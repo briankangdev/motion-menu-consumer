@@ -10,12 +10,12 @@ interface IResponseCopyProductsStatus {
 }
 
 export const copyProductsFromCompany = async (
-  template_company_id: ICompany["id"]
+  template: number
 ): Promise<IResponseCopyProducts> => {
   const response = await client.post(
     `/api/v1/companies/copy_content_from_template`,
     {
-      template_company_id,
+      template,
     }
   );
 

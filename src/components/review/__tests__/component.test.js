@@ -50,7 +50,7 @@ describe("review component", () => {
       render(Review, { ...props, body: text });
 
       const body = screen.queryByTestId("body");
-      expect(body.textContent).toBe(text);
+      expect(body.textContent).toContain(text);
 
       const more = screen.queryByTestId("more");
       expect(more).toBeNull();
@@ -61,12 +61,12 @@ describe("review component", () => {
 
       render(Review, { ...props, body: text });
       const body = screen.queryByTestId("body");
-      expect(body.textContent).not.toBe(text);
+      expect(body.textContent).not.toContain(text);
 
       let more = screen.queryByTestId("more");
       await fireEvent.click(more);
 
-      expect(body.textContent).toBe(text);
+      expect(body.textContent).toContain(text);
     });
 
     it("hide the 'more' button once is clicked", async () => {

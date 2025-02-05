@@ -4,10 +4,9 @@ import {
   ids,
   grouped_by_tags,
   IProduct,
-  ids_with_videos,
-  ids_with_images,
   query,
   filtered_ids,
+  ids_with_media,
 } from "../products";
 
 describe("Product Store", () => {
@@ -104,24 +103,17 @@ describe("Product Store", () => {
     });
   });
 
-  it("should return a list of product ids with images", () => {
-    let ids_with_imagesSub;
+  it("should return a list of product ids with image or video", () => {
+    let ids_with_mediaSub;
 
-    ids_with_images.subscribe((ids) => {
-      ids_with_imagesSub = ids;
+    ids_with_media.subscribe((ids) => {
+      ids_with_mediaSub = ids;
     });
 
-    expect(ids_with_imagesSub).toEqual([product_with_image.id]);
-  });
-
-  it("should return a list of product ids with videos", () => {
-    let ids_with_videosSub;
-
-    ids_with_videos.subscribe((ids) => {
-      ids_with_videosSub = ids;
-    });
-
-    expect(ids_with_videosSub).toEqual([product_with_video.id]);
+    expect(ids_with_mediaSub).toEqual([
+      product_with_image.id,
+      product_with_video.id,
+    ]);
   });
 
   it("should return the ids of products that match the search query", () => {

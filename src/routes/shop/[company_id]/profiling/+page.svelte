@@ -19,10 +19,10 @@
 
   const category_template_ids: Record<CompanyCategory, ICompany["id"]> = {
     empty: null,
-    pizza: 99, // TODO: These are PROD ids, need to update on staging
-    coffee: 100,
-    hamburger: 101,
-    saigon: 102,
+    pizza: 0, // TODO: These are PROD ids, need to update on staging
+    coffee: 1,
+    hamburger: 2,
+    saigon: 3,
   };
 
   const handleSubmitCallback = async (
