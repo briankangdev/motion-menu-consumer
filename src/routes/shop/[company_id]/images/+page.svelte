@@ -67,6 +67,15 @@
     });
   };
 
+  // User can click on a category to filter the products
+  const onCategoryClick = (category: string) => () => {
+    if ($query === category) {
+      $query = "";
+    } else {
+      $query = category;
+    }
+  };
+
   $: items =
     $query.length > 1
       ? Object.values($filtered_ids)
@@ -171,13 +180,7 @@
             title={category.name}
             active={category.name === $query}
             variant="black"
-            onClick={() => {
-              if ($query === category.name) {
-                query.set("");
-              } else {
-                query.set(category.name);
-              }
-            }}
+            onClick={onCategoryClick(category.name)}
             --text-transform="capitalize"
           />
         {/each}
@@ -195,6 +198,7 @@
           {/each}
         {:else}
           <!-- When search query is empty -->
+          <!-- Display products in each category -->
           {#each $categories_by_priority as category}
             {#if $grouped_by_categories[category.name]}
               {#each $grouped_by_categories[category.name] as product_id (product_id)}
@@ -204,7 +208,7 @@
           {/each}
 
           <hr class="menu-divider" />
-
+          <!-- Display products in no category -->
           {#if $grouped_by_categories[NO_CATEGORY]}
             {#each $grouped_by_categories[NO_CATEGORY] as product_id (product_id)}
               <ProductCard

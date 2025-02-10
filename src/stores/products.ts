@@ -60,13 +60,14 @@ export const ids = derived(dic, ($dic) => {
 
 export const grouped_by_categories = derived([dic, ids], ([$dic, $ids]) => {
   return $ids.reduce((result: IGroupedProducts, product_id: IProduct["id"]) => {
-    // Identify which tag the product belongs to
+    // Identify which category the product belongs to
     // It picks the first tag if there is any
     let category = $dic[product_id].category
       ? $dic[product_id].category.trim().toLowerCase()
       : NO_CATEGORY;
 
-    // Assign array of product ids given tag and sort by name
+    // Assign array of product ids given category and sort by name
+    // TODO: Alphabetically sort by category name is default
     result[category] = [...(result[category] || []), product_id].sort((a, b) =>
       $dic[a].name.localeCompare($dic[b].name),
     );

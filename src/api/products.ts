@@ -32,5 +32,5 @@ export const getProduct = async (
 };
 
 export const getProductCategories = async (company_id: CompanySlug) => {
-  return await client.get(`/api/v1/${company_id}/product_categories`);
+  return await client.get(`/api/v1/${company_id}/products/categories`);
 };

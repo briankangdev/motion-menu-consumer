@@ -15,6 +15,7 @@
     "hamburger",
     "saigon",
   ];
+
   let category_selected: CompanyCategory = "empty";
   let shop_name: string = "";
 

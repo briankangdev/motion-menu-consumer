@@ -26,6 +26,7 @@
     });
   });
 
+  // User can click on a category to filter the products
   const onCategoryClick = (category: string) => () => {
     if ($query === category) {
       $query = "";
@@ -73,6 +74,7 @@
   </div>
 
   <div class="category-container">
+    <!-- User can click on a category to filter the products -->
     {#each $categories_by_priority as category}
       <button
         type="button"
@@ -98,6 +100,7 @@
           />
         {/each}
       {:else}
+        <!-- Given all ordered categories, display products in each category -->
         {#each $categories_by_priority as category (category.name)}
           {#if $grouped_by_categories[category.name]}
             <h1 class="category">{category.name}</h1>
