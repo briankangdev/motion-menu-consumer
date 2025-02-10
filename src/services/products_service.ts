@@ -40,7 +40,7 @@ export async function loadProduct(product_id: IProduct["id"]) {
 }
 
 export async function loadProductCategories(company_id: CompanySlug) {
-  const response = await getProductCategories(company_id);
+  const response = await getProductCategories(company_id, true);
 
   const categories = response.data.data;
 

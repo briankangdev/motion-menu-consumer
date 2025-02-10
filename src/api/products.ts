@@ -31,6 +31,16 @@ export const getProduct = async (
   return response.data;
 };
 
-export const getProductCategories = async (company_id: CompanySlug) => {
-  return await client.get(`/api/v1/${company_id}/products/categories`);
+export const getProductCategories = async (
+  company_id: CompanySlug,
+  sort_by_priority: boolean = false
+) => {
+  return await client.get(
+    `/api/v1/${company_id}/products/categories`,
+    {
+      params: {
+        sort_by_priority,
+      },
+    }
+  );
 };
