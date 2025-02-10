@@ -5,10 +5,10 @@
   import {
     dic as products_dic,
     query,
-    grouped_by_tags,
+    grouped_by_categories,
     filtered_ids,
-    tags_by_priority,
-    NO_TAG,
+    categories_by_priority,
+    NO_CATEGORY,
   } from "../../../../stores/products";
   import { reviews } from "../../../../stores/reviews";
   import Button from "../../../../components/button/Button.svelte";
@@ -70,7 +70,7 @@
   $: items =
     $query.length > 1
       ? Object.values($filtered_ids)
-      : Object.values($grouped_by_tags).flatMap((x) => x);
+      : Object.values($grouped_by_categories).flatMap((x) => x);
 </script>
 
 <svelte:head>
@@ -165,17 +165,17 @@
         />
       </div>
 
-      <div class="tag-container">
-        {#each $tags_by_priority as tag}
+      <div class="category-container">
+        {#each $categories_by_priority as category}
           <Button
-            title={tag.name}
-            active={tag.name === $query}
+            title={category.name}
+            active={category.name === $query}
             variant="black"
             onClick={() => {
-              if ($query === tag.name) {
+              if ($query === category.name) {
                 query.set("");
               } else {
-                query.set(tag.name);
+                query.set(category.name);
               }
             }}
             --text-transform="capitalize"
@@ -195,9 +195,9 @@
           {/each}
         {:else}
           <!-- When search query is empty -->
-          {#each $tags_by_priority as tag}
-            {#if $grouped_by_tags[tag.name]}
-              {#each $grouped_by_tags[tag.name] as product_id (product_id)}
+          {#each $categories_by_priority as category}
+            {#if $grouped_by_categories[category.name]}
+              {#each $grouped_by_categories[category.name] as product_id (product_id)}
                 <ProductCard {company_id} product={$products_dic[product_id]} />
               {/each}
             {/if}
@@ -205,8 +205,8 @@
 
           <hr class="menu-divider" />
 
-          {#if $grouped_by_tags[NO_TAG]}
-            {#each $grouped_by_tags[NO_TAG] as product_id (product_id)}
+          {#if $grouped_by_categories[NO_CATEGORY]}
+            {#each $grouped_by_categories[NO_CATEGORY] as product_id (product_id)}
               <ProductCard
                 {company_id}
                 product={$products_dic[product_id]}
@@ -303,7 +303,7 @@
     background-size: 15px 15px;
   }
 
-  .tag-container {
+  .category-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;

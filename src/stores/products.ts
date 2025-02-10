@@ -1,12 +1,13 @@
 import { derived, writable } from "svelte/store";
 import type { Writable } from "svelte/store";
 
-export const NO_TAG = "no-tag";
+export const NO_CATEGORY = "no-category";
 
 export interface IProduct {
   id: number;
   name: string;
   description: string;
+  category: string;
   created_at: string;
   updated_at: string;
   deleted_at: string;
@@ -49,7 +50,7 @@ interface ITag {
   name: string;
 }
 
-export const tags_by_priority: Writable<ITag[]> = writable([]);
+export const categories_by_priority: Writable<ITag[]> = writable([]);
 
 // Ids are used to fetch data from the dictionary
 export const ids = derived(dic, ($dic) => {
@@ -57,18 +58,17 @@ export const ids = derived(dic, ($dic) => {
   return list.filter((v, i) => list.indexOf(v) === i);
 });
 
-export const grouped_by_tags = derived([dic, ids], ([$dic, $ids]) => {
+export const grouped_by_categories = derived([dic, ids], ([$dic, $ids]) => {
   return $ids.reduce((result: IGroupedProducts, product_id: IProduct["id"]) => {
     // Identify which tag the product belongs to
     // It picks the first tag if there is any
-    let tag: IProduct["tags"][0]["name"] =
-      $dic[product_id].tags.length > 0
-        ? $dic[product_id].tags[0].name.toLowerCase().trim()
-        : NO_TAG;
+    let category = $dic[product_id].category
+      ? $dic[product_id].category.trim().toLowerCase()
+      : NO_CATEGORY;
 
     // Assign array of product ids given tag and sort by name
-    result[tag] = [...(result[tag] || []), product_id].sort((a, b) =>
-      $dic[a].name.localeCompare($dic[b].name)
+    result[category] = [...(result[category] || []), product_id].sort((a, b) =>
+      $dic[a].name.localeCompare($dic[b].name),
     );
 
     return result;
@@ -77,7 +77,7 @@ export const grouped_by_tags = derived([dic, ids], ([$dic, $ids]) => {
 
 export const ids_with_media = derived([dic, ids], ([$dic, $ids]) => {
   return $ids.filter(
-    (id) => $dic[id].images_count > 0 || $dic[id].videos_count > 0
+    (id) => $dic[id].images_count > 0 || $dic[id].videos_count > 0,
   );
 });
 
@@ -88,22 +88,25 @@ export const filtered_ids = derived(
 
     return $ids.filter((id) => {
       return (
-        $dic[id].name.toLowerCase().includes(term) ||
-        $dic[id].description.toLowerCase().includes(term) ||
-        $dic[id].tags.some((tag) => {
+        $dic[id].name?.toLowerCase().includes(term) ||
+        $dic[id].description?.toLowerCase().includes(term) ||
+        $dic[id].category?.toLowerCase().includes(term) ||
+        $dic[id].tags?.some((tag) => {
           return tag.name.toLowerCase().includes(term);
         })
       );
     });
-  }
+  },
 );
 
-// Product ids sorted by tag priority.
+// Product ids sorted by category priority.
 // ex) [18, 23, 22]
-export const ids_sorted_by_tags = derived(
-  [ids, grouped_by_tags, tags_by_priority],
-  ([$ids, $grouped_by_tags, $tags_by_priority]) => {
-    // Return a flat map of product ids sorted by tag order string
-    return $tags_by_priority.flatMap((tag) => $grouped_by_tags[tag.name] || []);
-  }
+export const ids_sorted_by_categories = derived(
+  [ids, grouped_by_categories, categories_by_priority],
+  ([$ids, $grouped_by_categories, $categories_by_priority]) => {
+    // Return a flat map of product ids sorted by category order string
+    return $categories_by_priority.flatMap(
+      (category) => $grouped_by_categories[category.name] || [],
+    );
+  },
 );

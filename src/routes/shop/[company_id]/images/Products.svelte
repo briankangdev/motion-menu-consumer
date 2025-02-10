@@ -4,7 +4,7 @@
     ids_with_media,
     ids as products_ids,
     dic as products_dic,
-    ids_sorted_by_tags,
+    ids_sorted_by_categories,
   } from "../../../../stores/products";
   import Carrousel from "../../../../components/carrousel/Carrousel.svelte";
   import Button from "../../../../components/button/Button.svelte";
@@ -12,7 +12,7 @@
 
   export let company_id;
 
-  $: products_with_media = $ids_sorted_by_tags
+  $: products_with_media = $ids_sorted_by_categories
     .filter((id) => $ids_with_media.includes(id))
     .map((id) => $products_dic[id]);
 </script>

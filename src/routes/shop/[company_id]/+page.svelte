@@ -3,10 +3,10 @@
   import {
     dic as products_dic,
     query,
-    grouped_by_tags,
+    grouped_by_categories,
     filtered_ids,
-    tags_by_priority,
-    NO_TAG,
+    categories_by_priority,
+    NO_CATEGORY,
   } from "../../../stores/products.js";
   import { company } from "../../../stores/company.js";
   import Masonry from "../../../components/Masonry.svelte";
@@ -26,18 +26,18 @@
     });
   });
 
-  const onTagClick = (tag: string) => () => {
-    if ($query === tag) {
+  const onCategoryClick = (category: string) => () => {
+    if ($query === category) {
       $query = "";
     } else {
-      $query = tag;
+      $query = category;
     }
   };
 
   $: items =
     $query.length > 1
       ? Object.values($filtered_ids)
-      : Object.values($grouped_by_tags).flatMap((x) => x);
+      : Object.values($grouped_by_categories).flatMap((x) => x);
 </script>
 
 <svelte:head>
@@ -72,12 +72,12 @@
     />
   </div>
 
-  <div class="tag-container">
-    {#each $tags_by_priority as tag}
+  <div class="category-container">
+    {#each $categories_by_priority as category}
       <button
         type="button"
-        class={`tag-button ${tag.name === $query && "active"}`}
-        on:click={onTagClick(tag.name)}>{tag.name}</button
+        class={`category-button ${category.name === $query && "active"}`}
+        on:click={onCategoryClick(category.name)}>{category.name}</button
       >
     {/each}
   </div>
@@ -98,10 +98,10 @@
           />
         {/each}
       {:else}
-        {#each $tags_by_priority as tag (tag.name)}
-          {#if $grouped_by_tags[tag.name]}
-            <h1 class="tag">{tag.name}</h1>
-            {#each $grouped_by_tags[tag.name] as product_id (product_id)}
+        {#each $categories_by_priority as category (category.name)}
+          {#if $grouped_by_categories[category.name]}
+            <h1 class="category">{category.name}</h1>
+            {#each $grouped_by_categories[category.name] as product_id (product_id)}
               <ProductCard
                 {company_id}
                 product={$products_dic[product_id]}
@@ -113,8 +113,8 @@
 
         <hr class="menu-divider" />
 
-        {#if $grouped_by_tags[NO_TAG]}
-          {#each $grouped_by_tags[NO_TAG] as product_id (product_id)}
+        {#if $grouped_by_categories[NO_CATEGORY]}
+          {#each $grouped_by_categories[NO_CATEGORY] as product_id (product_id)}
             <ProductCard
               {company_id}
               product={$products_dic[product_id]}
@@ -143,7 +143,7 @@
     font-weight: bold;
   }
 
-  h1.tag {
+  h1.category {
     padding-left: 15px;
   }
 
@@ -209,7 +209,7 @@
     background-size: 15px 15px;
   }
 
-  .tag-container {
+  .category-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -232,7 +232,7 @@
     margin: 0;
   }
 
-  .tag-button {
+  .category-button {
     text-transform: capitalize;
     background-color: transparent;
     color: #868590;
@@ -246,7 +246,7 @@
     cursor: pointer;
   }
 
-  .tag-button.active {
+  .category-button.active {
     background-color: #f3f3f4;
     color: #000;
   }

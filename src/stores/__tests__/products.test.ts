@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   dic,
   ids,
-  grouped_by_tags,
+  grouped_by_categories,
   IProduct,
   query,
   filtered_ids,
@@ -22,6 +22,7 @@ describe("Product Store", () => {
     images_count: 0,
     videos_count: 0,
     price: 100,
+    category: "firstgroup",
     tags: [{ id: 1, name: "firstgroup" }],
     likes_count: 0,
   };
@@ -38,6 +39,7 @@ describe("Product Store", () => {
     images_count: 1,
     videos_count: 0,
     price: 100,
+    category: "secondgroup",
     tags: [{ id: 1, name: "secondgroup" }],
     likes_count: 0,
   };
@@ -90,14 +92,14 @@ describe("Product Store", () => {
     expect(idsSub).toEqual(products.map((product) => product.id));
   });
 
-  it("should group products by their tag", () => {
-    let grouped_by_tagsSub;
+  it("should group products by their category", () => {
+    let grouped_by_categoriesSub;
 
-    grouped_by_tags.subscribe((grouped) => {
-      grouped_by_tagsSub = grouped;
+    grouped_by_categories.subscribe((grouped) => {
+      grouped_by_categoriesSub = grouped;
     });
 
-    expect(grouped_by_tagsSub).toEqual({
+    expect(grouped_by_categoriesSub).toEqual({
       firstgroup: [1],
       secondgroup: [2, 3],
     });

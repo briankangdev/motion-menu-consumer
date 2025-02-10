@@ -1,7 +1,7 @@
 import { loadCompany } from "../../../services/company_service";
 import {
   loadAllProducts,
-  loadProductTags,
+  loadProductCategories,
 } from "../../../services/products_service";
 import { getProductLikes } from "../../../services/like_service";
 import type { CompanySlug } from "src/stores/company";
@@ -17,7 +17,7 @@ export async function load({ params }: IRouteParams) {
 
   await Promise.all([
     loadCompany(company_id),
-    loadProductTags(company_id),
+    loadProductCategories(company_id),
     loadAllProducts(company_id),
     getProductLikes(company_id),
   ]);
