@@ -16,7 +16,7 @@
 
     <div class="link-container">
         <a href="https://admin.motion.menu" rel="external">Owners</a>
-        <a href="/privacy">Privacy</a>
+        <a href="/privacy.html">Privacy</a>
         <a href="mailto:support@motion.menu">support@motion.menu</a>
 
         <!-- <div class="icon-container">
