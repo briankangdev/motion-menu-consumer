@@ -190,14 +190,6 @@
     gap: 10px;
   }
 
-  hr {
-    content: "";
-    width: 80%;
-    background-color: var(--gray);
-    opacity: 0.3;
-    margin-top: 10px;
-  }
-
   section.solution {
     display: flex;
     flex-direction: row;
@@ -212,10 +204,6 @@
 
   section.solution p {
     color: var(--gray);
-  }
-
-  .google_sign_in {
-    height: 40px; /* This is to prevent the button from altering the user interface. */
   }
 
   @media (min-width: 1024px) {

@@ -2,7 +2,6 @@
   import { _ } from "svelte-i18n";
   import { fb } from "@beyonk/svelte-facebook-pixel";
   import { login } from "../../../services/auth_service";
-  import { goto } from "$app/navigation";
   import { BUILD_QR_PAGE } from "../../../lib/analytics/types";
   import { onMount } from "svelte";
   import { user, type IUser } from "../../../stores/private/users/user";

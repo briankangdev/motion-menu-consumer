@@ -2,7 +2,7 @@ import { loadCompany } from "../../../services/public/companies_service";
 import {
   loadAllProducts,
   loadProductCategories,
-} from "../../../services/products_service";
+} from "../../../services/public/products_service";
 import { getProductLikes } from "../../../services/public/like_service";
 import type { CompanySlug } from "../../../stores/public/companies";
 

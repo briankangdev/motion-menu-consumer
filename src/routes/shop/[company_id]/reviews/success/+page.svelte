@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
-  import type { CompanySlug } from "../../../../../stores/public/companycompany";
+  import type { CompanySlug } from "../../../../../stores/public/companies";
   import Button from "../../../../../components/button/Button.svelte";
   import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";
   import { goto } from "$app/navigation";
@@ -42,10 +42,6 @@
     margin: 0;
   }
 
-  header {
-    padding: 4px 0 4px 12px;
-  }
-
   section {
     width: 80%;
     margin: 0 auto;
@@ -70,10 +66,6 @@
   }
 
   @media (min-width: 768px) {
-    header {
-      padding: 30px 0 30px 50px;
-    }
-
     section {
       width: 50%;
     }

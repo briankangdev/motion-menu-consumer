@@ -1,6 +1,6 @@
 import client from "../client";
 import type { IUser } from "../../stores/private/users/user";
-import type { IProduct } from "../../stores/products";
+import type { IProduct } from "../../stores/public/products";
 import type { CompanySlug } from "../../stores/public/companies";
 
 export interface ILike {

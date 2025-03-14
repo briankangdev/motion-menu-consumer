@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Button from "../button/Button.svelte";
-  import type { CompanyCategory } from "../../../services/private/companies/profile_service";
+  import type { CompanyCategory } from "../../services/private/companies/profile_service";
 
   export let handleSubmitCallback: (
     shop_name: string,

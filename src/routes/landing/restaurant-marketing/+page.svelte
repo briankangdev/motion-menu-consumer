@@ -159,10 +159,6 @@
 </main>
 
 <style>
-  header {
-    padding: 4px 0 4px 12px;
-  }
-
   h1 {
     font-weight: 600;
     line-height: 1.2;
@@ -207,10 +203,6 @@
   }
 
   @media (min-width: 1024px) {
-    header {
-      padding: 30px 0 30px 50px;
-    }
-
     section {
       max-width: 400px;
       gap: 15px;

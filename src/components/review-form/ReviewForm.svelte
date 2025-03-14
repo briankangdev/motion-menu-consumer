@@ -2,11 +2,11 @@
   import { _ } from "svelte-i18n";
   import { toast } from "svelte-french-toast";
   import { goto } from "$app/navigation";
-  import { company, type ICompany } from "../../stores/public/companycompany";
-  import { createReview } from "../../api/public/reviewsreviews";
-  import { is_authenticated, user } from "../../stores/private/users/user_storeers/user_store";
+  import { company, type ICompany } from "../../stores/public/companies";
+  import { createReview } from "../../api/public/reviews";
   import Button from "../../components/button/Button.svelte";
   import LoadingSpinner from "../../components/LoadingSpinner.svelte";
+  import { isAuthenticated, login } from "../../services/auth_service";
 
   type ReviewPage = "index" | "form";
 
@@ -42,13 +42,15 @@
     };
 
     if (comment.length > COMMENT_MIN_LENGTH) {
-      if ($is_authenticated) {
+      const authenticated = await isAuthenticated();
+
+      if (authenticated) {
         await sendReview();
         trackSubmitForm({ authenticated: true });
       } else {
-        await $user.loginWithPopup();
-        await sendReview();
-        trackSubmitForm({ authenticated: false });
+        await login();
+        // await sendReview();
+        // trackSubmitForm({ authenticated: false });
       }
     } else {
       error_occurred = true; //if comment is too short show error message
@@ -91,15 +93,18 @@
           ? "--mobile-visibility: visible" //if page is "form" always show message, otherwise only show on desktop
           : "--mobile-visibility: hidden"}
       >
-        {#if !$is_authenticated}
+      {#await isAuthenticated() then is_authenticated}
+        {#if !is_authenticated}
           {$_("sign-up_to_share_review")}
         {/if}
+      {/await}
       </p>
+      {#await isAuthenticated() then is_authenticated}
       <div class="submit-button">
         <Button
           onClick={() => {}}
           title={$_(
-            $is_authenticated
+            is_authenticated
               ? "components.review_form.add_review"
               : "components.review_form.sign_up_to_share"
           )}
@@ -107,6 +112,7 @@
           test_id="submit-button"
         />
       </div>
+      {/await}
     {/if}
   </div>
 </form>

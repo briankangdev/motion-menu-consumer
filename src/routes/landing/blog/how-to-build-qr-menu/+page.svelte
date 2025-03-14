@@ -209,17 +209,6 @@
         padding-left: 20px;
     }
 
-    .cta-button {
-        display: inline-block;
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-top: 1em;
-    }
-
     @media (min-width: 1024px) {
         h1 {
             font-size: 50px;

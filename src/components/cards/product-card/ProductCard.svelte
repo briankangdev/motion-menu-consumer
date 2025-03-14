@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { CompanySlug } from "src/stores/company";
-  import type { IProduct } from "src/stores/products";
+  import type { CompanySlug } from "../../../stores/public/companies";
+  import type { IProduct } from "../../../stores/public/products";
   import TruncatedText from "../../TruncatedText.svelte";
   import { goto } from "$app/navigation";
 

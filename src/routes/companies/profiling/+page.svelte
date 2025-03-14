@@ -1,8 +1,8 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { goto } from "$app/navigation";
-  import { PROFILING_PAGE } from "../../../lib/analytics/types";
-  import analytics from "../../../lib/analytics";
+  // import { PROFILING_PAGE } from "../../../lib/analytics/types";
+  // import analytics from "../../../lib/analytics";
   import toast from "svelte-french-toast";
   import ProfilingForm from "../../../components/profiling-form/ProfilingForm.svelte";
   import { update } from "../../../api/private/companies/profile";
@@ -107,10 +107,6 @@
   }
 
   @media (min-width: 1024px) {
-    header {
-      padding: 30px 0 30px 50px;
-    }
-
     section {
       width: 400px;
       margin: 0 auto;

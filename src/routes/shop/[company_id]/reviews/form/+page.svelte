@@ -2,15 +2,15 @@
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
   import { REVIEW_FORM_PAGE } from "../../../../../lib/analytics/types";
-  import { is_authenticated } from "../../../../../stores/private/users/user_storeers/user_store";
-  import { company, type ICompany } from "../../../../../stores/public/companycompany";
+  import { company, type ICompany } from "../../../../../stores/public/companies";
   import analytics from "../../../../../lib/analytics";
   import ReviewForm from "../../../../../components/review-form/ReviewForm.svelte";
   import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";
   import Navbar from "../../../../../components/Navbar.svelte";
+  // import { isAuthenticated } from "../../../../../services/auth_service";
 
   let company_id: ICompany["id"] = $company.id;
-  let loading: boolean = true;
+  let loading: boolean = false;
 
   onMount(() => {
     analytics.track(`${REVIEW_FORM_PAGE}.visit`, {
@@ -18,10 +18,10 @@
     });
   });
 
-  $: if ($is_authenticated !== undefined) {
-    //$is_authenticated is undefined until client side is hydrated
-    loading = false;
-  }
+  // $: if ($isAuthenticated()) {
+  //   //$is_authenticated is undefined until client side is hydrated
+  //   loading = false;
+  // }
 
   const trackSubmitForm = (aditional_props: {
     authenticated: boolean;
@@ -58,10 +58,6 @@
     margin: 0;
   }
 
-  header {
-    padding: 4px 0 4px 12px;
-  }
-
   section {
     padding: 0 30px;
     margin: 0 auto;
@@ -83,10 +79,6 @@
   }
 
   @media (min-width: 768px) {
-    header {
-      padding: 30px 0 30px 50px;
-    }
-
     section {
       width: 50%;
     }

@@ -1,7 +1,7 @@
 // import { profile_data } from "../stores/profile";
-import * as auth_api from "../api/private/companies/auth";
+// import * as auth_api from "../api/private/companies/auth";
 import { getAuth0Client } from "../lib/auth0";
-import { Auth0Client } from "@auth0/auth0-spa-js";
+import type { Auth0Client } from "@auth0/auth0-spa-js";
 
 export async function getAccessToken() {
   const auth0_client = await getAuth0Client();

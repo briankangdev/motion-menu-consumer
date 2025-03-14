@@ -1,5 +1,5 @@
 import client from "../client";
-import type { IProduct } from "../../stores/products";
+import type { IProduct } from "../../stores/public/products";
 import type { CompanySlug } from "../../stores/public/companies";
 
 interface IResponseProducts {

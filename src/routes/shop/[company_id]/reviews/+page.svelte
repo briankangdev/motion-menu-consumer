@@ -2,10 +2,9 @@
   import { onMount } from "svelte";
   import { _ as t } from "svelte-i18n";
   import { goto } from "$app/navigation";
-  import { is_authenticated } from "../../../../stores/private/users/user_storeers/user_store";
-  import { company, type ICompany } from "../../../../stores/public/companycompany";
-  import { reviews, reviews_meta } from "../../../../stores/public/reviewsreviews";
-  import { loadReviewsByPage } from "../../../../services/public/reviews_serviceservice";
+  import { company, type ICompany } from "../../../../stores/public/companies";
+  import { reviews, reviews_meta } from "../../../../stores/public/reviews";
+  import { loadReviewsByPage } from "../../../../services/public/reviews_service";
   import { getScrollPercent } from "../../../../utils/get_scroll_percent";
   import { REVIEW_INDEX_PAGE } from "../../../../lib/analytics/types";
   import analytics from "../../../../lib/analytics";
@@ -21,9 +20,12 @@
     .split(" ")
     .map((word) => word[0].toUpperCase() + word.slice(1))
     .join(" ");
-  let loading_client: boolean;
-  let loading_reviews: boolean;
+  let loading_client: boolean = false;
+
+  let loading_reviews: boolean = false;
+
   let actual_page: number;
+
   let total_reviews: number = $reviews_meta.count;
 
   $: actual_page = $reviews_meta.page;
@@ -35,12 +37,12 @@
     window.addEventListener("scroll", handleScroll);
   });
 
-  $: if ($is_authenticated !== undefined) {
-    //$is_authenticated is undefined until client side is hydrated
-    loading_client = false;
-  } else {
-    loading_client = true;
-  }
+  // $: if ($is_authenticated !== undefined) {
+  //   // $is_authenticated is undefined until client side is hydrated
+  //   loading_client = false;
+  // } else {
+  //   loading_client = true;
+  // }
 
   const handleScroll = async (): Promise<void> => {
     const scroll_percent: number = getScrollPercent();

@@ -5,7 +5,6 @@
     import analytics from "$lib/analytics";
     import { BLOG_BUILD_QR_PAGE } from "../../../../lib/analytics/types";
     import Navbar from "../../../../components/Navbar.svelte";
-    import Button from "../../../../components/button/Button.svelte";
 
     let user_id: IUser["distinct_id"] = $user.distinct_id;
 
@@ -186,7 +185,6 @@
         margin-bottom: 2em;
     }
 
-    ul,
     ol {
         padding-left: 20px;
     }
