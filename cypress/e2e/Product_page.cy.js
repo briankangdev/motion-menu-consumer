@@ -28,7 +28,7 @@ describe("Product Page", () => {
           method: "GET",
           url: "/api/v1/product/*",
         },
-        testResponse
+        testResponse,
       ).as("get_product");
 
       cy.visit(`/shop/shop/product/${testResponse.data.id}`);

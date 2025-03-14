@@ -38,12 +38,12 @@ describe("Review form Page", () => {
         localStorage.setItem(storage_token_name, test_token);
         localStorage.setItem(
           storage_expiration_date_name,
-          test_expiration_date
+          test_expiration_date,
         );
 
         expect(localStorage.getItem(storage_token_name)).to.equal(test_token);
         expect(localStorage.getItem(storage_expiration_date_name)).to.equal(
-          test_expiration_date
+          test_expiration_date,
         );
       });
 
@@ -71,7 +71,7 @@ describe("Review form Page", () => {
           },
           {
             statusCode: 201, // return 201 status code to simulate a successful review creation
-          }
+          },
         ).as("post_review");
 
         cy.get("[data-testid=submit-button]").should("be.visible");
@@ -92,7 +92,7 @@ describe("Review form Page", () => {
           },
           {
             statusCode: 500, // return 500 status code to simulate a failed review creation
-          }
+          },
         ).as("post_review");
 
         cy.get("[data-testid=submit-button]").should("be.visible");
@@ -118,7 +118,7 @@ describe("Review form Page", () => {
           // check if the popup was called correctly
           "have.been.calledWith",
           "",
-          "auth0:authorize:popup"
+          "auth0:authorize:popup",
         );
       });
 
@@ -130,7 +130,7 @@ describe("Review form Page", () => {
           },
           {
             statusCode: 201, // return 201 status code to simulate a successful review creation
-          }
+          },
         ).as("post_review");
 
         cy.get("[data-testid=submit-button]").should("be.visible");
@@ -157,7 +157,7 @@ describe("Review form Page", () => {
           },
           {
             statusCode: 500, // return 500 status code to simulate a failed review creation
-          }
+          },
         ).as("post_review");
 
         cy.get("[data-testid=submit-button]").should("be.visible");
@@ -185,7 +185,7 @@ describe("Review form Page", () => {
         localStorage.setItem(storage_token_name, "test_token");
         localStorage.setItem(
           storage_expiration_date_name,
-          "2050-01-01T00:00:00.000Z"
+          "2050-01-01T00:00:00.000Z",
         );
       });
 
@@ -197,7 +197,7 @@ describe("Review form Page", () => {
           },
           {
             statusCode: 201, // return 201 status code to simulate a successful review creation
-          }
+          },
         ).as("post_review");
 
         cy.get("[data-testid=submit-button]").should("be.visible");
@@ -209,9 +209,9 @@ describe("Review form Page", () => {
           cy.readFile(`src/lib/translation/${language}.json`).then(
             (translation) => {
               cy.get("div[class*=toaster]").contains(
-                translation[success_message]
+                translation[success_message],
               );
-            }
+            },
           );
         });
       });
@@ -224,7 +224,7 @@ describe("Review form Page", () => {
           },
           {
             statusCode: 500, // return 500 status code to simulate a failed review creation
-          }
+          },
         ).as("post_review");
 
         cy.get("[data-testid=submit-button]").should("be.visible");
@@ -236,9 +236,9 @@ describe("Review form Page", () => {
           cy.readFile(`src/lib/translation/${language}.json`).then(
             (translation) => {
               cy.get("div[class*=toaster]").contains(
-                translation[error_message]
+                translation[error_message],
               );
-            }
+            },
           );
         });
       });
@@ -255,7 +255,7 @@ describe("Review form Page", () => {
         localStorage.setItem(storage_token_name, "test_token");
         localStorage.setItem(
           storage_expiration_date_name,
-          "2050-01-01T00:00:00.000Z"
+          "2050-01-01T00:00:00.000Z",
         );
       });
 
@@ -265,15 +265,15 @@ describe("Review form Page", () => {
         cy.readFile(`src/lib/translation/${language}.json`).then(
           (translations) => {
             cy.get("[data-testid=submit-button]").contains(
-              translations[button_text_logged]
+              translations[button_text_logged],
             );
-          }
+          },
         );
       });
 
       it("unauthentication message should not be visible", () => {
         cy.get("[data-testid=unauthenticated-message]").should(
-          "not.be.visible"
+          "not.be.visible",
         );
       });
     });
@@ -285,9 +285,9 @@ describe("Review form Page", () => {
         cy.readFile(`src/lib/translation/${language}.json`).then(
           (translations) => {
             cy.get("[data-testid=submit-button]").contains(
-              translations[button_text_unlogged]
+              translations[button_text_unlogged],
             );
-          }
+          },
         );
       });
 
@@ -297,9 +297,9 @@ describe("Review form Page", () => {
         cy.readFile(`src/lib/translation/${language}.json`).then(
           (translations) => {
             cy.get("[data-testid=unauthenticated-message]").contains(
-              translations[paragraph_text_unlogged]
+              translations[paragraph_text_unlogged],
             );
-          }
+          },
         );
       });
     });

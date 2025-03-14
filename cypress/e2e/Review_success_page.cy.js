@@ -4,7 +4,7 @@ describe("Review success Page", () => {
   beforeEach(() => {
     cy.visit(`/shop/${TEST_COMPANY_ID}/review/success`);
     cy.intercept("/api/v1/companies/tremblay-halvorson-and-larkin").as(
-      "get_company"
+      "get_company",
     );
   });
 
@@ -16,7 +16,7 @@ describe("Review success Page", () => {
 
         cy.url().should(
           "eq",
-          `${Cypress.config().baseUrl}/shop/${TEST_COMPANY_ID}`
+          `${Cypress.config().baseUrl}/shop/${TEST_COMPANY_ID}`,
         );
       });
     });
@@ -27,7 +27,7 @@ describe("Review success Page", () => {
 
         cy.url().should(
           "eq",
-          `${Cypress.config().baseUrl}/shop/${TEST_COMPANY_ID}/review`
+          `${Cypress.config().baseUrl}/shop/${TEST_COMPANY_ID}/review`,
         );
       });
     });

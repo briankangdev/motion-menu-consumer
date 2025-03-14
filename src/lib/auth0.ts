@@ -3,10 +3,7 @@ import {
   PUBLIC_AUTH0_DOMAIN,
   PUBLIC_AUTH0_APP_CLIENT_ID,
 } from "$env/static/public";
-import {
-  createAuth0Client,
-  Auth0Client
-} from "@auth0/auth0-spa-js";
+import { createAuth0Client, Auth0Client } from "@auth0/auth0-spa-js";
 
 let auth0_client: Auth0Client | undefined = undefined;
 
@@ -24,10 +21,10 @@ export async function getAuth0Client() {
 
   // TODO: Update scopes for companies, employees and users
   const authorizationParams = {
-    redirect_uri: `${window.location.origin}/companies/profiling` ,
+    redirect_uri: `${window.location.origin}/companies/profiling`,
     audience: "https://motion.menu",
     scope: "profile read:reviews",
-    cookieDomain: '.motion.menu',
+    cookieDomain: ".motion.menu",
   };
 
   if (domain == undefined || clientId == undefined) {

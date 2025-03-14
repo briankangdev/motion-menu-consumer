@@ -44,7 +44,7 @@ describe("Product Card component", () => {
 
   // it("should render link to product page and pass company_id and product_id", () => {
   //   render(ProductCard, props);
-  //   const link = screen.queryByTestId("product-link"); 
+  //   const link = screen.queryByTestId("product-link");
 
   //   expect(link.href).toContain(props.company_id);
   //   expect(link.href).toContain(props.product.id);

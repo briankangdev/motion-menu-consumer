@@ -19,12 +19,12 @@ describe("Review Index Page", () => {
 
   it("should display the correct title", () => {
     cy.intercept("GET", "/api/v1/companies/*", company_response).as(
-      "getCompany"
+      "getCompany",
     );
     cy.wait("@getCompany").then(() => {
       cy.get("[data-testid=review-index-title]").should(
         "contain",
-        company_response.data.name
+        company_response.data.name,
       );
     });
   });
@@ -36,7 +36,7 @@ describe("Review Index Page", () => {
       cy.intercept(
         "GET",
         `/api/v1/${TEST_COMPANY_ID}/reviews*`,
-        reviews_empty_response
+        reviews_empty_response,
       ).as("getReviews");
 
       cy.wait("@getReviews").then(() => {
@@ -45,7 +45,7 @@ describe("Review Index Page", () => {
             cy.get(".no-reviews")
               .should("be.visible")
               .and("contain", translation[no_reviews]);
-          }
+          },
         );
       });
     });
@@ -54,19 +54,19 @@ describe("Review Index Page", () => {
       cy.intercept(
         "GET",
         `/api/v1/*/reviews?per_page=5&page=1**`,
-        reviews_response_1
+        reviews_response_1,
       ).as("getReviews1");
 
       cy.intercept(
         "GET",
         `/api/v1/*/reviews?per_page=5&page=2**`,
-        reviews_response_2
+        reviews_response_2,
       ).as("getReviews2");
 
       cy.wait("@getReviews1").then(() => {
         cy.get("[data-testid=review-container]").should(
           "have.length",
-          reviews_response_1.ids.length
+          reviews_response_1.ids.length,
         );
       });
 
@@ -75,14 +75,14 @@ describe("Review Index Page", () => {
       cy.wait("@getReviews2").then(() => {
         cy.get("[data-testid=review-container]").should(
           "have.length",
-          reviews_response_1.ids.length + reviews_response_2.ids.length
+          reviews_response_1.ids.length + reviews_response_2.ids.length,
         );
       });
     });
 
     it("should display the total number of reviews", () => {
       cy.intercept("GET", `/api/v1/*/reviews?**`, reviews_response_1).as(
-        "getReviews"
+        "getReviews",
       );
       cy.wait("@getReviews").then(() => {
         cy.get("[data-testid=total-reviews]")

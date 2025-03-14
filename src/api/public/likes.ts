@@ -17,7 +17,7 @@ interface IResponse {
 
 export const get_product_likes = async (
   company_id: CompanySlug,
-  user_distinct_id: IUser["distinct_id"]
+  user_distinct_id: IUser["distinct_id"],
 ): Promise<IResponse> => {
   const response = await client.get(`/api/v1/${company_id}/products/likes`, {
     params: {
@@ -29,7 +29,7 @@ export const get_product_likes = async (
 
 export const create_product_like = async (
   product_id: IProduct["id"],
-  user_distinct_id: IUser["distinct_id"]
+  user_distinct_id: IUser["distinct_id"],
 ): Promise<{ data: IProduct }> => {
   const response = await client.patch(`/api/v1/product/${product_id}/like`, {
     user_distinct_id,
@@ -39,7 +39,7 @@ export const create_product_like = async (
 
 export const remove_product_like = async (
   product_id: IProduct["id"],
-  user_distinct_id: IUser["distinct_id"]
+  user_distinct_id: IUser["distinct_id"],
 ): Promise<{ data: IProduct }> => {
   const response = await client.patch(`/api/v1/product/${product_id}/unlike`, {
     user_distinct_id,

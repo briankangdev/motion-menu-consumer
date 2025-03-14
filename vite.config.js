@@ -2,9 +2,7 @@ import { sveltekit } from "@sveltejs/kit/vite";
 
 /** @type {import('vite').UserConfig} */
 const config = {
-  plugins: [
-    sveltekit(),
-  ],
+  plugins: [sveltekit()],
   test: {
     environment: "jsdom", // necessary for rendering svelte components in tests
     include: ["src/**/*.{test,spec}.{js,ts}"],

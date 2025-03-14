@@ -16,7 +16,7 @@ The Button component is a Svelte component that displays a button with a customi
 <script>
     import Button from './button/Button.svelte';
 </script>
-    <Button 
+    <Button
     title="Submit"
     variant="primary"
     onClick={exampleFunction}
@@ -25,6 +25,7 @@ The Button component is a Svelte component that displays a button with a customi
     />
 
 ```
+
 ## Props
 
 - **title**: The text displayed on the button.
@@ -48,4 +49,3 @@ The Button component is a Svelte component that displays a button with a customi
 **Hover & Active**
 
 ![Hover & Active](https://i.imgur.com/kM4AFK5.png)
-

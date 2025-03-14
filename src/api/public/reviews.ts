@@ -13,7 +13,7 @@ export const getReviews = async (
   company_slug: ICompany["slug"],
   page: number = 1,
   per_page: number = 5,
-  featured: boolean = false
+  featured: boolean = false,
 ): Promise<IResponseReviews | undefined> => {
   try {
     const response: AxiosResponse<IResponseReviews> = await client.get(
@@ -24,7 +24,7 @@ export const getReviews = async (
           page,
           featured,
         },
-      }
+      },
     );
 
     return response.data;
@@ -35,7 +35,7 @@ export const getReviews = async (
 
 export const createReview = async (
   comment: string,
-  company_id: ICompany["id"]
+  company_id: ICompany["id"],
 ): Promise<IReview | undefined> => {
   try {
     const response: AxiosResponse<IReview> = await client.post(
@@ -45,7 +45,7 @@ export const createReview = async (
           body: comment,
           company_id: company_id,
         },
-      }
+      },
     );
 
     return response.data;

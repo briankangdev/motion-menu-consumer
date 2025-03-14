@@ -14,13 +14,14 @@ The Product Card component is a Svelte component that displays a card with name,
 <script>
     import ProductCard from './ProductCard.svelte';
 </script>
-    <ProductCard 
+    <ProductCard
     company_id={company_id}
     product={product}
     // handleTrack={exampleFunction} -> optional
     />
 
 ```
+
 ## Props
 
 - **company_id**: The company slug of the product, used for routing.
@@ -31,5 +32,5 @@ The Product Card component is a Svelte component that displays a card with name,
 
 ## Preview
 
-![Preview](https://i.imgur.com/2Goz8An.png) 
-*border is only for visibility
+![Preview](https://i.imgur.com/2Goz8An.png)
+\*border is only for visibility

@@ -17,7 +17,7 @@ The Product Media Card component is a Svelte component that displays a card with
 <script>
     import ProductMediaCard from './ProductMediaCard.svelte';
 </script>
-    <ProductMediaCard 
+    <ProductMediaCard
     company_id={company_id}
     product={product}
     variant="primary"
@@ -26,6 +26,7 @@ The Product Media Card component is a Svelte component that displays a card with
     />
 
 ```
+
 ## Props
 
 - **company_id**: The company slug of the product, used for routing.
@@ -42,7 +43,7 @@ The Product Media Card component is a Svelte component that displays a card with
 
 ### Primary
 
-![Primary](https://i.imgur.com/Gi42J0F.png) 
+![Primary](https://i.imgur.com/Gi42J0F.png)
 "Primary" variant displays only the media of the product
 
 ### Hover Shadow
@@ -54,4 +55,3 @@ The Product Media Card component is a Svelte component that displays a card with
 
 ![Shadow](https://i.imgur.com/G5k4U9g.png)
 "Shadow" variant displays the media of the product and a static shadow overlay with the product information.
-

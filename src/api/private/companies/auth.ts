@@ -6,11 +6,11 @@ interface IValidateResponse {
 }
 
 export const validate = async (
-  access_token: string
+  access_token: string,
 ): Promise<AxiosResponse<IValidateResponse>> => {
   return await client.post("/api/v1/companies/auth/validate", {
     headers: {
-      "Authorization": `Bearer ${access_token}`,
+      Authorization: `Bearer ${access_token}`,
     },
   });
 };

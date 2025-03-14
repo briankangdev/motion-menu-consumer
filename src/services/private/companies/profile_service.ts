@@ -14,10 +14,9 @@ export type CompanyCategory =
   | "hamburger"
   | "saigon";
 
-  export async function loadProfile() {
-    const data = await show();
-    profile_data.update((prev) => ({ ...prev, ...data }));
+export async function loadProfile() {
+  const data = await show();
+  profile_data.update((prev) => ({ ...prev, ...data }));
 
-    return data;
-  }
-   
+  return data;
+}

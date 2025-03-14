@@ -3,7 +3,7 @@ describe("Images Page", () => {
 
   beforeEach(() => {
     cy.intercept("GET", `/api/v1/companies/${TEST_COMPANY_ID}`).as(
-      "get_company"
+      "get_company",
     );
     cy.on("uncaught:exception", () => false);
   });
@@ -17,7 +17,7 @@ describe("Images Page", () => {
       cy.wait("@get_company").then(({ response }) => {
         cy.get("[data-testid=company-name]").should(
           "have.text",
-          response.body.data.name
+          response.body.data.name,
         );
       });
     });
@@ -26,7 +26,7 @@ describe("Images Page", () => {
       cy.wait("@get_company").then(({ response }) => {
         cy.get("[data-testid=company-description]").should(
           "have.text",
-          response.body.data.description
+          response.body.data.description,
         );
       });
     });
@@ -84,7 +84,7 @@ describe("Images Page", () => {
   context("coming from loading page", () => {
     beforeEach(() => {
       cy.intercept("GET", `/api/v1/${TEST_COMPANY_ID}/products*`).as(
-        "get_products"
+        "get_products",
       );
 
       cy.visit(`/shop/${TEST_COMPANY_ID}/images/loading`);

@@ -15,7 +15,7 @@ describe("HistoryBack component", () => {
   });
 
   it("should call window.history.back", async () => {
-    const user = userEvent.setup()
+    const user = userEvent.setup();
 
     window.history.back = vi.fn();
 
@@ -40,7 +40,6 @@ describe("HistoryBack component", () => {
   //   const button = screen.queryByTestId("history-back-button");
 
   //   await fireEvent.click(button);
-
 
   //   await waitFor(() => {
   //     expect(window.history.back).not.toHaveBeenCalled();

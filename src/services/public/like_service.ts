@@ -27,7 +27,7 @@ export const getProductLikes = async (company_id: CompanySlug) => {
   try {
     const response = await get_product_likes(company_id, user_distinct_id);
     let user_likes: IUser["likes"] = Object.values(response.data).map(
-      (like: ILike) => like.product_id
+      (like: ILike) => like.product_id,
     );
     user.update((prev) => ({ ...prev, likes: user_likes }));
   } catch (err) {

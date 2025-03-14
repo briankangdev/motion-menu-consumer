@@ -64,7 +64,7 @@ describe("Product Media Card component", () => {
       const card = screen.queryByTestId("product-media-card");
 
       expect(card.className).not.toContain(
-        "product-media-card " + wrongVariant
+        "product-media-card " + wrongVariant,
       );
       expect(card.className).toContain("product-media-card " + defaultVariant);
     });

@@ -16,7 +16,7 @@ describe("Profiling Page", () => {
       cy.get("[data-testid=submit-button]").click();
 
       cy.get("[data-testid=error-message]").contains(
-        translation.routes.shop.profiling.input_error.length
+        translation.routes.shop.profiling.input_error.length,
       );
     });
 
@@ -26,7 +26,7 @@ describe("Profiling Page", () => {
       cy.get("[data-testid=shop-name-input]").clear().type(shortName).blur();
 
       cy.get("[data-testid=error-message]").contains(
-        translation.routes.shop.profiling.input_error.length
+        translation.routes.shop.profiling.input_error.length,
       );
     });
 
@@ -36,7 +36,7 @@ describe("Profiling Page", () => {
       cy.get("[data-testid=shop-name-input]").clear().type(longName).blur();
 
       cy.get("[data-testid=error-message]").contains(
-        translation.routes.shop.profiling.input_error.length
+        translation.routes.shop.profiling.input_error.length,
       );
     });
 
@@ -49,7 +49,7 @@ describe("Profiling Page", () => {
         .blur();
 
       cy.get("[data-testid=error-message]").contains(
-        translation.routes.shop.profiling.input_error.no_special
+        translation.routes.shop.profiling.input_error.no_special,
       );
     });
 
@@ -106,14 +106,14 @@ describe("Profiling Page", () => {
         "/api/v1/companies/copy_content_from_template",
         () => {
           copy_pruducts_called = true;
-        }
+        },
       ).as("copy_products");
       cy.intercept(
         "GET",
         "/api/v1/companies/copy_content_from_template/*",
         () => {
           check_copy_products_status_called = true;
-        }
+        },
       ).as("check_copy_products_status");
     });
 

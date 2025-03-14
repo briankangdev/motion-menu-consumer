@@ -1,11 +1,19 @@
 import { browser } from "$app/environment";
 import type { CompanySlug } from "../../stores/public/companies";
-import { getProducts, getProduct, getProductCategories } from "../../api/public/products";
-import { dic, categories_by_priority, type IProduct } from "../../stores/public/products";
+import {
+  getProducts,
+  getProduct,
+  getProductCategories,
+} from "../../api/public/products";
+import {
+  dic,
+  categories_by_priority,
+  type IProduct,
+} from "../../stores/public/products";
 
 export async function loadProductsByPage(
   company_id: CompanySlug,
-  page: number
+  page: number,
 ) {
   const response = await getProducts(company_id, page);
 

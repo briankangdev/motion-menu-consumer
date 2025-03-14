@@ -16,12 +16,13 @@ The Review component is a Svelte component that displays a review with a name, b
 <script>
     import Review from './review/Review.svelte';
 </script>
-<Review 
+<Review
     name="Veronica"
     body="I love this app."
     created_at="2022-12-10T18:00:00.000Z"
 />
 ```
+
 ## Props
 
 - **name**: The name of the person who wrote the review.
@@ -29,7 +30,6 @@ The Review component is a Svelte component that displays a review with a name, b
 - **body**: The content of the review.
 
 - **created_at**: The date when the review was created in string format.
-
 
 ## Preview
 

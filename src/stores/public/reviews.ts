@@ -25,6 +25,6 @@ export const reviews_meta: Writable<IResponseReviews["meta"]> = writable({});
 export const reviews = derived(reviews_data, ($reviews_data) => {
   return Object.values($reviews_data).sort(
     (a, b) =>
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
   );
 });

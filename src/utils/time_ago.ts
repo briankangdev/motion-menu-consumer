@@ -7,7 +7,7 @@
  */
 
 export let time_ago = (
-  created_at: string
+  created_at: string,
 ): { message: string; values: { [key: string]: number } } => {
   let date = new Date(created_at);
   let todayDate = new Date();

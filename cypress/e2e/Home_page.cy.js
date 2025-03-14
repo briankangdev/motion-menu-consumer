@@ -23,7 +23,7 @@ describe("Home Page", () => {
           method: "GET",
           url: "https://edge.api.flagsmith.com/api/v1/**",
         },
-        testResponse(testTitleA)
+        testResponse(testTitleA),
       ).as("init_session");
 
       cy.visit("/");
@@ -39,7 +39,7 @@ describe("Home Page", () => {
           method: "GET",
           url: "https://edge.api.flagsmith.com/api/v1/**",
         },
-        testResponse(testTitleB)
+        testResponse(testTitleB),
       ).as("init_session");
 
       cy.visit("/");

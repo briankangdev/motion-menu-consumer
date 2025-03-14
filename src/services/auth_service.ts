@@ -29,12 +29,15 @@ export async function logout() {
 }
 
 export async function handleAuthRedirectCallback() {
-  if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
+  if (
+    window.location.search.includes("code=") &&
+    window.location.search.includes("state=")
+  ) {
     const auth0_client = await getAuth0Client();
     // state and code are used to handle the auth0 redirect callback
     await auth0_client.handleRedirectCallback();
     // const access_token = await auth0_client.getTokenSilently();
-    // Validate token as company 
+    // Validate token as company
     // await auth_api.validateToken(access_token);
     // Use replaceState to redirect the user away and remove the querystring parameters
     window.history.replaceState({}, document.title, "/");

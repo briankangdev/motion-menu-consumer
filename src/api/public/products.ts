@@ -14,17 +14,17 @@ interface IResponseProduct {
 export const getProducts = async (
   company_id: CompanySlug,
   page: number,
-  per_page: number = 15
+  per_page: number = 15,
 ): Promise<IResponseProducts> => {
   const response = await client.get(
-    `/api/v1/${company_id}/products?page=${page}&per_page=${per_page}`
+    `/api/v1/${company_id}/products?page=${page}&per_page=${per_page}`,
   );
 
   return response.data;
 };
 
 export const getProduct = async (
-  product_id: IProduct["id"]
+  product_id: IProduct["id"],
 ): Promise<IResponseProduct> => {
   const response = await client.get(`/api/v1/product/${product_id}`);
 
@@ -33,14 +33,11 @@ export const getProduct = async (
 
 export const getProductCategories = async (
   company_id: CompanySlug,
-  sort_by_priority: boolean = false
+  sort_by_priority: boolean = false,
 ) => {
-  return await client.get(
-    `/api/v1/${company_id}/products/categories`,
-    {
-      params: {
-        sort_by_priority,
-      },
-    }
-  );
+  return await client.get(`/api/v1/${company_id}/products/categories`, {
+    params: {
+      sort_by_priority,
+    },
+  });
 };

@@ -6,7 +6,7 @@ interface IResponse {
 }
 
 export const getCompany = async (
-  company_id: CompanySlug
+  company_id: CompanySlug,
 ): Promise<IResponse> => {
   const response = await client.get(`/api/v1/companies/${company_id}`);
   return response.data;

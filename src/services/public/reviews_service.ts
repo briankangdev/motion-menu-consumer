@@ -4,7 +4,7 @@ import { reviews_data, reviews_meta } from "../../stores/public/reviews";
 
 export async function loadReviewsByPage(
   company_slug: ICompany["slug"],
-  page: number = 1
+  page: number = 1,
 ) {
   const response: IResponseReviews = await getReviews(company_slug, page);
 
