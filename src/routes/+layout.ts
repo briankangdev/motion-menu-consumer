@@ -1,18 +1,14 @@
 import { browser } from "$app/environment";
 import analytics from "$lib/analytics";
+import { handleAuthRedirectCallback } from "../services/auth_service";
 import "$lib/i18n";
 import { locale, waitLocale } from "svelte-i18n";
-import { getProfile } from "../services/profile_service";
 
-export const load = async ({ data: { cookies } }) => {
-  const { uid, client_id, access_token, is_authenticated } = cookies;
-
+export const load = async () => {  
   if (browser) {
     locale.set(window.navigator.language);
-  }
-
-  if (is_authenticated) {
-    await getProfile(uid, client_id, access_token);
+    // Handle Auth0 authentication callback
+    await handleAuthRedirectCallback();
   }
 
   await analytics.init({ cross_subdomain_cookie: false });

@@ -1,7 +1,7 @@
 import { browser } from "$app/environment";
-import type { CompanySlug } from "src/stores/company";
-import { getProducts, getProduct, getProductCategories } from "../api/products";
-import { dic, categories_by_priority, type IProduct } from "../stores/products";
+import type { CompanySlug } from "../../stores/public/companies";
+import { getProducts, getProduct, getProductCategories } from "../../api/public/products";
+import { dic, categories_by_priority, type IProduct } from "../../stores/public/products";
 
 export async function loadProductsByPage(
   company_id: CompanySlug,

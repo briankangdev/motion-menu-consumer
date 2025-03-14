@@ -11,13 +11,6 @@ export interface ICompany {
   tag_priority: string;
 }
 
-export type CompanySlug = ICompany["slug"];
-
-export type CompanyCategory =
-  | "empty"
-  | "pizza"
-  | "coffee"
-  | "hamburger"
-  | "saigon";
+export type CompanySlug = string;
 
 export const company = writable<ICompany>(null);

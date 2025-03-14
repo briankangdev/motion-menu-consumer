@@ -1,6 +1,6 @@
-import client from "./client";
-import type { IProduct } from "../stores/products";
-import type { CompanySlug } from "../stores/company";
+import client from "../client";
+import type { IProduct } from "../../stores/products";
+import type { CompanySlug } from "../../stores/public/companies";
 
 interface IResponseProducts {
   data: { [key: string]: IProduct };

@@ -2,9 +2,9 @@
   import { _ } from "svelte-i18n";
   import { toast } from "svelte-french-toast";
   import { goto } from "$app/navigation";
-  import { company, type ICompany } from "../../stores/company";
-  import { createReview } from "../../api/reviews";
-  import { is_authenticated, user } from "../../stores/user_store";
+  import { company, type ICompany } from "../../stores/public/companycompany";
+  import { createReview } from "../../api/public/reviewsreviews";
+  import { is_authenticated, user } from "../../stores/private/users/user_storeers/user_store";
   import Button from "../../components/button/Button.svelte";
   import LoadingSpinner from "../../components/LoadingSpinner.svelte";
 

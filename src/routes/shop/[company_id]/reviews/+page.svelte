@@ -2,10 +2,10 @@
   import { onMount } from "svelte";
   import { _ as t } from "svelte-i18n";
   import { goto } from "$app/navigation";
-  import { is_authenticated } from "../../../../stores/user_store";
-  import { company, type ICompany } from "../../../../stores/company";
-  import { reviews, reviews_meta } from "../../../../stores/reviews";
-  import { loadReviewsByPage } from "../../../../services/reviews_service";
+  import { is_authenticated } from "../../../../stores/private/users/user_storeers/user_store";
+  import { company, type ICompany } from "../../../../stores/public/companycompany";
+  import { reviews, reviews_meta } from "../../../../stores/public/reviewsreviews";
+  import { loadReviewsByPage } from "../../../../services/public/reviews_serviceservice";
   import { getScrollPercent } from "../../../../utils/get_scroll_percent";
   import { REVIEW_INDEX_PAGE } from "../../../../lib/analytics/types";
   import analytics from "../../../../lib/analytics";

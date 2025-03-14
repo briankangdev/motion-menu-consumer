@@ -4,7 +4,7 @@
   import { goto } from "$app/navigation";
   import { MARKETING_LANDING_PAGE } from "../../../lib/analytics/types";
   import { onMount } from "svelte";
-  import { user, type IUser } from "../../../stores/user";
+  import { user, type IUser } from "../../../stores/private/users/user";
   import analytics from "../../../lib/analytics";
   import Button from "../../../components/button/Button.svelte";
   import IoLogoInstagram from "svelte-icons/io/IoLogoInstagram.svelte";

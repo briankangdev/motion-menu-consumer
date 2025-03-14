@@ -1,7 +1,7 @@
 <script lang="ts">
     import { _ } from "svelte-i18n";
     import { onMount } from "svelte";
-    import { user, type IUser } from "../../../../stores/user";
+    import { user, type IUser } from "../../../../stores/private/users/user";
     import analytics from "$lib/analytics";
     import { BLOG_BUILD_QR_PAGE } from "../../../../lib/analytics/types";
     import Navbar from "../../../../components/Navbar.svelte";

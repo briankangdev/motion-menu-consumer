@@ -1,23 +1,19 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { goto } from "$app/navigation";
-  import {
-    company,
-    type CompanyCategory,
-    type ICompany,
-  } from "../../../../stores/public/companieses";
-  import { PROFILING_PAGE } from "../../../../lib/analytics/types";
-  import analytics from "../../../../lib/analytics";
+  import { PROFILING_PAGE } from "../../../lib/analytics/types";
+  import analytics from "../../../lib/analytics";
   import toast from "svelte-french-toast";
-  import ProfilingForm from "../../../../components/profiling-form/ProfilingForm.svelte";
-  import { updateCompany } from "../../../../api/public/company";
+  import ProfilingForm from "../../../components/profiling-form/ProfilingForm.svelte";
+  import { update } from "../../../api/private/companies/profile";
   import {
     checkCopyProductsStatus,
     copyProductsFromCompany,
-  } from "../../../../api/private/companies/copy_content_from_template";
-  import Navbar from "../../../../components/Navbar.svelte";
+  } from "../../../api/private/companies/copy_content_from_template";
+  import Navbar from "../../../components/Navbar.svelte";
+  import type { CompanyCategory } from "../../../services/private/companies/profile_service";
 
-  const category_template_ids: Record<CompanyCategory, ICompany["id"]> = {
+  const category_template_ids: Record<CompanyCategory, number> = {
     empty: null,
     pizza: 0, // TODO: These are PROD ids, need to update on staging
     coffee: 1,
@@ -30,12 +26,12 @@
     category: CompanyCategory
   ) => {
     try {
-      await updateCompany({ name: shop_name });
+      await update({ name: shop_name });
 
-      analytics.track(`${PROFILING_PAGE}.continue-button.click`, {
-        company_id: $company.id,
-        demo: category,
-      });
+      // analytics.track(`${PROFILING_PAGE}.continue-button.click`, {
+      //   company_id: $profile_data.id,
+      //   demo: category,
+      // });
 
       // if category is not empty, copy products from template
       if (category !== "empty") {

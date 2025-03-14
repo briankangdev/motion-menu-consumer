@@ -1,7 +1,7 @@
-import client from "./client";
+import client from "../client";
 import type { AxiosResponse } from "axios";
-import type { ICompany } from "../stores/company";
-import type { IReview } from "../stores/reviews";
+import type { ICompany } from "../../stores/public/companies";
+import type { IReview } from "../../stores/public/reviews";
 
 export interface IResponseReviews {
   data: { [key: string]: IReview };

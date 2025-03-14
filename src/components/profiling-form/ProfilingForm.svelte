@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Button from "../button/Button.svelte";
-  import type { CompanyCategory } from "../../stores/company";
+  import type { CompanyCategory } from "../../../services/private/companies/profile_service";
 
   export let handleSubmitCallback: (
     shop_name: string,
@@ -29,6 +29,7 @@
       error = true;
       return;
     }
+
     if (shop_name.length < 3 || shop_name.length > 30) {
       error_message = $_(`routes.shop.profiling.input_error.length`);
       error = true;

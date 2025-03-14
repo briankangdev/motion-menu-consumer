@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ as t } from "svelte-i18n";
   import { goto } from "$app/navigation";
-  import { company } from "../../../../stores/company.js";
+  import { company } from "../../../../stores/public/companies.js";
   import {
     dic as products_dic,
     query,
@@ -9,8 +9,8 @@
     filtered_ids,
     categories_by_priority,
     NO_CATEGORY,
-  } from "../../../../stores/products";
-  import { reviews } from "../../../../stores/reviews";
+  } from "../../../../stores/public/products.js";
+  import { reviews } from "../../../../stores/public/reviews.js";
   import Button from "../../../../components/button/Button.svelte";
   import Review from "../../../../components/review/Review.svelte";
   import Masonry from "../../../../components/Masonry.svelte";

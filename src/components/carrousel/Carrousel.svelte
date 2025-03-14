@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { CompanySlug } from "../../stores/company";
-  import type { IProduct } from "../../stores/products";
+  import type { CompanySlug } from "../../stores/public/companies";
+  import type { IProduct } from "../../stores/public/products";
   import ProductMediaCard from "../cards/product-media-card/ProductMediaCard.svelte";
   import type { Variant } from "../cards/product-media-card/types";
   import MdKeyboardArrowRight from "svelte-icons/md/MdKeyboardArrowRight.svelte";

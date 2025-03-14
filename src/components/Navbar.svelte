@@ -1,21 +1,16 @@
 <script lang="ts">
   import Logo from "./Logo.svelte";
   import { _ as t } from "svelte-i18n";
-  import { profile_data } from "../stores/profile";
   import Button from "./button/Button.svelte";
-  import { signOut } from "../services/profile_service";
+  import { isAuthenticated, logout } from "../services/auth_service";
   import analytics from "../lib/analytics";
   import IoIosMenu from "svelte-icons/io/IoIosMenu.svelte";
+
+  const BASE_URL = "https://admin.motion.menu";
 
   export let handleButtonTrack = (button_name: string) => {
     analytics.track(`components.navbar.${button_name}.click`);
   };
-
-  let profile_name = "";
-
-  $: {
-    profile_name = $profile_data?.name;
-  }
 </script>
 
 <header>
@@ -45,12 +40,14 @@
           }}
         />
       </a>
-      {#if profile_name}
+
+      {#await isAuthenticated() then is_authenticated}
+      {#if is_authenticated}
         <div class="dropdown-profile-button">
           <Button
             title={$t("components.navbar.greeting", {
               values: {
-                name: profile_name,
+                name: "profile_name",
               },
             })}
             variant="borderless"
@@ -60,7 +57,7 @@
         <!-- container has padding to don't lose hover when moving mouse to dropdown -->
         <div class="dropdown-profile-container">
           <div class="dropdown-profile">
-            <a href="https://admin.motion.menu/products" rel="external">
+            <a href="{BASE_URL}/products" rel="external">
               <Button
                 title={$t("components.navbar.open_app")}
                 variant="borderless"
@@ -73,7 +70,7 @@
               title={$t("components.navbar.sign_out")}
               variant="red"
               onClick={async () => {
-                await signOut();
+                await logout();
                 handleButtonTrack("sign-out");
               }}
             />
@@ -99,6 +96,7 @@
           />
         </a>
       {/if}
+      {/await}
     </div>
   </div>
 </header>

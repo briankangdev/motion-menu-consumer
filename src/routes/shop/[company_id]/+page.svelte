@@ -7,8 +7,8 @@
     filtered_ids,
     categories_by_priority,
     NO_CATEGORY,
-  } from "../../../stores/products.js";
-  import { company } from "../../../stores/company.js";
+  } from "../../../stores/public/products.js";
+  import { company } from "../../../stores/public/companies.js";
   import Masonry from "../../../components/Masonry.svelte";
   import Navbar from "../../../components/Navbar.svelte";
   import ProductCard from "../../../components/cards/product-card/ProductCard.svelte";

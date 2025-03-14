@@ -1,5 +1,4 @@
-import type { ICompany } from "../stores/company";
-import client from "./client";
+import client from "../../client";
 
 interface IResponseCopyProducts {
   job_id: string;

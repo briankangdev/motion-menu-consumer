@@ -1,7 +1,7 @@
 import { writable, derived } from "svelte/store";
 import type { Writable } from "svelte/store";
-import type { ICompany } from "./company";
-import type { IResponseReviews } from "src/api/reviews";
+import type { ICompany } from "./companies";
+import type { IResponseReviews } from "../../api/public/reviews";
 
 export interface IReview {
   id: number;
@@ -19,7 +19,9 @@ export interface IReview {
 }
 
 export const reviews_data: Writable<IResponseReviews["data"]> = writable({});
+
 export const reviews_meta: Writable<IResponseReviews["meta"]> = writable({});
+
 export const reviews = derived(reviews_data, ($reviews_data) => {
   return Object.values($reviews_data).sort(
     (a, b) =>

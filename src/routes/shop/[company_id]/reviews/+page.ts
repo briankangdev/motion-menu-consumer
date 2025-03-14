@@ -1,6 +1,6 @@
-import { loadReviewsByPage } from "../../../../services/reviews_service";
-import { loadCompany } from "../../../../services/company_service";
-import type { ICompany } from "../../../../stores/company";
+import { loadReviewsByPage } from "../../../../services/public/reviews_service";
+import { loadCompany } from "../../../../services/public/companies_service";
+import type { ICompany } from "../../../../stores/public/companies";
 
 interface IRouteParams {
   params: {

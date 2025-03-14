@@ -1,31 +1,36 @@
 <script lang="ts">
-  import { _ } from "svelte-i18n";
-  import { company } from "../../../../../stores/company.js";
-  import Skeleton from "../../../../../components/skeleton/Skeleton.svelte";
   import { onMount } from "svelte";
+  import { _ } from "svelte-i18n";
   import { goto } from "$app/navigation";
-  import Navbar from "../../../../../components/Navbar.svelte";
+  import { profile_data } from "../../../../stores/private/companies/profile";
+  import Skeleton from "../../../../components/skeleton/Skeleton.svelte";
+  import Navbar from "../../../../components/Navbar.svelte";
+  import type { PageData } from './$types';
+
+  export let data: PageData;
 
   onMount(() =>
+  {
     setTimeout(
-      () =>
-        goto(`/shop/${$company.id}/images?new_shop_owner=true`, {
+      () => {
+        goto(`/shop/${data.slug}/images?new_shop_owner=true`, {
           replaceState: true,
-        }),
+        });
+      },
       3000
     )
-  );
+  });
 </script>
 
 <svelte:head>
-  {#if $company.name}
-    <title>{$company.name} Motion Menu Photos</title>
+  {#if $profile_data.name}
+    <title>{$profile_data.name} Motion Menu Photos</title>
   {:else}
     <title>Motion Menu</title>
   {/if}
   <meta
     name="description"
-    content={`${$company.name} digital ${$_("menu")} - motion menu`}
+    content={`${$profile_data.name} digital ${$_("menu")} - motion menu`}
   />
 </svelte:head>
 

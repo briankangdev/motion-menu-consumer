@@ -1,6 +1,6 @@
 import mixpanel from "mixpanel-browser";
 import { PUBLIC_PROJECT_TOKEN } from "$env/static/public";
-import { user } from "../../stores/user";
+import { user } from "../../stores/private/users/user";
 
 const EVENT_PREFIX = "consumer";
 

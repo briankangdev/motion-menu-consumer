@@ -1,16 +1,11 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { fb } from "@beyonk/svelte-facebook-pixel";
-  import {
-    googleSignIn,
-    signIn,
-    signUp,
-  } from "../../../services/profile_service";
+  import { login } from "../../../services/auth_service";
   import { goto } from "$app/navigation";
   import { LANDING_PAGE } from "../../../lib/analytics/types";
   import { onMount } from "svelte";
-  import { PUBLIC_GOOGLE_OAUTH_CLIENT_ID } from "$env/static/public";
-  import { user, type IUser } from "../../../stores/user";
+  import { user, type IUser } from "../../../stores/private/users/user";
   import analytics from "$lib/analytics";
   import Button from "../../../components/button/Button.svelte";
   import SignUpForm from "../../../components/signup-form/SignUpForm.svelte";
@@ -26,65 +21,31 @@
     analytics.track(`${LANDING_PAGE}.visit`, {
       user_id,
     });
-    // It forces to execute the script after the page is re-rendered
-    // Otherwise, the button will not be rendered
-    const script = document.createElement("script");
-    script.src = "https://accounts.google.com/gsi/client";
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-
-    window.onGoogleSignIn = async (response) => {
-      const profile = await googleSignIn(response.credential);
-
-      analytics.track(`${LANDING_PAGE}.sign-up-button.click`, {
-        user_id,
-        provider: "google",
-      });
-
-      if (profile.is_new_account) {
-        analytics.track(`${LANDING_PAGE}.sign_up`, {
-          profile_id: profile.id,
-        });
-
-        fb.track("CompleteRegistration", { type: "google" });
-
-        trackLandingSignup();
-
-        //invalidateAll: true is to force the page to re-render and update the profile_data store
-        goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
-      } else {
-        analytics.track(`${LANDING_PAGE}.sign_in`, {
-          profile_id: profile.id,
-        });
-
-        goto(`/shop/${profile.id}/images`, { invalidateAll: true });
-      }
-    };
   });
 
-  const handleSubmitCallback = async (
-    email: string,
-    password: string,
-    password_confirmation: string
-  ) => {
-    const name = email.split("@")[0]; //We set a default name for the user
+  const loginCallback = async () => {
+    toast.success($_("components.sign-up_form.success_message"));
+
+    analytics.track(`${LANDING_PAGE}.sign-up-button.click`, {
+      user_id,
+      provider: "email",
+    });
+
+    // Facebook Tracking
+    fb.track("CompleteRegistration", { type: "email" });
+
+    // Google Tracking
+    trackLandingSignup();
+  };
+
+  const handleSubmitCallback = async () => {
     try {
       loading_submit = true;
-      await signUp(name, email, password, password_confirmation);
-      toast.success($_("components.sign-up_form.success_message"));
-      analytics.track(`${LANDING_PAGE}.sign-up-button.click`, {
-        user_id,
-        provider: "email",
-      });
-      fb.track("CompleteRegistration", { type: "email" });
 
-      trackLandingSignup();
+      await login(loginCallback);
 
       loading_submit = false;
-
-      const { data: profile } = await signIn(email, password);
-      goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
+      // goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
     } catch (error) {
       const error_message: string = $_(
         `components.sign-up_form.errors.${error.response.data.errors.full_messages[0]}`
@@ -97,9 +58,11 @@
   };
 
   function onLearnMoreMarketingClick() {
+    // Tracking
     analytics.track(`${LANDING_PAGE}.learn_more_marketing_button.click`);
     fb.track("ViewContent", { page: "restaurant-marketing" });
 
+    // Navigate to the marketing landing page
     goto("/landing/restaurant-marketing");
   }
 </script>
@@ -167,27 +130,7 @@
           {$_("routes.landing.try.description")}
         </p>
 
-        <div class="google_sign_in" data-testid="google-sign-in">
-          <div
-            id="g_id_onload"
-            data-client_id={PUBLIC_GOOGLE_OAUTH_CLIENT_ID}
-            data-callback="onGoogleSignIn"
-            data-auto_prompt="false"
-          />
-          <div
-            class="g_id_signin"
-            data-type="standard"
-            data-size="large"
-            data-theme="outline"
-            data-text="sign_in_with"
-            data-shape="rectangular"
-            data-logo_alignment="left"
-          />
-        </div>
-
-        <hr />
-
-        <SignUpForm {handleSubmitCallback} {loading_submit} />
+        <SignUpForm {handleSubmitCallback} />
       </section>
     </div>
 
@@ -211,10 +154,6 @@
 </main>
 
 <style>
-  header {
-    padding: 4px 0 4px 12px;
-  }
-
   h1 {
     font-weight: 600;
     line-height: 1.2;
@@ -280,10 +219,6 @@
   }
 
   @media (min-width: 1024px) {
-    header {
-      padding: 30px 0 30px 50px;
-    }
-
     section {
       max-width: 400px;
       gap: 15px;

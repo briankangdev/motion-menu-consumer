@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
   import { _ as t } from "svelte-i18n";
   import {
     ids_with_media,
     ids as products_ids,
     dic as products_dic,
     ids_sorted_by_categories,
-  } from "../../../../stores/products";
+  } from "../../../../stores/public/products";
   import Carrousel from "../../../../components/carrousel/Carrousel.svelte";
   import Button from "../../../../components/button/Button.svelte";
   import { goto } from "$app/navigation";

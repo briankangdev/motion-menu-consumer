@@ -2,8 +2,8 @@
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
   import { REVIEW_FORM_PAGE } from "../../../../../lib/analytics/types";
-  import { is_authenticated } from "../../../../../stores/user_store";
-  import { company, type ICompany } from "../../../../../stores/company";
+  import { is_authenticated } from "../../../../../stores/private/users/user_storeers/user_store";
+  import { company, type ICompany } from "../../../../../stores/public/companycompany";
   import analytics from "../../../../../lib/analytics";
   import ReviewForm from "../../../../../components/review-form/ReviewForm.svelte";
   import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";

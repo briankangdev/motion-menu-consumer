@@ -3,7 +3,7 @@
   import ImagePlaceholder from "../../../../../components/placeholders/ImagePlaceholder.svelte";
   import VideoPlaceholder from "../../../../../components/placeholders/VideoPlaceholder.svelte";
   import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";
-  import { dic } from "../../../../../stores/products";
+  import { dic } from "../../../../../stores/public/products";
 
   const CDN_BASE_URL = "https://res.cloudinary.com/dnaexfddx";
   const SIZE = 300;

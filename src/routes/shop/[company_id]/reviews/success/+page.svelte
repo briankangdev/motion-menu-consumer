@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
-  import type { CompanySlug } from "../../../../../stores/company";
+  import type { CompanySlug } from "../../../../../stores/public/companycompany";
   import Button from "../../../../../components/button/Button.svelte";
   import HistoryBack from "../../../../../components/history-back/HistoryBack.svelte";
   import { goto } from "$app/navigation";

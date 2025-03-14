@@ -1,7 +1,7 @@
-import client from "./client";
-import type { IUser } from "../stores/user";
-import type { IProduct } from "../stores/products";
-import type { CompanySlug } from "../stores/company";
+import client from "../client";
+import type { IUser } from "../../stores/private/users/user";
+import type { IProduct } from "../../stores/products";
+import type { CompanySlug } from "../../stores/public/companies";
 
 export interface ILike {
   created_at: string;

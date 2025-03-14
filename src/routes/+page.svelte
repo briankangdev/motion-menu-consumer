@@ -5,7 +5,7 @@
   import FeatureFlag from "../lib/feature_flag";
   import analytics from "../lib/analytics";
   import { HOME_PAGE } from "../lib/analytics/types";
-  import { user, type IUser } from "../stores/user";
+  import { user, type IUser } from "../stores/private/users/user";
   import Button from "../components/button/Button.svelte";
   import { fb } from "@beyonk/svelte-facebook-pixel";
   import { goto } from "$app/navigation";

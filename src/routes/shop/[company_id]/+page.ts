@@ -1,10 +1,10 @@
-import { loadCompany } from "../../../services/company_service";
+import { loadCompany } from "../../../services/public/companies_service";
 import {
   loadAllProducts,
   loadProductCategories,
 } from "../../../services/products_service";
-import { getProductLikes } from "../../../services/like_service";
-import type { CompanySlug } from "src/stores/company";
+import { getProductLikes } from "../../../services/public/like_service";
+import type { CompanySlug } from "../../../stores/public/companies";
 
 interface IRouteParams {
   params: {

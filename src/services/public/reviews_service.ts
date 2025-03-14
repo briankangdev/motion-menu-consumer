@@ -1,6 +1,6 @@
-import { getReviews, type IResponseReviews } from "../api/reviews";
-import type { ICompany } from "src/stores/company";
-import { reviews_data, reviews_meta } from "../stores/reviews";
+import { getReviews, type IResponseReviews } from "../../api/public/reviews";
+import type { ICompany } from "../../stores/public/companies";
+import { reviews_data, reviews_meta } from "../../stores/public/reviews";
 
 export async function loadReviewsByPage(
   company_slug: ICompany["slug"],

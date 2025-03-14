@@ -1,4 +1,4 @@
-import { loadCompany } from "../../../../../services/company_service";
+import { loadCompany } from "../../../../../services/public/companies_service";
 
 interface IRouteParams {
   params: {

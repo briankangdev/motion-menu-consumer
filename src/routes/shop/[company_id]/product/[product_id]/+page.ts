@@ -1,6 +1,6 @@
-import { loadCompany } from "../../../../../services/company_service";
-import { loadProduct } from "../../../../../services/products_service";
-import { getProductLikes } from "../../../../../services/like_service";
+import { loadCompany } from "../../../../../services/public/companies_service";
+import { loadProduct } from "../../../../../services/public/products_service";
+import { getProductLikes } from "../../../../../services/public/like_service";
 
 interface IRouteParams {
   params: {

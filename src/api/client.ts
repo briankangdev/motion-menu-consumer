@@ -1,9 +1,8 @@
 import axios, { AxiosHeaders } from "axios";
 import type { AxiosInstance } from "axios";
 import { PUBLIC_MOTION_MENU_API_ENDPOINT } from "$env/static/public";
-import { jwt_token } from "../stores/user_store";
-import { get } from "svelte/store";
-import Cookies from "../lib/cookies";
+import { getAccessToken } from "../services/auth_service";
+import { browser } from "$app/environment";
 
 interface ICustomHeaders extends AxiosHeaders {
   Authorization?: string;
@@ -13,22 +12,16 @@ const client: AxiosInstance = axios.create({
   baseURL: PUBLIC_MOTION_MENU_API_ENDPOINT,
 });
 
-client.interceptors.request.use((config) => {
+client.interceptors.request.use(async (config) => {
   const custom_headers = config.headers as ICustomHeaders;
 
-  if (typeof window === "undefined") return config; // if server side, don't add token
+  if (!browser) return config; // if server side, don't add token
 
-  // User authentification
-  let user_jwt_token = get(jwt_token);
+  const access_token = await getAccessToken();
 
-  if (user_jwt_token) {
-    custom_headers.Authorization = `Bearer ${user_jwt_token}`;
+  if (access_token) {
+    custom_headers.Authorization = `Bearer ${access_token}`;
   }
-
-  // Company authentification
-  custom_headers["access-token"] = Cookies.get("access-token");
-  custom_headers["client"] = Cookies.get("client");
-  custom_headers["uid"] = Cookies.get("uid");
 
   return config;
 });

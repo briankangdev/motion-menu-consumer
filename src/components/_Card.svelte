@@ -3,10 +3,10 @@
   import {
     createProductLike,
     removeProductLike,
-  } from "../services/like_service";
-  import type { IProduct } from "src/stores/products";
-  import { user } from "../stores/user";
-  import type { CompanySlug } from "src/stores/company";
+  } from "../services/public/like_service";
+  import { user } from "../stores/private/users/user";
+  import type { IProduct } from "../stores/public/products";
+  import type { CompanySlug } from "../stores/public/companies";
   import TruncatedText from "./TruncatedText.svelte";
 
   export let company_id: CompanySlug;

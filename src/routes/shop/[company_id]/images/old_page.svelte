@@ -6,7 +6,7 @@
     ids_with_images,
     ids_with_videos,
   } from "../../../../stores/products.js";
-  import { company } from "../../../../stores/company.js";
+  import { company } from "../../../../stores/public/companies.js";
   import Masonry from "../../../../components/Masonry.svelte";
   import Card from "../../../../components/Card.svelte";
   import Video from "../../../../components/Video.svelte";

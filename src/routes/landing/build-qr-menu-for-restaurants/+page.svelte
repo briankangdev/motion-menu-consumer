@@ -1,16 +1,11 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { fb } from "@beyonk/svelte-facebook-pixel";
-  import {
-    googleSignIn,
-    signIn,
-    signUp,
-  } from "../../../services/profile_service";
+  import { login } from "../../../services/auth_service";
   import { goto } from "$app/navigation";
   import { BUILD_QR_PAGE } from "../../../lib/analytics/types";
   import { onMount } from "svelte";
-  import { PUBLIC_GOOGLE_OAUTH_CLIENT_ID } from "$env/static/public";
-  import { user, type IUser } from "../../../stores/user";
+  import { user, type IUser } from "../../../stores/private/users/user";
   import analytics from "$lib/analytics";
   import Button from "../../../components/button/Button.svelte";
   import SignUpForm from "../../../components/signup-form/SignUpForm.svelte";
@@ -31,71 +26,37 @@
     analytics.track(`${BUILD_QR_PAGE}.visit`, {
       user_id,
     });
-    // It forces to execute the script after the page is re-rendered
-    // Otherwise, the button will not be rendered
-    const script = document.createElement("script");
-    script.src = "https://accounts.google.com/gsi/client";
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-
-    window.onGoogleSignIn = async (response) => {
-      const profile = await googleSignIn(response.credential);
-
-      analytics.track(`${BUILD_QR_PAGE}.sign-up-button.click`, {
-        user_id,
-        provider: "google",
-      });
-
-      if (profile.is_new_account) {
-        analytics.track(`${BUILD_QR_PAGE}.sign_up`, {
-          profile_id: profile.id,
-        });
-
-        fb.track("CompleteRegistration", { type: "google" });
-
-        trackLandingSignup();
-
-        //invalidateAll: true is to force the page to re-render and update the profile_data store
-        goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
-      } else {
-        analytics.track(`${BUILD_QR_PAGE}.sign_in`, {
-          profile_id: profile.id,
-        });
-
-        goto(`/shop/${profile.id}/images`, { invalidateAll: true });
-      }
-    };
   });
 
-  const handleSubmitCallback = async (
-    email: string,
-    password: string,
-    password_confirmation: string,
-  ) => {
-    const name = email.split("@")[0]; //We set a default name for the user
+  const loginCallback = async () => {
+    toast.success($_("components.sign-up_form.success_message"));
+
+    // Mixpanel tracking
+    analytics.track(`${BUILD_QR_PAGE}.sign-up-button.click`, {
+      user_id,
+      provider: "email",
+    });
+
+    // Facebook tracking
+    fb.track("CompleteRegistration", { type: "email" });
+
+    // Google tracking
+    trackLandingSignup();
+  };
+
+  const handleSubmitCallback = async () => {
     try {
       loading_submit = true;
-      await signUp(name, email, password, password_confirmation);
-      toast.success($_("components.sign-up_form.success_message"));
-      analytics.track(`${BUILD_QR_PAGE}.sign-up-button.click`, {
-        user_id,
-        provider: "email",
-      });
-      fb.track("CompleteRegistration", { type: "email" });
 
-      trackLandingSignup();
+      await login(loginCallback);
 
       loading_submit = false;
 
-      const { data: profile } = await signIn(email, password);
-      goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
+      // goto(`/shop/${profile.id}/profiling`, { invalidateAll: true });
     } catch (error) {
-      const error_message: string = $_(
-        `components.sign-up_form.errors.${error.response.data.errors.full_messages[0]}`,
-      );
+      console.error(error);
+      const error_message: string = error.message;
 
-      console.log(error);
       toast.error(error_message);
       loading_submit = false;
     }
@@ -119,29 +80,10 @@
           {$_("routes.build_qr.try.description")}
         </p>
 
-        <div class="google_sign_in" data-testid="google-sign-in">
-          <div
-            id="g_id_onload"
-            data-client_id={PUBLIC_GOOGLE_OAUTH_CLIENT_ID}
-            data-callback="onGoogleSignIn"
-            data-auto_prompt="false"
-          />
-          <div
-            class="g_id_signin"
-            data-type="standard"
-            data-size="large"
-            data-theme="outline"
-            data-text="sign_in_with"
-            data-shape="rectangular"
-            data-logo_alignment="left"
-          />
-        </div>
-
-        <hr />
-
-        <SignUpForm {handleSubmitCallback} {loading_submit} />
+        <SignUpForm {handleSubmitCallback} />
 
         <br />
+
         <a href="https://admin.motion.menu/sign_in" rel="external">
           <Button
             title={$_("routes.build_qr.have_account_button.title")}
@@ -189,23 +131,10 @@
   }
 
   section {
-    /* padding: 0 30px 20px 30px; */
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 90%;
-  }
-
-  hr {
-    content: "";
-    width: 80%;
-    background-color: var(--gray);
-    opacity: 0.3;
-    margin-top: 10px;
-  }
-
-  .google_sign_in {
-    height: 40px; /* This is to prevent the button from altering the user interface. */
   }
 
   @media (min-width: 1024px) {

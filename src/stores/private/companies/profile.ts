@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import type { ICompany } from "./company";
+import type { ICompany } from "../../public/companies";
 
 export interface IProfile extends ICompany {
   time_zone: string;
@@ -16,7 +16,6 @@ export interface IProfileData {
   id: number;
   email: string;
   name: string;
-  guest_order_enabled: boolean;
   address: string;
   street_number: string;
   street_name: string;
@@ -28,22 +27,9 @@ export interface IProfileData {
   schedule: string;
   time_zone: string;
   description: string;
-  latitude: number;
-  longitude: number;
-  pos_enabled: boolean;
   provider: string;
   uid: string;
-  number_of_seats: number;
   phone: string;
-  facebook: string;
-  contact_email: string;
-  responsible_phone: string;
-  responsible_name: string;
-  responsible_age: number;
-  responsible_email: string;
-  rating_count: number;
-  allow_password_change: boolean;
-  instagram: string;
   short_description: string;
   reference: string;
   established: string;

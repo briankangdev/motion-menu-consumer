@@ -4,18 +4,18 @@
 // API communication
 // Tracking logic
 
-import { dic as products_dic } from "../stores/products";
+import { dic as products_dic } from "../../stores/public/products";
 import {
   get_product_likes,
   create_product_like,
   remove_product_like,
   type ILike,
-} from "../api/likes";
+} from "../../api/public/likes";
 import mixpanel from "mixpanel-browser";
-import type { IUser } from "../stores/user";
-import type { IProduct } from "../stores/products";
-import { user } from "../stores/user";
-import type { CompanySlug } from "../stores/company";
+import type { IUser } from "../../stores/private/users/user";
+import type { IProduct } from "../../stores/public/products";
+import { user } from "../../stores/private/users/user";
+import type { CompanySlug } from "../../stores/public/companies";
 
 let user_distinct_id: IUser["distinct_id"];
 
