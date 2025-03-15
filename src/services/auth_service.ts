@@ -15,6 +15,7 @@ export async function isAuthenticated() {
 
 export async function login(callback?: () => void) {
   const auth0_client = await getAuth0Client();
+  await auth0_client.logout();
   await auth0_client.loginWithRedirect();
 
   if (callback) {

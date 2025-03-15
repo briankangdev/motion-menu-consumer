@@ -2,6 +2,7 @@
   import { _ } from "svelte-i18n";
   import Button from "../button/Button.svelte";
   import type { CompanyCategory } from "../../services/private/companies/profile_service";
+  import { markProfilingAsCompleted } from '../../services/private/companies/profiling_service';
 
   export let handleSubmitCallback: (
     shop_name: string,
@@ -43,15 +44,20 @@
     shop_name = (event.target as HTMLInputElement).value;
   }
 
-  function handleSubmit() {
-    checkInput();
+  const handleSubmit = async () => {
+    try {
+      checkInput();
 
-    if (error) {
-      return;
-    } else {
-      handleSubmitCallback(shop_name, category_selected);
+      if (error) {
+        return;
+      } else {
+        handleSubmitCallback(shop_name, category_selected);
+        markProfilingAsCompleted();
+      }
+    } catch (error) {
+      // ... existing error handling ...
     }
-  }
+  };
 </script>
 
 <form class="profiling_form" on:submit|preventDefault={handleSubmit}>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
   import { goto } from "$app/navigation";
   // import { PROFILING_PAGE } from "../../../lib/analytics/types";
@@ -12,6 +13,14 @@
   } from "../../../api/private/companies/copy_content_from_template";
   import Navbar from "../../../components/Navbar.svelte";
   import type { CompanyCategory } from "../../../services/private/companies/profile_service";
+  import { hasCompletedProfiling } from '../../../services/private/companies/profiling_service';
+
+  onMount(() => {
+    // If user has already completed profiling, redirect to home or another page
+    if (hasCompletedProfiling()) {
+      goto('/'); // or any other appropriate page
+    }
+  });
 
   const category_template_ids: Record<CompanyCategory, number> = {
     empty: null,

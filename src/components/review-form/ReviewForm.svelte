@@ -3,7 +3,7 @@
   import { toast } from "svelte-french-toast";
   import { goto } from "$app/navigation";
   import { company, type ICompany } from "../../stores/public/companies";
-  import { createReview } from "../../api/public/reviews";
+  import { createReview } from "../../api/private/users/reviews";
   import Button from "../../components/button/Button.svelte";
   import LoadingSpinner from "../../components/LoadingSpinner.svelte";
   import { isAuthenticated, login } from "../../services/auth_service";

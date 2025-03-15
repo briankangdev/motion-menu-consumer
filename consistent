@@ -1,0 +1,92 @@
+## Coding Style and Conventions
+
+### Variable Naming Convention
+1. **camelCase** for variables, functions, and methods: `createProductLike`, `handleLike`, `onTouchStart`
+2. **snake_case** for API endpoints and some constants: `get_product_likes`, `MAX_TEXT_LENGTH`
+3. **PascalCase** for component names and types/interfaces: `Like.svelte`, `IUser`, `IProduct`
+4. **UPPER_SNAKE_CASE** for constants: `INSTAGRAM_DM_LINK`, `HOME_PAGE`
+
+### TypeScript Usage
+1. **Strong typing** throughout the codebase with TypeScript interfaces and types
+2. **Type exports** for reusability across the application
+3. **Type imports** from other modules to maintain consistency
+4. **Interface naming convention**: Prefixed with "I" (e.g., `IUser`, `IProduct`, `ILike`)
+
+### Functional Programming
+1. **Pure functions** for utility operations: `truncate(text)`
+2. **Immutable state updates** using the spread operator: `{ ...prev, likes: [...prev.likes, product_id] }`
+3. **Array methods** like `map`, `filter` instead of loops
+4. **Arrow functions** used extensively
+
+### Formatting
+1. **Consistent indentation** with 2 spaces
+2. **Semicolons** at the end of statements
+3. **Single quotes** for strings in TypeScript files
+4. **Double quotes** for attributes in Svelte templates
+5. **Trailing commas** in multi-line arrays and objects
+
+## Project Structure
+
+### File and Folder Organization
+1. **Feature-based organization** for components: `/components/like`, `/components/button`
+2. **Domain separation** between public and private APIs: `/api/public`, `/api/private`
+3. **Clear separation** of concerns:
+   - `/components` - UI components
+   - `/api` - API communication
+   - `/services` - Business logic
+   - `/stores` - State management
+   - `/utils` - Utility functions
+   - `/routes` - Page components and routing
+   - `/lib` - Shared libraries and functionality
+
+### Component Structure
+1. **Single responsibility** components
+2. **Svelte component files** (.svelte) with script, template, and style sections
+3. **TypeScript** used in script sections with `<script lang="ts">`
+4. **Scoped CSS** within components
+
+## Architectural Patterns
+
+### Component Props and Callbacks
+1. **Callback props** passed to components instead of defining handlers inside: `createLikeCallback`, `removeLikeCallback`
+2. **Props typing** with TypeScript for clear interfaces
+3. **Explicit exports** for component props: `export let isLiked: boolean;`
+
+### State Management
+1. **Svelte stores** for global state management: `user = writable<IUser>(null);`
+2. **Store subscriptions** for reactive updates
+3. **Reactive declarations** with `$:` for derived state
+4. **Store updates** through service functions
+
+### API Communication
+1. **Centralized API client** with Axios
+2. **Service layer** between components and API
+3. **Typed API responses** and parameters
+4. **Error handling** with try/catch blocks
+5. **Authentication token** handling in API client interceptors
+
+### Event Handling
+1. **Event delegation** pattern for UI interactions
+2. **Analytics tracking** integrated with user actions
+3. **Explicit event handlers** named descriptively: `onMarketingButtonClick`
+
+### Reactive Programming
+1. **Reactive declarations** with `$:` for derived state
+2. **Store subscriptions** for reactive updates
+3. **Component lifecycle** hooks like `onMount`
+
+### Testing
+1. **Test directories** alongside implementation: `/utils/__tests__/`
+2. **Data attributes** for testing: `data-testid="like-icon"`
+
+## Other Conventions
+
+1. **Internationalization** using `svelte-i18n` with the `$_()` function
+2. **Feature flags** for A/B testing and feature toggling
+3. **Analytics tracking** integrated throughout the application
+4. **Responsive design** with CSS
+5. **Accessibility** considerations (though some a11y warnings are ignored)
+6. **Error handling** with try/catch blocks in async functions
+7. **Consistent commenting** for code sections
+
+These patterns and conventions form a comprehensive style guide for the project, ensuring consistency and maintainability across the codebase.
