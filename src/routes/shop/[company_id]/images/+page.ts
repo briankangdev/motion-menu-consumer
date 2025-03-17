@@ -3,7 +3,7 @@ import {
   loadAllProducts,
   loadProductCategories,
 } from "../../../../services/public/products_service";
-import { getProductLikes } from "../../../../services/public/like_service";
+import { getProductLikes } from "../../../../services/private/users/like_service";
 import { loadReviewsByPage } from "../../../../services/public/reviews_service";
 
 interface IRouteParams {

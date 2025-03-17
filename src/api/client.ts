@@ -17,7 +17,7 @@ client.interceptors.request.use(async (config) => {
 
   if (!browser) return config; // if server side, don't add token
 
-  if (isAuthenticated()) {
+  if (await isAuthenticated()) {
     const access_token = await getAccessToken();
     custom_headers.Authorization = `Bearer ${access_token}`;
   }
