@@ -36,7 +36,7 @@ export async function getAuth0Client() {
     clientId,
     authorizationParams,
     cacheLocation: "localstorage",
-    useRefreshTokens: true, // Use refresh tokens
+    // useRefreshTokens: true, // Use refresh tokens
   });
 
   return auth0_client;

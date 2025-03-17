@@ -1,7 +1,7 @@
 import axios, { AxiosHeaders } from "axios";
 import type { AxiosInstance } from "axios";
 import { PUBLIC_MOTION_MENU_API_ENDPOINT } from "$env/static/public";
-import { getAccessToken } from "../services/auth_service";
+import { getAccessToken, isAuthenticated } from "../services/auth_service";
 import { browser } from "$app/environment";
 
 interface ICustomHeaders extends AxiosHeaders {
@@ -17,9 +17,8 @@ client.interceptors.request.use(async (config) => {
 
   if (!browser) return config; // if server side, don't add token
 
-  const access_token = await getAccessToken();
-
-  if (access_token) {
+  if (isAuthenticated()) {
+    const access_token = await getAccessToken();
     custom_headers.Authorization = `Bearer ${access_token}`;
   }
 
